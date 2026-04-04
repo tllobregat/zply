@@ -1,0 +1,133 @@
+# Zply 🚀
+
+**Zply** is a high-quality, ultra-fast, and privacy-focused developer toolkit. Built for developers by developers, it brings all your essential transformation, encoding, and visualization tools into a single, sleek, and high-performance "operating system" interface.
+
+🌐 **Live Demo:** [zply.dev](https://zply.dev)
+
+---
+
+## ✨ Key Principles
+
+- **🔒 Zero Backend:** Every tool runs 100% in your browser. No data is ever sent to a server.
+- **🍪 Zero Cookies & Trackers:** We don't track you. No cookies, no third-party scripts, no analytics.
+- **💾 URI Persistence:** Share your workspace state instantly. We use **LZ-String** compression to store your current state directly in the `window.location.hash`.
+- **⚡ High Performance:** Built with Next.js (SSG) for sub-second load times and a fluid, "Island-based" UI architecture.
+
+---
+
+## 🛠 Available Tools
+
+### 🎨 Visualisation
+- **[PlantUML Editor](https://zply.dev/plantuml-editor)**: Create UML diagrams via text with real-time preview.
+- **[Markdown Editor](https://zply.dev/markdown-editor)**: Ultra-fast GFM (GitHub Flavored) editor with split-screen preview.
+- **Mermaid.js Maker** (`Coming Soon`): Lightweight flowcharts and sequence diagrams.
+- **SVG Optimizer** (`Coming Soon`): Visualize and clean up SVG code using SVGO.
+- **[SQL & DB Visualizer](https://zply.dev/sql-database-visualizer)**: Generate ER diagrams from SQL (PostgreSQL, MariaDB) or Prisma.
+- **Excalidraw Island** (`Coming Soon`): Smooth hand-drawn sketching and diagrams.
+
+### 📊 Data & Text
+- **[JSON Formatter](https://zply.dev/json-utils)**: Instant indentation, validation, and minification.
+- **[Text Compare](https://zply.dev/text-compare)**: Visual diff tool with split or unified views.
+- **[Regex Tester](https://zply.dev/regex)**: Test regular expressions with real-time explanations.
+- **[Data Transformer](https://zply.dev/data-transformer)**: Convert between JSON, YAML, CSV, XML, and TypeScript.
+- **SQL Formatter** (`Coming Soon`): Beautify and standardize complex SQL queries.
+
+### 🔐 Security
+- **[JWT Decoder](https://zply.dev/jwt-debugger)**: Secure, local decoding of JWT claims and payloads.
+- **[Hash Generator](https://zply.dev/hash-generator)**: Generate SHA-256, SHA-512, and MD5 hashes (Web Crypto API).
+- **Password & Secret Generator** (`Coming Soon`): Generate secure passwords, API keys, and tokens with local strength evaluation.
+- **RSA Key Pair Gen** (`Coming Soon`): Generate public/private RSA key pairs.
+
+### 🔤 Encoding & Conversion
+- **[Base64 Tool](https://zply.dev/base64-encoder-decoder)**: Encode and decode text or files to Base64 instantly.
+- **URL Encoder/Decoder** (`Coming Soon`): Secure management of URI special characters.
+- **HTML Entities** (`Coming Soon`): Escape and unescape HTML characters.
+- **Binary Converter** (`Coming Soon`): Convert text to binary and back.
+- **Color Converter** (`Coming Soon`): Convert between HEX, RGB, HSL, and CMYK.
+- **Unicode Escape** (`Coming Soon`): Convert text to Unicode escape sequences.
+
+### 🕒 Time & Calendars
+- **[Epoch Converter](https://zply.dev/epoch-converter)**: Convert timestamps to readable dates and handle UTC.
+- **[Timezone Converter](https://zply.dev/tz-converter)**: Compare times across different time zones.
+- **Cron Parser** (`Coming Soon`): Translate Cron expressions into natural language.
+- **Time trakcer** (`Coming Soon`): Track time with a precise stopwatch, lap management, and customizable countdowns.
+
+### 🌐 Network
+- **[My IP Info](https://zply.dev/my-ip-info)**: Detailed information about your public IP address.
+- **CIDR Calculator** (`Coming Soon`): Calculate IP ranges and subnet masks.
+- **HTTP Headers** (`Coming Soon`): Analyze HTTP response headers.
+
+---
+
+## 🚀 Tech Stack
+
+- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Primitives:** [Radix UI](https://www.radix-ui.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Editor:** [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+- **State Compression:** [LZ-String](https://pieroxy.net/lua/lz-string/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+
+---
+
+## 🛠 Getting Started
+
+### Prerequisites
+
+- Node.js 22.x (LTS)
+- npm
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/tllobregat/zply.git
+   cd zply
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Zply is an open-source project, and we are happy to accept:
+
+- **Bug Fixes:** Found a glitch? Open an issue or submit a PR.
+- **New Tools:** Have an idea for a "Zero Backend" tool? We'd love to see it.
+- **UI/UX Improvements:** Help us make Zply even more polished.
+
+### How to Contribute
+
+1.  **Ticket First**: Search for an existing issue or [open a new one](https://github.com/tllobregat/zply/issues) to discuss your proposed change or tool. This ensures alignment with the project's vision and avoids duplicate work.
+2.  **Fork & Branch**: Fork the repository and create a descriptive branch:
+    -   For features: `git checkout -b feature/amazing-tool`
+    -   For bug fixes: `git checkout -b fix/issue-description`
+3.  **Development**: Implement your changes following the coding standards defined in `GEMINI.md`.
+4.  **PR with Link**: Submit a Pull Request and **link it to the original issue** (e.g., `Closes #123`).
+5.  **Validation**: Ensure the CI pipeline passes (Build, Lint, and Type Check).
+
+We value clean, well-documented, and highly-typed contributions!
+
+---
+
+## 📜 License
+
+Distributed under the MIT License. See `LICENSE` for more information (coming soon).
+
+---
+
+## 💜 Community & Support
+
+Zply is built by developers, for developers. If you find it useful, consider starring the repo! ⭐️
