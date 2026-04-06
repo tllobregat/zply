@@ -10,13 +10,13 @@ export function ThemeToggle(): ReactNode {
   const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect((): () => void => {
-    const frame: number = requestAnimationFrame(() => setMounted(true));
-    return () => cancelAnimationFrame(frame);
+    const frame: number = requestAnimationFrame((): void => setMounted(true));
+    return (): void => cancelAnimationFrame(frame);
   }, []);
 
   if (!mounted) {
     return (
-      <div className="p-3.5 rounded-2xl w-13 h-13 bg-muted/10 animate-pulse" />
+      <div className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl w-11 h-11 sm:w-13 sm:h-13 bg-muted/10 animate-pulse" />
     );
   }
 
@@ -26,22 +26,22 @@ export function ThemeToggle(): ReactNode {
     <button
       onClick={(): void => setTheme(isDark ? 'light' : 'dark')}
       className={cn(
-        'p-3.5 rounded-2xl transition-all duration-500 group relative overflow-hidden active:scale-95',
+        'p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all duration-500 group relative overflow-hidden active:scale-95',
         'bg-island-bg border border-island-border shadow-lg',
         'hover:shadow-zply-blue/10 hover:border-zply-blue/50'
       )}
       aria-label="Toggle theme"
     >
-      <div className="relative w-6 h-6 flex items-center justify-center">
+      <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
         <Sun 
           className={cn(
-            'w-6 h-6 absolute transition-all duration-500 transform',
+            'w-5 h-5 sm:w-6 sm:h-6 absolute transition-all duration-500 transform',
             isDark ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100 text-amber-500'
           )} 
         />
         <Moon 
           className={cn(
-            'w-6 h-6 absolute transition-all duration-500 transform',
+            'w-5 h-5 sm:w-6 sm:h-6 absolute transition-all duration-500 transform',
             isDark ? 'rotate-0 scale-100 opacity-100 text-blue-400' : '-rotate-90 scale-0 opacity-0'
           )} 
         />

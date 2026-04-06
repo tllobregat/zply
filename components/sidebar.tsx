@@ -31,11 +31,11 @@ export function Sidebar(): React.ReactNode {
 
   return (
     <aside
-      className="w-full sm:w-20 h-auto sm:h-full flex flex-row sm:flex-col items-center py-2 sm:py-8 px-4 sm:px-0 glass-island rounded-2xl sm:rounded-[2.5rem] border border-island-border shadow-2xl z-50">
+      className="w-full sm:w-20 h-auto sm:h-full flex flex-row sm:flex-col items-center py-2 sm:py-8 px-4 sm:px-0 glass-island rounded-2xl sm:rounded-[2.5rem] border border-island-border shadow-2xl z-50 mb-safe sm:mb-0">
       {/* Logo Zply - Acts as Home button */}
       <Link
         href="/"
-        onClick={(e: React.MouseEvent) => {
+        onClick={(e: React.MouseEvent): void => {
           if (pathname === '/') {
             e.preventDefault();
             document.getElementById('home-scroll-container')?.scrollTo({ top: 0, behavior: 'smooth' });
@@ -56,7 +56,7 @@ export function Sidebar(): React.ReactNode {
 
       <div className="w-px sm:w-8 h-8 sm:h-px bg-island-border/50 mx-2 sm:mx-auto my-0 sm:my-2 sm:hidden" />
 
-      <nav className="flex-1 flex flex-row sm:flex-col items-center justify-start mt-6 gap-2 sm:gap-6">
+      <nav className="flex-1 flex flex-row sm:flex-col items-center justify-start sm:mt-6 gap-2 sm:gap-6">
         {/* Search Trigger */}
         <button
           onClick={handleOpenSearch}
@@ -75,7 +75,7 @@ export function Sidebar(): React.ReactNode {
         {/* Dashboard / Categories shortcut */}
         <Link
           href="/#dashboard"
-          onClick={(e: React.MouseEvent) => {
+          onClick={(e: React.MouseEvent): void => {
             if (pathname === '/') {
               e.preventDefault();
               document.getElementById('dashboard')?.scrollIntoView({ behavior: 'smooth' });
@@ -93,42 +93,44 @@ export function Sidebar(): React.ReactNode {
 
         {
           pinnedTools.length > 0
-          && (
-            <>
-              <div className="w-px sm:w-8 h-8 sm:h-px bg-island-border/50 mx-1 sm:mx-auto my-0 sm:my-2" />
-              <div className="flex flex-row sm:flex-col gap-2">
-                {
-                  pinnedTools.map((tool: ToolConfig) => {
-                    const Icon: LucideIcon = tool.icon;
-                    const isActive: boolean = pathname === tool.href;
-                    const categoryColor: CategoryColor = CATEGORY_COLORS[tool.category];
-                    const theme: CategoryTheme = getCategoryClasses(categoryColor);
+            ? (
+              <>
+                <div className="w-px sm:w-8 h-8 sm:h-px bg-island-border/50 mx-1 sm:mx-auto my-0 sm:my-2" />
+                <div className="flex flex-row sm:flex-col gap-2">
+                  {
+                    pinnedTools.map((tool: ToolConfig) => {
+                      const Icon: LucideIcon = tool.icon;
+                      const isActive: boolean = pathname === tool.href;
+                      const categoryColor: CategoryColor = CATEGORY_COLORS[tool.category];
+                      const theme: CategoryTheme = getCategoryClasses(categoryColor);
 
-                    return (
-                      <Link
-                        key={tool.id}
-                        href={tool.href}
-                        className={cn(
-                          'p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all relative group shrink-0',
-                          isActive
-                            ? cn('shadow-lg text-white', theme.bg, theme.shadow)
-                            : cn('text-muted-foreground bg-island-bg border border-island-border', theme.hoverText, `hover:bg-${categoryColor}-600/10`)
-                        )}
-                        aria-label={tool.title}
-                      >
-                        <Icon className={cn('w-5 h-5 sm:w-6 sm:h-6', !isActive && theme.text)} />
-                        <span
-                          className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-2xl z-60 hidden sm:block"
+                      return (
+                        <Link
+                          key={tool.id}
+                          href={tool.href}
+                          className={cn(
+                            'p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all relative group shrink-0',
+                            isActive
+                              ? cn('shadow-lg text-white', theme.bg, theme.shadow)
+                              : cn('text-muted-foreground bg-island-bg border border-island-border', theme.hoverText, `hover:bg-${categoryColor}-600/10`)
+                          )}
+                          aria-label={tool.title}
                         >
-                          {tool.title}
-                        </span>
-                      </Link>
-                    );
-                  })
-                }
-              </div>
-            </>
-          )}
+                          <Icon className={cn('w-5 h-5 sm:w-6 sm:h-6', !isActive && theme.text)} />
+                          <span
+                            className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-2xl z-60 hidden sm:block"
+                          >
+                            {tool.title}
+                          </span>
+                        </Link>
+                      );
+                    })
+                  }
+                </div>
+              </>
+            )
+            : null
+        }
       </nav>
 
       <div className="w-px sm:w-8 h-8 sm:h-px bg-island-border/50 mx-2 sm:mx-auto my-0 sm:my-2 sm:hidden" />

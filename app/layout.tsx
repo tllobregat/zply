@@ -62,7 +62,7 @@ export default function RootLayout({ children }: PropsWithChildren): React.React
       suppressHydrationWarning
     >
     <body
-      className="h-screen flex overflow-hidden selection:bg-zply-blue/30 selection:text-zply-blue transition-colors duration-300"
+      className="h-[100dvh] flex overflow-hidden selection:bg-zply-blue/30 selection:text-zply-blue transition-colors duration-300"
     >
     <ThemeProvider
       attribute="class"

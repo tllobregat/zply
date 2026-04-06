@@ -72,4 +72,8 @@
   .zply-gradient {
     background: linear-gradient(135deg, var(--color-zply-blue) 0%, var(--color-zply-purple) 100%);
   }
+
+  .mb-safe {
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+  }
 }
