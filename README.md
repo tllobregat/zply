@@ -120,6 +120,28 @@ We welcome contributions! Zply is an open-source project, and we are happy to ac
 
 We value clean, well-documented, and highly-typed contributions!
 
+### 🛠️ Commit Convention
+
+This project uses **Husky** and **commitlint** to enforce the [Conventional Commits](https://www.conventionalcommits.org/) specification. This ensures a clean, readable history and allows for automated changelogs.
+
+#### Message Format
+Each commit message must follow this structure:
+`<type>(<scope>): <description>`
+
+#### Common Types
+- **feat**: A new tool or user-facing feature.
+- **fix**: A bug fix.
+- **docs**: Documentation changes only.
+- **style**: Changes that do not affect the meaning of the code (formatting, missing semi-colons, etc).
+- **refactor**: A code change that neither fixes a bug nor adds a feature.
+- **chore**: Updating build tasks, package manager configs, or tools.
+
+#### 💡 Local Enforcement
+When you run `git commit`, Husky will automatically trigger a check. If your message does not follow the convention, the commit will be **rejected**.
+
+**Example of a valid commit:**
+`feat(json): add nested key validation`
+
 ---
 
 ## 📜 License
