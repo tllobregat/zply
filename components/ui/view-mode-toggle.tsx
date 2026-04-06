@@ -8,19 +8,21 @@ import React from 'react';
 /**
  * Interface for the ViewModeToggle component props.
  */
-interface ViewModeToggleProps {
+interface ViewModeToggleProps<T extends string = ViewMode> {
   /** The current view mode */
-  viewMode: ViewMode;
+  viewMode: T;
   /** Callback function to update the view mode */
-  setViewMode: (mode: ViewMode) => void;
+  setViewMode: (mode: T) => void;
   /** Optional additional CSS classes */
   className?: string;
+  /** Optional custom modes */
+  modes?: { id: T; label: string }[];
 }
 
 /**
  * Available modes definition with label and id.
  */
-const MODES: { id: ViewMode; label: string }[] = [
+const DEFAULT_MODES: { id: ViewMode; label: string }[] = [
   { id: 'editor', label: 'Editor' },
   { id: 'split', label: 'Split' },
   { id: 'preview', label: 'Preview' },
@@ -30,13 +32,20 @@ const MODES: { id: ViewMode; label: string }[] = [
  * A highly reusable toggle component for switching between 'editor', 'split', and 'preview' modes.
  * Features smooth Framer Motion animations and "Zply" aesthetic.
  */
-export function ViewModeToggle({ viewMode, setViewMode, className }: ViewModeToggleProps): React.ReactNode {
+export function ViewModeToggle<T extends string = ViewMode>(
+  {
+    viewMode,
+    setViewMode,
+    className,
+    modes = DEFAULT_MODES as unknown as { id: T; label: string }[]
+  }: ViewModeToggleProps<T>
+): React.ReactNode {
   return (
     <div className={cn(
       'flex p-1 bg-island-bg/50 border border-island-border rounded-2xl relative shadow-inner',
       className
     )}>
-      {MODES.map((mode) => (
+      {modes.map((mode) => (
         <button
           key={mode.id}
           onClick={() => setViewMode(mode.id)}
@@ -50,7 +59,7 @@ export function ViewModeToggle({ viewMode, setViewMode, className }: ViewModeTog
         >
           {viewMode === mode.id && (
             <motion.div
-              layoutId="view-mode-active"
+              layoutId={`view-mode-active-${className}`} // Unique layoutId if multiple toggles are on the same page
               className="absolute inset-0 bg-island-bg border border-island-border rounded-xl shadow-lg -z-10"
               initial={false}
               transition={{

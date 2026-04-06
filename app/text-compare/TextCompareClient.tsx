@@ -11,11 +11,14 @@ import { ReactNode } from 'react';
 import { useTextCompareState } from './use-text-compare-state';
 import { TextCompareEditor } from './TextCompareEditor';
 
+import { DiffMode, ViewMode } from './text-compare.types';
+
 export default function TextCompareClient(): ReactNode {
   const { 
     state, 
     updateOriginal, 
     updateModified, 
+    updateDiffMode,
     viewMode, 
     setViewMode 
   } = useTextCompareState();
@@ -32,7 +35,30 @@ export default function TextCompareClient(): ReactNode {
         { label: 'Text Compare' }
       ]}
       headerActions={
-        <ViewModeToggle viewMode={viewMode} setViewMode={setViewMode} />
+        <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2">
+          <ViewModeToggle<DiffMode>
+            viewMode={state.diffMode}
+            setViewMode={updateDiffMode}
+            modes={[
+              { id: 'unified', label: 'Unified' },
+              { id: 'split', label: 'Split' }
+            ]}
+          />
+          {
+            state.diffMode === 'split'
+            && (
+              <ViewModeToggle<ViewMode>
+                viewMode={viewMode}
+                setViewMode={setViewMode}
+                modes={[
+                  { id: 'original', label: 'Original' },
+                  { id: 'split', label: 'Split' },
+                  { id: 'modified', label: 'Modified' }
+                ]}
+              />
+            )
+          }
+        </div>
       }
       footerIndicator={
         <>
@@ -49,6 +75,7 @@ export default function TextCompareClient(): ReactNode {
         original={state.original}
         modified={state.modified}
         viewMode={viewMode}
+        diffMode={state.diffMode}
         onOriginalChange={updateOriginal}
         onModifiedChange={updateModified}
       />
