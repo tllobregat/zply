@@ -67,18 +67,21 @@ function DevToolButton(): React.ReactNode {
                 onClick={handleCopy}
                 className="p-1.5 hover:bg-emerald-500/20 rounded-md transition-colors text-emerald-400/60 hover:text-emerald-400"
                 title="Copy JSON"
+                aria-label="Copy JSON"
               >
                 {isCopied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               </button>
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="p-1.5 hover:bg-emerald-500/20 rounded-md transition-colors text-emerald-400/60 hover:text-emerald-400"
+                aria-label={isExpanded ? "Shrink inspector" : "Expand inspector"}
               >
                 {isExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
               </button>
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-1.5 hover:bg-emerald-500/20 rounded-md transition-colors text-emerald-400/60 hover:text-emerald-400"
+                aria-label="Close inspector"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -110,6 +113,7 @@ function DevToolButton(): React.ReactNode {
           onClick={() => setIsOpen(true)}
           className="p-3 glass-island bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-full shadow-lg text-emerald-400 transition-all hover:scale-110 active:scale-95 group"
           title="Open State Inspector"
+          aria-label="Open State Inspector"
         >
           <Terminal className="w-5 h-5 group-hover:rotate-12 transition-transform" />
         </button>

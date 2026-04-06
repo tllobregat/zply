@@ -136,6 +136,7 @@ export function CommandMenu(): React.ReactNode {
                                       : 'text-muted hover:bg-island-bg/50',
                                     item.status === 'coming-soon' && 'opacity-50'
                                   )}
+                                  aria-label={`Open ${item.title} tool`}
                                 >
                                   <div className="flex items-center gap-2">
                                     <div className={cn(

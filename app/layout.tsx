@@ -8,6 +8,7 @@ import { NextFontWithVariable } from 'next/dist/compiled/@next/font';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import React, { PropsWithChildren } from 'react';
+import { Analytics } from "@vercel/analytics/next"
 
 const geistSans: NextFontWithVariable = Geist({
   variable: '--font-geist-sans',
@@ -90,6 +91,7 @@ export default function RootLayout({ children }: PropsWithChildren): React.React
         <DevTool />
       </Providers>
     </ThemeProvider>
+    <Analytics />
     </body>
     </html>
   );

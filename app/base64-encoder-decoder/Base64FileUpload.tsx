@@ -37,7 +37,13 @@ export function Base64FileUpload(
                   </span>
                 </div>
               </div>
-              <Button variant="ghost" size="icon" className="rounded-xl hover:bg-red-500/10 hover:text-red-400" onClick={onClearFile}>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="rounded-xl hover:bg-red-500/10 hover:text-red-400" 
+                onClick={onClearFile}
+                aria-label="Clear file"
+              >
                 <X className="w-4 h-4" />
               </Button>
             </div>

@@ -45,6 +45,7 @@ export function Sidebar(): React.ReactNode {
           'p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all active:scale-95 hover:rotate-3 relative group',
           pathname === '/' ? 'bg-zply-blue shadow-lg shadow-zply-blue/30' : 'bg-island-bg border border-island-border text-muted hover:text-foreground hover:bg-island-bg/80'
         )}
+        aria-label="Home Page"
       >
         <Zap className={cn('w-5 h-5 sm:w-6 sm:h-6 fill-current', pathname === '/' ? 'text-white' : 'text-current')} />
         <span
@@ -60,6 +61,7 @@ export function Sidebar(): React.ReactNode {
         <button
           onClick={handleOpenSearch}
           className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all relative group text-muted-foreground hover:text-zply-blue hover:bg-zply-blue/10"
+          aria-label="Open search menu"
         >
           <Search className="w-5 h-5 sm:w-6 sm:h-6" />
           <span
@@ -80,6 +82,7 @@ export function Sidebar(): React.ReactNode {
             }
           }}
           className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all relative group text-muted-foreground hover:text-zply-blue hover:bg-zply-blue/10"
+          aria-label="Go to Dashboard"
         >
           <LayoutGrid className="w-5 h-5 sm:w-6 sm:h-6" />
           <span
@@ -111,6 +114,7 @@ export function Sidebar(): React.ReactNode {
                             ? cn('shadow-lg text-white', theme.bg, theme.shadow)
                             : cn('text-muted-foreground bg-island-bg border border-island-border', theme.hoverText, `hover:bg-${categoryColor}-600/10`)
                         )}
+                        aria-label={tool.title}
                       >
                         <Icon className={cn('w-5 h-5 sm:w-6 sm:h-6', !isActive && theme.text)} />
                         <span
@@ -137,6 +141,7 @@ export function Sidebar(): React.ReactNode {
           target="_blank"
           rel="noopener noreferrer"
           className="p-3 sm:p-3.5 text-muted hover:text-foreground hover:bg-island-bg/50 rounded-xl sm:rounded-2xl transition-all group relative"
+          aria-label="GitHub Repository"
         >
           <Github className="w-5 h-5 sm:w-6 sm:h-6" />
           <span
@@ -150,6 +155,7 @@ export function Sidebar(): React.ReactNode {
           target="_blank"
           rel="noopener noreferrer"
           className="p-3 sm:p-3.5 text-muted hover:text-orange-400 hover:bg-orange-400/10 rounded-xl sm:rounded-2xl transition-all group relative"
+          aria-label="Buy me a coffee"
         >
           <Coffee className="w-5 h-5 sm:w-6 sm:h-6" />
           <span

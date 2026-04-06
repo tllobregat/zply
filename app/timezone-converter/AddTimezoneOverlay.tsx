@@ -49,7 +49,13 @@ export function AddTimezoneOverlay(
               <div className="p-8 space-y-6">
                 <div className="flex items-center justify-between">
                   <h2 className="text-xl font-black uppercase tracking-tight">Add Timezone</h2>
-                  <Button variant="ghost" size="icon" onClick={onClose} className="rounded-full">
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    onClick={onClose} 
+                    className="rounded-full"
+                    aria-label="Close overlay"
+                  >
                     <X className="w-5 h-5" />
                   </Button>
                 </div>
@@ -78,6 +84,7 @@ export function AddTimezoneOverlay(
                           'w-full flex items-center justify-between p-4 rounded-2xl group transition-all text-left',
                           `hover:bg-${theme.text.split('-')[1]}-500/10`
                         )}
+                        aria-label={`Add ${tz.name} timezone`}
                       >
                         <div className="flex flex-col">
                           <span className={cn('text-sm font-bold transition-colors truncate', theme.hoverText)}>{tz.name}</span>

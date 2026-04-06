@@ -42,6 +42,7 @@ export default function FormatSelector(
           activeColor,
           isOpen && 'bg-white/5'
         )}
+        aria-label="Select data format"
       >
         <span>{FORMAT_LABELS[value]}</span>
         <ChevronDown className={cn('w-3 h-3 transition-transform duration-200', isOpen && 'rotate-180')} />
