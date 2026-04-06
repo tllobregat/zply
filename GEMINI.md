@@ -83,3 +83,9 @@ Pour la création et la gestion des outils, utiliser le skill specialized `zply-
 - **Filtrage** : Utiliser `useMemo` sur les recherches et catégories pour éviter les recalculs coûteux.
 - **Images** : Privilégier le SVG ou les icônes Lucide.
 - **LCP** : Garder un bundle léger, utiliser `next/dynamic` si nécessaire pour les composants lourds (comme Monaco Editor).
+
+## 📝 Git Workflow
+- **Commit Pattern** : Toujours effectuer un commit après chaque tâche terminée.
+- **Convention** : Utiliser les [Conventional Commits](https://www.conventionalcommits.org/) (nécessaire pour `standard-version`).
+- **Format** : `<type>(<scope>): <message>` (ex: `feat(ui): add new button`, `fix(core): resolve race condition`).
+- **Types recommandés** : `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`.
