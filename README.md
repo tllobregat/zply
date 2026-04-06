@@ -8,9 +8,10 @@
 
 ## ✨ Key Principles
 
-- **🔒 Zero Backend:** Every tool runs 100% in your browser. No data is ever sent to a server.
-- **🍪 Zero Cookies & Trackers:** We don't track you. No cookies, no third-party scripts, no analytics.
-- **💾 URI Persistence:** Share your workspace state instantly. We use **LZ-String** compression to store your current state directly in the `window.location.hash`.
+- **🔒 Zero Backend:** Every tool runs 100% in your browser. No user-input data is ever sent to a server.
+- **🍪 Zero Cookies:** We do not use cookies or persistent identifiers. Your browsing remains private and storage-free.
+- **🛡️ Privacy-First Telemetry:** We use anonymous, cookieless telemetry to monitor site health. (See [Analytics & Privacy](#-analytics--privacy) for details).
+- **💾 URI Persistence:** Share your workspace state instantly. We use **LZ-String** compression to store your current state directly in the `window.location.hash`, ensuring your data stays in the browser and never touches the network.
 - **⚡ High Performance:** Built with Next.js (SSG) for sub-second load times and a fluid, "Island-based" UI architecture.
 
 ---
@@ -141,6 +142,24 @@ When you run `git commit`, Husky will automatically trigger a check. If your mes
 
 **Example of a valid commit:**
 `feat(json): add nested key validation`
+
+---
+
+## 📊 Analytics & Privacy
+
+Zply is built on a **Privacy-First** philosophy. We do not use cookies, and we do not collect any Personally Identifiable Information (PII).
+
+### 🛡️ Cookieless Telemetry
+To monitor site health and performance, we use **Vercel Web Analytics**. This integration is strictly for anonymous telemetry and does not track individual users.
+
+* **No Cookies:** No data is stored on your device's persistent storage.
+* **No PII:** Your IP address is hashed and discarded immediately; we never see who you are.
+* **Short-lived Hashes:** Visitor identification is rotated every 24 hours, making cross-day tracking impossible.
+* **Full Transparency:** You can verify Vercel's privacy-first architecture in their [Official Documentation](https://vercel.com/docs/analytics/privacy-policy) and [GDPR Compliance Guide](https://vercel.com/docs/analytics/gdpr).
+
+### 🔒 Zero Backend Data
+Even with telemetry enabled, your **data remains yours**.
+The contents of your editors (JSON, SQL, JWTs, etc.) are processed 100% locally in your browser. Because Zply uses **URI Persistence** (LZ-String compression in the `window.location.hash`), your sensitive inputs never touch a server—not even Vercel's.
 
 ---
 
