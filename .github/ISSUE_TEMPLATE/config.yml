@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🌐 Live Demo
+    url: https://zply.dev
+    about: Please check if the bug persists on the latest live version before reporting.
+  - name: 📖 Tool Creation Guide
+    url: https://github.com/tllobregat/zply/blob/main/.gemini/skills/zply-tool/SKILL.md
+    about: Read our technical manifesto before proposing new architecture.
