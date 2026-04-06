@@ -2,12 +2,13 @@
 
 import { Logger } from '@/lib/logger';
 import { cn } from '@/lib/utils';
-import { Check, ChevronDown, ChevronUp, Copy, Terminal, X } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp, Copy, EyeOff, Terminal, X } from 'lucide-react';
 import LZString from 'lz-string';
 import React, { useEffect, useState } from 'react';
 
 function DevToolButton(): React.ReactNode {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hashContent, setHashContent] = useState<unknown>(null);
   const [isCopied, setIsCopied] = useState(false);
@@ -50,6 +51,10 @@ function DevToolButton(): React.ReactNode {
     setTimeout(() => setIsCopied(false), 2000);
   };
 
+  if (isHidden) {
+    return null;
+  }
+
   return (
     <div className="fixed bottom-4 right-4 z-9999 flex flex-col items-end gap-2 font-mono">
       {isOpen && (
@@ -63,6 +68,14 @@ function DevToolButton(): React.ReactNode {
               <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">URI State Inspector</span>
             </div>
             <div className="flex items-center gap-1">
+              <button
+                onClick={() => setIsHidden(true)}
+                className="p-1.5 hover:bg-emerald-500/20 rounded-md transition-colors text-emerald-400/60 hover:text-emerald-400"
+                title="Hide DevTool (requires reload to show)"
+                aria-label="Hide DevTool"
+              >
+                <EyeOff className="w-3.5 h-3.5" />
+              </button>
               <button
                 onClick={handleCopy}
                 className="p-1.5 hover:bg-emerald-500/20 rounded-md transition-colors text-emerald-400/60 hover:text-emerald-400"
@@ -109,14 +122,24 @@ function DevToolButton(): React.ReactNode {
       )}
 
       {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="p-3 glass-island bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-full shadow-lg text-emerald-400 transition-all hover:scale-110 active:scale-95 group"
-          title="Open State Inspector"
-          aria-label="Open State Inspector"
-        >
-          <Terminal className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-        </button>
+        <div className="flex items-center gap-2 group/container">
+          <button
+            onClick={() => setIsHidden(true)}
+            className="p-2 glass-island bg-emerald-500/5 hover:bg-emerald-500/20 border border-emerald-500/20 rounded-full shadow-lg text-emerald-400/40 hover:text-emerald-400 transition-all opacity-0 group-hover/container:opacity-100 -translate-x-2 group-hover/container:translate-x-0"
+            title="Hide DevTool"
+            aria-label="Hide DevTool"
+          >
+            <EyeOff className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => setIsOpen(true)}
+            className="p-3 glass-island bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-full shadow-lg text-emerald-400 transition-all hover:scale-110 active:scale-95 group"
+            title="Open State Inspector"
+            aria-label="Open State Inspector"
+          >
+            <Terminal className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+          </button>
+        </div>
       )}
     </div>
   );
