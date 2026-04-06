@@ -6,6 +6,26 @@
 
 ---
 
+## 📑 Table of Contents
+
+- [✨ Key Principles](#-key-principles)
+- [🛠️ Available Tools](#-available-tools)
+    - [🎨 Visualization](#-visualisation)
+    - [📄 Data & Text](#-data--text)
+    - [🔐 Security](#-security)
+    - [🔢 Encoding & Conversion](#-encoding--conversion)
+    - [🕒 Time & Calendars](#-time--calendars)
+    - [🌐 Network](#-network)
+- [🏗️ Tech Stack](#-tech-stack)
+- [🚦 Getting Started](#-getting-started)
+- [🤝 Contributing](#-contributing)
+- [📊 Analytics & Privacy](#-analytics--privacy)
+- [⚖️ License](#-license)
+- [💜 Community & Support](#-community--support)
+- [☕ Support the Project](#-support-the-project)
+
+---
+
 ## ✨ Key Principles
 
 - **🔒 Zero Backend:** Every tool runs 100% in your browser. No user-input data is ever sent to a server.
@@ -24,23 +44,23 @@
 - **Mermaid.js Maker** (`Coming Soon`): Lightweight flowcharts and sequence diagrams.
 - **SVG Optimizer** (`Coming Soon`): Visualize and clean up SVG code using SVGO.
 - **[SQL & DB Visualizer](https://zply.dev/sql-database-visualizer)**: Generate ER diagrams from SQL (PostgreSQL, MariaDB) or Prisma.
-- **Excalidraw Island** (`Coming Soon`): Smooth hand-drawn sketching and diagrams.
+- **Excalidraw Canvas** (`Coming Soon`): Smooth hand-drawn sketching and diagrams.
 
 ### 📊 Data & Text
-- **[JSON Formatter](https://zply.dev/json-utils)**: Instant indentation, validation, and minification.
+- **[JSON Utils](https://zply.dev/json-utils)**: Instant indentation, validation, and minification.
 - **[Text Compare](https://zply.dev/text-compare)**: Visual diff tool with split or unified views.
-- **[Regex Tester](https://zply.dev/regex)**: Test regular expressions with real-time explanations.
+- **Regex Tester** (`Coming Soon`): Test regular expressions with real-time explanations.
 - **[Data Transformer](https://zply.dev/data-transformer)**: Convert between JSON, YAML, CSV, XML, and TypeScript.
 - **SQL Formatter** (`Coming Soon`): Beautify and standardize complex SQL queries.
 
 ### 🔐 Security
-- **[JWT Decoder](https://zply.dev/jwt-debugger)**: Secure, local decoding of JWT claims and payloads.
+- **[JWT Debugger](https://zply.dev/jwt-debugger)**: Secure, local decoding of JWT claims and payloads.
 - **[Hash Generator](https://zply.dev/hash-generator)**: Generate SHA-256, SHA-512, and MD5 hashes (Web Crypto API).
 - **Password & Secret Generator** (`Coming Soon`): Generate secure passwords, API keys, and tokens with local strength evaluation.
 - **RSA Key Pair Gen** (`Coming Soon`): Generate public/private RSA key pairs.
 
 ### 🔤 Encoding & Conversion
-- **[Base64 Tool](https://zply.dev/base64-encoder-decoder)**: Encode and decode text or files to Base64 instantly.
+- **[Base64 Encoder/Decoder](https://zply.dev/base64-encoder-decoder)**: Encode and decode text or files to Base64 instantly.
 - **URL Encoder/Decoder** (`Coming Soon`): Secure management of URI special characters.
 - **HTML Entities** (`Coming Soon`): Escape and unescape HTML characters.
 - **Binary Converter** (`Coming Soon`): Convert text to binary and back.
@@ -49,9 +69,9 @@
 
 ### 🕒 Time & Calendars
 - **[Epoch Converter](https://zply.dev/epoch-converter)**: Convert timestamps to readable dates and handle UTC.
-- **[Timezone Converter](https://zply.dev/tz-converter)**: Compare times across different time zones.
+- **[Timezone Converter](https://zply.dev/timezone-converter)**: Compare times across different time zones.
 - **Cron Parser** (`Coming Soon`): Translate Cron expressions into natural language.
-- **Time trakcer** (`Coming Soon`): Track time with a precise stopwatch, lap management, and customizable countdowns.
+- **Stopwatch & Timer** (`Coming Soon`): Track time with a precise stopwatch, lap management, and customizable countdowns.
 
 ### 🌐 Network
 - **[My IP Info](https://zply.dev/my-ip-info)**: Detailed information about your public IP address.
@@ -69,6 +89,8 @@
 - **Editor:** [Monaco Editor](https://microsoft.github.io/monaco-editor/)
 - **State Compression:** [LZ-String](https://pieroxy.net/lua/lz-string/)
 - **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Graphs:** [React Flow](https://reactflow.dev/) & [Dagre](https://github.com/dagrejs/dagre)
+- **Time:** [Day.js](https://day.js.org/)
 
 ---
 
@@ -165,10 +187,20 @@ The contents of your editors (JSON, SQL, JWTs, etc.) are processed 100% locally 
 
 ## 📜 License
 
-Distributed under the MIT License. See `LICENSE` for more information (coming soon).
+Distributed under the MIT License. See [LICENSE](https://github.com/tllobregat/zply/blob/main/LICENSE) for more information.
 
 ---
 
 ## 💜 Community & Support
 
 Zply is built by developers, for developers. If you find it useful, consider starring the repo! ⭐️
+
+[![GitHub stars](https://img.shields.io/github/stars/tllobregat/zply.svg?style=social&label=Star&maxAge=2592000)](https://github.com/tllobregat/zply/stargazers)
+
+---
+
+## ☕ Support the Project
+
+If Zply helps you in your daily workflow, consider supporting its development!
+
+<a href="https://buymeacoffee.com/tllo" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
