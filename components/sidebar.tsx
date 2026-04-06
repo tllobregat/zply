@@ -60,6 +60,7 @@ export function Sidebar(): React.ReactNode {
         <button
           onClick={handleOpenSearch}
           className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all relative group text-muted-foreground hover:text-zply-blue hover:bg-zply-blue/10"
+          aria-label="Open search menu"
         >
           <Search className="w-5 h-5 sm:w-6 sm:h-6" />
           <span
@@ -80,6 +81,7 @@ export function Sidebar(): React.ReactNode {
             }
           }}
           className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all relative group text-muted-foreground hover:text-zply-blue hover:bg-zply-blue/10"
+          aria-label="Go to Dashboard"
         >
           <LayoutGrid className="w-5 h-5 sm:w-6 sm:h-6" />
           <span

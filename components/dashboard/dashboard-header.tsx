@@ -56,6 +56,7 @@ export function DashboardHeader(
                   setSearch('');
                 }}
                 className="p-2 sm:p-2.5 rounded-xl bg-island-bg border border-island-border hover:border-blue-500/30 text-muted transition-all active:scale-95 hover:text-foreground group/back shadow-sm shrink-0"
+                aria-label="Back to all categories"
               >
                 <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 group-hover/back:-translate-x-0.5 transition-transform" />
               </button>

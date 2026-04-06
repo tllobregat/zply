@@ -63,6 +63,7 @@ export function ToolCard(
                       ? cn(theme.icon, theme.border)
                       : 'bg-island-bg border-island-border text-muted hover:text-foreground hover:border-island-border/50'
                   )}
+                  aria-label={isPinned ? "Unpin tool" : "Pin tool"}
                 >
                   <Pin className={cn('w-3 h-3 sm:w-3.5 sm:h-3.5', isPinned && 'fill-current')} />
                 </button>

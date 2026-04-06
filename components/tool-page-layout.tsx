@@ -164,7 +164,12 @@ export default function ToolPageLayout(
                 ? (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="secondary" size="icon" className="h-10 w-10">
+                      <Button 
+                        variant="secondary" 
+                        size="icon" 
+                        className="h-10 w-10"
+                        aria-label="More options"
+                      >
                         <MoreHorizontal className="w-4 h-4" />
                       </Button>
                     </DropdownMenuTrigger>

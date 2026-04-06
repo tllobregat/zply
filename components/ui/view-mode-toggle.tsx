@@ -46,6 +46,7 @@ export function ViewModeToggle({ viewMode, setViewMode, className }: ViewModeTog
               ? 'text-foreground'
               : 'text-muted-foreground hover:text-foreground'
           )}
+          aria-label={`Switch to ${mode.label} view`}
         >
           {viewMode === mode.id && (
             <motion.div
