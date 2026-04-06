@@ -42,6 +42,7 @@ export function ToolCard(
           theme.hoverBorder,
           isComingSoon && 'opacity-40 cursor-not-allowed'
         )}
+        aria-label={isComingSoon ? `${tool.title} (Coming Soon)` : `Open ${tool.title}`}
       >
         <div className="flex items-start justify-between mb-3 sm:mb-4">
           <div className={cn(
