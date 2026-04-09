@@ -82,17 +82,24 @@ export function usePlantUmlActions(): UsePlantumlActions {
         canvas.toBlob(async (blob: Blob | null) => {
           if (blob) {
             try {
+              // Note: Some browsers may require a direct user action. 
+              // Since this is triggered by canvas/image callbacks, 
+              // it might fail with NotAllowedError in some environments.
               const item: ClipboardItem = new ClipboardItem({ [blob.type]: blob });
               await navigator.clipboard.write([item]);
               setCopied('image');
-            } catch (err) {
-              console.error('Failed to copy image to clipboard:', err);
+            } catch (err: unknown) {
+              if (err instanceof Error && err.name === 'NotAllowedError') {
+                console.warn('Clipboard write permission denied. This might be due to asynchronous nature of the copy action.');
+              } else {
+                console.error('Failed to copy image to clipboard:', err);
+              }
             }
           }
         }, 'image/png');
       };
       img.src = url;
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error converting SVG to PNG:', error);
     }
   };

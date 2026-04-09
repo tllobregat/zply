@@ -27,7 +27,7 @@ function DevToolButton(): React.ReactNode {
         } else {
           setHashContent(null);
         }
-      } catch (e) {
+      } catch (e: unknown) {
         Logger.error('Failed to decode hash', e);
         setHashContent({ error: 'Failed to decode hash' });
       }
@@ -46,9 +46,30 @@ function DevToolButton(): React.ReactNode {
   }, []);
 
   const handleCopy = (): void => {
-    navigator.clipboard.writeText(JSON.stringify(hashContent, null, 2));
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(JSON.stringify(hashContent, null, 2))
+        .then(() => {
+          setIsCopied(true);
+          setTimeout(() => setIsCopied(false), 2000);
+        })
+        .catch((err: Error): void => {
+          console.error('Failed to copy JSON to clipboard:', err);
+        });
+    } else {
+      // Fallback for non-secure context
+      const textArea: HTMLTextAreaElement = document.createElement('textarea');
+      textArea.value = JSON.stringify(hashContent, null, 2);
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+      } catch (err: unknown) {
+        console.error('Fallback copy failed:', err);
+      }
+      document.body.removeChild(textArea);
+    }
   };
 
   if (isHidden) {
