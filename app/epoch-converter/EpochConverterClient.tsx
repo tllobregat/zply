@@ -33,7 +33,7 @@ export default function EpochConverterClient(): ReactNode {
       footerIndicator={
         <span className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5 text-yellow-500/30" /> Milliseconds auto-detected</span>
       }
-      workspaceClassName="flex-1 min-h-0 overflow-auto p-8 md:p-12 items-center justify-center"
+      workspaceClassName="flex-1 min-h-0 overflow-auto custom-scrollbar p-8 md:p-12 items-center justify-center"
     >
       <div className="w-full max-w-2xl space-y-12">
         {/* Header/Actions Section */}

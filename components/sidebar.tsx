@@ -179,7 +179,7 @@ export function Sidebar(): React.ReactNode {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="fixed inset-0 bg-background/90 backdrop-blur-xl z-[100] sm:hidden flex flex-col p-6 overflow-y-auto"
+              className="fixed inset-0 bg-background/90 backdrop-blur-xl z-100 sm:hidden flex flex-col p-6 overflow-y-auto custom-scrollbar"
             >
               <div className="flex justify-between items-center mb-10">
                 <div className="flex items-center gap-3">

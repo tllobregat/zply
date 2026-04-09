@@ -16,6 +16,7 @@ Zply est une boîte à outils de développement "High Quality", ultra-rapide et 
 - **Mode Sombre / Clair :** **INTERDIT** d'utiliser le préfixe Tailwind `dark:`. Toujours utiliser `resolvedTheme` (via `useTheme`) pour appliquer des classes conditionnelles.
 - **Navigation :** Barre latérale ou flottante ultra-réactive avec recherche floue (Command Palette).
     - **Logo (Home) :** Le bouton logo de la barre latérale sert à la fois de lien vers l'accueil et de réinitialisation du dashboard. Cliquer dessus sur la page d'accueil déclenche un événement `reset-dashboard` et scrolle vers `#dashboard`.
+    - **Dashboard Home :** La page d'accueil du dashboard (vue "All") doit inclure une section Hero claire définissant la proposition de valeur de l'application (100% privé, local-first) et une section "Popular Tools" pour un accès rapide aux outils les plus utilisés.
 - **Esthétique :**
     - Bordures fines (1px) `border-island-border`.
     - Effets de verre (Glassmorphism) sur les modaux et la navigation ("Glass Island").

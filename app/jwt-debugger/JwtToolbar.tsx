@@ -63,7 +63,7 @@ export function JwtToolbar(
                   <Settings2 className="w-3 h-3 text-muted-foreground" /> {algorithm}
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="bg-island-card border-island-border max-h-[300px] overflow-auto">
+              <DropdownMenuContent align="start" className="bg-island-card border-island-border max-h-[300px] overflow-auto custom-scrollbar">
                 {
                   ALGORITHMS.map((algo: string) => (
                     <DropdownMenuItem

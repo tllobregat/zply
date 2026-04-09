@@ -86,14 +86,14 @@ export function DashboardHeader(
         </div>
       </div>
 
-      <div className="relative group w-full md:w-80 lg:w-96">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-4.5 sm:h-4.5 text-muted group-focus-within:text-blue-500 transition-colors" />
+      <div className="relative group w-full md:w-[400px] lg:w-[500px]">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-muted group-focus-within:text-blue-500 transition-colors" />
         <input
           type="text"
-          placeholder="Search tools..."
+          placeholder="Search tools (e.g. jwt, json, regex)..."
           value={search}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
-          className="w-full bg-island-bg/50 border border-island-border rounded-lg sm:rounded-xl py-2.5 sm:py-3 pl-11 sm:pl-12 pr-10 sm:pr-24 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500/50 transition-all outline-none text-xs sm:text-sm text-foreground placeholder:text-muted/60"
+          className="w-full bg-island-bg border border-island-border rounded-xl sm:rounded-2xl py-3 sm:py-4 pl-12 sm:pl-14 pr-10 sm:pr-24 focus:ring-8 focus:ring-blue-500/5 focus:border-blue-500/50 transition-all outline-none text-sm sm:text-base text-foreground placeholder:text-muted/50 shadow-sm group-hover:border-island-border-hover"
         />
         <div
           className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1 px-2 py-1 rounded-md bg-island-bg border border-island-border pointer-events-none group-focus-within:opacity-0 transition-opacity"

@@ -38,7 +38,7 @@ export function ToolCard(
       <Link
         href={isComingSoon ? '#' : tool.href}
         className={cn(
-          'group block p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-island-border bg-island-card hover:bg-island-bg transition-all duration-300 h-full relative overflow-hidden shadow-sm hover:shadow-md',
+          'group block p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-island-border bg-island-card hover:bg-island-bg transition-all duration-300 h-full relative overflow-hidden shadow-sm hover:shadow-md cursor-pointer',
           theme.hoverBorder,
           isComingSoon && 'opacity-40 cursor-not-allowed'
         )}

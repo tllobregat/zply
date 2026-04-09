@@ -4,6 +4,8 @@ import { CategoryGrid } from '@/components/dashboard/category-grid';
 import { DashboardBreadcrumb } from '@/components/dashboard/dashboard-breadcrumb';
 import { DashboardFooter } from '@/components/dashboard/dashboard-footer';
 import { DashboardHeader } from '@/components/dashboard/dashboard-header';
+import { DashboardHero } from '@/components/dashboard/dashboard-hero';
+import { QuickActions } from '@/components/dashboard/quick-actions';
 import { ToolGrid } from '@/components/dashboard/tool-grid';
 import { UsePinnedTools, usePinnedTools } from '@/hooks/use-pinned-tools';
 import { Category, ToolConfig, TOOLS } from '@/lib/config/tools';
@@ -86,6 +88,13 @@ export function Dashboard(): React.ReactNode {
         />
 
         <div className="flex-1 p-4 sm:p-8 overflow-y-auto custom-scrollbar">
+          {isBrowsingCategories && (
+            <>
+              <DashboardHero />
+              <QuickActions />
+            </>
+          )}
+
           <DashboardBreadcrumb
             activeCategory={activeCategory}
             search={search}

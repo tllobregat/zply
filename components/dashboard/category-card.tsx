@@ -19,6 +19,9 @@ export function CategoryCard({ name, onClick, index }: CategoryCardProps): React
   const toolCount: number = TOOLS.filter((t: ToolConfig): boolean => t.category === name && t.status === 'active').length;
 
   const theme: CategoryTheme = getCategoryClasses(meta.color);
+  const previewTools: ToolConfig[] = TOOLS
+    .filter((t: ToolConfig): boolean => t.category === name && t.status === 'active')
+    .slice(0, 3);
 
   return (
     <motion.button
@@ -27,29 +30,42 @@ export function CategoryCard({ name, onClick, index }: CategoryCardProps): React
       transition={{ delay: index * 0.1 }}
       onClick={onClick}
       className={cn(
-        "group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-island-card border border-island-border transition-all text-left relative overflow-hidden active:scale-[0.98] shadow-sm hover:shadow-lg",
+        "group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-island-card border border-island-border transition-all text-left relative overflow-hidden active:scale-[0.98] shadow-sm hover:shadow-lg flex flex-col h-full cursor-pointer",
         theme.hoverBorder,
         "hover:bg-island-bg"
       )}
     >
-      <div
-        className={cn(
-          'w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-md',
-          cn(theme.bg, theme.border, 'text-white', theme.shadow)
-        )}
-      >
-        <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
-      </div>
+      <div className="flex-1">
+        <div
+          className={cn(
+            'w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-md',
+            cn(theme.bg, theme.border, 'text-white', theme.shadow)
+          )}
+        >
+          <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+        </div>
 
-      <h3 className={cn(
-        "text-base sm:text-lg font-black uppercase tracking-tight mb-1 text-foreground transition-colors line-clamp-1",
-        theme.hoverText
-      )}>
-        {name}
-      </h3>
-      <p className="text-muted-foreground leading-relaxed mb-4 sm:mb-6 text-[10px] sm:text-[11px] font-medium line-clamp-2">
-        {meta.desc}
-      </p>
+        <h3 className={cn(
+          "text-base sm:text-lg font-black uppercase tracking-tight mb-1 text-foreground transition-colors line-clamp-1",
+          theme.hoverText
+        )}>
+          {name}
+        </h3>
+        <p className="text-muted-foreground leading-relaxed mb-4 text-[10px] sm:text-[11px] font-medium line-clamp-2">
+          {meta.desc}
+        </p>
+
+        <div className="flex flex-wrap gap-1.5 mb-6">
+          {previewTools.map((tool: ToolConfig) => (
+            <span 
+              key={tool.id}
+              className="px-2 py-0.5 rounded-md bg-island-bg border border-island-border text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-wider"
+            >
+              {tool.title}
+            </span>
+          ))}
+        </div>
+      </div>
 
       <div className="flex items-center justify-between border-t border-island-border/50 pt-3 sm:pt-4">
          <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-muted-foreground/70">
