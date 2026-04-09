@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowDown, ArrowRight, ArrowUp, Command, LucideIcon, Search, X } from 'lucide-react';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -14,6 +15,9 @@ export function CommandMenu(): React.ReactNode {
   const [search, setSearch] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const router: AppRouterInstance = useRouter();
+  const tTools = useTranslations('Tools');
+  const tCommon = useTranslations('Common');
+  const tCategories = useTranslations('Categories');
 
   // Raccourcis clavier et événements
   useEffect(() => {
@@ -42,11 +46,13 @@ export function CommandMenu(): React.ReactNode {
     if (!search) {
       return TOOLS.filter((t: ToolConfig) => t.status === 'active').slice(0, 5);
     }
-    return TOOLS.filter((item: ToolConfig) =>
-      item.title.toLowerCase().includes(search.toLowerCase()) ||
-      item.category.toLowerCase().includes(search.toLowerCase())
-    ).slice(0, 8);
-  }, [search]);
+    return TOOLS.filter((item: ToolConfig) => {
+      const title = tTools(`${item.id}.title`).toLowerCase();
+      const category = tCategories(item.category).toLowerCase();
+      return title.includes(search.toLowerCase()) ||
+             category.includes(search.toLowerCase());
+    }).slice(0, 8);
+  }, [search, tTools, tCategories]);
 
   useEffect(() => {
     const frame: number = requestAnimationFrame(() => {
@@ -100,7 +106,7 @@ export function CommandMenu(): React.ReactNode {
                   <Search className="w-4 h-4 sm:w-5 sm:h-5 text-muted mr-2 sm:mr-3" />
                   <input
                     autoFocus
-                    placeholder="Search tools..."
+                    placeholder={tCommon('sidebar.commandMenu.placeholder')}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     onKeyDown={handleKeyDown}
@@ -117,8 +123,9 @@ export function CommandMenu(): React.ReactNode {
                     filteredItems.length > 0
                       ? (
                         <div className="py-1">
-                          <p className="px-3 sm:px-4 py-1 text-[8px] sm:text-[10px] font-black text-muted-foreground uppercase tracking-widest">Available
-                            tools</p>
+                          <p className="px-3 sm:px-4 py-1 text-[8px] sm:text-[10px] font-black text-muted-foreground uppercase tracking-widest">
+                            {tCommon('sidebar.commandMenu.availableTools')}
+                          </p>
                           {
                             filteredItems.map((item: ToolConfig, index: number) => {
                               const Icon: LucideIcon = item.icon;
@@ -136,7 +143,7 @@ export function CommandMenu(): React.ReactNode {
                                       : 'text-muted hover:bg-island-bg/50',
                                     item.status === 'coming-soon' && 'opacity-50'
                                   )}
-                                  aria-label={`Open ${item.title} tool`}
+                                  aria-label={`${tCommon('sidebar.openSearch')} ${tTools(`${item.id}.title`)}`}
                                 >
                                   <div className="flex items-center gap-2">
                                     <div className={cn(
@@ -146,16 +153,16 @@ export function CommandMenu(): React.ReactNode {
                                       <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                     </div>
                                     <div>
-                                      <p className="text-xs sm:text-sm font-bold text-foreground">{item.title}</p>
+                                      <p className="text-xs sm:text-sm font-bold text-foreground">{tTools(`${item.id}.title`)}</p>
                                       <p
-                                        className="text-[8px] sm:text-[9px] text-muted-foreground font-medium leading-none line-clamp-1">{item.description}</p>
+                                        className="text-[8px] sm:text-[9px] text-muted-foreground font-medium leading-none line-clamp-1">{tTools(`${item.id}.description`)}</p>
                                     </div>
                                   </div>
                                   <div className="flex items-center gap-2">
                                     {
                                       item.status === 'coming-soon'
                                       && <span
-                                        className="text-[8px] font-black bg-island-bg border border-island-border px-1.5 py-0.5 rounded uppercase tracking-widest text-muted-foreground">Soon</span>
+                                        className="text-[8px] font-black bg-island-bg border border-island-border px-1.5 py-0.5 rounded uppercase tracking-widest text-muted-foreground">{tCommon('comingSoon')}</span>
                                     }
                                     <ArrowRight
                                       className={cn('w-4 h-4 transition-all', activeIndex === index ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2')} />
@@ -168,7 +175,7 @@ export function CommandMenu(): React.ReactNode {
                       )
                       : (
                         <div className="py-4 sm:py-12 text-center">
-                          <p className="text-muted text-xs sm:text-sm">No tools found for &quot;{search}&quot;</p>
+                          <p className="text-muted text-xs sm:text-sm">{tCommon('sidebar.commandMenu.noResults', { search })}</p>
                         </div>
                       )
                   }
@@ -182,21 +189,21 @@ export function CommandMenu(): React.ReactNode {
                         <ArrowUp className="w-2.5 h-2.5" />
                         <ArrowDown className="w-2.5 h-2.5" />
                       </span>
-                      <span>Navigate</span>
+                      <span>{tCommon('sidebar.commandMenu.navigate')}</span>
                     </span>
                     <span className="flex items-center gap-1.5">
                       <span className="flex items-center">
                         <span className="hidden sm:inline">ENTER</span>
                         <span className="sm:hidden text-xs">⏎</span>
                       </span>
-                      <span>Select</span>
+                      <span>{tCommon('sidebar.commandMenu.select')}</span>
                     </span>
                     <span className="hidden xs:flex items-center gap-1.5">
                       <span className="flex items-center">
                         <span className="hidden sm:inline">ESC</span>
                         <X className="sm:hidden w-2.5 h-2.5" />
                       </span>
-                      <span>Close</span>
+                      <span>{tCommon('sidebar.commandMenu.close')}</span>
                     </span>
                   </div>
                 </div>

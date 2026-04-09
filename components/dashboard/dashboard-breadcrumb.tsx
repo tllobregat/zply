@@ -4,6 +4,7 @@ import { getCategoryColorClass } from '@/lib/config/categories';
 import { Category } from '@/lib/config/tools';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, LayoutGrid } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 interface DashboardBreadcrumbProps {
@@ -23,6 +24,9 @@ export function DashboardBreadcrumb(
     isBrowsingCategories,
   }: DashboardBreadcrumbProps,
 ): React.ReactNode {
+  const t = useTranslations('Common');
+  const tCats = useTranslations('Categories');
+
   if (isBrowsingCategories) {
     return null;
   }
@@ -37,11 +41,11 @@ export function DashboardBreadcrumb(
           setSearch('');
         }}
       >
-        Toolbox
+        {t('toolbox')}
       </span>
       <ChevronLeft className="w-2.5 h-2.5 sm:w-3 h-3 rotate-180 text-muted/30 shrink-0" />
       <span className={cn("font-black truncate", getCategoryColorClass(activeCategory))}>
-        {search ? 'Search' : activeCategory}
+        {search ? t('searchPlaceholder').split('...')[0] : tCats(activeCategory)}
       </span>
     </div>
   );

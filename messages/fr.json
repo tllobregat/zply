@@ -1,0 +1,458 @@
+{
+  "Index": {
+    "title": "Le couteau suisse pour <span>vos tâches quotidiennes</span>",
+    "description": "Conçu pour les professionnels soucieux de leur vie privée",
+    "browserPrivacy": "Aucune donnée ne quitte votre navigateur.",
+    "features": {
+      "private": "100% Privé",
+      "privateDesc": "Le traitement se fait dans votre navigateur",
+      "offline": "Mode hors-ligne",
+      "offlineDesc": "Fonctionne sans connexion Internet",
+      "fast": "Ultra Rapide",
+      "fastDesc": "Outils locaux sans latence"
+    },
+    "popularTools": "Outils Populaires",
+    "toolsCount": "{count, plural, =1 {# Outil} other {# Outils}}",
+    "noResults": "Aucun résultat",
+    "tryOtherKeywords": "Essayez d'autres mots-clés",
+    "searchPlaceholder": "Rechercher des outils (ex: jwt, json, regex)...",
+    "searchResults": "Résultats de recherche",
+    "dashboard": "Tableau de bord"
+  },
+  "Common": {
+    "language": "Langue",
+    "en": "Anglais",
+    "fr": "Français",
+    "homePage": "Accueil",
+    "home": "Accueil",
+    "privacyGuaranteed": "Confidentialité Garantie",
+    "openSource": "Open Source",
+    "toolbox": "Boîte à outils",
+    "toolActions": {
+      "beautify": "Embellir",
+      "minify": "Minifier",
+      "foldAll": "Tout replier",
+      "unfold": "Tout déplier",
+      "useCurrentTime": "Utiliser l'heure actuelle",
+      "addTimezone": "Ajouter un fuseau"
+    },
+    "toolIndicators": {
+      "realTimeHashing": "Hachage en temps réel",
+      "msAutoDetected": "Millisecondes auto-détectées",
+      "liveNow": "Heure actuelle",
+      "liveRendering": "Rendu en direct",
+      "liveTransform": "Transformation en direct",
+      "imageDetected": "Image détectée",
+      "realTimeSync": "Synchronisation en temps réel",
+      "editingMode": "Mode édition de l'heure"
+    },
+    "charsCount": "{count, plural, =1 {# caractère} other {# caractères}}",
+    "tablesCount": "{count, plural, =1 {# table} other {# tables}}",
+    "relationsCount": "{count, plural, =1 {# relation} other {# relations}}",
+    "tzCount": "{count, plural, =1 {# fuseau} other {# fuseaux}}",
+    "toolModes": {
+      "editor": "Éditeur",
+      "split": "Fractionné",
+      "preview": "Aperçu",
+      "tree": "Arborescence",
+      "encode": "Encodage",
+      "decode": "Décodage",
+      "text": "Texte",
+      "file": "Fichier"
+    },
+    "interactiveEngine": "Moteur Interactif",
+    "share": "Partager",
+    "syncing": "Sync...",
+    "copied": "Copié !",
+    "aboutTool": "À propos de cet outil",
+    "pinToDashboard": "Épingler au tableau de bord",
+    "unpinFromDashboard": "Désépingler du tableau de bord",
+    "securityPrivacy": "Sécurité et Confidentialité",
+    "clientSideOnly": "Côté Client Uniquement",
+    "libsCount": "{count, plural, =1 {# Bibliothèque} other {# Bibliothèques}}",
+    "poweredBy": "Propulsé par",
+    "aboutTitle": "À propos de {title}",
+    "aboutDescription": "est un outil conçu pour fonctionner entièrement dans votre navigateur. Tous les traitements et transformations de données sont effectués localement, garantissant que vos informations sensibles ne quittent jamais votre appareil. Cette approche offre non seulement une confidentialité accrue, mais aussi des performances supérieures en éliminant les allers-retours avec le serveur.",
+    "howToUse": "Comment l'utiliser",
+    "step1": "Saisissez vos données dans l'éditeur ou la zone prévue à cet effet.",
+    "step2": "Ajustez les paramètres en fonction de vos besoins spécifiques.",
+    "step3": "Les résultats sont générés instantanément et prêts à être utilisés.",
+    "privacyFirst": "La confidentialité avant tout",
+    "privacyDescription": "Zply est conçu avec une approche axée sur la confidentialité. Vos données ne sont jamais envoyées à un serveur. Cet outil s'exécute entièrement dans votre navigateur, ce qui permet de manipuler des informations sensibles en toute sécurité.",
+    "openTool": "Ouvrir l'outil",
+    "comingSoon": "Bientôt",
+    "sidebar": {
+      "search": "Rechercher",
+      "searchShortcut": "⌘K",
+      "pinnedTools": "Outils épinglés",
+      "preferencesLinks": "Préférences & Liens",
+      "github": "GitHub",
+      "support": "Soutenir",
+      "menu": "Menu",
+      "openSearch": "Ouvrir le menu de recherche",
+      "toggleMobileMenu": "Basculer le menu mobile",
+      "closeMenu": "Fermer le menu",
+      "commandMenu": {
+        "placeholder": "Rechercher des outils...",
+        "availableTools": "Outils disponibles",
+        "noResults": "Aucun outil trouvé pour \"{search}\"",
+        "navigate": "Naviguer",
+        "select": "Sélectionner",
+        "close": "Fermer"
+      }
+    }
+  },
+  "Categories": {
+    "All": "Tous",
+    "categoriesCount": "{count, plural, =1 {# Catégorie} other {# Catégories}}",
+    "Diagrams": "Diagrammes",
+    "DiagramsDesc": "Visualisez le code, les flux et la structure de la documentation",
+    "Data": "Données",
+    "DataDesc": "Formatez, validez et transformez des structures de données",
+    "Security": "Sécurité",
+    "SecurityDesc": "Sécurisez vos applications avec des outils cryptographiques robustes",
+    "Encoding": "Encodage",
+    "EncodingDesc": "Encodez et décodez des données dans différents formats",
+    "Time": "Temps",
+    "TimeDesc": "Convertissez, analysez et suivez les données temporelles",
+    "Network": "Réseau",
+    "NetworkDesc": "Analysez les configurations réseau et les protocoles web"
+  },
+  "Tools": {
+    "sql-database-visualizer": {
+      "title": "Visualiseur SQL & BD",
+      "description": "Générez des diagrammes ER interactifs à partir de SQL ou Prisma localement et en toute sécurité."
+    },
+    "plantuml-editor": {
+      "title": "Éditeur PlantUML",
+      "description": "Concevez des diagrammes UML via du texte. Aperçu en temps réel et partage par URI.",
+      "snippets": {
+        "title": "Extraits",
+        "label": "Modèles PlantUML",
+        "groups": {
+          "sequence": "Diagramme de séquence",
+          "class": "Diagramme de classe",
+          "useCase": "Diagramme de cas d'utilisation",
+          "state": "Diagramme d'état",
+          "er": "Relation d'entité",
+          "component": "Diagramme de composant"
+        },
+        "items": {
+          "basicRequestResponse": "Requête/Réponse de base",
+          "lifelinesActivation": "Avec lignes de vie & Activation",
+          "altOptLoop": "Blocs Alt/Opt/Loop",
+          "basicClassesComposition": "Classes de base & Composition",
+          "inheritanceInterfaces": "Héritage & Interfaces",
+          "associationsMultiplicity": "Associations & Multiplicité",
+          "actorsBasic": "Acteurs & Cas d'utilisation de base",
+          "includeExtend": "Include/Extend",
+          "simpleStates": "États simples",
+          "compositeChoice": "Composite & Choix",
+          "concurrentRegions": "Régions concurrentes",
+          "usersPosts": "Utilisateurs & Articles",
+          "crowsFoot": "Notation Patte de Corbeau",
+          "junctionAssociative": "Entité de jonction/associative",
+          "packagesNodes": "Paquets & Nœuds",
+          "providedRequired": "Interfaces fournies/requises",
+          "deployment": "Déploiement (Nœud + Artefact)"
+        },
+        "contents": {
+          "basicRequestResponse": {
+            "request": "Requête d'authentification",
+            "response": "Réponse d'authentification",
+            "anotherRequest": "Autre requête d'authentification",
+            "anotherResponse": "Autre réponse d'authentification"
+          },
+          "lifelinesActivation": {
+            "user": "Utilisateur",
+            "clickLogin": "Cliquer sur connexion",
+            "loggedIn": "Connecté"
+          },
+          "altOptLoop": {
+            "request": "Requête",
+            "success": "succès",
+            "error": "erreur",
+            "retry": "Réessayer",
+            "retryRequest": "Réessayer la requête",
+            "response": "Réponse",
+            "loopTimes": "3 fois"
+          },
+          "basicClassesComposition": {
+            "car": "Voiture",
+            "model": "modèle",
+            "year": "année",
+            "drive": "conduire",
+            "engine": "Moteur",
+            "horsepower": "puissance"
+          },
+          "inheritanceInterfaces": {
+            "repository": "Répertoire",
+            "save": "sauvegarder",
+            "findById": "trouverParId",
+            "baseEntity": "EntitéDeBase",
+            "id": "id",
+            "user": "Utilisateur",
+            "name": "nom",
+            "userRepository": "RépertoireUtilisateur"
+          },
+          "associationsMultiplicity": {
+            "order": "Commande",
+            "orderLine": "LigneDeCommande",
+            "product": "Produit"
+          },
+          "actorsBasic": {
+            "foodCritic": "Critique Gastronomique",
+            "restaurant": "Restaurant",
+            "eatFood": "Manger",
+            "payForFood": "Payer",
+            "drink": "Boire"
+          },
+          "includeExtend": {
+            "customer": "Client",
+            "admin": "Admin",
+            "placeOrder": "Passer commande",
+            "pay": "Payer",
+            "validateCart": "Valider le panier",
+            "refund": "Rembourser"
+          },
+          "simpleStates": {
+            "state1": "ceci est une chaîne",
+            "succeeded": "Réussi",
+            "aborted": "Abandonné"
+          },
+          "compositeChoice": {
+            "idle": "Inactif",
+            "processing": "Traitement",
+            "queueing": "En attente",
+            "running": "En cours",
+            "start": "démarrer",
+            "done": "terminé",
+            "submit": "soumettre",
+            "cancel": "annuler",
+            "invalid": "invalide",
+            "valid": "valide"
+          },
+          "concurrentRegions": {
+            "system": "Système",
+            "ui": "UI",
+            "hidden": "Masqué",
+            "visible": "Visible",
+            "show": "afficher",
+            "hide": "masquer",
+            "network": "Réseau",
+            "disconnected": "Déconnecté",
+            "connected": "Connecté",
+            "connect": "connecter",
+            "drop": "perte"
+          },
+          "usersPosts": {
+            "user": "Utilisateur",
+            "username": "nom_utilisateur",
+            "password": "mot_de_passe",
+            "post": "Article",
+            "content": "contenu"
+          },
+          "crowsFoot": {
+            "customer": "Client",
+            "name": "nom",
+            "order": "Commande",
+            "date": "date",
+            "places": "passe"
+          },
+          "junctionAssociative": {
+            "student": "Étudiant",
+            "name": "nom",
+            "course": "Cours",
+            "title": "titre",
+            "enrollment": "Inscription",
+            "grade": "note"
+          },
+          "packagesNodes": {
+            "someGroup": "Certain Groupe",
+            "otherGroups": "Autres Groupes",
+            "firstComponent": "Premier Composant",
+            "secondComponent": "Second Composant",
+            "anotherComponent": "Autre Composant"
+          },
+          "providedRequired": {
+            "webApp": "ApplicationWeb",
+            "api": "API",
+            "database": "BaseDeDonnées",
+            "auth": "Auth",
+            "logger": "Journaliseur",
+            "use": "utiliser"
+          },
+          "deployment": {
+            "server": "Serveur",
+            "db": "BD",
+            "postgres": "postgres"
+          }
+        }
+      }
+    },
+    "markdown-editor": {
+      "title": "Éditeur Markdown",
+      "description": "Éditeur Markdown ultra-rapide avec aperçu en temps réel.",
+      "default": "# 🖋️ Éditeur Markdown\n\n## 🚀 Introduction\nÉditez ici pour voir le résultat à droite.\n\n## 🏗️ Architecture\nZply est basé sur Next.js.\n\n### 🎨 Design\nStyle épuré et moderne.\n\n## 🛠️ Utilisation\nUtilisez la barre d'outils pour formater votre texte."
+    },
+    "mermaid-maker": {
+      "title": "Créateur Mermaid.js",
+      "description": "Créez des diagrammes de flux et de séquence légers."
+    },
+    "svg-optimizer": {
+      "title": "Optimiseur SVG",
+      "description": "Visualisez et optimisez le code SVG via SVGO."
+    },
+    "excalidraw-canvas": {
+      "title": "Canevas Excalidraw",
+      "description": "Croquis ultra-fluides et diagrammes à l'aspect \"dessiné à la main\"."
+    },
+    "data-transformer": {
+      "title": "Transformateur de Données",
+      "description": "Convertissez instantanément entre les formats JSON, YAML, CSV, XML et TypeScript."
+    },
+    "json-utils": {
+      "title": "Utilitaires JSON",
+      "description": "Visualisation, indentation, validation et minification instantanées de JSON.",
+      "invalidJson": "JSON Invalide",
+      "validJson": "JSON Valide",
+      "default": "{\n  \"id\": \"zply-01\",\n  \"name\": \"Formateur et Visualiseur JSON\",\n  \"features\": [\n    \"Formatage ultra-rapide\",\n    \"Minification\",\n    \"Validation stricte\",\n    \"Visualisation en arborescence\",\n    \"Persistance URL\"\n  ],\n  \"local_only\": true,\n  \"stats\": {\n    \"speed\": \"instantané\",\n    \"security\": \"côté client\"\n  }\n}"
+    },
+    "text-compare": {
+      "title": "Comparaison de Texte",
+      "description": "Comparez deux textes et trouvez les différences. Vue fractionnée ou unifiée.",
+      "default": {
+        "original": "// Texte original\nconst a = 1;\nconst b = 2;",
+        "modified": "// Texte modifié\nconst a = 1;\nconst b = 3;"
+      },
+      "unified": "Unifiée",
+      "split": "Fractionnée",
+      "original": "Original",
+      "modified": "Modifié",
+      "liveDiff": "Diff en Direct",
+      "sideBySide": "Comparaison côte à côte"
+    },
+    "regex-tester": {
+      "title": "Testeur Regex",
+      "description": "Testeur d'expressions régulières avec explications en temps réel."
+    },
+    "sql-formatter": {
+      "title": "Formateur SQL",
+      "description": "Embellissez et unifiez vos requêtes SQL complexes."
+    },
+    "jwt-debugger": {
+      "title": "Débogueur JWT",
+      "description": "Décodage et encodage sécurisés et locaux de JSON Web Tokens (JWT).",
+      "hmacSecret": "Secret HMAC...",
+      "privateKey": "Clé privée (PEM ou JSON)..."
+    },
+    "hash-generator": {
+      "title": "Générateur de Hash",
+      "description": "Générez des empreintes SHA-256, SHA-512 et MD5 via l'API Web Crypto."
+    },
+    "secret-generator": {
+      "title": "Générateur de Mots de Passe & Secrets",
+      "description": "Générez des mots de passe sécurisés, des clés API et des jetons aléatoires avec évaluation de la force."
+    },
+    "rsa-key-pair-generator": {
+      "title": "Générateur de Paire de Clés RSA",
+      "description": "Générez des paires de clés publiques/privées RSA."
+    },
+    "base64-encoder-decoder": {
+      "title": "Encodeur/Décodeur Base64",
+      "description": "Encodage et décodage Base64 instantanés pour du texte ou des fichiers."
+    },
+    "url-encoder-decoder": {
+      "title": "Encodeur/Décodeur URL",
+      "description": "Gestion sécurisée des caractères spéciaux d'URI."
+    },
+    "html-entities-converter": {
+      "title": "Entités HTML",
+      "description": "Échappez et déséchappez vos caractères HTML."
+    },
+    "binary-converter": {
+      "title": "Convertisseur Binaire",
+      "description": "Convertissez du texte en binaire et vice versa."
+    },
+    "color-converter": {
+      "title": "Convertisseur de Couleurs",
+      "description": "Conversion entre les formats HEX, RGB, HSL et CMYK."
+    },
+    "unicode-escape-sequences": {
+      "title": "Échappement Unicode",
+      "description": "Convertissez du texte en séquences d'échappement Unicode."
+    },
+    "epoch-converter": {
+      "title": "Convertisseur Epoch",
+      "description": "Timestamps vers dates lisibles et gestion de l'UTC.",
+      "localTime": "Heure locale",
+      "utcTime": "Heure UTC",
+      "timestampLabel": "Unix Timestamp (Secondes ou Millisecondes)"
+    },
+    "timezone-converter": {
+      "title": "Convertisseur de Fuseau Horaire",
+      "description": "Comparez les heures entre différents fuseaux horaires.",
+      "addTimezone": "Ajouter un fuseau",
+      "searchPlaceholder": "Rechercher une ville ou une région...",
+      "noResults": "Aucun fuseau trouvé pour \"{search}\"",
+      "referenceTime": "Heure de référence",
+      "liveSyncActive": "Synchronisation en direct",
+      "liveMode": "Mode Direct",
+      "fixedTime": "Heure Fixe"
+    },
+    "cron-parser": {
+      "title": "Analyseur Cron",
+      "description": "Traduisez les expressions Cron en texte naturel."
+    },
+    "time-tracker": {
+      "title": "Chronomètre & Minuteur",
+      "description": "Suivez le temps avec un chronomètre précis et des comptes à rebours personnalisables."
+    },
+    "my-ip-info": {
+      "title": "Infos mon IP",
+      "description": "Obtenez des informations détaillées sur votre adresse IP publique.",
+      "manualDetection": "Détection manuelle",
+      "publicIpTerminal": "IP publique (Terminal)",
+      "localIpInternal": "IP locale (Interne)",
+      "platforms": {
+        "macosLinuxWindows": "macOS / Linux / Windows",
+        "powershell": "PowerShell",
+        "windowsCmd": "Windows (CMD)",
+        "macosLinux": "macOS / Linux"
+      },
+      "secureLookup": "Recherche sécurisée",
+      "clientSideDetection": "Détection côté client uniquement",
+      "deviceInfo": "Infos Appareil",
+      "operatingSystem": "Système d'exploitation",
+      "resolution": "Résolution",
+      "userAgent": "User Agent",
+      "localDetectionLogic": "La logique de détection s'exécute strictement dans votre navigateur.",
+      "geolocation": "Géolocalisation",
+      "location": "Localisation",
+      "country": "Pays",
+      "providerAsn": "Fournisseur / ASN",
+      "timezone": "Fuseau horaire",
+      "postalCode": "Code postal",
+      "coordinates": "Coordonnées",
+      "detectionFailed": "Échec de la détection",
+      "reloadPage": "Recharger la page",
+      "publicIpAddress": "Votre adresse IP publique",
+      "copyIp": "Copier l'IP",
+      "privacyGate": "Portail de Confidentialité",
+      "externalQueryRequired": "La détection d'IP nécessite une requête externe",
+      "privacyGateDescription": "Zply s'exécute entièrement dans votre navigateur. Pour récupérer votre adresse IP publique et votre géolocalisation, nous devons interroger un fournisseur externe (<span class=\"font-mono\">ipapi.co</span>).",
+      "detecting": "Détection en cours...",
+      "showMyIp": "Afficher mon IP",
+      "openProvider": "Ouvrir ipapi.co",
+      "detectingConnection": "Détection de votre connexion..."
+    },
+    "cidr-calculator": {
+      "title": "Calculateur CIDR",
+      "description": "Calculez les IPs, les plages et les masques de sous-réseau."
+    },
+    "http-headers-analyzer": {
+      "title": "En-têtes HTTP",
+      "description": "Analysez les en-têtes de réponse HTTP."
+    }
+  }
+}

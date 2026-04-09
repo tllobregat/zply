@@ -1,0 +1,458 @@
+{
+  "Index": {
+    "title": "The Swiss Army Knife for <span>Your Daily Tasks</span>",
+    "description": "Designed for privacy-conscious professionals",
+    "browserPrivacy": "No data leaves your browser.",
+    "features": {
+      "private": "100% Private",
+      "privateDesc": "Processing happens in your browser",
+      "offline": "Offline Ready",
+      "offlineDesc": "Works without internet connection",
+      "fast": "Ultra Fast",
+      "fastDesc": "Zero latency locally-driven tools"
+    },
+    "popularTools": "Popular Tools",
+    "toolsCount": "{count, plural, =1 {# Tool} other {# Tools}}",
+    "noResults": "No results",
+    "tryOtherKeywords": "Try other keywords",
+    "searchPlaceholder": "Search tools (e.g. jwt, json, regex)...",
+    "searchResults": "Search Results",
+    "dashboard": "Dashboard"
+  },
+  "Common": {
+    "language": "Language",
+    "en": "English",
+    "fr": "French",
+    "homePage": "Home Page",
+    "home": "Home",
+    "privacyGuaranteed": "Privacy Guaranteed",
+    "openSource": "Open Source",
+    "toolbox": "Toolbox",
+    "toolActions": {
+      "beautify": "Beautify",
+      "minify": "Minify",
+      "foldAll": "Fold All",
+      "unfold": "Unfold",
+      "useCurrentTime": "Use Current Time",
+      "addTimezone": "Add Timezone"
+    },
+    "toolIndicators": {
+      "realTimeHashing": "Real-time Hashing",
+      "msAutoDetected": "Milliseconds auto-detected",
+      "liveNow": "Live Now",
+      "liveRendering": "Live Rendering",
+      "liveTransform": "Live Transform",
+      "imageDetected": "Image Detected",
+      "realTimeSync": "Real-time sync active",
+      "editingMode": "Time editing mode"
+    },
+    "charsCount": "{count, plural, =1 {# character} other {# characters}}",
+    "tablesCount": "{count, plural, =1 {# table} other {# tables}}",
+    "relationsCount": "{count, plural, =1 {# relation} other {# relations}}",
+    "tzCount": "{count, plural, =1 {# timezone} other {# timezones}}",
+    "toolModes": {
+      "editor": "Editor",
+      "split": "Split",
+      "preview": "Preview",
+      "tree": "Tree",
+      "encode": "Encoding",
+      "decode": "Decoding",
+      "text": "Text",
+      "file": "File"
+    },
+    "interactiveEngine": "Interactive Engine",
+    "share": "Share",
+    "syncing": "Syncing...",
+    "copied": "Copied!",
+    "aboutTool": "About this tool",
+    "pinToDashboard": "Pin to Dashboard",
+    "unpinFromDashboard": "Unpin from Dashboard",
+    "securityPrivacy": "Security & Privacy",
+    "clientSideOnly": "Client-Side Only",
+    "libsCount": "{count, plural, =1 {# Library} other {# Libraries}}",
+    "poweredBy": "Powered by",
+    "aboutTitle": "About {title}",
+    "aboutDescription": "is a tool designed to work completely within your browser. All data processing and transformations are performed locally, ensuring that your sensitive information never leaves your device. This approach provides not only enhanced privacy but also superior performance by eliminating server round-trips.",
+    "howToUse": "How to use",
+    "step1": "Enter your input data into the editor or designated area.",
+    "step2": "Adjust any settings or parameters to match your specific needs.",
+    "step3": "The results will be generated instantly and ready for use.",
+    "privacyFirst": "Privacy First",
+    "privacyDescription": "Zply is built with a privacy-first mindset. Your data is never sent to a server for processing. This tool runs entirely in your local browser environment, making it safe for handling sensitive information without risk of leakage.",
+    "openTool": "Open Tool",
+    "comingSoon": "Soon",
+    "sidebar": {
+      "search": "Search",
+      "searchShortcut": "⌘K",
+      "pinnedTools": "Pinned Tools",
+      "preferencesLinks": "Preferences & Links",
+      "github": "GitHub",
+      "support": "Support",
+      "menu": "Menu",
+      "openSearch": "Open search menu",
+      "toggleMobileMenu": "Toggle mobile menu",
+      "closeMenu": "Close menu",
+      "commandMenu": {
+        "placeholder": "Search tools...",
+        "availableTools": "Available tools",
+        "noResults": "No tools found for \"{search}\"",
+        "navigate": "Navigate",
+        "select": "Select",
+        "close": "Close"
+      }
+    }
+  },
+  "Categories": {
+    "All": "All",
+    "categoriesCount": "{count, plural, =1 {# Category} other {# Categories}}",
+    "Diagrams": "Diagrams",
+    "DiagramsDesc": "Visualize code, flows, and documentation structure",
+    "Data": "Data",
+    "DataDesc": "Format, validate, and transform data structures",
+    "Security": "Security",
+    "SecurityDesc": "Secure your applications with robust cryptographic tools",
+    "Encoding": "Encoding",
+    "EncodingDesc": "Encode and decode data across various formats",
+    "Time": "Time",
+    "TimeDesc": "Convert, parse, and track time-related data",
+    "Network": "Network",
+    "NetworkDesc": "Analyze network configurations and web protocols"
+  },
+  "Tools": {
+    "sql-database-visualizer": {
+      "title": "SQL & DB Visualizer",
+      "description": "Generate interactive ER diagrams from SQL or Prisma locally and securely."
+    },
+    "plantuml-editor": {
+      "title": "PlantUML Editor",
+      "description": "Design UML diagrams via text. Real-time preview and sharing by URI.",
+      "snippets": {
+        "title": "Snippets",
+        "label": "PlantUML Templates",
+        "groups": {
+          "sequence": "Sequence Diagram",
+          "class": "Class Diagram",
+          "useCase": "Use Case Diagram",
+          "state": "State Diagram",
+          "er": "Entity Relationship",
+          "component": "Component Diagram"
+        },
+        "items": {
+          "basicRequestResponse": "Basic Request/Response",
+          "lifelinesActivation": "With Lifelines & Activation",
+          "altOptLoop": "Alt/Opt/Loop Blocks",
+          "basicClassesComposition": "Basic Classes & Composition",
+          "inheritanceInterfaces": "Inheritance & Interfaces",
+          "associationsMultiplicity": "Associations & Multiplicity",
+          "actorsBasic": "Actors & Basic Use Cases",
+          "includeExtend": "Include/Extend",
+          "simpleStates": "Simple States",
+          "compositeChoice": "Composite & Choice",
+          "concurrentRegions": "Concurrent Regions",
+          "usersPosts": "Users & Posts",
+          "crowsFoot": "Crow’s Foot Notation",
+          "junctionAssociative": "Junction/Associative Entity",
+          "packagesNodes": "Packages & Nodes",
+          "providedRequired": "Provided/Required Interfaces",
+          "deployment": "Deployment (Node + Artifact)"
+        },
+        "contents": {
+          "basicRequestResponse": {
+            "request": "Authentication Request",
+            "response": "Authentication Response",
+            "anotherRequest": "Another authentication Request",
+            "anotherResponse": "Another authentication Response"
+          },
+          "lifelinesActivation": {
+            "user": "User",
+            "clickLogin": "Click login",
+            "loggedIn": "Logged in"
+          },
+          "altOptLoop": {
+            "request": "Request",
+            "success": "success",
+            "error": "error",
+            "retry": "Retry",
+            "retryRequest": "Retry request",
+            "response": "Response",
+            "loopTimes": "3 times"
+          },
+          "basicClassesComposition": {
+            "car": "Car",
+            "model": "model",
+            "year": "year",
+            "drive": "drive",
+            "engine": "Engine",
+            "horsepower": "horsepower"
+          },
+          "inheritanceInterfaces": {
+            "repository": "Repository",
+            "save": "save",
+            "findById": "findById",
+            "baseEntity": "BaseEntity",
+            "id": "id",
+            "user": "User",
+            "name": "name",
+            "userRepository": "UserRepository"
+          },
+          "associationsMultiplicity": {
+            "order": "Order",
+            "orderLine": "OrderLine",
+            "product": "Product"
+          },
+          "actorsBasic": {
+            "foodCritic": "Food Critic",
+            "restaurant": "Restaurant",
+            "eatFood": "Eat Food",
+            "payForFood": "Pay for Food",
+            "drink": "Drink"
+          },
+          "includeExtend": {
+            "customer": "Customer",
+            "admin": "Admin",
+            "placeOrder": "Place Order",
+            "pay": "Pay",
+            "validateCart": "Validate Cart",
+            "refund": "Refund"
+          },
+          "simpleStates": {
+            "state1": "this is a string",
+            "succeeded": "Succeeded",
+            "aborted": "Aborted"
+          },
+          "compositeChoice": {
+            "idle": "Idle",
+            "processing": "Processing",
+            "queueing": "Queueing",
+            "running": "Running",
+            "start": "start",
+            "done": "done",
+            "submit": "submit",
+            "cancel": "cancel",
+            "invalid": "invalid",
+            "valid": "valid"
+          },
+          "concurrentRegions": {
+            "system": "System",
+            "ui": "UI",
+            "hidden": "Hidden",
+            "visible": "Visible",
+            "show": "show",
+            "hide": "hide",
+            "network": "Network",
+            "disconnected": "Disconnected",
+            "connected": "Connected",
+            "connect": "connect",
+            "drop": "drop"
+          },
+          "usersPosts": {
+            "user": "User",
+            "username": "username",
+            "password": "password",
+            "post": "Post",
+            "content": "content"
+          },
+          "crowsFoot": {
+            "customer": "Customer",
+            "name": "name",
+            "order": "Order",
+            "date": "date",
+            "places": "places"
+          },
+          "junctionAssociative": {
+            "student": "Student",
+            "name": "name",
+            "course": "Course",
+            "title": "title",
+            "enrollment": "Enrollment",
+            "grade": "grade"
+          },
+          "packagesNodes": {
+            "someGroup": "Some Group",
+            "otherGroups": "Other Groups",
+            "firstComponent": "First Component",
+            "secondComponent": "Second Component",
+            "anotherComponent": "Another Component"
+          },
+          "providedRequired": {
+            "webApp": "WebApp",
+            "api": "API",
+            "database": "Database",
+            "auth": "Auth",
+            "logger": "Logger",
+            "use": "use"
+          },
+          "deployment": {
+            "server": "Server",
+            "db": "DB",
+            "postgres": "postgres"
+          }
+        }
+      }
+    },
+    "markdown-editor": {
+      "title": "Markdown Editor",
+      "description": "Ultra-fast GitHub Flavored Markdown (GFM) editor with split-screen preview.",
+      "default": "# 🖋️ Markdown Editor\n\n## 🚀 Introduction\nEdit here to see the result on the right.\n\n## 🏗️ Architecture\nZply is built with Next.js.\n\n### 🎨 Design\nClean and modern styling.\n\n## 🛠️ Usage\nUse the toolbar to format your text."
+    },
+    "mermaid-maker": {
+      "title": "Mermaid.js Maker",
+      "description": "Create lightweight flowcharts and sequence diagrams."
+    },
+    "svg-optimizer": {
+      "title": "SVG Optimizer",
+      "description": "Visualize and optimize SVG code via SVGO."
+    },
+    "excalidraw-canvas": {
+      "title": "Excalidraw Canvas",
+      "description": "Ultra-smooth sketching and \"hand-drawn\" diagrams."
+    },
+    "data-transformer": {
+      "title": "Data Transformer",
+      "description": "Convert between JSON, YAML, CSV, XML, and TypeScript formats instantly."
+    },
+    "json-utils": {
+      "title": "JSON Utils",
+      "description": "Instant JSON visualization, indentation, validation, and minification.",
+      "invalidJson": "Invalid JSON",
+      "validJson": "Valid JSON",
+      "default": "{\n  \"id\": \"zply-01\",\n  \"name\": \"JSON Formatter & Viewer\",\n  \"features\": [\n    \"Ultra-fast formatting\",\n    \"Minification\",\n    \"Strict validation\",\n    \"Tree Visualization\",\n    \"URL Persistence\"\n  ],\n  \"local_only\": true,\n  \"stats\": {\n    \"speed\": \"instant\",\n    \"security\": \"client-side\"\n  }\n}"
+    },
+    "text-compare": {
+      "title": "Text Compare",
+      "description": "Compare two texts and find differences. Split or Unified view.",
+      "default": {
+        "original": "// Original text\nconst a = 1;\nconst b = 2;",
+        "modified": "// Modified text\nconst a = 1;\nconst b = 3;"
+      },
+      "unified": "Unified",
+      "split": "Split",
+      "original": "Original",
+      "modified": "Modified",
+      "liveDiff": "Live Diff",
+      "sideBySide": "Side-by-side comparison"
+    },
+    "regex-tester": {
+      "title": "Regex Tester",
+      "description": "Regular expression tester with real-time explanations."
+    },
+    "sql-formatter": {
+      "title": "SQL Formatter",
+      "description": "Beautify and unify your complex SQL queries."
+    },
+    "jwt-debugger": {
+      "title": "JWT Debugger",
+      "description": "Secure and local decoding and encoding of JSON Web Tokens (JWT).",
+      "hmacSecret": "HMAC Secret...",
+      "privateKey": "Private Key (PEM or JSON)..."
+    },
+    "hash-generator": {
+      "title": "Hash Generator",
+      "description": "Generate SHA-256, SHA-512, and MD5 hashes via Web Crypto API."
+    },
+    "secret-generator": {
+      "title": "Password & Secret Generator",
+      "description": "Generate secure passwords, API keys, and random tokens with strength evaluation."
+    },
+    "rsa-key-pair-generator": {
+      "title": "RSA Key Pair Gen",
+      "description": "Generate RSA public/private key pairs."
+    },
+    "base64-encoder-decoder": {
+      "title": "Base64 Encoder/Decoder",
+      "description": "Instant Base64 encoding and decoding for text or files."
+    },
+    "url-encoder-decoder": {
+      "title": "URL Encoder/Decoder",
+      "description": "Secure management of URI special characters."
+    },
+    "html-entities-converter": {
+      "title": "HTML Entities",
+      "description": "Escape and unescape your HTML characters."
+    },
+    "binary-converter": {
+      "title": "Binary Converter",
+      "description": "Convert text to binary and vice versa."
+    },
+    "color-converter": {
+      "title": "Color Converter",
+      "description": "Conversion between HEX, RGB, HSL, and CMYK formats."
+    },
+    "unicode-escape-sequences": {
+      "title": "Unicode Escape",
+      "description": "Convert text to Unicode escape sequences."
+    },
+    "epoch-converter": {
+      "title": "Epoch Converter",
+      "description": "Timestamps to readable dates and UTC management.",
+      "localTime": "Local Time",
+      "utcTime": "UTC Time",
+      "timestampLabel": "Unix Timestamp (Seconds or Milliseconds)"
+    },
+    "timezone-converter": {
+      "title": "Timezone Converter",
+      "description": "Compare times between different time zones.",
+      "addTimezone": "Add Timezone",
+      "searchPlaceholder": "Search city or region...",
+      "noResults": "No timezones found matching \"{search}\"",
+      "referenceTime": "Reference Time",
+      "liveSyncActive": "Live Sync Active",
+      "liveMode": "Live Mode",
+      "fixedTime": "Fixed Time"
+    },
+    "cron-parser": {
+      "title": "Cron Parser",
+      "description": "Translate Cron expressions into natural text."
+    },
+    "time-tracker": {
+      "title": "Stopwatch & Timer",
+      "description": "Track time with a precise stopwatch, lap management, and customizable countdowns."
+    },
+    "my-ip-info": {
+      "title": "My IP Info",
+      "description": "Get detailed information about your public IP address.",
+      "manualDetection": "Manual Detection",
+      "publicIpTerminal": "Public IP (Terminal)",
+      "localIpInternal": "Local IP (Internal)",
+      "platforms": {
+        "macosLinuxWindows": "macOS / Linux / Windows",
+        "powershell": "PowerShell",
+        "windowsCmd": "Windows (CMD)",
+        "macosLinux": "macOS / Linux"
+      },
+      "secureLookup": "Secure Lookup",
+      "clientSideDetection": "Client-side only detection",
+      "deviceInfo": "Device Info",
+      "operatingSystem": "Operating System",
+      "resolution": "Resolution",
+      "userAgent": "User Agent",
+      "localDetectionLogic": "Detection logic runs strictly in your browser.",
+      "geolocation": "Geolocation",
+      "location": "Location",
+      "country": "Country",
+      "providerAsn": "Provider / ASN",
+      "timezone": "Timezone",
+      "postalCode": "Postal Code",
+      "coordinates": "Coordinates",
+      "detectionFailed": "Detection Failed",
+      "reloadPage": "Reload Page",
+      "publicIpAddress": "Your Public IP Address",
+      "copyIp": "Copy IP",
+      "privacyGate": "Privacy Gate",
+      "externalQueryRequired": "IP Detection requires external query",
+      "privacyGateDescription": "Zply runs entirely in your browser. To retrieve your public IP address and geolocation, we need to query an external provider (<span class=\"font-mono\">ipapi.co</span>).",
+      "detecting": "Detecting...",
+      "showMyIp": "Show my IP",
+      "openProvider": "Open ipapi.co",
+      "detectingConnection": "Detecting your connection..."
+    },
+    "cidr-calculator": {
+      "title": "CIDR Calculator",
+      "description": "Calculate IPs, ranges, and subnet masks."
+    },
+    "http-headers-analyzer": {
+      "title": "HTTP Headers",
+      "description": "Analyze HTTP response headers."
+    }
+  }
+}

@@ -3,6 +3,7 @@
 import { ChevronRight, Home } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 export interface BreadcrumbItem {
@@ -16,10 +17,11 @@ interface BreadcrumbProps {
 }
 
 export function Breadcrumb({ items }: BreadcrumbProps): React.ReactNode {
+  const t = useTranslations('Common');
   return (
     <nav className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">
       <Link href="/" className="hover:text-blue-400 transition-colors flex items-center gap-1">
-        <Home className="w-3 h-3" /> Home
+        <Home className="w-3 h-3" /> {t('home')}
       </Link>
       {
         items.map((item: BreadcrumbItem): React.ReactNode => (

@@ -10,15 +10,7 @@ const eslintConfig = defineConfig([
       "no-nested-ternary": "error",
       "@typescript-eslint/no-inferrable-types": "off",
       "react-hooks/exhaustive-deps": "off",
-      "@typescript-eslint/explicit-function-return-type": "error",
-      "@typescript-eslint/explicit-member-accessibility": "error",
-      "@typescript-eslint/typedef": [
-        "error",
-        {
-          "variableDeclaration": true,
-          "variableDeclarationIgnoreFunction": true
-        }
-      ]
+      "@typescript-eslint/explicit-member-accessibility": "error"
     }
   },
   {

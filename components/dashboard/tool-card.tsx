@@ -5,6 +5,7 @@ import { ToolConfig } from '@/lib/config/tools';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { ArrowRight, LucideIcon, Pin, Wand2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React from 'react';
 
@@ -23,9 +24,14 @@ export function ToolCard(
     onTogglePin
   }: ToolCardProps,
 ): React.ReactNode {
+  const t = useTranslations('Tools');
+  const tCommon = useTranslations('Common');
   const Icon: LucideIcon = tool.icon;
   const isComingSoon: boolean = tool.status === 'coming-soon';
   const theme: CategoryTheme = getCategoryClasses(CATEGORY_COLORS[tool.category]);
+
+  const title = t(`${tool.id}.title`);
+  const description = t(`${tool.id}.description`);
 
   return (
     <motion.div
@@ -42,7 +48,7 @@ export function ToolCard(
           theme.hoverBorder,
           isComingSoon && 'opacity-40 cursor-not-allowed'
         )}
-        aria-label={isComingSoon ? `${tool.title} (Coming Soon)` : `Open ${tool.title}`}
+        aria-label={isComingSoon ? `${title} (${tCommon('comingSoon')})` : `${tCommon('openTool')} ${title}`}
       >
         <div className="flex items-start justify-between mb-3 sm:mb-4">
           <div className={cn(
@@ -77,11 +83,11 @@ export function ToolCard(
           "text-xs sm:text-sm font-black mb-1 transition-colors uppercase tracking-tight text-foreground line-clamp-1 sm:line-clamp-none",
           theme.hoverText
         )}>
-          {tool.title}
+          {title}
         </h3>
 
         <p className="text-muted-foreground leading-relaxed text-[9px] sm:text-[10px] font-medium line-clamp-2">
-          {tool.description}
+          {description}
         </p>
 
         {
@@ -89,7 +95,7 @@ export function ToolCard(
           && (
             <div className="mt-4 flex justify-end opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
               <div className={cn("flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest", theme.text)}>
-                Open Tool
+                {tCommon('openTool')}
                 <ArrowRight className="w-3 h-3" />
               </div>
             </div>
@@ -101,7 +107,7 @@ export function ToolCard(
           && (
             <div className="mt-4 flex items-center gap-1.5 opacity-40">
               <Wand2 className="w-3 h-3 text-muted" />
-              <span className="text-[8px] font-black uppercase tracking-tighter text-muted">Soon</span>
+              <span className="text-[8px] font-black uppercase tracking-tighter text-muted">{tCommon('comingSoon')}</span>
             </div>
           )
         }

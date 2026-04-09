@@ -4,6 +4,7 @@ import { CATEGORY_META, CategoryMeta, CategoryTheme, getCategoryClasses } from '
 import { ToolConfig, ToolId, TOOLS } from '@/lib/config/tools';
 import { motion } from 'framer-motion';
 import { LucideIcon, Star } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import React from 'react';
 
@@ -17,6 +18,8 @@ const POPULAR_TOOL_IDS: ToolId[] = [
 ];
 
 export function QuickActions(): React.ReactNode {
+  const t = useTranslations('Tools');
+  const tIndex = useTranslations('Index');
   const popularTools: ToolConfig[] = TOOLS.filter((tool: ToolConfig): boolean => 
     POPULAR_TOOL_IDS.includes(tool.id)
   );
@@ -30,7 +33,7 @@ export function QuickActions(): React.ReactNode {
     >
       <div className="flex items-center gap-3 mb-6 text-slate-500/80">
         <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-400" />
-        <h3 className="text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] sm:tracking-[0.25em]">Popular Tools</h3>
+        <h3 className="text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] sm:tracking-[0.25em]">{tIndex('popularTools')}</h3>
         <div className="h-px bg-island-border/60 flex-1 ml-4 sm:ml-6" />
       </div>
 
@@ -49,7 +52,7 @@ export function QuickActions(): React.ReactNode {
               <div className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform ${theme?.icon || 'bg-zply-blue/10 text-zply-blue'}`}>
                 {Icon && <Icon className="w-3.5 h-3.5" />}
               </div>
-              <span className="text-xs font-bold text-foreground">{tool.title}</span>
+              <span className="text-xs font-bold text-foreground">{t(`${tool.id}.title`)}</span>
             </Link>
           );
         })}

@@ -12,10 +12,12 @@ import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 import { usePinnedTools } from '@/hooks/use-pinned-tools';
 import { useShareableStateSync } from '@/hooks/use-shareable-state-context';
 import { CATEGORY_COLORS, CategoryTheme, getCategoryClasses, getCategoryColorClass } from '@/lib/config/categories';
-import { Library, ToolConfig, TOOLS } from '@/lib/config/tools';
+import { Category, Library, ToolConfig, TOOLS } from '@/lib/config/tools';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle2, ChevronDown, Info, MoreHorizontal, Pin, RefreshCw, Share2, ShieldCheck } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import Script from 'next/script';
 import React, { useEffect, useRef, useState } from 'react';
 
 interface ToolPageLayoutProps {
@@ -41,6 +43,8 @@ export default function ToolPageLayout(
     workspaceClassName,
   }: ToolPageLayoutProps,
 ): React.ReactNode {
+  const t = useTranslations('Tools');
+  const tCommon = useTranslations('Common');
   const { togglePin, isPinned }: { togglePin: (id: string) => void; isPinned: (id: string) => boolean } = usePinnedTools();
   const { copy, isCopied }: { copy: (text: string, id?: string) => void; isCopied: (id?: string) => boolean } = useCopyToClipboard();
   const { isSyncing, syncNow } = useShareableStateSync();
@@ -54,14 +58,21 @@ export default function ToolPageLayout(
     return (): void => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const tCategories = useTranslations('Categories');
   const toolConfig: ToolConfig | undefined = TOOLS.find((t: ToolConfig) => t.id === toolId);
   const theme: CategoryTheme | undefined = toolConfig ? getCategoryClasses(CATEGORY_COLORS[toolConfig.category]) : undefined;
 
   // Enhance breadcrumb items with category colors
-  const enhancedBreadcrumbItems: BreadcrumbItem[] = breadcrumbItems.map((item: BreadcrumbItem) => ({
-    ...item,
-    className: item.className || getCategoryColorClass(item.label) || undefined
-  }));
+  const enhancedBreadcrumbItems: BreadcrumbItem[] = breadcrumbItems.map((item: BreadcrumbItem) => {
+    // Check if the label matches a translated category name
+    const categoryKey = Object.keys(Category).find(key => tCategories(Category[key as keyof typeof Category]) === item.label);
+    const categoryValue = categoryKey ? Category[categoryKey as keyof typeof Category] : item.label;
+
+    return {
+      ...item,
+      className: item.className || getCategoryColorClass(categoryValue) || undefined
+    };
+  });
 
   const iconColorClassName: string = theme ? cn(theme.bg, theme.border, 'text-white') : 'bg-blue-500 border-blue-500/20 text-white';
 
@@ -86,16 +97,16 @@ export default function ToolPageLayout(
   const isShared: boolean = isCopied('share');
 
   // Determine button state and label
-  let shareLabel: string = 'Share';
+  let shareLabel: string = tCommon('share');
   let shareIcon: React.ReactNode = <Share2 className="w-3.5 h-3.5" />;
   let shareVariant: 'primary' | 'success' | 'active' = 'primary';
 
   if (isSyncing) {
-    shareLabel = 'Syncing...';
+    shareLabel = tCommon('syncing');
     shareIcon = <RefreshCw className="w-3.5 h-3.5 animate-spin" />;
     shareVariant = 'active';
   } else if (isShared) {
-    shareLabel = 'Copied';
+    shareLabel = tCommon('copied');
     shareIcon = <CheckCircle2 className="w-3.5 h-3.5" />;
     shareVariant = 'success';
   }
@@ -118,7 +129,7 @@ export default function ToolPageLayout(
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
     'name': `${title} - Zply`,
-    'description': toolConfig?.description,
+    'description': toolConfig ? t(`${toolConfig.id}.description`) : '',
     'applicationCategory': 'DeveloperTool',
     'operatingSystem': 'Any',
     'url': `https://zply.dev${toolConfig?.href}`,
@@ -135,7 +146,8 @@ export default function ToolPageLayout(
       animate={{ opacity: 1, y: 0 }}
       className="flex-1 flex flex-col min-h-0 overflow-y-auto custom-scrollbar"
     >
-      <script
+      <Script
+        id={`json-ld-${toolId}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
@@ -168,7 +180,7 @@ export default function ToolPageLayout(
                         variant="secondary" 
                         size="icon" 
                         className="h-10 w-10"
-                        aria-label="More options"
+                        aria-label={tCommon('moreOptions')}
                       >
                         <MoreHorizontal className="w-4 h-4" />
                       </Button>
@@ -179,7 +191,7 @@ export default function ToolPageLayout(
                         && (
                           <>
                             <DropdownMenuLabel className="px-2 py-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
-                              Tool Actions
+                              {tCommon('toolActions')}
                             </DropdownMenuLabel>
                             <div className="p-1 flex flex-col gap-1.5">
                               {renderHeaderAction()}
@@ -189,21 +201,21 @@ export default function ToolPageLayout(
                         )
                       }
                       <DropdownMenuLabel className="px-2 py-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
-                        Settings
+                        {tCommon('settings')}
                       </DropdownMenuLabel>
                       <DropdownMenuItem
                         onClick={scrollToAbout}
                         className="gap-3 py-2.5 rounded-xl cursor-pointer"
                       >
                         <Info className="w-4 h-4" />
-                        <span className="font-bold">About this tool</span>
+                        <span className="font-bold">{tCommon('aboutTool')}</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => togglePin(toolId)}
                         className="gap-3 py-2.5 rounded-xl cursor-pointer"
                       >
                         <Pin className={cn('w-4 h-4', isPinned(toolId) && 'fill-current text-blue-500')} />
-                        <span className="font-bold">{isPinned(toolId) ? 'Unpin from dashboard' : 'Pin to dashboard'}</span>
+                        <span className="font-bold">{isPinned(toolId) ? tCommon('unpinFromDashboard') : tCommon('pinToDashboard')}</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={handleShare}
@@ -225,7 +237,7 @@ export default function ToolPageLayout(
                       variant="secondary"
                       size="icon"
                       onClick={scrollToAbout}
-                      title="About this tool"
+                      title={tCommon('aboutTool')}
                     >
                       <Info className="w-4 h-4" />
                     </Button>
@@ -234,7 +246,7 @@ export default function ToolPageLayout(
                       variant={isPinned(toolId) ? 'active' : 'secondary'}
                       size="icon"
                       onClick={() => togglePin(toolId)}
-                      title={isPinned(toolId) ? 'Unpin from dashboard' : 'Pin to dashboard'}
+                      title={isPinned(toolId) ? tCommon('unpinFromDashboard') : tCommon('pinToDashboard')}
                     >
                       <Pin className={cn('w-4 h-4', isPinned(toolId) && 'fill-current')} />
                     </Button>
@@ -263,7 +275,7 @@ export default function ToolPageLayout(
                         </AnimatePresence>
                         <div className="flex items-center gap-2 opacity-0 pointer-events-none">
                           <RefreshCw className="w-3.5 h-3.5" />
-                          <span>Syncing...</span>
+                          <span>{tCommon('syncing')}</span>
                         </div>
                       </div>
                     </Button>
@@ -307,7 +319,7 @@ export default function ToolPageLayout(
                                 toolConfig?.libs && toolConfig.libs.length > 0
                                 && (
                                   <span className="text-muted-foreground group-hover:text-blue-400 transition-colors">
-                                    {toolConfig.libs.length} Libs
+                                    {tCommon('libsCount', { count: toolConfig.libs.length })}
                                   </span>
                                 )
                               }
@@ -316,11 +328,11 @@ export default function ToolPageLayout(
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end" side="top" className="w-56 p-2 bg-island-bg/95 backdrop-blur-xl border-island-border shadow-2xl">
                             <DropdownMenuLabel className="px-2 py-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
-                              Security & Privacy
+                              {tCommon('securityPrivacy')}
                             </DropdownMenuLabel>
                             <div className="px-3 py-2.5 flex items-center gap-3 text-foreground/80 bg-island-bg/30 rounded-xl mb-2">
                               <ShieldCheck className="w-4 h-4 text-green-500" />
-                              <span className="font-bold text-[10px] tracking-widest uppercase">Client-Side Only</span>
+                              <span className="font-bold text-[10px] tracking-widest uppercase">{tCommon('clientSideOnly')}</span>
                             </div>
 
                             {
@@ -328,7 +340,7 @@ export default function ToolPageLayout(
                                 <>
                                   <DropdownMenuSeparator className="my-2" />
                                   <DropdownMenuLabel className="px-2 py-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
-                                    Powered by
+                                    {tCommon('poweredBy')}
                                   </DropdownMenuLabel>
                                   <div className="flex flex-col gap-1">
                                     {
@@ -357,7 +369,7 @@ export default function ToolPageLayout(
                           {
                             toolConfig?.libs && toolConfig.libs.length > 0 && (
                               <div className="flex items-center gap-2 mr-4">
-                                <span className="text-muted">Powered by:</span>
+                                <span className="text-muted">{tCommon('poweredBy')}:</span>
                                 <div className="flex items-center gap-2">
                                   {
                                     toolConfig.libs.map((lib: Library, index: number) => (
@@ -381,7 +393,7 @@ export default function ToolPageLayout(
 
                           <div className="flex items-center gap-2 opacity-80">
                             <ShieldCheck className="w-3.5 h-3.5 text-green-500/50" />
-                            Client-Side Only
+                            {tCommon('clientSideOnly')}
                           </div>
                         </>
                       )
@@ -400,42 +412,40 @@ export default function ToolPageLayout(
           <section ref={aboutRef} className="px-6 py-12 sm:py-20 max-w-4xl mx-auto w-full space-y-12 shrink-0">
             <div className="space-y-4">
               <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground/90">
-                About {title}
+                {tCommon('aboutTitle', { title })}
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                {toolConfig.description} Zply provides this tool to help developers work faster and more securely.
-                Like all our tools, it runs entirely in your browser. Your data never leaves your computer.
+                {toolConfig ? t(`${toolConfig.id}.description`) : ''} {tCommon('aboutDescription')}
               </p>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-12">
               <div className="space-y-4">
                 <h3 className="text-lg font-black tracking-widest uppercase text-zply-blue">
-                  How to use
+                  {tCommon('howToUse')}
                 </h3>
                 <ul className="space-y-3 text-muted-foreground">
                   <li className="flex gap-3">
                     <span className="font-black text-foreground/40">01.</span>
-                    <span>Input your data into the editor or interactive workspace above.</span>
+                    <span>{tCommon('step1')}</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="font-black text-foreground/40">02.</span>
-                    <span>Use the toolbar to perform actions, format, or transform your data.</span>
+                    <span>{tCommon('step2')}</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="font-black text-foreground/40">03.</span>
-                    <span>Your results are updated in real-time. Copy or share them via the URI.</span>
+                    <span>{tCommon('step3')}</span>
                   </li>
                 </ul>
               </div>
 
               <div className="space-y-4">
                 <h3 className="text-lg font-black tracking-widest uppercase text-zply-purple">
-                  Privacy First
+                  {tCommon('privacyFirst')}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  This {title.toLowerCase()} is client-side only. We don&#39;t use cookies, trackers, or any backend storage.
-                  The &#34;Share&#34; feature uses URI persistence, meaning your state is encoded in the URL hash, not stored in a database.
+                  {tCommon('privacyDescription', { title })}
                 </p>
               </div>
             </div>

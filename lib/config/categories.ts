@@ -6,7 +6,6 @@ export type CategoryColor = 'blue' | 'green' | 'red' | 'purple' | 'orange' | 'cy
 export type CategoryMeta = {
   icon: LucideIcon;
   color: CategoryColor;
-  desc: string;
 };
 
 export const CATEGORY_COLORS: Record<CategoryWithoutAll, CategoryColor> = {
@@ -21,33 +20,27 @@ export const CATEGORY_COLORS: Record<CategoryWithoutAll, CategoryColor> = {
 export const CATEGORY_META: Record<CategoryWithoutAll, CategoryMeta> = {
   [Category.DIAGRAMS]: {
     icon: Code2,
-    color: 'blue',
-    desc: 'Visualize code, flows, and documentation structure'
+    color: 'blue'
   },
   [Category.DATA]: {
     icon: FileJson,
-    color: 'green',
-    desc: 'Format, validate, and transform data structures'
+    color: 'green'
   },
   [Category.SECURITY]: {
     icon: Lock,
     color: 'red',
-    desc: 'Secure your applications with robust cryptographic tools',
   },
   [Category.ENCODING]: {
     icon: Binary,
-    color: 'purple',
-    desc: 'Encode and decode data across various formats'
+    color: 'purple'
   },
   [Category.TIME]: {
     icon: Clock,
-    color: 'orange',
-    desc: 'Convert, parse, and track time-related data'
+    color: 'orange'
   },
   [Category.NETWORK]: {
     icon: Globe,
-    color: 'cyan',
-    desc: 'Analyze network configurations and web protocols'
+    color: 'cyan'
   },
 };
 

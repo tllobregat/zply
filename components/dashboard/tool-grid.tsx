@@ -3,6 +3,7 @@
 import { ToolCard } from '@/components/dashboard/tool-card';
 import { ToolConfig } from '@/lib/config/tools';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 interface ToolGridProps {
@@ -18,6 +19,8 @@ export function ToolGrid(
     handleTogglePin,
   }: ToolGridProps,
 ): React.ReactNode {
+  const t = useTranslations('Index');
+
   return (
     <motion.div
       key="tools"
@@ -45,8 +48,8 @@ export function ToolGrid(
           )
           : (
             <div className="py-40 text-center">
-              <h3 className="text-xl font-black text-foreground uppercase">No results</h3>
-              <p className="text-muted-foreground text-xs mt-2 uppercase tracking-widest">Try other keywords</p>
+              <h3 className="text-xl font-black text-foreground uppercase">{t('noResults')}</h3>
+              <p className="text-muted-foreground text-xs mt-2 uppercase tracking-widest">{t('tryOtherKeywords')}</p>
             </div>
           )
       }

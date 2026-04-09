@@ -3,6 +3,7 @@
 import { ViewMode } from '@/hooks/use-view-mode';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 /**
@@ -16,17 +17,8 @@ interface ViewModeToggleProps<T extends string = ViewMode> {
   /** Optional additional CSS classes */
   className?: string;
   /** Optional custom modes */
-  modes?: { id: T; label: string }[];
+  modes?: { id: T; label?: string }[];
 }
-
-/**
- * Available modes definition with label and id.
- */
-const DEFAULT_MODES: { id: ViewMode; label: string }[] = [
-  { id: 'editor', label: 'Editor' },
-  { id: 'split', label: 'Split' },
-  { id: 'preview', label: 'Preview' },
-];
 
 /**
  * A highly reusable toggle component for switching between 'editor', 'split', and 'preview' modes.
@@ -37,15 +29,25 @@ export function ViewModeToggle<T extends string = ViewMode>(
     viewMode,
     setViewMode,
     className,
-    modes = DEFAULT_MODES as unknown as { id: T; label: string }[]
+    modes
   }: ViewModeToggleProps<T>
 ): React.ReactNode {
+  const t = useTranslations('Common.toolModes');
+  
+  const defaultModes: { id: ViewMode; label: string }[] = [
+    { id: 'editor', label: t('editor') },
+    { id: 'split', label: t('split') },
+    { id: 'preview', label: t('preview') },
+  ];
+
+  const activeModes = modes || (defaultModes as unknown as { id: T; label: string }[]);
+
   return (
     <div className={cn(
       'flex p-1 bg-island-bg/50 border border-island-border rounded-2xl relative shadow-inner',
       className
     )}>
-      {modes.map((mode) => (
+      {activeModes.map((mode) => (
         <button
           key={mode.id}
           onClick={() => setViewMode(mode.id)}
@@ -55,7 +57,7 @@ export function ViewModeToggle<T extends string = ViewMode>(
               ? 'text-foreground'
               : 'text-muted-foreground hover:text-foreground'
           )}
-          aria-label={`Switch to ${mode.label} view`}
+          aria-label={`Switch to ${mode.label || mode.id} view`}
         >
           {viewMode === mode.id && (
             <motion.div
@@ -70,7 +72,7 @@ export function ViewModeToggle<T extends string = ViewMode>(
             />
           )}
           <span className="relative">
-            {mode.label}
+            {mode.label || (t.has(mode.id as string) ? t(mode.id as string) : mode.id)}
           </span>
         </button>
       ))}

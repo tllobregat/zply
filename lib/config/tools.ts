@@ -91,12 +91,10 @@ export interface Library {
 
 export interface ToolConfig {
   id: ToolId;
-  title: string;
-  description: string;
   href: string;
   icon: LucideIcon;
   status: ToolStatus;
-  category: Exclude<Category, 'All'>;
+  category: Exclude<Category, Category.ALL>;
   showInSidebar?: boolean;
   libs?: Library[];
 }
@@ -105,8 +103,6 @@ export const TOOLS: ToolConfig[] = [
   // DIAGRAMS
   {
     id: ToolId.DB_SCHEMA,
-    title: 'SQL & DB Visualizer',
-    description: 'Generate interactive ER diagrams from SQL or Prisma locally and securely.',
     href: '/sql-database-visualizer',
     icon: Database,
     status: 'active',
@@ -120,8 +116,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.PLANTUML,
-    title: 'PlantUML Editor',
-    description: 'Design UML diagrams via text. Real-time preview and sharing by URI.',
     href: '/plantuml-editor',
     icon: Code,
     status: 'active',
@@ -133,8 +127,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.MARKDOWN,
-    title: 'Markdown Editor',
-    description: 'Ultra-fast GitHub Flavored Markdown (GFM) editor with split-screen preview.',
     href: '/markdown-editor',
     icon: FileText,
     status: 'active',
@@ -147,8 +139,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.MERMAID,
-    title: 'Mermaid.js Maker',
-    description: 'Create lightweight flowcharts and sequence diagrams.',
     href: '/mermaid-maker',
     icon: Share2,
     status: 'coming-soon',
@@ -159,8 +149,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.SVG_OPT,
-    title: 'SVG Optimizer',
-    description: 'Visualize and optimize SVG code via SVGO.',
     href: '/svg-optimizer',
     icon: Columns,
     status: 'coming-soon',
@@ -171,8 +159,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.EXCALIDRAW,
-    title: 'Excalidraw Canvas',
-    description: 'Ultra-smooth sketching and "hand-drawn" diagrams.',
     href: '/excalidraw-canvas',
     icon: Pencil,
     status: 'coming-soon',
@@ -185,8 +171,6 @@ export const TOOLS: ToolConfig[] = [
   // DATA
   {
     id: ToolId.DATA_TRANSFORMER,
-    title: 'Data Transformer',
-    description: 'Convert between JSON, YAML, CSV, XML, and TypeScript formats instantly.',
     href: '/data-transformer',
     icon: Repeat,
     status: 'active',
@@ -201,8 +185,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.JSON_UTILS,
-    title: 'JSON Utils',
-    description: 'Instant JSON visualization, indentation, validation, and minification.',
     href: '/json-utils',
     icon: FileJson,
     status: 'active',
@@ -214,8 +196,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.TEXT_COMPARE,
-    title: 'Text Compare',
-    description: 'Compare two texts and find differences. Split or Unified view.',
     href: '/text-compare',
     icon: Columns,
     status: 'active',
@@ -227,8 +207,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.REGEX,
-    title: 'Regex Tester',
-    description: 'Regular expression tester with real-time explanations.',
     href: '/regex-tester',
     icon: SearchCode,
     status: 'coming-soon',
@@ -237,8 +215,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.SQL_FMT,
-    title: 'SQL Formatter',
-    description: 'Beautify and unify your complex SQL queries.',
     href: '/sql-formatter',
     icon: Database,
     status: 'coming-soon',
@@ -248,8 +224,6 @@ export const TOOLS: ToolConfig[] = [
   // SECURITY
   {
     id: ToolId.JWT_DEC,
-    title: 'JWT Debugger',
-    description: 'Secure and local decoding and encoding of JSON Web Tokens (JWT).',
     href: '/jwt-debugger',
     icon: Key,
     status: 'active',
@@ -264,8 +238,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.HASH_GEN,
-    title: 'Hash Generator',
-    description: 'Generate SHA-256, SHA-512, and MD5 hashes via Web Crypto API.',
     href: '/hash-generator',
     icon: Hash,
     status: 'active',
@@ -278,8 +250,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.SECRET_GEN,
-    title: 'Password & Secret Generator',
-    description: 'Generate secure passwords, API keys, and random tokens with strength evaluation.',
     href: '/secret-generator',
     icon: ShieldCheck,
     status: 'coming-soon',
@@ -287,8 +257,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.RSA_GEN,
-    title: 'RSA Key Pair Gen',
-    description: 'Generate RSA public/private key pairs.',
     href: '/rsa-key-pair-generator',
     icon: ShieldEllipsis,
     status: 'coming-soon',
@@ -298,8 +266,6 @@ export const TOOLS: ToolConfig[] = [
   // ENCODING
   {
     id: ToolId.BASE64,
-    title: 'Base64 Encoder/Decoder',
-    description: 'Instant Base64 encoding and decoding for text or files.',
     href: '/base64-encoder-decoder',
     icon: Binary,
     status: 'active',
@@ -308,8 +274,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.URL_IO,
-    title: 'URL Encoder/Decoder',
-    description: 'Secure management of URI special characters.',
     href: '/url-encoder-decoder',
     icon: Globe,
     status: 'coming-soon',
@@ -317,8 +281,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.HTML_ENTITIES,
-    title: 'HTML Entities',
-    description: 'Escape and unescape your HTML characters.',
     href: '/html-entities-converter',
     icon: FileCode,
     status: 'coming-soon',
@@ -326,8 +288,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.BINARY_CONV,
-    title: 'Binary Converter',
-    description: 'Convert text to binary and vice versa.',
     href: '/binary-converter',
     icon: Cpu,
     status: 'coming-soon',
@@ -335,8 +295,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.COLOR_CONV,
-    title: 'Color Converter',
-    description: 'Conversion between HEX, RGB, HSL, and CMYK formats.',
     href: '/color-converter',
     icon: Palette,
     status: 'coming-soon',
@@ -344,8 +302,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.UNICODE_ESC,
-    title: 'Unicode Escape',
-    description: 'Convert text to Unicode escape sequences.',
     href: '/unicode-escape-sequences',
     icon: CaseSensitive,
     status: 'coming-soon',
@@ -355,8 +311,6 @@ export const TOOLS: ToolConfig[] = [
   // TIME
   {
     id: ToolId.EPOCH,
-    title: 'Epoch Converter',
-    description: 'Timestamps to readable dates and UTC management.',
     href: '/epoch-converter',
     icon: Clock,
     status: 'active',
@@ -368,8 +322,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.TZ_CONV,
-    title: 'Timezone Converter',
-    description: 'Compare times between different time zones.',
     href: '/timezone-converter',
     icon: Globe,
     status: 'active',
@@ -381,8 +333,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.CRON,
-    title: 'Cron Parser',
-    description: 'Translate Cron expressions into natural text.',
     href: '/cron-parser',
     icon: Calendar,
     status: 'coming-soon',
@@ -390,8 +340,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.TIME_TRACKER,
-    title: 'Stopwatch & Timer',
-    description: 'Track time with a precise stopwatch, lap management, and customizable countdowns.',
     href: '/stopwatch-and-timer',
     icon: Timer,
     status: 'coming-soon',
@@ -401,8 +349,6 @@ export const TOOLS: ToolConfig[] = [
   // NETWORK
   {
     id: ToolId.MY_IP,
-    title: 'My IP Info',
-    description: 'Get detailed information about your public IP address.',
     href: '/my-ip-info',
     icon: MapPin,
     status: 'active',
@@ -414,8 +360,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.CIDR,
-    title: 'CIDR Calculator',
-    description: 'Calculate IPs, ranges, and subnet masks.',
     href: '/cidr-calculator',
     icon: Network,
     status: 'coming-soon',
@@ -423,8 +367,6 @@ export const TOOLS: ToolConfig[] = [
   },
   {
     id: ToolId.HTTP_HEADERS,
-    title: 'HTTP Headers',
-    description: 'Analyze HTTP response headers.',
     href: '/http-headers-analyzer',
     icon: ListTree,
     status: 'coming-soon',

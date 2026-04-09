@@ -11,12 +11,14 @@ import { UsePinnedTools, usePinnedTools } from '@/hooks/use-pinned-tools';
 import { Category, ToolConfig, TOOLS } from '@/lib/config/tools';
 import { AnimatePresence } from 'framer-motion';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { useTranslations } from 'next-intl';
 import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 export function Dashboard(): React.ReactNode {
   const searchParams: URLSearchParams = useSearchParams();
   const router: AppRouterInstance = useRouter();
+  const tTools = useTranslations('Tools');
 
   const [search, setSearch] = useState<string>('');
   const { pinnedIds, togglePin }: UsePinnedTools = usePinnedTools();
@@ -69,12 +71,14 @@ export function Dashboard(): React.ReactNode {
 
   const filteredTools: ToolConfig[] = useMemo((): ToolConfig[] => {
     return TOOLS.filter((tool: ToolConfig): boolean => {
-      const matchesSearch: boolean = tool.title.toLowerCase().includes(search.toLowerCase())
-        || tool.description.toLowerCase().includes(search.toLowerCase());
+      const title = tTools(`${tool.id}.title`).toLowerCase();
+      const description = tTools(`${tool.id}.description`).toLowerCase();
+      const matchesSearch: boolean = title.includes(search.toLowerCase())
+        || description.includes(search.toLowerCase());
       const matchesCategory: boolean = activeCategory === Category.ALL || tool.category === activeCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [search, activeCategory]);
+  }, [search, activeCategory, tTools]);
 
   const isBrowsingCategories: boolean = activeCategory === Category.ALL && search === '';
 

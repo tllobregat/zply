@@ -3,8 +3,11 @@
 import { motion } from 'framer-motion';
 import { Shield, Zap, Globe } from 'lucide-react';
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 export function DashboardHero(): React.ReactNode {
+  const t = useTranslations('Index');
+
   return (
     <div className="mb-12">
       <motion.div
@@ -14,11 +17,13 @@ export function DashboardHero(): React.ReactNode {
         className="text-center mb-10"
       >
         <h2 className="text-3xl sm:text-5xl font-black tracking-tight mb-4 text-foreground">
-          The Swiss Army Knife for <span className="text-zply-blue">Your Daily Tasks</span>
+          {t.rich('title', {
+            span: (chunks) => <span className="text-zply-blue">{chunks}</span>
+          })}
         </h2>
         <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto font-medium">
-          A collection of 100% private, local-first tools for data, security, and visualization.
-          <span className="block mt-1 font-bold text-foreground/80 italic">No data leaves your browser.</span>
+          {t('description')}
+          <span className="block mt-1 font-bold text-foreground/80 italic">{t('browserPrivacy')}</span>
         </p>
       </motion.div>
 
@@ -33,8 +38,8 @@ export function DashboardHero(): React.ReactNode {
             <Shield className="w-5 h-5" />
           </div>
           <div className="min-w-0">
-            <h3 className="text-[10px] font-black uppercase tracking-wider text-foreground">100% Private</h3>
-            <p className="text-[9px] text-muted-foreground leading-tight font-medium">Strictly browser-side</p>
+            <h3 className="text-[10px] font-black uppercase tracking-wider text-foreground">{t('features.private')}</h3>
+            <p className="text-[9px] text-muted-foreground leading-tight font-medium">{t('features.privateDesc')}</p>
           </div>
         </div>
 
@@ -43,8 +48,8 @@ export function DashboardHero(): React.ReactNode {
             <Globe className="w-5 h-5" />
           </div>
           <div className="min-w-0">
-            <h3 className="text-[10px] font-black uppercase tracking-wider text-foreground">Offline Ready</h3>
-            <p className="text-[9px] text-muted-foreground leading-tight font-medium">Works without internet</p>
+            <h3 className="text-[10px] font-black uppercase tracking-wider text-foreground">{t('features.offline')}</h3>
+            <p className="text-[9px] text-muted-foreground leading-tight font-medium">{t('features.offlineDesc')}</p>
           </div>
         </div>
 
@@ -53,8 +58,8 @@ export function DashboardHero(): React.ReactNode {
             <Zap className="w-5 h-5" />
           </div>
           <div className="min-w-0">
-            <h3 className="text-[10px] font-black uppercase tracking-wider text-foreground">Ultra Fast</h3>
-            <p className="text-[9px] text-muted-foreground leading-tight font-medium">Zero latency screens</p>
+            <h3 className="text-[10px] font-black uppercase tracking-wider text-foreground">{t('features.fast')}</h3>
+            <p className="text-[9px] text-muted-foreground leading-tight font-medium">{t('features.fastDesc')}</p>
           </div>
         </div>
       </motion.div>

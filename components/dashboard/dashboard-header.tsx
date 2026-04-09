@@ -4,6 +4,7 @@ import { getCategoryColorClass } from '@/lib/config/categories';
 import { CATEGORIES, Category } from '@/lib/config/tools';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, Command, Search } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 interface DashboardHeaderProps {
@@ -25,10 +26,14 @@ export function DashboardHeader(
     filteredToolsCount,
   }: DashboardHeaderProps,
 ): React.ReactNode {
-  const searchTitle: string = search ? 'Search Results' : 'Dashboard';
+  const tCommon = useTranslations('Common');
+  const tIndex = useTranslations('Index');
+  const tCategories = useTranslations('Categories');
+
+  const searchTitle: string = search ? tIndex('searchResults') : tIndex('dashboard');
   const title: string = activeCategory === Category.ALL
     ? searchTitle
-    : activeCategory;
+    : tCategories(activeCategory);
 
   return (
     <header className="px-4 py-4 sm:px-8 sm:py-5 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 border-b border-island-border/50 bg-island-bg/40 backdrop-blur-sm">
@@ -39,7 +44,7 @@ export function DashboardHeader(
               ZPLY
             </h1>
             <span className="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-zply-blue mt-0.5 sm:mt-1">
-              Toolbox
+              {tCommon('toolbox')}
             </span>
           </div>
         </div>
@@ -73,13 +78,13 @@ export function DashboardHeader(
               <p className="text-muted-foreground text-[8px] sm:text-[10px] font-black uppercase tracking-widest opacity-80 whitespace-nowrap">
                 {
                   isBrowsingCategories
-                    ? `${CATEGORIES.length - 1} Categories`
-                    : `${filteredToolsCount} Tools`
+                    ? tCategories('categoriesCount', { count: CATEGORIES.length - 1 })
+                    : tIndex('toolsCount', { count: filteredToolsCount })
                 }
               </p>
               <div className="w-1 h-1 rounded-full bg-island-border shrink-0" />
               <p className="text-zply-blue text-[8px] sm:text-[10px] font-black uppercase tracking-widest opacity-80 whitespace-nowrap">
-                100% Private
+                {tIndex('features.private')}
               </p>
             </div>
           </div>
@@ -90,7 +95,7 @@ export function DashboardHeader(
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-muted group-focus-within:text-blue-500 transition-colors" />
         <input
           type="text"
-          placeholder="Search tools (e.g. jwt, json, regex)..."
+          placeholder={tIndex('searchPlaceholder')}
           value={search}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
           className="w-full bg-island-bg border border-island-border rounded-xl sm:rounded-2xl py-3 sm:py-4 pl-12 sm:pl-14 pr-10 sm:pr-24 focus:ring-8 focus:ring-blue-500/5 focus:border-blue-500/50 transition-all outline-none text-sm sm:text-base text-foreground placeholder:text-muted/50 shadow-sm group-hover:border-island-border-hover"

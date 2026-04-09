@@ -5,6 +5,7 @@ import { CategoryWithoutAll, ToolConfig, TOOLS } from '@/lib/config/tools';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { ArrowRight, LayoutGrid, LucideIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 interface CategoryCardProps {
@@ -14,7 +15,9 @@ interface CategoryCardProps {
 }
 
 export function CategoryCard({ name, onClick, index }: CategoryCardProps): React.ReactNode {
-  const meta: CategoryMeta = CATEGORY_META[name] || { icon: LayoutGrid, color: 'blue', desc: 'Various tools' };
+  const t = useTranslations('Categories');
+  const tTools = useTranslations('Tools');
+  const meta: CategoryMeta = CATEGORY_META[name] || { icon: LayoutGrid, color: 'blue' };
   const Icon: LucideIcon = meta.icon;
   const toolCount: number = TOOLS.filter((t: ToolConfig): boolean => t.category === name && t.status === 'active').length;
 
@@ -49,10 +52,10 @@ export function CategoryCard({ name, onClick, index }: CategoryCardProps): React
           "text-base sm:text-lg font-black uppercase tracking-tight mb-1 text-foreground transition-colors line-clamp-1",
           theme.hoverText
         )}>
-          {name}
+          {t(name)}
         </h3>
         <p className="text-muted-foreground leading-relaxed mb-4 text-[10px] sm:text-[11px] font-medium line-clamp-2">
-          {meta.desc}
+          {t(`${name}Desc`)}
         </p>
 
         <div className="flex flex-wrap gap-1.5 mb-6">
@@ -61,7 +64,7 @@ export function CategoryCard({ name, onClick, index }: CategoryCardProps): React
               key={tool.id}
               className="px-2 py-0.5 rounded-md bg-island-bg border border-island-border text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-wider"
             >
-              {tool.title}
+              {tTools(`${tool.id}.title`)}
             </span>
           ))}
         </div>

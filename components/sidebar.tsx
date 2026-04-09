@@ -7,15 +7,19 @@ import { TOOLS } from '@/lib/config/tools';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Coffee, Github, LucideIcon, Menu, Search, X, Zap } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useMemo, useState } from 'react';
 import { ThemeToggle } from './theme-toggle';
+import { LanguageSwitcher } from './language-switcher';
 import { Portal } from './ui/portal';
 
 export function Sidebar(): React.ReactNode {
   const pathname: string = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const tTools = useTranslations('Tools');
+  const tCommon = useTranslations('Common');
 
   const { pinnedIds }: { pinnedIds: string[] } = usePinnedTools();
 
@@ -36,27 +40,27 @@ export function Sidebar(): React.ReactNode {
     <aside
       className="w-full sm:w-20 h-auto sm:h-full flex flex-row sm:flex-col items-center py-2 sm:py-8 px-4 sm:px-0 glass-island rounded-xl sm:rounded-3xl border border-island-border shadow-xl z-50 mb-safe sm:mb-0">
       {/* Logo Zply - Acts as Home button */}
-      <Link
-        href="/#dashboard"
-        onClick={(e: React.MouseEvent): void => {
-          if (pathname === '/') {
-            e.preventDefault();
-            window.dispatchEvent(new CustomEvent('reset-dashboard'));
-            document.getElementById('dashboard')?.scrollIntoView({ behavior: 'smooth' });
-          }
-        }}
-        className={cn(
-          'p-3 sm:p-3.5 rounded-lg sm:rounded-xl transition-all active:scale-95 hover:rotate-3 relative group',
-          pathname === '/' ? 'bg-zply-blue shadow-md shadow-zply-blue/30' : 'bg-island-bg border border-island-border text-muted hover:text-foreground hover:bg-island-bg/80'
-        )}
-        aria-label="Home Page"
-      >
-        <Zap className={cn('w-5 h-5 sm:w-6 sm:h-6 fill-current', pathname === '/' ? 'text-white' : 'text-current')} />
-        <span
-          className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-xl z-60 hidden sm:block">
-          Home Page
-        </span>
-      </Link>
+        <Link
+          href="/#dashboard"
+          onClick={(e: React.MouseEvent): void => {
+            if (pathname === '/') {
+              e.preventDefault();
+              window.dispatchEvent(new CustomEvent('reset-dashboard'));
+              document.getElementById('dashboard')?.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className={cn(
+            'p-3 sm:p-3.5 rounded-lg sm:rounded-xl transition-all active:scale-95 hover:rotate-3 relative group',
+            pathname === '/' ? 'bg-zply-blue shadow-md shadow-zply-blue/30' : 'bg-island-bg border border-island-border text-muted-foreground hover:text-foreground hover:bg-island-bg/80'
+          )}
+          aria-label={tCommon('homePage')}
+        >
+          <Zap className={cn('w-5 h-5 sm:w-6 sm:h-6 fill-current', pathname === '/' ? 'text-white' : 'text-current')} />
+          <span
+            className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-xl z-60 hidden sm:block">
+            {tCommon('homePage')}
+          </span>
+        </Link>
 
       <div className="w-px sm:w-8 h-8 sm:h-px bg-island-border/50 mx-2 sm:mx-auto my-0 sm:my-2 sm:hidden" />
 
@@ -65,12 +69,12 @@ export function Sidebar(): React.ReactNode {
         <button
           onClick={handleOpenSearch}
           className="p-3 sm:p-3.5 rounded-lg sm:rounded-xl transition-all relative group text-muted-foreground hover:text-zply-blue hover:bg-zply-blue/10 cursor-pointer"
-          aria-label="Open search menu"
+          aria-label={tCommon('sidebar.openSearch')}
         >
           <Search className="w-5 h-5 sm:w-6 sm:h-6" />
           <span
             className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-xl z-60 hidden sm:block">
-            Search <span className="text-muted-foreground ml-2">⌘K</span>
+            {tCommon('sidebar.search')} <span className="text-muted-foreground ml-2">{tCommon('sidebar.searchShortcut')}</span>
           </span>
         </button>
 
@@ -106,13 +110,13 @@ export function Sidebar(): React.ReactNode {
                               ? cn('shadow-md text-white', theme.bg, theme.shadow)
                               : cn('text-muted-foreground bg-island-bg border border-island-border', theme.hoverText, `hover:bg-${categoryColor}-600/10`)
                           )}
-                          aria-label={tool.title}
+                          aria-label={tTools(`${tool.id}.title`)}
                         >
                           <Icon className={cn('w-6 h-6', !isActive && theme.text)} />
                           <span
                             className="absolute left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-xl z-60"
                           >
-                            {tool.title}
+                            {tTools(`${tool.id}.title`)}
                           </span>
                         </Link>
                       </React.Fragment>
@@ -132,13 +136,14 @@ export function Sidebar(): React.ReactNode {
         <button
           onClick={(): void => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="p-3 rounded-xl transition-all relative text-muted-foreground hover:text-zply-blue hover:bg-zply-blue/10 flex items-center gap-1"
-          aria-label="Toggle mobile menu"
+          aria-label={tCommon('sidebar.toggleMobileMenu')}
         >
           {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
       <div className="hidden sm:flex flex-col gap-6 mt-auto items-center">
+        <LanguageSwitcher />
         <ThemeToggle />
 
         <a
@@ -146,12 +151,12 @@ export function Sidebar(): React.ReactNode {
           target="_blank"
           rel="noopener noreferrer"
           className="p-3 sm:p-3.5 text-muted hover:text-foreground hover:bg-island-bg/50 rounded-xl sm:rounded-2xl transition-all group relative"
-          aria-label="GitHub Repository"
+          aria-label={tCommon('sidebar.github')}
         >
           <Github className="w-5 h-5 sm:w-6 sm:h-6" />
           <span
             className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-2xl hidden sm:block">
-            GitHub
+            {tCommon('sidebar.github')}
           </span>
         </a>
 
@@ -160,12 +165,12 @@ export function Sidebar(): React.ReactNode {
           target="_blank"
           rel="noopener noreferrer"
           className="p-3 sm:p-3.5 text-muted hover:text-orange-400 hover:bg-orange-400/10 rounded-xl sm:rounded-2xl transition-all group relative"
-          aria-label="Buy me a coffee"
+          aria-label={tCommon('sidebar.support')}
         >
           <Coffee className="w-5 h-5 sm:w-6 sm:h-6" />
           <span
             className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-2xl hidden sm:block">
-            Buy me a coffee
+            {tCommon('sidebar.support')}
           </span>
         </a>
       </div>
@@ -186,12 +191,12 @@ export function Sidebar(): React.ReactNode {
                   <div className="p-2 bg-zply-blue rounded-xl">
                     <Zap className="w-5 h-5 text-white fill-current" />
                   </div>
-                  <span className="text-xl font-black uppercase tracking-widest text-foreground">Menu</span>
+                  <span className="text-xl font-black uppercase tracking-widest text-foreground">{tCommon('sidebar.menu')}</span>
                 </div>
                 <button
                   onClick={(): void => setIsMobileMenuOpen(false)}
                   className="p-3 rounded-xl bg-island-bg border border-island-border text-muted-foreground hover:text-foreground active:scale-90 transition-all"
-                  aria-label="Close menu"
+                  aria-label={tCommon('sidebar.closeMenu')}
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -205,7 +210,7 @@ export function Sidebar(): React.ReactNode {
                     transition={{ delay: 0.1 }}
                     className="flex flex-col gap-5"
                   >
-                    <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground ml-1">Pinned Tools</h3>
+                    <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground ml-1">{tCommon('sidebar.pinnedTools')}</h3>
                     <div className="grid grid-cols-1 gap-3">
                       {pinnedTools.map((tool: ToolConfig, index: number) => {
                         const Icon: LucideIcon = tool.icon;
@@ -236,10 +241,10 @@ export function Sidebar(): React.ReactNode {
                               </div>
                               <div className="flex flex-col">
                                 <span className={cn('text-sm font-bold', isActive ? 'text-foreground' : 'text-foreground/80')}>
-                                  {tool.title}
+                                  {tTools(`${tool.id}.title`)}
                                 </span>
                                 <span className="text-[11px] text-muted-foreground line-clamp-1">
-                                  {tool.description}
+                                  {tTools(`${tool.id}.description`)}
                                 </span>
                               </div>
                             </Link>
@@ -256,40 +261,49 @@ export function Sidebar(): React.ReactNode {
                   transition={{ delay: 0.3 }}
                   className="flex flex-col gap-5"
                 >
-                  <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground ml-1">Preferences & Links</h3>
-                  <div className="flex flex-wrap gap-3">
+                  <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground ml-1">{tCommon('sidebar.preferencesLinks')}</h3>
+                  <div className="flex flex-col gap-3">
+                    <div className="flex flex-wrap gap-3">
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.4 }}
+                        className="bg-island-bg border border-island-border p-2 rounded-2xl flex items-center"
+                      >
+                        <ThemeToggle />
+                      </motion.div>
+                      <motion.a
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.45 }}
+                        href="https://github.com/tllobregat/zply"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-4 bg-island-bg border border-island-border rounded-2xl text-muted-foreground flex items-center gap-3 active:scale-95 transition-all"
+                      >
+                        <Github className="w-5 h-5" />
+                        <span className="text-sm font-bold">{tCommon('sidebar.github')}</span>
+                      </motion.a>
+                      <motion.a
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.5 }}
+                        href="https://buymeacoffee.com/tllo"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-4 bg-island-bg border border-island-border rounded-2xl text-muted-foreground flex items-center gap-3 active:scale-95 transition-all"
+                      >
+                        <Coffee className="w-5 h-5" />
+                        <span className="text-sm font-bold">{tCommon('sidebar.support')}</span>
+                      </motion.a>
+                    </div>
                     <motion.div
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.4 }}
-                      className="bg-island-bg border border-island-border p-2 rounded-2xl flex items-center"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.55 }}
                     >
-                      <ThemeToggle />
+                      <LanguageSwitcher variant="mobile" />
                     </motion.div>
-                    <motion.a
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.45 }}
-                      href="https://github.com/tllobregat/zply"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-4 bg-island-bg border border-island-border rounded-2xl text-muted-foreground flex items-center gap-3 active:scale-95 transition-all"
-                    >
-                      <Github className="w-5 h-5" />
-                      <span className="text-sm font-bold">GitHub</span>
-                    </motion.a>
-                    <motion.a
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.5 }}
-                      href="https://buymeacoffee.com/tllo"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-4 bg-island-bg border border-island-border rounded-2xl text-muted-foreground flex items-center gap-3 active:scale-95 transition-all"
-                    >
-                      <Coffee className="w-5 h-5" />
-                      <span className="text-sm font-bold">Support</span>
-                    </motion.a>
                   </div>
                 </motion.div>
               </div>
