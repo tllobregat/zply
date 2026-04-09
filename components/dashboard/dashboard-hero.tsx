@@ -14,7 +14,7 @@ export function DashboardHero(): React.ReactNode {
         className="text-center mb-10"
       >
         <h2 className="text-3xl sm:text-5xl font-black tracking-tight mb-4 text-foreground">
-          The Swiss Army Knife for <span className="text-zply-blue">Modern Developers</span>
+          The Swiss Army Knife for <span className="text-zply-blue">Your Daily Tasks</span>
         </h2>
         <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto font-medium">
           A collection of 100% private, local-first tools for data, security, and visualization.

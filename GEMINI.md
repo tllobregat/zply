@@ -1,7 +1,7 @@
 # Zply - Technical Manifesto & Guidelines
 
 ## 🚀 Vision
-Zply est une boîte à outils de développement "High Quality", ultra-rapide et respectueuse de la vie privée.
+Zply est "The Swiss Army Knife for Your Daily Tasks". Une boîte à outils "High Quality", ultra-rapide et respectueuse de la vie privée, conçue pour les professionnels du numérique.
 **Principe de base :** Zéro Backend. Zéro Cookie. Zéro Database. Toute la persistance passe par l'URI pour faciliter le partage.
 
 ## 🏗 Architecture (Next.js App Router)

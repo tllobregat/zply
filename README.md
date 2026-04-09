@@ -1,6 +1,8 @@
 # Zply 🚀
 
-**Zply** is a high-quality, ultra-fast, and privacy-focused developer toolkit. Built for developers by developers, it brings all your essential transformation, encoding, and visualization tools into a single, sleek, and high-performance "operating system" interface.
+**Zply** is a high-quality, ultra-fast, and privacy-focused toolset. The Swiss Army Knife for Your Daily Tasks, it brings all your essential transformation, encoding, and visualization tools into a single, sleek, and high-performance "operating system" interface.
+
+Built for professionals who value privacy and speed.
 
 🌐 **Live Demo:** [zply.dev](https://zply.dev)
 
@@ -193,7 +195,7 @@ Distributed under the MIT License. See [LICENSE](https://github.com/tllobregat/z
 
 ## 💜 Community & Support
 
-Zply is built by developers, for developers. If you find it useful, consider starring the repo! ⭐️
+Zply is built for the community. If you find it useful, consider starring the repo! ⭐️
 
 [![GitHub stars](https://img.shields.io/github/stars/tllobregat/zply.svg?style=social&label=Star&maxAge=2592000)](https://github.com/tllobregat/zply/stargazers)
 
