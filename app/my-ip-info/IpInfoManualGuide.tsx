@@ -37,7 +37,7 @@ export function IpInfoManualGuide({ theme }: IpInfoManualGuideProps): ReactNode 
                   <div className="text-[9px] font-bold text-muted-foreground uppercase truncate">{item.label}</div>
                   <code className={cn('text-[10px] font-mono break-all', theme.text)}>{item.cmd}</code>
                 </div>
-                <CopyButton onCopy={(): void => copy(item.cmd)} isCopied={false} className="h-7 w-7 shrink-0" />
+                <CopyButton onCopy={(): void => copy(item.cmd)} isCopied={false} className="h-7 w-7 shrink-0" showText={false} />
               </div>
             ))}
           </div>
@@ -58,7 +58,7 @@ export function IpInfoManualGuide({ theme }: IpInfoManualGuideProps): ReactNode 
                   <div className="text-[9px] font-bold text-muted-foreground uppercase truncate">{item.label}</div>
                   <code className={cn('text-[10px] font-mono break-all', theme.text)}>{item.cmd}</code>
                 </div>
-                <CopyButton onCopy={(): void => copy(item.cmd)} isCopied={false} className="h-7 w-7 shrink-0" />
+                <CopyButton onCopy={(): void => copy(item.cmd)} isCopied={false} className="h-7 w-7 shrink-0" showText={false} />
               </div>
             ))}
           </div>
