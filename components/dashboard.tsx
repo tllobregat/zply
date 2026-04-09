@@ -15,36 +15,46 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 export function Dashboard(): React.ReactNode {
   const searchParams: URLSearchParams = useSearchParams();
   const router: AppRouterInstance = useRouter();
-  const initialCategory: Category | null = searchParams.get('category') as Category | null;
 
   const [search, setSearch] = useState<string>('');
-  const [activeCategory, setActiveCategory] = useState<Category>((initialCategory as Category) || Category.ALL);
   const { pinnedIds, togglePin }: UsePinnedTools = usePinnedTools();
   const toolsRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
+
+  // Derive activeCategory from URL
+  const activeCategory: Category = useMemo(() => {
+    const categoryFromUrl: string | null = searchParams.get('category');
+    if (categoryFromUrl && Object.values(Category).includes(categoryFromUrl as Category)) {
+      return categoryFromUrl as Category;
+    }
+    return Category.ALL;
+  }, [searchParams]);
+
+  // Update activeCategory via URL
+  const setActiveCategory = (newCategory: Category): void => {
+    const params: URLSearchParams = new URLSearchParams(searchParams.toString());
+    if (newCategory === Category.ALL) {
+      params.delete('category');
+    } else {
+      params.set('category', newCategory);
+    }
+
+    const queryString: string = params.toString();
+    const targetUrl: string = queryString ? `/?${queryString}` : '/';
+
+    // Always use replace to avoid history pollution as requested in previous fixes
+    router.replace(targetUrl, { scroll: false });
+  };
 
   // Handle reset-dashboard event
   useEffect(() => {
     const handleReset = (): void => {
       setActiveCategory(Category.ALL);
       setSearch('');
-      // Also clear URL parameters if needed
-      router.replace('/', { scroll: false });
     };
 
     window.addEventListener('reset-dashboard', handleReset);
     return (): void => window.removeEventListener('reset-dashboard', handleReset);
-  }, [router]);
-
-  // Handle initial scroll and category selection from URL
-  useEffect(() => {
-    if (initialCategory && initialCategory !== Category.ALL) {
-      // Wait for a frame to ensure the element is ready and avoid synchronous setState
-      const frame: number = requestAnimationFrame(() => {
-        setActiveCategory(initialCategory);
-      });
-      return (): void => cancelAnimationFrame(frame);
-    }
-  }, [initialCategory]);
+  }, [searchParams, router]); // include dependencies for setActiveCategory closure logic
 
   const handleTogglePin = (id: string, e: React.MouseEvent): void => {
     e.preventDefault();

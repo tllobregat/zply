@@ -33,7 +33,7 @@ export default function MarkdownPageClient(): ReactNode {
       title="Markdown Editor"
       icon={<FileText className="w-5 h-5" />}
       breadcrumbItems={[
-        { label: Category.VISUALISATION, href: `/?category=${Category.VISUALISATION}` },
+        { label: Category.DIAGRAMS, href: `/?category=${Category.DIAGRAMS}` },
         { label: 'Markdown Editor' }
       ]}
       headerActions={

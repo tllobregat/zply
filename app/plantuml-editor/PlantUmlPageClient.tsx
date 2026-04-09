@@ -33,7 +33,7 @@ export default function PlantUmlPageClient(): ReactNode {
   } = usePlantUmlTransformation(content, isMounted);
   const { handleDownload, handleCopy, handleCopyAsImage, isCopied } = usePlantUmlActions();
 
-  const theme: CategoryTheme = getCategoryClasses(CATEGORY_COLORS[Category.VISUALISATION]);
+  const theme: CategoryTheme = getCategoryClasses(CATEGORY_COLORS[Category.DIAGRAMS]);
 
   const handleSelectSnippet = (snippet: string): void => {
     setContent(snippet);
@@ -77,7 +77,7 @@ export default function PlantUmlPageClient(): ReactNode {
       icon={<Code className="w-5 h-5" />}
       workspaceClassName="flex-1 min-h-0 md:flex-row"
       breadcrumbItems={[
-        { label: Category.VISUALISATION, href: `/?category=${Category.VISUALISATION}` },
+        { label: Category.DIAGRAMS, href: `/?category=${Category.DIAGRAMS}` },
         { label: 'PlantUML Editor' }
       ]}
       headerActions={

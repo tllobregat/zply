@@ -10,7 +10,7 @@ export type CategoryMeta = {
 };
 
 export const CATEGORY_COLORS: Record<CategoryWithoutAll, CategoryColor> = {
-  [Category.VISUALISATION]: 'blue',
+  [Category.DIAGRAMS]: 'blue',
   [Category.DATA]: 'green',
   [Category.SECURITY]: 'red',
   [Category.ENCODING]: 'purple',
@@ -19,35 +19,35 @@ export const CATEGORY_COLORS: Record<CategoryWithoutAll, CategoryColor> = {
 };
 
 export const CATEGORY_META: Record<CategoryWithoutAll, CategoryMeta> = {
-  [Category.VISUALISATION]: {
+  [Category.DIAGRAMS]: {
     icon: Code2,
     color: 'blue',
-    desc: 'Diagrams, UML, and Markdown'
+    desc: 'Visualize code, flows, and documentation structure'
   },
   [Category.DATA]: {
     icon: FileJson,
     color: 'green',
-    desc: 'JSON formatting and data conversion'
+    desc: 'Format, validate, and transform data structures'
   },
   [Category.SECURITY]: {
     icon: Lock,
     color: 'red',
-    desc: 'Hashing, JWT decoding, and crypto',
+    desc: 'Secure your applications with robust cryptographic tools',
   },
   [Category.ENCODING]: {
     icon: Binary,
     color: 'purple',
-    desc: 'Base64, URL, and data encoding'
+    desc: 'Encode and decode data across various formats'
   },
   [Category.TIME]: {
     icon: Clock,
     color: 'orange',
-    desc: 'Epoch timestamps and time tools'
+    desc: 'Convert, parse, and track time-related data'
   },
   [Category.NETWORK]: {
     icon: Globe,
     color: 'cyan',
-    desc: 'Regex testing and network utilities'
+    desc: 'Analyze network configurations and web protocols'
   },
 };
 

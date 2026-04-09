@@ -31,7 +31,7 @@ export type ToolStatus = 'active' | 'coming-soon';
 
 export enum Category {
   ALL = 'All',
-  VISUALISATION = 'Visualisation',
+  DIAGRAMS = 'Diagrams',
   DATA = 'Data',
   SECURITY = 'Security',
   ENCODING = 'Encoding',
@@ -42,7 +42,7 @@ export enum Category {
 export type CategoryWithoutAll = Exclude<Category, Category.ALL>;
 
 export enum ToolId {
-  // VISUALISATION
+  // DIAGRAMS
   PLANTUML = 'plantuml-editor',
   MARKDOWN = 'markdown-editor',
   MERMAID = 'mermaid-maker',
@@ -102,7 +102,7 @@ export interface ToolConfig {
 }
 
 export const TOOLS: ToolConfig[] = [
-  // VISUALISATION
+  // DIAGRAMS
   {
     id: ToolId.DB_SCHEMA,
     title: 'SQL & DB Visualizer',
@@ -110,7 +110,7 @@ export const TOOLS: ToolConfig[] = [
     href: '/sql-database-visualizer',
     icon: Database,
     status: 'active',
-    category: Category.VISUALISATION,
+    category: Category.DIAGRAMS,
     libs: [
       { name: 'Monaco Editor', url: 'https://github.com/microsoft/monaco-editor' },
       { name: 'React Flow', url: 'https://reactflow.dev/' },
@@ -125,7 +125,7 @@ export const TOOLS: ToolConfig[] = [
     href: '/plantuml-editor',
     icon: Code,
     status: 'active',
-    category: Category.VISUALISATION,
+    category: Category.DIAGRAMS,
     showInSidebar: true,
     libs: [
       { name: 'plantuml-core', url: 'https://github.com/plantuml/plantuml-core' }
@@ -138,7 +138,7 @@ export const TOOLS: ToolConfig[] = [
     href: '/markdown-editor',
     icon: FileText,
     status: 'active',
-    category: Category.VISUALISATION,
+    category: Category.DIAGRAMS,
     showInSidebar: true,
     libs: [
       { name: 'marked', url: 'https://github.com/markedjs/marked' },
@@ -152,7 +152,7 @@ export const TOOLS: ToolConfig[] = [
     href: '/mermaid-maker',
     icon: Share2,
     status: 'coming-soon',
-    category: Category.VISUALISATION,
+    category: Category.DIAGRAMS,
     libs: [
       { name: 'mermaid', url: 'https://github.com/mermaid-js/mermaid' }
     ]
@@ -164,7 +164,7 @@ export const TOOLS: ToolConfig[] = [
     href: '/svg-optimizer',
     icon: Columns,
     status: 'coming-soon',
-    category: Category.VISUALISATION,
+    category: Category.DIAGRAMS,
     libs: [
       { name: 'svgo', url: 'https://github.com/svg/svgo' }
     ]
@@ -176,7 +176,7 @@ export const TOOLS: ToolConfig[] = [
     href: '/excalidraw-canvas',
     icon: Pencil,
     status: 'coming-soon',
-    category: Category.VISUALISATION,
+    category: Category.DIAGRAMS,
     libs: [
       { name: 'excalidraw', url: 'https://github.com/excalidraw/excalidraw' }
     ]
@@ -434,7 +434,7 @@ export const TOOLS: ToolConfig[] = [
 
 export const CATEGORIES: Category[] = [
   Category.ALL,
-  Category.VISUALISATION,
+  Category.DIAGRAMS,
   Category.DATA,
   Category.SECURITY,
   Category.ENCODING,
