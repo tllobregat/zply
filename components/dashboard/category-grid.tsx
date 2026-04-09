@@ -7,7 +7,7 @@ import { Filter } from 'lucide-react';
 import React from 'react';
 
 interface CategoryGridProps {
-  setActiveCategory: (category: Category) => void;
+  setActiveCategory: (category: Category, useReplace?: boolean) => void;
 }
 
 export function CategoryGrid({ setActiveCategory }: CategoryGridProps): React.ReactNode {

@@ -32,7 +32,7 @@ export function Dashboard(): React.ReactNode {
   }, [searchParams]);
 
   // Update activeCategory via URL
-  const setActiveCategory = (newCategory: Category): void => {
+  const setActiveCategory = (newCategory: Category, useReplace: boolean = false): void => {
     const params: URLSearchParams = new URLSearchParams(searchParams.toString());
     if (newCategory === Category.ALL) {
       params.delete('category');
@@ -43,14 +43,17 @@ export function Dashboard(): React.ReactNode {
     const queryString: string = params.toString();
     const targetUrl: string = queryString ? `/?${queryString}` : '/';
 
-    // Always use replace to avoid history pollution as requested in previous fixes
-    router.replace(targetUrl, { scroll: false });
+    if (useReplace) {
+      router.replace(targetUrl, { scroll: false });
+    } else {
+      router.push(targetUrl, { scroll: false });
+    }
   };
 
   // Handle reset-dashboard event
   useEffect(() => {
     const handleReset = (): void => {
-      setActiveCategory(Category.ALL);
+      setActiveCategory(Category.ALL, true);
       setSearch('');
     };
 

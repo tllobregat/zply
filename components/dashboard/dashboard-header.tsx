@@ -10,7 +10,7 @@ interface DashboardHeaderProps {
   activeCategory: Category;
   search: string;
   setSearch: (search: string) => void;
-  setActiveCategory: (category: Category) => void;
+  setActiveCategory: (category: Category, useReplace?: boolean) => void;
   isBrowsingCategories: boolean;
   filteredToolsCount: number;
 }
@@ -52,7 +52,7 @@ export function DashboardHeader(
             && (
               <button
                 onClick={() => {
-                  setActiveCategory(Category.ALL);
+                  setActiveCategory(Category.ALL, true);
                   setSearch('');
                 }}
                 className="p-2 sm:p-2.5 rounded-xl bg-island-bg border border-island-border hover:border-blue-500/30 text-muted transition-all active:scale-95 hover:text-foreground group/back shadow-sm shrink-0"

@@ -9,7 +9,7 @@ import React from 'react';
 interface DashboardBreadcrumbProps {
   activeCategory: Category;
   search: string;
-  setActiveCategory: (category: Category) => void;
+  setActiveCategory: (category: Category, useReplace?: boolean) => void;
   setSearch: (search: string) => void;
   isBrowsingCategories: boolean;
 }
@@ -33,7 +33,7 @@ export function DashboardBreadcrumb(
       <span
         className="cursor-pointer hover:text-zply-blue transition-colors shrink-0"
         onClick={() => {
-          setActiveCategory(Category.ALL);
+          setActiveCategory(Category.ALL, true);
           setSearch('');
         }}
       >
