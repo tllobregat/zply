@@ -27,7 +27,7 @@ export function ThemeToggle(): ReactNode {
       onClick={(): void => setTheme(isDark ? 'light' : 'dark')}
       className={cn(
         'p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all duration-500 group relative overflow-hidden active:scale-95',
-        'bg-island-bg border border-island-border shadow-lg',
+        'bg-island-bg border border-island-border shadow-lg cursor-pointer',
         'hover:shadow-zply-blue/10 hover:border-zply-blue/50'
       )}
       aria-label="Toggle theme"
