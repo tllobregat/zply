@@ -8,17 +8,32 @@ import { ToolGrid } from '@/components/dashboard/tool-grid';
 import { UsePinnedTools, usePinnedTools } from '@/hooks/use-pinned-tools';
 import { Category, ToolConfig, TOOLS } from '@/lib/config/tools';
 import { AnimatePresence } from 'framer-motion';
-import { useSearchParams } from 'next/navigation';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 export function Dashboard(): React.ReactNode {
   const searchParams: URLSearchParams = useSearchParams();
+  const router: AppRouterInstance = useRouter();
   const initialCategory: Category | null = searchParams.get('category') as Category | null;
 
   const [search, setSearch] = useState<string>('');
   const [activeCategory, setActiveCategory] = useState<Category>((initialCategory as Category) || Category.ALL);
   const { pinnedIds, togglePin }: UsePinnedTools = usePinnedTools();
   const toolsRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
+
+  // Handle reset-dashboard event
+  useEffect(() => {
+    const handleReset = (): void => {
+      setActiveCategory(Category.ALL);
+      setSearch('');
+      // Also clear URL parameters if needed
+      router.replace('/', { scroll: false });
+    };
+
+    window.addEventListener('reset-dashboard', handleReset);
+    return (): void => window.removeEventListener('reset-dashboard', handleReset);
+  }, [router]);
 
   // Handle initial scroll and category selection from URL
   useEffect(() => {
@@ -50,7 +65,7 @@ export function Dashboard(): React.ReactNode {
 
   return (
     <div id="dashboard" ref={toolsRef} className="px-1 sm:px-0 max-w-screen-2xl mx-auto h-full overflow-hidden">
-      <div className="glass-island rounded-2xl sm:rounded-[2.5rem] border border-island-border/50 overflow-hidden flex flex-col shadow-2xl h-full min-h-[400px]">
+      <div className="glass-island rounded-xl sm:rounded-3xl border border-island-border/50 overflow-hidden flex flex-col shadow-xl h-full min-h-[400px]">
         <DashboardHeader
           activeCategory={activeCategory}
           search={search}

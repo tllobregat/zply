@@ -6,7 +6,7 @@ import type { ToolConfig } from '@/lib/config/tools';
 import { TOOLS } from '@/lib/config/tools';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Coffee, Github, LayoutGrid, LucideIcon, Menu, Search, X, Zap } from 'lucide-react';
+import { Coffee, Github, LucideIcon, Menu, Search, X, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useMemo, useState } from 'react';
@@ -34,25 +34,26 @@ export function Sidebar(): React.ReactNode {
 
   return (
     <aside
-      className="w-full sm:w-20 h-auto sm:h-full flex flex-row sm:flex-col items-center py-2 sm:py-8 px-4 sm:px-0 glass-island rounded-2xl sm:rounded-[2.5rem] border border-island-border shadow-2xl z-50 mb-safe sm:mb-0">
+      className="w-full sm:w-20 h-auto sm:h-full flex flex-row sm:flex-col items-center py-2 sm:py-8 px-4 sm:px-0 glass-island rounded-xl sm:rounded-3xl border border-island-border shadow-xl z-50 mb-safe sm:mb-0">
       {/* Logo Zply - Acts as Home button */}
       <Link
-        href="/"
+        href="/#dashboard"
         onClick={(e: React.MouseEvent): void => {
           if (pathname === '/') {
             e.preventDefault();
-            document.getElementById('home-scroll-container')?.scrollTo({ top: 0, behavior: 'smooth' });
+            window.dispatchEvent(new CustomEvent('reset-dashboard'));
+            document.getElementById('dashboard')?.scrollIntoView({ behavior: 'smooth' });
           }
         }}
         className={cn(
-          'p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all active:scale-95 hover:rotate-3 relative group',
-          pathname === '/' ? 'bg-zply-blue shadow-lg shadow-zply-blue/30' : 'bg-island-bg border border-island-border text-muted hover:text-foreground hover:bg-island-bg/80'
+          'p-3 sm:p-3.5 rounded-lg sm:rounded-xl transition-all active:scale-95 hover:rotate-3 relative group',
+          pathname === '/' ? 'bg-zply-blue shadow-md shadow-zply-blue/30' : 'bg-island-bg border border-island-border text-muted hover:text-foreground hover:bg-island-bg/80'
         )}
         aria-label="Home Page"
       >
         <Zap className={cn('w-5 h-5 sm:w-6 sm:h-6 fill-current', pathname === '/' ? 'text-white' : 'text-current')} />
         <span
-          className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-2xl z-60 hidden sm:block">
+          className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-xl z-60 hidden sm:block">
           Home Page
         </span>
       </Link>
@@ -63,36 +64,16 @@ export function Sidebar(): React.ReactNode {
         {/* Search Trigger */}
         <button
           onClick={handleOpenSearch}
-          className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all relative group text-muted-foreground hover:text-zply-blue hover:bg-zply-blue/10 cursor-pointer"
+          className="p-3 sm:p-3.5 rounded-lg sm:rounded-xl transition-all relative group text-muted-foreground hover:text-zply-blue hover:bg-zply-blue/10 cursor-pointer"
           aria-label="Open search menu"
         >
           <Search className="w-5 h-5 sm:w-6 sm:h-6" />
           <span
-            className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-2xl z-60 hidden sm:block">
+            className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-xl z-60 hidden sm:block">
             Search <span className="text-muted-foreground ml-2">⌘K</span>
           </span>
         </button>
 
-        <div className="w-px sm:w-8 h-8 sm:h-px bg-island-border/50 mx-1 sm:mx-auto my-0 sm:my-2" />
-
-        {/* Dashboard / Categories shortcut */}
-        <Link
-          href="/#dashboard"
-          onClick={(e: React.MouseEvent): void => {
-            if (pathname === '/') {
-              e.preventDefault();
-              document.getElementById('dashboard')?.scrollIntoView({ behavior: 'smooth' });
-            }
-          }}
-          className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all relative group text-muted-foreground hover:text-zply-blue hover:bg-zply-blue/10 cursor-pointer"
-          aria-label="Go to Dashboard"
-        >
-          <LayoutGrid className="w-5 h-5 sm:w-6 sm:h-6" />
-          <span
-            className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-2xl z-60 hidden sm:block">
-            Dashboard
-          </span>
-        </Link>
 
         {
           pinnedTools.length > 0
@@ -120,16 +101,16 @@ export function Sidebar(): React.ReactNode {
                         <Link
                           href={tool.href}
                           className={cn(
-                            'p-3.5 rounded-2xl transition-all relative group shrink-0',
+                            'p-3.5 rounded-xl transition-all relative group shrink-0',
                             isActive
-                              ? cn('shadow-lg text-white', theme.bg, theme.shadow)
+                              ? cn('shadow-md text-white', theme.bg, theme.shadow)
                               : cn('text-muted-foreground bg-island-bg border border-island-border', theme.hoverText, `hover:bg-${categoryColor}-600/10`)
                           )}
                           aria-label={tool.title}
                         >
                           <Icon className={cn('w-6 h-6', !isActive && theme.text)} />
                           <span
-                            className="absolute left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-2xl z-60"
+                            className="absolute left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-xl z-60"
                           >
                             {tool.title}
                           </span>
