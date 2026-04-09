@@ -27,14 +27,14 @@ export function CategoryCard({ name, onClick, index }: CategoryCardProps): React
       transition={{ delay: index * 0.1 }}
       onClick={onClick}
       className={cn(
-        "group p-4 sm:p-6 rounded-2xl sm:rounded-[2rem] bg-island-card border border-island-border transition-all text-left relative overflow-hidden active:scale-[0.98] shadow-sm hover:shadow-xl",
+        "group p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-island-card border border-island-border transition-all text-left relative overflow-hidden active:scale-[0.98] shadow-sm hover:shadow-lg",
         theme.hoverBorder,
         "hover:bg-island-bg"
       )}
     >
       <div
         className={cn(
-          'w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg',
+          'w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-md',
           cn(theme.bg, theme.border, 'text-white', theme.shadow)
         )}
       >

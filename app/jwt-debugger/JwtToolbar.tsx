@@ -52,7 +52,7 @@ export function JwtToolbar(
         && (
           <div
             className={cn(
-              'flex items-center gap-2 bg-island-bg border border-island-border rounded-2xl shadow-inner px-2 h-10',
+              'flex items-center gap-2 bg-island-bg border border-island-border rounded-xl shadow-inner px-2 h-10',
               isDropdown && 'w-full flex-col h-auto py-2 items-stretch'
             )}
           >
@@ -103,7 +103,7 @@ export function JwtToolbar(
       {/* Mode Selector (Decode/Encode) */}
       <div
         className={cn(
-          'flex items-center bg-island-bg border border-island-border rounded-2xl shadow-inner px-1 h-10',
+          'flex items-center bg-island-bg border border-island-border rounded-xl shadow-inner px-1 h-10',
           isDropdown && 'w-full justify-between'
         )}
       >

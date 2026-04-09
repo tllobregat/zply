@@ -15,10 +15,13 @@ Zply est une boîte à outils de développement "High Quality", ultra-rapide et 
 - **Thème :** Dark Mode par défaut (Islands contrastées).
 - **Mode Sombre / Clair :** **INTERDIT** d'utiliser le préfixe Tailwind `dark:`. Toujours utiliser `resolvedTheme` (via `useTheme`) pour appliquer des classes conditionnelles.
 - **Navigation :** Barre latérale ou flottante ultra-réactive avec recherche floue (Command Palette).
+    - **Logo (Home) :** Le bouton logo de la barre latérale sert à la fois de lien vers l'accueil et de réinitialisation du dashboard. Cliquer dessus sur la page d'accueil déclenche un événement `reset-dashboard` et scrolle vers `#dashboard`.
 - **Esthétique :**
     - Bordures fines (1px) `border-island-border`.
     - Effets de verre (Glassmorphism) sur les modaux et la navigation ("Glass Island").
     - Accents de couleur : Bleu Zply (`#3b82f6`) ou Violet Énergie.
+    - **Border Radius :** Utiliser des arrondis plus petits pour un look moderne. Standard : `3xl` (1.5rem) pour les conteneurs principaux, `xl/2xl` (0.75rem - 1rem) pour les cartes et `lg/xl` (0.5rem - 0.75rem) pour les boutons et inputs.
+    - **Shadows :** Utiliser des ombres douces et légères pour compléter les arrondis réduits. Préférer `shadow-xl` ou `shadow-2xl` pour les conteneurs principaux et `shadow-md` ou `shadow-lg` pour les éléments interactifs.
 - **Performance :** LCP < 1.2s. Aucun chargement bloquant.
 - **Workspace Layout** : Utiliser `ToolPageLayout`. Par défaut en colonne, passer en `flex-row` via `workspaceClassName` pour les outils de type Éditeur + Preview.
 

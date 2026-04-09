@@ -93,7 +93,7 @@ export function DashboardHeader(
           placeholder="Search tools..."
           value={search}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
-          className="w-full bg-island-bg/50 border border-island-border rounded-xl sm:rounded-2xl py-2.5 sm:py-3 pl-11 sm:pl-12 pr-10 sm:pr-24 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500/50 transition-all outline-none text-xs sm:text-sm text-foreground placeholder:text-muted/60"
+          className="w-full bg-island-bg/50 border border-island-border rounded-lg sm:rounded-xl py-2.5 sm:py-3 pl-11 sm:pl-12 pr-10 sm:pr-24 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500/50 transition-all outline-none text-xs sm:text-sm text-foreground placeholder:text-muted/60"
         />
         <div
           className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:flex items-center gap-1 px-2 py-1 rounded-md bg-island-bg border border-island-border pointer-events-none group-focus-within:opacity-0 transition-opacity"

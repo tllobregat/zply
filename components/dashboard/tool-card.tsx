@@ -38,7 +38,7 @@ export function ToolCard(
       <Link
         href={isComingSoon ? '#' : tool.href}
         className={cn(
-          'group block p-4 sm:p-5 rounded-2xl sm:rounded-[2rem] border border-island-border bg-island-card hover:bg-island-bg transition-all duration-300 h-full relative overflow-hidden shadow-sm hover:shadow-lg',
+          'group block p-4 sm:p-5 rounded-xl sm:rounded-2xl border border-island-border bg-island-card hover:bg-island-bg transition-all duration-300 h-full relative overflow-hidden shadow-sm hover:shadow-md',
           theme.hoverBorder,
           isComingSoon && 'opacity-40 cursor-not-allowed'
         )}
@@ -46,7 +46,7 @@ export function ToolCard(
       >
         <div className="flex items-start justify-between mb-3 sm:mb-4">
           <div className={cn(
-            'w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 shadow-md',
+            'w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 shadow-sm',
             cn(theme.bg, theme.border, 'text-white', theme.shadow),
           )}>
             <Icon className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5" />

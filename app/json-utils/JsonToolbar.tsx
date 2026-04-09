@@ -31,7 +31,7 @@ export function JsonToolbar(
   return (
     <div className={cn("flex items-center gap-3", isDropdown && "flex-col items-stretch")}>
       <div className={cn(
-        "flex items-center bg-island-bg border border-island-border rounded-2xl shadow-inner px-1 h-10",
+        "flex items-center bg-island-bg border border-island-border rounded-xl shadow-inner px-1 h-10",
         isDropdown && "w-full justify-between"
       )}>
         <Button
@@ -58,7 +58,7 @@ export function JsonToolbar(
 
       <div
         className={cn(
-          'flex items-center bg-island-bg border border-island-border rounded-2xl shadow-inner px-1 h-10 transition-opacity', 
+          'flex items-center bg-island-bg border border-island-border rounded-xl shadow-inner px-1 h-10 transition-opacity', 
           viewMode === 'tree' && 'opacity-50 pointer-events-none',
           isDropdown && "w-full grid grid-cols-2 h-auto py-1"
         )}>

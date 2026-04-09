@@ -60,7 +60,7 @@ export function Base64Preview(
         className="h-full flex flex-col items-center justify-center p-8 overflow-auto custom-scrollbar"
       >
         <div className="relative group">
-          <div className={cn('absolute -inset-4 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity', theme.bg, 'opacity-20')} />
+          <div className={cn('absolute -inset-4 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity', theme.bg, 'opacity-20')} />
           {
             imageType === 'image/svg+xml'
               ? (

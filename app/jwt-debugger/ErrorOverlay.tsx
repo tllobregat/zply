@@ -22,7 +22,7 @@ export function ErrorOverlay({ error, theme }: ErrorOverlayProps): ReactNode {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             className={cn(
-              "absolute bottom-10 left-1/2 -translate-x-1/2 px-6 py-3 text-white rounded-2xl shadow-2xl flex items-center gap-3 backdrop-blur-md z-50 border",
+              "absolute bottom-10 left-1/2 -translate-x-1/2 px-6 py-3 text-white rounded-xl shadow-xl flex items-center gap-3 backdrop-blur-md z-50 border",
               theme.bg,
               theme.border.replace('500/20', '400/30')
             )}
