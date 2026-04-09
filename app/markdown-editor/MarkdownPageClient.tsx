@@ -22,7 +22,10 @@ export default function MarkdownPageClient(): ReactNode {
   const { content, setContent, viewMode, setViewMode } = useMarkdownState();
   const { html } = useMarkdownTransformation(content);
   const editorRef: RefObject<monaco.editor.IStandaloneCodeEditor | null> = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
+  const previewRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(null);
+
   const { handleToolbarAction, handleFoldAll, handleUnfoldAll } = useMarkdownActions(editorRef);
+
 
   return (
     <ToolPageLayout
@@ -51,7 +54,7 @@ export default function MarkdownPageClient(): ReactNode {
           <span>{content.length} chars</span>
         </>
       }
-      workspaceClassName="flex-row overflow-hidden"
+      workspaceClassName="flex-1 min-h-0 flex-row overflow-hidden"
     >
       <EditorPreviewWorkspace
         value={content}
@@ -114,15 +117,17 @@ export default function MarkdownPageClient(): ReactNode {
             lineDecorationsWidth: 16,
           }
         }}
-        previewClassName={`p-12 md:p-16 overflow-y-auto ${resolvedTheme === 'dark' ? 'bg-[#050a1a]' : 'bg-slate-50'}`}
+        previewClassName={`${resolvedTheme === 'dark' ? 'bg-[#050a1a]' : 'bg-slate-50'}`}
         preview={
-          <article
-            className={cn(
-              "prose max-w-none prose-headings:font-black prose-p:leading-relaxed",
-              resolvedTheme === 'dark' && "prose-invert"
-            )}
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
+          <div ref={previewRef} className="h-full p-12 md:p-16 overflow-y-auto custom-scrollbar">
+            <article
+              className={cn(
+                "prose max-w-none prose-headings:font-black prose-p:leading-relaxed",
+                resolvedTheme === 'dark' && "prose-invert"
+              )}
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+          </div>
         }
       />
     </ToolPageLayout>

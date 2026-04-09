@@ -74,7 +74,7 @@ export default function Base64Client(): ReactNode {
           <span>{state.inputType === 'file' ? 'Binary File' : 'Plain Text'} Mode</span>
         </>
       }
-      workspaceClassName="flex-col md:flex-row"
+      workspaceClassName="flex-1 min-h-0 flex-col md:flex-row"
     >
       <EditorPreviewWorkspace
         value={state.input}

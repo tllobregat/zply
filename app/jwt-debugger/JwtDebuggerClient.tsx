@@ -68,7 +68,7 @@ export default function JwtDebuggerClient(): ReactNode {
       footerIndicator={
         <span className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5 text-yellow-500/30" /> Local Processing</span>
       }
-      workspaceClassName={cn(isSplit ? 'md:flex-row' : 'flex-col', 'flex-col')}
+      workspaceClassName={cn('flex-1 min-h-0', isSplit ? 'md:flex-row' : 'flex-col', 'flex-col')}
     >
       <div className={cn('flex-1 flex min-h-0', isSplit ? 'flex-col md:flex-row' : 'flex-col')}>
         {

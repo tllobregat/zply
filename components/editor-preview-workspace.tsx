@@ -127,7 +127,7 @@ export function EditorPreviewWorkspace(
   );
 
   const previewElement: ReactNode = (
-    <div className={cn('h-full w-full bg-island-bg/50 custom-scrollbar', previewClassName)}>
+    <div className={cn('h-full w-full bg-island-bg/50', previewClassName)}>
       {preview}
     </div>
   );

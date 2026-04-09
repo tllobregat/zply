@@ -39,7 +39,7 @@ export function DbSchemaVisualizer(): ReactNode {
       toolId={ToolId.DB_SCHEMA}
       title="SQL & DB Visualizer"
       icon={<Database className="w-5 h-5" />}
-      workspaceClassName="md:flex-row"
+      workspaceClassName="flex-1 min-h-0 md:flex-row"
       breadcrumbItems={[
         { label: Category.VISUALISATION, href: `/?category=${Category.VISUALISATION}` },
         { label: 'SQL & DB Visualizer' }

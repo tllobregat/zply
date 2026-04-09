@@ -46,7 +46,7 @@ export default function DataTransformerPageClient(): ReactNode {
           <span>{state.i.length} chars in → {transformContent.length} chars out</span>
         </>
       }
-      workspaceClassName="flex-col md:flex-row overflow-hidden"
+      workspaceClassName="flex-1 min-h-0 flex-col md:flex-row overflow-hidden"
     >
       <TransformerEditor
         value={state.i}

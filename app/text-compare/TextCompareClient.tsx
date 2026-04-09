@@ -69,7 +69,7 @@ export default function TextCompareClient(): ReactNode {
           <span>Side-by-side comparison</span>
         </>
       }
-      workspaceClassName="md:flex-row"
+      workspaceClassName="flex-1 min-h-0 md:flex-row"
     >
       <TextCompareEditor
         original={state.original}

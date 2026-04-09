@@ -23,7 +23,11 @@ interface MarkdownToolbarProps {
   onUnfoldAll: () => void;
 }
 
-export function MarkdownToolbar({ onAction, onFoldAll, onUnfoldAll }: MarkdownToolbarProps): ReactNode {
+export function MarkdownToolbar({ 
+  onAction, 
+  onFoldAll, 
+  onUnfoldAll,
+}: MarkdownToolbarProps): ReactNode {
   return (
     <div className="hidden lg:flex items-center gap-0.5 bg-island-bg/40 border border-island-border p-1 rounded-xl">
       <Button

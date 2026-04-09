@@ -145,7 +145,7 @@ export default function ToolPageLayout(
           Takes up 100% of the viewport height (min-h-full)
           to push SEO content below the fold.
       */}
-      <div className="min-h-full flex flex-col shrink-0">
+      <div className="h-full flex flex-col shrink-0">
         {/* Control Island */}
         <header className="px-4 sm:px-6 py-4 flex items-center justify-between shrink-0">
           <div className="flex flex-col min-w-0">
