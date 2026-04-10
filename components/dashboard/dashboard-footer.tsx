@@ -1,6 +1,7 @@
 'use client';
 
 import { Separator } from '@/components/ui/separator';
+import { Github } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import React from 'react';
@@ -18,7 +19,15 @@ export function DashboardFooter(): React.ReactNode {
             {t('privacyGuaranteed')}
           </Link>
           <Separator className="opacity-30" />
-          <span>{t('openSource')}</span>
+          <a
+            href="https://github.com/tllobregat/zply"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors flex items-center gap-1.5"
+          >
+            <Github className="w-3 h-3" />
+            {t('openSource')}
+          </a>
         </div>
         <div className="text-muted-foreground/40 sm:text-muted-foreground/60">
           ZPLY {t('toolbox')} © {new Date().getFullYear()}

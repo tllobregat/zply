@@ -6,7 +6,7 @@ import type { ToolConfig } from '@/lib/config/tools';
 import { TOOLS } from '@/lib/config/tools';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Coffee, Github, LucideIcon, Menu, Search, X, Zap } from 'lucide-react';
+import { Coffee, LucideIcon, Menu, Search, X, Zap } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -146,19 +146,6 @@ export function Sidebar(): React.ReactNode {
         <LanguageSwitcher />
         <ThemeToggle />
 
-        <a
-          href="https://github.com/tllobregat/zply"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-3 sm:p-3.5 text-muted hover:text-foreground hover:bg-island-bg/50 rounded-xl sm:rounded-2xl transition-all group relative"
-          aria-label={tCommon('sidebar.github')}
-        >
-          <Github className="w-5 h-5 sm:w-6 sm:h-6" />
-          <span
-            className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-2xl hidden sm:block">
-            {tCommon('sidebar.github')}
-          </span>
-        </a>
 
         <a
           href="https://buymeacoffee.com/tllo"
@@ -272,18 +259,6 @@ export function Sidebar(): React.ReactNode {
                       >
                         <ThemeToggle />
                       </motion.div>
-                      <motion.a
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.45 }}
-                        href="https://github.com/tllobregat/zply"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-4 bg-island-bg border border-island-border rounded-2xl text-muted-foreground flex items-center gap-3 active:scale-95 transition-all"
-                      >
-                        <Github className="w-5 h-5" />
-                        <span className="text-sm font-bold">{tCommon('sidebar.github')}</span>
-                      </motion.a>
                       <motion.a
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
