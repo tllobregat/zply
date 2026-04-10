@@ -45,6 +45,8 @@ export default function MarkdownPageClient(): ReactNode {
             onAction={handleToolbarAction} 
             onFoldAll={handleFoldAll} 
             onUnfoldAll={handleUnfoldAll} 
+            onLoadFile={setContent}
+            loadFileLabel={t(`${ToolId.MARKDOWN}.loadFile`)}
           />
           <Separator className="h-4 hidden lg:block" />
           <ViewModeToggle viewMode={viewMode} setViewMode={setViewMode} />

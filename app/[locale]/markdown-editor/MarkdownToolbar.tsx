@@ -10,26 +10,68 @@ import {
   Italic,
   Link,
   List,
+  FolderOpen,
   Quote,
   Strikethrough,
   Terminal,
   UnfoldVertical
 } from 'lucide-react';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useRef } from 'react';
 
 interface MarkdownToolbarProps {
   onAction: (prefix: string, suffix: string, placeholder: string, isBlock: boolean) => void;
   onFoldAll: () => void;
   onUnfoldAll: () => void;
+  onLoadFile: (content: string) => void;
+  loadFileLabel?: string;
 }
 
-export function MarkdownToolbar({ 
-  onAction, 
-  onFoldAll, 
-  onUnfoldAll,
-}: MarkdownToolbarProps): ReactNode {
+export function MarkdownToolbar(
+  {
+    onAction,
+    onFoldAll,
+    onUnfoldAll,
+    onLoadFile,
+    loadFileLabel = 'Load File'
+  }: MarkdownToolbarProps,
+): ReactNode {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const content = event.target?.result;
+      if (typeof content === 'string') {
+        onLoadFile(content);
+      }
+    };
+    reader.readAsText(file);
+    // Reset input value to allow selecting the same file again
+    e.target.value = '';
+  };
+
   return (
     <div className="hidden lg:flex items-center gap-0.5 bg-island-bg/40 border border-island-border p-1 rounded-xl">
+      <Button
+        variant="ghost"
+        size="icon"
+        className="w-8 h-8 rounded-lg"
+        title={loadFileLabel}
+        onClick={() => fileInputRef.current?.click()}
+      >
+        <FolderOpen className="w-4 h-4" />
+      </Button>
+      <input
+        type="file"
+        ref={fileInputRef}
+        className="hidden"
+        accept=".md,.markdown,text/markdown,text/plain"
+        onChange={handleFileChange}
+      />
+      <Separator className="h-4 mx-1" />
       <Button
         variant="ghost"
         size="icon"
