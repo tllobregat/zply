@@ -294,6 +294,7 @@
       "title": "Éditeur Markdown",
       "description": "Éditeur Markdown ultra-rapide avec aperçu en temps réel.",
       "loadFile": "Charger un fichier",
+      "exportPdf": "Exporter en PDF",
       "default": "# 🖋️ Éditeur Markdown\n\n## 🚀 Introduction\nÉditez ici pour voir le résultat à droite.\n\n## 🏗️ Architecture\nZply est basé sur Next.js.\n\n### 🎨 Design\nStyle épuré et moderne.\n\n## 🛠️ Utilisation\nUtilisez la barre d'outils pour formater votre texte."
     },
     "mermaid-maker": {

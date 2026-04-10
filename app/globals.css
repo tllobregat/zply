@@ -114,3 +114,73 @@
     @apply bg-muted;
   }
 }
+
+@media print {
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide everything except the print container */
+  body > *:not(#markdown-print-area) {
+    display: none !important;
+  }
+
+  #markdown-print-area {
+    display: block !important;
+    background: white !important;
+    color: black !important;
+    width: 100%;
+    height: auto !important;
+    min-height: 100%;
+    padding: 2cm;
+    margin: 0;
+  }
+
+  /* Page margins to 0 to hide browser headers/footers */
+  @page {
+    margin: 0;
+    size: auto;
+  }
+
+  /* Force light mode and reset typography for print */
+  #markdown-print-area article {
+    background: white !important;
+    color: black !important;
+    max-width: none !important;
+  }
+
+  /* Reset prose variables for light mode printing */
+  #markdown-print-area .prose {
+    --tw-prose-body: #1a1a1a !important;
+    --tw-prose-headings: #000000 !important;
+    --tw-prose-links: #2563eb !important;
+    --tw-prose-bold: #000000 !important;
+    --tw-prose-counters: #4b5563 !important;
+    --tw-prose-bullets: #4b5563 !important;
+    --tw-prose-hr: #e5e7eb !important;
+    --tw-prose-quotes: #4b5563 !important;
+    --tw-prose-quote-borders: #e5e7eb !important;
+    --tw-prose-captions: #4b5563 !important;
+    --tw-prose-code: #1a1a1a !important;
+    --tw-prose-pre-code: #1a1a1a !important;
+    --tw-prose-pre-bg: #f3f4f6 !important;
+    --tw-prose-th-borders: #d1d5db !important;
+    --tw-prose-td-borders: #e5e7eb !important;
+    --tw-prose-invert-body: #1a1a1a !important;
+    --tw-prose-invert-headings: #000000 !important;
+  }
+  
+  /* Ensure images don't break across pages if possible, or at least fit */
+  #markdown-print-area img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+  
+  /* Avoid breaking headings at the bottom of the page */
+  #markdown-print-area h1, 
+  #markdown-print-area h2, 
+  #markdown-print-area h3 {
+    page-break-after: avoid;
+  }
+}

@@ -11,6 +11,7 @@ import {
   Link,
   List,
   FolderOpen,
+  Printer,
   Quote,
   Strikethrough,
   Terminal,
@@ -23,7 +24,9 @@ interface MarkdownToolbarProps {
   onFoldAll: () => void;
   onUnfoldAll: () => void;
   onLoadFile: (content: string) => void;
+  onExportPdf: () => void;
   loadFileLabel?: string;
+  exportPdfLabel?: string;
 }
 
 export function MarkdownToolbar(
@@ -32,7 +35,9 @@ export function MarkdownToolbar(
     onFoldAll,
     onUnfoldAll,
     onLoadFile,
-    loadFileLabel = 'Load File'
+    onExportPdf,
+    loadFileLabel = 'Load File',
+    exportPdfLabel = 'Export to PDF'
   }: MarkdownToolbarProps,
 ): ReactNode {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -71,6 +76,15 @@ export function MarkdownToolbar(
         accept=".md,.markdown,text/markdown,text/plain"
         onChange={handleFileChange}
       />
+      <Button
+        variant="ghost"
+        size="icon"
+        className="w-8 h-8 rounded-lg"
+        title={exportPdfLabel}
+        onClick={onExportPdf}
+      >
+        <Printer className="w-4 h-4" />
+      </Button>
       <Separator className="h-4 mx-1" />
       <Button
         variant="ghost"
