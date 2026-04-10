@@ -2,6 +2,7 @@
 
 import { Separator } from '@/components/ui/separator';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 import React from 'react';
 
 export function DashboardFooter(): React.ReactNode {
@@ -13,7 +14,9 @@ export function DashboardFooter(): React.ReactNode {
     >
       <div className="pt-3 sm:pt-6 border-t border-island-border/30 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4 text-[8px] sm:text-[10px] text-muted-foreground font-bold uppercase tracking-widest">
         <div className="flex items-center gap-3 sm:gap-4">
-          <span>{t('privacyGuaranteed')}</span>
+          <Link href="/privacy" className="hover:text-blue-500 transition-colors">
+            {t('privacyGuaranteed')}
+          </Link>
           <Separator className="opacity-30" />
           <span>{t('openSource')}</span>
         </div>

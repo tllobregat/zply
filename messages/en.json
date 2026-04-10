@@ -102,6 +102,27 @@
       }
     }
   },
+  "PrivacyPolicy": {
+    "title": "Privacy & Security",
+    "description": "Zply is built on a Privacy-First philosophy. We do not use cookies, and we do not collect any Personally Identifiable Information (PII).",
+    "zeroBackend": "Zero Backend",
+    "zeroBackendDesc": "Every tool runs 100% in your browser. No user-input data is ever sent to a server. For tools requiring external data (like IP detection), we always ask for your consent before any external request.",
+    "zeroCookies": "Zero Cookies",
+    "zeroCookiesDesc": "We do not use cookies or persistent identifiers. Your browsing remains private and storage-free.",
+    "uriPersistence": "URI Persistence",
+    "uriPersistenceDesc": "Share your workspace state instantly. We use LZ-String compression to store your current state directly in the window.location.hash.",
+    "secureHash": "Why the # is Secure",
+    "secureHashDesc": "The text after the '#' symbol (the fragment identifier) in a URL is never sent to the server by the browser. Even if you share a link containing your data, only your browser (and whoever you share the link with) can see it. Zply never even knows what's in your hash.",
+    "telemetry": "Privacy-First Telemetry",
+    "telemetryDesc": "To monitor site health and performance, we use Vercel Web Analytics. This integration is strictly for anonymous telemetry and does not track individual users.",
+    "noPii": "No PII",
+    "noPiiDesc": "Your IP address is hashed and discarded immediately; we never see who you are.",
+    "transparency": "Full Transparency",
+    "transparencyDesc": "You can verify Vercel's privacy-first architecture in their official documentation.",
+    "fragmentIdentifier": "Fragment Identifier Security",
+    "exampleHash": "#compressed-data-never-leaves-browser",
+    "externalPrivacyPolicy": "Privacy Policy"
+  },
   "Categories": {
     "All": "All",
     "categoriesCount": "{count, plural, =1 {# Category} other {# Categories}}",

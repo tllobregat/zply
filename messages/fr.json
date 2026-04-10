@@ -102,6 +102,27 @@
       }
     }
   },
+  "PrivacyPolicy": {
+    "title": "Confidentialité & Sécurité",
+    "description": "Zply est construit sur une philosophie de protection de la vie privée. Nous n'utilisons pas de cookies et nous ne collectons aucune information personnellement identifiable (PII).",
+    "zeroBackend": "Zéro Backend",
+    "zeroBackendDesc": "Chaque outil s'exécute à 100% dans votre navigateur. Aucune donnée saisie n'est jamais envoyée à un serveur. Pour les outils nécessitant des données externes (comme la détection d'IP), nous demandons toujours votre accord avant toute requête externe.",
+    "zeroCookies": "Zéro Cookies",
+    "zeroCookiesDesc": "Nous n'utilisons pas de cookies ou d'identifiants persistants. Votre navigation reste privée et sans stockage.",
+    "uriPersistence": "Persistence URI",
+    "uriPersistenceDesc": "Partagez l'état de votre espace de travail instantanément. Nous utilisons la compression LZ-String pour stocker votre état actuel directement dans le window.location.hash.",
+    "secureHash": "Pourquoi le # est sécurisé",
+    "secureHashDesc": "Le texte après le symbole '#' (l'identifiant de fragment) dans une URL n'est jamais envoyé au serveur par le navigateur. Même si vous partagez un lien contenant vos données, seul votre navigateur (et la personne avec qui vous partagez le lien) peut le voir. Zply ne sait même pas ce qu'il y a dans votre hash.",
+    "telemetry": "Télémétrie respectueuse de la vie privée",
+    "telemetryDesc": "Pour surveiller la santé et les performances du site, nous utilisons Vercel Web Analytics. Cette intégration est strictement destinée à une télémétrie anonyme et ne suit pas les utilisateurs individuels.",
+    "noPii": "Pas de PII",
+    "noPiiDesc": "Votre adresse IP est hachée et jetée immédiatement ; nous ne voyons jamais qui vous êtes.",
+    "transparency": "Transparence totale",
+    "transparencyDesc": "Vous pouvez vérifier l'architecture respectueuse de la vie privée de Vercel dans leur documentation officielle.",
+    "fragmentIdentifier": "Sécurité de l'identifiant de fragment",
+    "exampleHash": "#donnees-compressees-ne-quittent-jamais-le-navigateur",
+    "externalPrivacyPolicy": "Politique de confidentialité"
+  },
   "Categories": {
     "All": "Tous",
     "categoriesCount": "{count, plural, =1 {# Catégorie} other {# Catégories}}",

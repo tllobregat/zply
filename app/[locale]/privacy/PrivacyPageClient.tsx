@@ -1,0 +1,146 @@
+'use client';
+
+import { DashboardFooter } from '@/components/dashboard/dashboard-footer';
+import { Breadcrumb } from '@/components/ui/breadcrumb';
+import { ShieldCheck, Lock, Cookie, Database, Activity, ExternalLink } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+import { motion } from 'framer-motion';
+
+export function PrivacyPageClient(): React.ReactNode {
+  const t = useTranslations('PrivacyPolicy');
+
+  const principles = [
+    {
+      icon: <Database className="w-5 h-5 text-blue-500" />,
+      title: t('zeroBackend'),
+      description: t('zeroBackendDesc')
+    },
+    {
+      icon: <Cookie className="w-5 h-5 text-purple-500" />,
+      title: t('zeroCookies'),
+      description: t('zeroCookiesDesc')
+    },
+    {
+      icon: <Lock className="w-5 h-5 text-green-500" />,
+      title: t('uriPersistence'),
+      description: t('uriPersistenceDesc')
+    }
+  ];
+
+  return (
+    <div className="px-1 sm:px-0 max-w-screen-2xl mx-auto h-full overflow-hidden">
+      <div className="glass-island rounded-xl sm:rounded-3xl border border-island-border/50 overflow-hidden flex flex-col shadow-xl h-full min-h-100">
+        {/* Header */}
+        <header className="px-4 sm:px-8 py-4 sm:py-6 border-b border-island-border/30 shrink-0">
+          <Breadcrumb items={[{ label: t('title') }]} />
+          <div className="flex items-center gap-3 mt-2">
+            <div className="p-2 bg-blue-500 rounded-xl text-white">
+              <ShieldCheck className="w-6 h-6" />
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight">{t('title')}</h1>
+          </div>
+        </header>
+
+        {/* Content */}
+        <div className="flex-1 p-4 sm:p-8 overflow-y-auto custom-scrollbar bg-island-bg/5">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-4xl mx-auto space-y-12 pb-12"
+          >
+            <section className="space-y-4">
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                {t('description')}
+              </p>
+            </section>
+
+            <section className="grid sm:grid-cols-3 gap-6">
+              {principles.map((principle, i) => (
+                <div key={i} className="p-6 bg-island-bg/20 border border-island-border/30 rounded-2xl space-y-3">
+                  {principle.icon}
+                  <h3 className="font-black uppercase tracking-widest text-[10px] text-muted-foreground">
+                    {principle.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {principle.description}
+                  </p>
+                </div>
+              ))}
+            </section>
+
+            <section className="p-8 bg-blue-500/5 border border-blue-500/20 rounded-3xl space-y-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-blue-500/10 rounded-lg">
+                  <Lock className="w-5 h-5 text-blue-500" />
+                </div>
+                <h2 className="text-xl font-black tracking-tight">{t('secureHash')}</h2>
+              </div>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p>{t('secureHashDesc')}</p>
+                <div className="p-4 bg-island-bg/40 rounded-xl border border-island-border/30 font-mono text-xs overflow-x-auto whitespace-nowrap">
+                  https://zply.dev/markdown-editor<span className="text-blue-500 font-bold">{t('exampleHash')}</span>
+                </div>
+                <div className="flex justify-end">
+                  <a
+                    href="https://en.wikipedia.org/wiki/URI_fragment#Security"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-xs font-bold text-blue-500 hover:text-blue-400 transition-colors"
+                  >
+                    {t('fragmentIdentifier')} <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            <section className="space-y-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-purple-500/10 rounded-lg">
+                  <Activity className="w-5 h-5 text-purple-500" />
+                </div>
+                <h2 className="text-xl font-black tracking-tight">{t('telemetry')}</h2>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <p className="text-muted-foreground leading-relaxed">
+                    {t('telemetryDesc')}
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-2 text-sm font-bold">
+                      <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                      {t('noPii')}
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      {t('noPiiDesc')}
+                    </p>
+                  </div>
+                </div>
+                <div className="p-6 bg-island-bg/20 border border-island-border/30 rounded-2xl space-y-4">
+                  <h3 className="font-black uppercase tracking-widest text-[10px] text-muted-foreground">
+                    {t('transparency')}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {t('transparencyDesc')}
+                  </p>
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    <a
+                      href="https://vercel.com/docs/analytics/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-xs font-bold text-blue-500 hover:text-blue-400 transition-colors"
+                    >
+                      {t('externalPrivacyPolicy')} <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </motion.div>
+        </div>
+
+        <DashboardFooter />
+      </div>
+    </div>
+  );
+}
