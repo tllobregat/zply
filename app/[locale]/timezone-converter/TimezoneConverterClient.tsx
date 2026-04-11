@@ -90,7 +90,7 @@ export default function TimezoneConverterClient(): ReactNode {
               layout
               onClick={(): void => setIsAdding(true)}
               className={cn(
-                'p-8 flex flex-col items-center justify-center text-center glass-island border-2 border-dashed border-island-border rounded-4xl bg-island-bg/5 group transition-all cursor-pointer',
+                'p-8 flex flex-col items-center justify-center text-center glass-island border-2 border-dashed border-island-border rounded-3xl group transition-all cursor-pointer',
                 theme.hoverBorder
               )}
             >

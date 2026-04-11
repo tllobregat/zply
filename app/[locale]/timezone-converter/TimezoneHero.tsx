@@ -22,9 +22,9 @@ export function TimezoneHero(
 
   return (
     <div className="relative group">
-      <div className={cn('absolute -inset-1 rounded-4xl blur opacity-10 group-hover:opacity-20 transition duration-1000', theme.bg)}></div>
+      <div className={cn('absolute -inset-1 rounded-2xl sm:rounded-3xl blur opacity-10 group-hover:opacity-20 transition duration-1000', theme.bg)}></div>
       <div
-        className="relative p-10 md:p-16 rounded-4xl bg-island-card border border-island-border flex flex-col items-center text-center space-y-6">
+        className="relative p-10 md:p-16 rounded-2xl sm:rounded-3xl bg-island-card border border-island-border flex flex-col items-center text-center space-y-6">
         <div className="space-y-2 w-full flex flex-col items-center">
           <span className={cn('text-[10px] font-black uppercase tracking-[0.3em]', theme.text)}>{t('referenceTime')}</span>
           <div className="relative w-full">

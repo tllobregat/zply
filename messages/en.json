@@ -2,20 +2,21 @@
   "Index": {
     "title": "The Swiss Army Knife for <span>Your Daily Tasks</span>",
     "description": "Designed for privacy-conscious professionals",
-    "browserPrivacy": "No data leaves your browser.",
     "features": {
       "private": "100% Private",
-      "privateDesc": "Processing happens in your browser",
-      "offline": "Offline Ready",
-      "offlineDesc": "Works without internet connection",
+      "privateDesc": "Zero backend, zero cookies, zero trackers.",
+      "shareable": "URI Persistence",
+      "shareableDesc": "Share your workspace state instantly.",
       "fast": "Ultra Fast",
       "fastDesc": "Zero latency locally-driven tools"
     },
     "popularTools": "Popular Tools",
+    "browseCategories": "Browse Categories",
     "toolsCount": "{count, plural, =1 {# Tool} other {# Tools}}",
     "noResults": "No results",
     "tryOtherKeywords": "Try other keywords",
     "searchPlaceholder": "Search tools (e.g. jwt, json, regex)...",
+    "searchPlaceholderMobile": "Search tools...",
     "searchResults": "Search Results",
     "dashboard": "Dashboard"
   },
@@ -23,18 +24,21 @@
     "language": "Language",
     "en": "English",
     "fr": "French",
+    "light": "Light",
+    "dark": "Dark",
     "homePage": "Home Page",
     "home": "Home",
     "privacyGuaranteed": "Privacy Guaranteed",
     "openSource": "Open Source",
     "toolbox": "Toolbox",
     "toolActions": {
+      "addTimezone": "Add Timezone",
       "beautify": "Beautify",
-      "minify": "Minify",
       "foldAll": "Fold All",
+      "minify": "Minify",
       "unfold": "Unfold",
       "useCurrentTime": "Use Current Time",
-      "addTimezone": "Add Timezone"
+      "title": "Actions"
     },
     "toolIndicators": {
       "realTimeHashing": "Real-time Hashing",
@@ -92,6 +96,8 @@
       "openSearch": "Open search menu",
       "toggleMobileMenu": "Toggle mobile menu",
       "closeMenu": "Close menu",
+      "toggleTheme": "Toggle theme",
+      "themeToggle": "Switch to {mode} Mode",
       "commandMenu": {
         "placeholder": "Search tools...",
         "availableTools": "Available tools",
@@ -100,7 +106,11 @@
         "select": "Select",
         "close": "Close"
       }
-    }
+    },
+    "settings": {
+      "title": "Settings"
+    },
+    "moreOptions": "More options"
   },
   "PrivacyPolicy": {
     "title": "Privacy & Security",

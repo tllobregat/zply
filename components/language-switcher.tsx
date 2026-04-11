@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/routing';
 import { Globe } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import { SidebarTooltip } from './sidebar-tooltip';
 
 interface LanguageSwitcherProps {
   variant?: 'desktop' | 'mobile';
@@ -47,7 +48,7 @@ export function LanguageSwitcher({ variant = 'desktop' }: LanguageSwitcherProps)
   return (
     <button
       onClick={toggleLanguage}
-      className="p-3 sm:p-3.5 text-muted hover:text-foreground hover:bg-island-bg/50 rounded-xl sm:rounded-2xl transition-all group relative"
+      className="p-3 sm:p-3.5 text-muted hover:text-foreground hover:bg-island-bg/50 rounded-xl sm:rounded-2xl transition-all group relative cursor-pointer"
       aria-label={t('language')}
     >
       <div className="relative">
@@ -56,9 +57,9 @@ export function LanguageSwitcher({ variant = 'desktop' }: LanguageSwitcherProps)
           {locale}
         </span>
       </div>
-      <span className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-2xl hidden sm:block">
+      <SidebarTooltip>
         {t('language')}: {locale === 'en' ? t('en') : t('fr')}
-      </span>
+      </SidebarTooltip>
     </button>
   );
 }

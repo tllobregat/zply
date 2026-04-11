@@ -6,13 +6,14 @@ import type { ToolConfig } from '@/lib/config/tools';
 import { TOOLS } from '@/lib/config/tools';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Coffee, LucideIcon, Menu, Search, X, Zap } from 'lucide-react';
+import { Coffee, Github, LucideIcon, Menu, Search, ShieldCheck, X, Zap } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useMemo, useState } from 'react';
 import { ThemeToggle } from './theme-toggle';
 import { LanguageSwitcher } from './language-switcher';
+import { SidebarTooltip } from './sidebar-tooltip';
 import { Portal } from './ui/portal';
 
 export function Sidebar(): React.ReactNode {
@@ -20,6 +21,7 @@ export function Sidebar(): React.ReactNode {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const tTools = useTranslations('Tools');
   const tCommon = useTranslations('Common');
+  const tIndex = useTranslations('Index');
 
   const { pinnedIds }: { pinnedIds: string[] } = usePinnedTools();
 
@@ -38,7 +40,7 @@ export function Sidebar(): React.ReactNode {
 
   return (
     <aside
-      className="w-full sm:w-20 h-auto sm:h-full flex flex-row sm:flex-col items-center py-2 sm:py-8 px-4 sm:px-0 glass-island rounded-xl sm:rounded-3xl border border-island-border shadow-xl z-50 mb-safe sm:mb-0">
+      className="w-auto sm:w-20 h-auto sm:h-full flex flex-row sm:flex-col items-center py-2 sm:py-8 px-4 sm:px-0 gap-2 sm:gap-0 glass-island rounded-2xl sm:rounded-3xl border border-island-border shadow-xl z-50 mb-safe sm:mb-0 mx-2 sm:ml-3 sm:mr-0">
       {/* Logo Zply - Acts as Home button */}
         <Link
           href="/#dashboard"
@@ -56,26 +58,25 @@ export function Sidebar(): React.ReactNode {
           aria-label={tCommon('homePage')}
         >
           <Zap className={cn('w-5 h-5 sm:w-6 sm:h-6 fill-current', pathname === '/' ? 'text-white' : 'text-current')} />
-          <span
-            className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-xl z-60 hidden sm:block">
+          <SidebarTooltip>
             {tCommon('homePage')}
-          </span>
+          </SidebarTooltip>
         </Link>
 
-      <div className="w-px sm:w-8 h-8 sm:h-px bg-island-border/50 mx-2 sm:mx-auto my-0 sm:my-2 sm:hidden" />
+      <div className="w-px sm:w-8 h-8 sm:h-px bg-island-border/50 mx-2 sm:mx-auto my-0 sm:my-2 hidden sm:block" />
 
-      <nav className="flex-1 flex flex-row sm:flex-col items-center justify-start sm:mt-6 gap-2 sm:gap-6">
+      <nav className="flex-1 flex flex-row sm:flex-col items-center justify-start sm:mt-6 gap-3 sm:gap-6">
         {/* Search Trigger */}
         <button
           onClick={handleOpenSearch}
-          className="p-3 sm:p-3.5 rounded-lg sm:rounded-xl transition-all relative group text-muted-foreground hover:text-zply-blue hover:bg-zply-blue/10 cursor-pointer"
+          className="flex-1 sm:flex-none flex items-center justify-center sm:justify-start gap-3 p-3 sm:p-3.5 bg-island-bg/40 border border-island-border sm:border-transparent sm:bg-transparent rounded-xl sm:rounded-xl transition-all relative group text-muted-foreground hover:text-zply-blue hover:bg-zply-blue/10 cursor-pointer"
           aria-label={tCommon('sidebar.openSearch')}
         >
           <Search className="w-5 h-5 sm:w-6 sm:h-6" />
-          <span
-            className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-xl z-60 hidden sm:block">
+          <span className="sm:hidden text-sm font-medium truncate max-w-40 sm:max-w-none">{tIndex('searchPlaceholderMobile')}</span>
+          <SidebarTooltip>
             {tCommon('sidebar.search')} <span className="text-muted-foreground ml-2">{tCommon('sidebar.searchShortcut')}</span>
-          </span>
+          </SidebarTooltip>
         </button>
 
 
@@ -83,7 +84,7 @@ export function Sidebar(): React.ReactNode {
           pinnedTools.length > 0
           && (
             <>
-              <div className="w-px sm:w-8 h-8 sm:h-px bg-island-border/50 mx-1 sm:mx-auto my-0 sm:my-2" />
+              <div className="hidden sm:block w-px sm:w-8 h-8 sm:h-px bg-island-border/50 mx-1 sm:mx-auto my-0 sm:my-2" />
 
               {/* Desktop: Pinned Tools Icons */}
               <div className="hidden sm:flex flex-col gap-6">
@@ -113,11 +114,9 @@ export function Sidebar(): React.ReactNode {
                           aria-label={tTools(`${tool.id}.title`)}
                         >
                           <Icon className={cn('w-6 h-6', !isActive && theme.text)} />
-                          <span
-                            className="absolute left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-xl z-60"
-                          >
+                          <SidebarTooltip leftOffset="left-22.5">
                             {tTools(`${tool.id}.title`)}
-                          </span>
+                          </SidebarTooltip>
                         </Link>
                       </React.Fragment>
                     );
@@ -129,7 +128,7 @@ export function Sidebar(): React.ReactNode {
         }
       </nav>
 
-      <div className="w-px sm:w-8 h-8 sm:h-px bg-island-border/50 mx-2 sm:mx-auto my-0 sm:my-2" />
+      <div className="hidden sm:block w-px sm:w-8 h-8 sm:h-px bg-island-border/50 mx-2 sm:mx-auto my-0 sm:my-2" />
 
       {/* Burger Menu Toggle (Mobile) */}
       <div className="sm:hidden">
@@ -155,10 +154,9 @@ export function Sidebar(): React.ReactNode {
           aria-label={tCommon('sidebar.support')}
         >
           <Coffee className="w-5 h-5 sm:w-6 sm:h-6" />
-          <span
-            className="absolute left-16 sm:left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-2xl hidden sm:block">
+          <SidebarTooltip>
             {tCommon('sidebar.support')}
-          </span>
+          </SidebarTooltip>
         </a>
       </div>
 
@@ -197,7 +195,7 @@ export function Sidebar(): React.ReactNode {
                     transition={{ delay: 0.1 }}
                     className="flex flex-col gap-5"
                   >
-                    <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground ml-1">{tCommon('sidebar.pinnedTools')}</h3>
+                    <h3 className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground ml-1">{tCommon('sidebar.pinnedTools')}</h3>
                     <div className="grid grid-cols-1 gap-3">
                       {pinnedTools.map((tool: ToolConfig, index: number) => {
                         const Icon: LucideIcon = tool.icon;
@@ -230,7 +228,7 @@ export function Sidebar(): React.ReactNode {
                                 <span className={cn('text-sm font-bold', isActive ? 'text-foreground' : 'text-foreground/80')}>
                                   {tTools(`${tool.id}.title`)}
                                 </span>
-                                <span className="text-[11px] text-muted-foreground line-clamp-1">
+                                <span className="text-xs text-muted-foreground line-clamp-1">
                                   {tTools(`${tool.id}.description`)}
                                 </span>
                               </div>
@@ -248,7 +246,7 @@ export function Sidebar(): React.ReactNode {
                   transition={{ delay: 0.3 }}
                   className="flex flex-col gap-5"
                 >
-                  <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground ml-1">{tCommon('sidebar.preferencesLinks')}</h3>
+                  <h3 className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground ml-1">{tCommon('sidebar.preferencesLinks')}</h3>
                   <div className="flex flex-col gap-3">
                     <div className="flex flex-wrap gap-3">
                       <motion.div
@@ -279,6 +277,36 @@ export function Sidebar(): React.ReactNode {
                     >
                       <LanguageSwitcher variant="mobile" />
                     </motion.div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="flex flex-col gap-5 pt-10 border-t border-island-border/20"
+                >
+                  <div className="flex flex-col gap-4">
+                    <Link
+                      href="/privacy"
+                      onClick={(): void => setIsMobileMenuOpen(false)}
+                      className="flex items-center gap-3 text-sm font-bold text-muted-foreground hover:text-blue-500 transition-colors"
+                    >
+                      <ShieldCheck className="w-5 h-5" />
+                      {tCommon('privacyGuaranteed')}
+                    </Link>
+                    <a
+                      href="https://github.com/tllobregat/zply"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 text-sm font-bold text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <Github className="w-5 h-5" />
+                      {tCommon('openSource')}
+                    </a>
+                  </div>
+                  <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/30">
+                    ZPLY {tCommon('toolbox')} © {new Date().getFullYear()}
                   </div>
                 </motion.div>
               </div>

@@ -27,7 +27,7 @@ export function EpochResultCard(
 
   return (
     <div
-      className={cn('glass-island p-8 rounded-4xl border border-island-border bg-island-card space-y-4 group transition-all', theme.hoverBorder)}>
+      className={cn('glass-island p-8 rounded-2xl sm:rounded-3xl border border-island-border bg-island-card space-y-4 group transition-all', theme.hoverBorder)}>
       <div className={cn('flex items-center gap-3', theme.text)}>
         {icon}
         <span className="text-[10px] font-black uppercase tracking-widest">{label}</span>

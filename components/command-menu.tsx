@@ -99,31 +99,32 @@ export function CommandMenu(): React.ReactNode {
               initial={{ opacity: 0, scale: 0.95, y: -20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              className="fixed top-[10%] inset-x-0 mx-auto w-[calc(100%-1.5rem)] sm:w-full max-w-xl z-101"
+              className="fixed top-[5%] sm:top-[10%] inset-x-3 sm:inset-x-0 mx-auto w-[calc(100%-1.5rem)] sm:w-full max-w-xl z-101"
             >
               <div className="bg-island-bg/95 border border-island-border rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden backdrop-blur-2xl">
-                <div className="flex items-center px-4 sm:px-6 py-3 sm:py-4 border-b border-island-border">
-                  <Search className="w-4 h-4 sm:w-5 sm:h-5 text-muted mr-2 sm:mr-3" />
+                <div className="flex items-center px-5 sm:px-8 py-3 sm:py-4 border-b border-island-border">
+                  <Search className="w-5 h-5 text-muted mr-3" />
                   <input
                     autoFocus
                     placeholder={tCommon('sidebar.commandMenu.placeholder')}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground text-base sm:text-lg"
+                    className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted/50 text-base sm:text-lg py-1.5"
                   />
                   <div
                     className="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-md bg-island-bg border border-island-border text-[10px] font-black text-muted-foreground">
                     <Command className="w-3 h-3" /> K
                   </div>
+                  <div className="w-5 ml-3 sm:hidden" />
                 </div>
 
-                <div className="p-1.5 sm:p-2 max-h-[60vh] sm:max-h-100 overflow-y-auto custom-scrollbar">
+                <div className="p-2 sm:p-3 max-h-[65vh] sm:max-h-100 overflow-y-auto custom-scrollbar">
                   {
                     filteredItems.length > 0
                       ? (
                         <div className="py-1">
-                          <p className="px-3 sm:px-4 py-1 text-[8px] sm:text-[10px] font-black text-muted-foreground uppercase tracking-widest">
+                          <p className="px-3 sm:px-4 py-2 text-[10px] sm:text-xs font-black text-muted-foreground uppercase tracking-widest">
                             {tCommon('sidebar.commandMenu.availableTools')}
                           </p>
                           {
@@ -137,7 +138,7 @@ export function CommandMenu(): React.ReactNode {
                                   onClick={() => onSelect(item.href)}
                                   onMouseEnter={() => setActiveIndex(index)}
                                   className={cn(
-                                    'w-full flex items-center justify-between px-3 sm:px-4 py-1.5 sm:py-3 rounded-xl sm:rounded-2xl transition-all text-left group',
+                                    'w-full flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl transition-all text-left group',
                                     activeIndex === index
                                       ? 'bg-blue-600/10 text-blue-400'
                                       : 'text-muted hover:bg-island-bg/50',
@@ -145,17 +146,17 @@ export function CommandMenu(): React.ReactNode {
                                   )}
                                   aria-label={`${tCommon('sidebar.openSearch')} ${tTools(`${item.id}.title`)}`}
                                 >
-                                  <div className="flex items-center gap-2">
+                                  <div className="flex items-center gap-3">
                                     <div className={cn(
-                                      'w-6 h-6 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center border transition-colors',
+                                      'w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center border transition-colors',
                                       activeIndex === index ? cn(theme.bg, theme.border, 'text-white') : cn('bg-island-bg border-island-border text-muted-foreground', theme.hoverText)
                                     )}>
-                                      <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                                      <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                                     </div>
                                     <div>
-                                      <p className="text-xs sm:text-sm font-bold text-foreground">{tTools(`${item.id}.title`)}</p>
+                                      <p className="text-sm sm:text-base font-bold text-foreground">{tTools(`${item.id}.title`)}</p>
                                       <p
-                                        className="text-[8px] sm:text-[9px] text-muted-foreground font-medium leading-none line-clamp-1">{tTools(`${item.id}.description`)}</p>
+                                        className="text-[10px] sm:text-xs text-muted-foreground font-medium leading-tight line-clamp-1">{tTools(`${item.id}.description`)}</p>
                                     </div>
                                   </div>
                                   <div className="flex items-center gap-2">
@@ -182,26 +183,26 @@ export function CommandMenu(): React.ReactNode {
                 </div>
 
                 <div
-                  className="px-4 sm:px-6 py-2 sm:py-3 border-t border-island-border bg-island-bg/30 flex items-center justify-between text-[9px] sm:text-[10px] text-muted-foreground font-bold uppercase tracking-widest">
+                  className="px-5 sm:px-8 py-2.5 sm:py-3.5 border-t border-island-border bg-island-bg/30 flex items-center justify-between text-[10px] sm:text-xs text-muted-foreground font-bold uppercase tracking-widest">
                   <div className="flex gap-4 sm:gap-6 whitespace-nowrap">
-                    <span className="hidden xs:flex items-center gap-1.5">
-                      <span className="flex items-center gap-0.5">
-                        <ArrowUp className="w-2.5 h-2.5" />
-                        <ArrowDown className="w-2.5 h-2.5" />
+                    <span className="hidden xs:flex items-center gap-2">
+                      <span className="flex items-center gap-1">
+                        <ArrowUp className="w-3 h-3" />
+                        <ArrowDown className="w-3 h-3" />
                       </span>
                       <span>{tCommon('sidebar.commandMenu.navigate')}</span>
                     </span>
-                    <span className="flex items-center gap-1.5">
+                    <span className="flex items-center gap-2">
                       <span className="flex items-center">
                         <span className="hidden sm:inline">ENTER</span>
-                        <span className="sm:hidden text-xs">⏎</span>
+                        <span className="sm:hidden text-sm">⏎</span>
                       </span>
                       <span>{tCommon('sidebar.commandMenu.select')}</span>
                     </span>
-                    <span className="hidden xs:flex items-center gap-1.5">
+                    <span className="hidden xs:flex items-center gap-2">
                       <span className="flex items-center">
                         <span className="hidden sm:inline">ESC</span>
-                        <X className="sm:hidden w-2.5 h-2.5" />
+                        <X className="sm:hidden w-3 h-3" />
                       </span>
                       <span>{tCommon('sidebar.commandMenu.close')}</span>
                     </span>

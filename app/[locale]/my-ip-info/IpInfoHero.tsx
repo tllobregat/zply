@@ -18,8 +18,8 @@ export function IpInfoHero({ ip, isCopied, onCopy, theme }: IpInfoHeroProps): Re
 
   return (
     <div
-      className="relative group p-8 md:p-10 rounded-[3rem] bg-island-card border border-island-border overflow-hidden text-center md:text-left">
-      <div className={cn('absolute -inset-1 rounded-[3rem] blur opacity-10 group-hover:opacity-20 transition duration-1000', theme.bg)}></div>
+      className="relative group p-8 md:p-10 rounded-2xl sm:rounded-3xl bg-island-card border border-island-border overflow-hidden text-center md:text-left">
+      <div className={cn('absolute -inset-1 rounded-2xl sm:rounded-3xl blur opacity-10 group-hover:opacity-20 transition duration-1000', theme.bg)}></div>
       <div className="relative flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="space-y-2">
             <span

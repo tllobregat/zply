@@ -16,8 +16,8 @@ export function IpInfoPermissionGate({ onAccept, loading, theme }: IpInfoPermiss
   const t = useTranslations('Tools');
 
   return (
-    <div className="relative group p-8 md:p-10 rounded-[3rem] bg-island-card border border-island-border overflow-hidden text-center md:text-left h-full flex flex-col justify-center">
-      <div className={cn('absolute -inset-1 rounded-[3rem] blur opacity-5 group-hover:opacity-10 transition duration-1000', theme.bg)}></div>
+    <div className="relative group p-8 md:p-10 rounded-2xl sm:rounded-3xl bg-island-card border border-island-border overflow-hidden text-center md:text-left h-full flex flex-col justify-center">
+      <div className={cn('absolute -inset-1 rounded-2xl sm:rounded-3xl blur opacity-5 group-hover:opacity-10 transition duration-1000', theme.bg)}></div>
       <div className="relative flex flex-col xl:flex-row items-center justify-between gap-8">
         <div className="space-y-3 max-w-lg">
           <span

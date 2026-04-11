@@ -47,9 +47,9 @@ export function AddTimezoneOverlay(
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-lg bg-island-card border border-island-border rounded-[2.5rem] shadow-2xl overflow-hidden"
+              className="relative w-full max-w-lg bg-island-card border border-island-border rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden"
             >
-              <div className="p-8 space-y-6">
+              <div className="p-6 space-y-4">
                 <div className="flex items-center justify-between">
                   <h2 className="text-xl font-black uppercase tracking-tight">{t('addTimezone')}</h2>
                   <Button 
@@ -64,17 +64,19 @@ export function AddTimezoneOverlay(
                 </div>
 
                 <div className="relative">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <input
                     autoFocus
                     placeholder={t('searchPlaceholder')}
                     value={search}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>): void => onSearchChange(e.target.value)}
                     className={cn(
-                      'w-full h-14 pl-12 pr-4 bg-island-bg border border-island-border rounded-2xl outline-none transition-all font-medium',
+                      'w-full h-12 pl-12 pr-12 bg-island-bg border border-island-border rounded-xl sm:rounded-2xl outline-none transition-all font-medium text-sm sm:text-base',
                       `focus:border-${theme.text.split('-')[1]}-500/50`
                     )}
                   />
+                  <div className="absolute left-4 inset-y-0 flex items-center pointer-events-none">
+                    <Search className="w-5 h-5 text-muted-foreground" />
+                  </div>
                 </div>
 
                 <div className="space-y-1 max-h-60 overflow-y-auto custom-scrollbar pr-2">
@@ -84,7 +86,7 @@ export function AddTimezoneOverlay(
                         key={tz.id}
                         onClick={(): void => onAdd(tz.id)}
                         className={cn(
-                          'w-full flex items-center justify-between p-4 rounded-2xl group transition-all text-left',
+                          'w-full flex items-center justify-between p-3 rounded-xl sm:rounded-2xl group transition-all text-left',
                           `hover:bg-${theme.text.split('-')[1]}-500/10`
                         )}
                         aria-label={`Add ${tz.name} timezone`}

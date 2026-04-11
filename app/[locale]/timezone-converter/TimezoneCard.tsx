@@ -35,7 +35,7 @@ export default function TimezoneCard({ timezone, timestamp, isReference, onRemov
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.9 }}
       className={cn(
-        'group relative p-6 md:p-8 rounded-4xl bg-island-card border transition-all duration-500',
+        'group relative p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-island-card border transition-all duration-500',
         isReference ? theme.border : 'border-island-border hover:border-island-border/80',
         'hover:shadow-2xl',
         isReference && theme.shadow.replace('20', '10')

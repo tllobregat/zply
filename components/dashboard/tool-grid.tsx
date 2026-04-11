@@ -49,7 +49,7 @@ export function ToolGrid(
           : (
             <div className="py-40 text-center">
               <h3 className="text-xl font-black text-foreground uppercase">{t('noResults')}</h3>
-              <p className="text-muted-foreground text-xs mt-2 uppercase tracking-widest">{t('tryOtherKeywords')}</p>
+              <p className="text-muted-foreground text-base mt-2 uppercase tracking-widest">{t('tryOtherKeywords')}</p>
             </div>
           )
       }

@@ -2,12 +2,15 @@
 
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { useTranslations } from 'next-intl';
 import React, { useEffect, useState, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import { SidebarTooltip } from './sidebar-tooltip';
 
 export function ThemeToggle(): ReactNode {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState<boolean>(false);
+  const t = useTranslations('Common');
 
   useEffect((): () => void => {
     const frame: number = requestAnimationFrame((): void => setMounted(true));
@@ -26,11 +29,11 @@ export function ThemeToggle(): ReactNode {
     <button
       onClick={(): void => setTheme(isDark ? 'light' : 'dark')}
       className={cn(
-        'p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all duration-500 group relative overflow-hidden active:scale-95',
+        'p-3 sm:p-3.5 rounded-xl sm:rounded-2xl transition-all duration-500 group relative active:scale-95',
         'bg-island-bg border border-island-border shadow-lg cursor-pointer',
         'hover:shadow-zply-blue/10 hover:border-zply-blue/50'
       )}
-      aria-label="Toggle theme"
+      aria-label={t('sidebar.toggleTheme')}
     >
       <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
         <Sun 
@@ -48,11 +51,9 @@ export function ThemeToggle(): ReactNode {
       </div>
       
       {/* Tooltip style similar to other sidebar buttons */}
-      <span
-        className="absolute left-22.5 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-island-bg text-foreground text-[10px] font-black uppercase tracking-widest rounded-xl opacity-0 group-hover:opacity-100 transition-all -translate-x-2.5 group-hover:translate-x-0 whitespace-nowrap border border-island-border pointer-events-none shadow-2xl z-60 hidden sm:block"
-      >
-        Switch to {isDark ? 'Light' : 'Dark'} Mode
-      </span>
+      <SidebarTooltip leftOffset="left-22.5">
+        {t('sidebar.themeToggle', { mode: isDark ? t('light') : t('dark') })}
+      </SidebarTooltip>
     </button>
   );
 }

@@ -2,20 +2,21 @@
   "Index": {
     "title": "Le couteau suisse pour <span>vos tâches quotidiennes</span>",
     "description": "Conçu pour les professionnels soucieux de leur vie privée",
-    "browserPrivacy": "Aucune donnée ne quitte votre navigateur.",
     "features": {
       "private": "100% Privé",
-      "privateDesc": "Le traitement se fait dans votre navigateur",
-      "offline": "Mode hors-ligne",
-      "offlineDesc": "Fonctionne sans connexion Internet",
+      "privateDesc": "Zéro backend, zéro cookie, zéro tracker.",
+      "shareable": "Persistance URI",
+      "shareableDesc": "Partagez l'état de votre espace instantanément.",
       "fast": "Ultra Rapide",
-      "fastDesc": "Outils locaux sans latence"
+      "fastDesc": "Outils locaux sans aucune latence"
     },
     "popularTools": "Outils Populaires",
+    "browseCategories": "Parcourir les catégories",
     "toolsCount": "{count, plural, =1 {# Outil} other {# Outils}}",
     "noResults": "Aucun résultat",
     "tryOtherKeywords": "Essayez d'autres mots-clés",
     "searchPlaceholder": "Rechercher des outils (ex: jwt, json, regex)...",
+    "searchPlaceholderMobile": "Rechercher des outils...",
     "searchResults": "Résultats de recherche",
     "dashboard": "Tableau de bord"
   },
@@ -23,18 +24,21 @@
     "language": "Langue",
     "en": "Anglais",
     "fr": "Français",
+    "light": "Clair",
+    "dark": "Sombre",
     "homePage": "Accueil",
     "home": "Accueil",
     "privacyGuaranteed": "Confidentialité Garantie",
     "openSource": "Open Source",
     "toolbox": "Boîte à outils",
     "toolActions": {
+      "addTimezone": "Ajouter un fuseau",
       "beautify": "Embellir",
       "minify": "Minifier",
       "foldAll": "Tout replier",
       "unfold": "Tout déplier",
       "useCurrentTime": "Utiliser l'heure actuelle",
-      "addTimezone": "Ajouter un fuseau"
+      "title": "Actions"
     },
     "toolIndicators": {
       "realTimeHashing": "Hachage en temps réel",
@@ -92,6 +96,8 @@
       "openSearch": "Ouvrir le menu de recherche",
       "toggleMobileMenu": "Basculer le menu mobile",
       "closeMenu": "Fermer le menu",
+      "toggleTheme": "Changer le thème",
+      "themeToggle": "Passer au mode {mode}",
       "commandMenu": {
         "placeholder": "Rechercher des outils...",
         "availableTools": "Outils disponibles",
@@ -100,7 +106,11 @@
         "select": "Sélectionner",
         "close": "Fermer"
       }
-    }
+    },
+    "settings": {
+      "title": "Paramètres"
+    },
+    "moreOptions": "Plus d'options"
   },
   "PrivacyPolicy": {
     "title": "Confidentialité & Sécurité",

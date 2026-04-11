@@ -54,7 +54,7 @@ export function CategoryCard({ name, onClick, index }: CategoryCardProps): React
         )}>
           {t(name)}
         </h3>
-        <p className="text-muted-foreground leading-relaxed mb-4 text-[10px] sm:text-[11px] font-medium line-clamp-2">
+        <p className="text-muted-foreground leading-relaxed mb-4 text-sm font-medium line-clamp-2">
           {t(`${name}Desc`)}
         </p>
 
@@ -62,7 +62,7 @@ export function CategoryCard({ name, onClick, index }: CategoryCardProps): React
           {previewTools.map((tool: ToolConfig) => (
             <span 
               key={tool.id}
-              className="px-2 py-0.5 rounded-md bg-island-bg border border-island-border text-[8px] sm:text-[9px] font-bold text-muted-foreground uppercase tracking-wider"
+              className="px-2 py-0.5 rounded-md bg-island-bg border border-island-border text-xs font-bold text-muted-foreground tracking-wider"
             >
               {tTools(`${tool.id}.title`)}
             </span>
@@ -71,7 +71,7 @@ export function CategoryCard({ name, onClick, index }: CategoryCardProps): React
       </div>
 
       <div className="flex items-center justify-between border-t border-island-border/50 pt-3 sm:pt-4">
-         <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-muted-foreground/70">
+         <span className="text-xs font-black uppercase tracking-widest text-muted-foreground/70">
             {toolCount} Tool{toolCount > 1 ? 's' : ''}
          </span>
         <div className={cn("w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-island-bg border border-island-border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0 shadow-sm", theme.text)}>

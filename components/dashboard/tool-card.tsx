@@ -80,13 +80,13 @@ export function ToolCard(
         </div>
 
         <h3 className={cn(
-          "text-xs sm:text-sm font-black mb-1 transition-colors uppercase tracking-tight text-foreground line-clamp-1 sm:line-clamp-none",
+          "text-base font-black mb-1 transition-colors uppercase tracking-tight text-foreground line-clamp-1 sm:line-clamp-none",
           theme.hoverText
         )}>
           {title}
         </h3>
 
-        <p className="text-muted-foreground leading-relaxed text-[9px] sm:text-[10px] font-medium line-clamp-2">
+        <p className="text-muted-foreground leading-relaxed text-sm font-medium line-clamp-2">
           {description}
         </p>
 
@@ -94,7 +94,7 @@ export function ToolCard(
           !isComingSoon
           && (
             <div className="mt-4 flex justify-end opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
-              <div className={cn("flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest", theme.text)}>
+              <div className={cn("flex items-center gap-1.5 text-xs font-black uppercase tracking-widest", theme.text)}>
                 {tCommon('openTool')}
                 <ArrowRight className="w-3 h-3" />
               </div>
@@ -107,7 +107,7 @@ export function ToolCard(
           && (
             <div className="mt-4 flex items-center gap-1.5 opacity-40">
               <Wand2 className="w-3 h-3 text-muted" />
-              <span className="text-[8px] font-black uppercase tracking-tighter text-muted">{tCommon('comingSoon')}</span>
+              <span className="text-[10px] sm:text-xs font-black uppercase tracking-tighter text-muted">{tCommon('comingSoon')}</span>
             </div>
           )
         }

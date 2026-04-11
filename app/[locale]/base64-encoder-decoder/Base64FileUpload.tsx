@@ -56,7 +56,7 @@ export function Base64FileUpload(
                 onChange={onFileUpload}
               />
               <div className={cn(
-                'flex flex-col items-center justify-center p-8 border-2 border-dashed border-island-border rounded-3xl bg-island-bg/5 transition-all',
+                'flex flex-col items-center justify-center p-8 border-2 border-dashed border-island-border rounded-2xl sm:rounded-3xl bg-island-bg/5 transition-all',
                 theme.hoverBorder
               )}>
                 <Upload className={cn('w-8 h-8 text-muted-foreground/30 mb-3 transition-colors', theme.hoverText)} />

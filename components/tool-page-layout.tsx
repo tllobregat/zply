@@ -1,4 +1,5 @@
 import { Breadcrumb, BreadcrumbItem } from '@/components/ui/breadcrumb';
+import { PageLayout } from '@/components/page-layout';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -141,25 +142,10 @@ export default function ToolPageLayout(
   });
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="flex-1 flex flex-col min-h-0 overflow-y-auto custom-scrollbar"
-    >
-      <Script
-        id={`json-ld-${toolId}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonLd }}
-      />
-
-      {/* 
-          Interactive Fold: 
-          Takes up 100% of the viewport height (min-h-full)
-          to push SEO content below the fold.
-      */}
-      <div className="h-full flex flex-col shrink-0">
-        {/* Control Island */}
-        <header className="px-4 sm:px-6 py-4 flex items-center justify-between shrink-0">
+    <PageLayout
+      scrollInIsland={false}
+      header={
+        <header className="px-4 sm:px-8 py-4 flex items-center justify-between shrink-0">
           <div className="flex flex-col min-w-0">
             <Breadcrumb items={enhancedBreadcrumbItems} />
             <div className="flex items-center gap-3">
@@ -176,9 +162,9 @@ export default function ToolPageLayout(
                 ? (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button 
-                        variant="secondary" 
-                        size="icon" 
+                      <Button
+                        variant="secondary"
+                        size="icon"
                         className="h-10 w-10"
                         aria-label={tCommon('moreOptions')}
                       >
@@ -191,7 +177,7 @@ export default function ToolPageLayout(
                         && (
                           <>
                             <DropdownMenuLabel className="px-2 py-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
-                              {tCommon('toolActions')}
+                              {tCommon('toolActions.title')}
                             </DropdownMenuLabel>
                             <div className="p-1 flex flex-col gap-1.5">
                               {renderHeaderAction()}
@@ -201,21 +187,25 @@ export default function ToolPageLayout(
                         )
                       }
                       <DropdownMenuLabel className="px-2 py-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
-                        {tCommon('settings')}
+                        {tCommon('settings.title')}
                       </DropdownMenuLabel>
                       <DropdownMenuItem
                         onClick={scrollToAbout}
                         className="gap-3 py-2.5 rounded-xl cursor-pointer"
                       >
-                        <Info className="w-4 h-4" />
-                        <span className="font-bold">{tCommon('aboutTool')}</span>
+                        <div className="flex items-center gap-3 w-full">
+                          <Info className="w-4 h-4" />
+                          <span className="font-bold">{tCommon('aboutTool')}</span>
+                        </div>
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => togglePin(toolId)}
                         className="gap-3 py-2.5 rounded-xl cursor-pointer"
                       >
-                        <Pin className={cn('w-4 h-4', isPinned(toolId) && 'fill-current text-blue-500')} />
-                        <span className="font-bold">{isPinned(toolId) ? tCommon('unpinFromDashboard') : tCommon('pinToDashboard')}</span>
+                        <div className="flex items-center gap-3 w-full">
+                          <Pin className={cn('w-4 h-4', isPinned(toolId) && 'fill-current text-blue-500')} />
+                          <span className="font-bold">{isPinned(toolId) ? tCommon('unpinFromDashboard') : tCommon('pinToDashboard')}</span>
+                        </div>
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={handleShare}
@@ -284,129 +274,115 @@ export default function ToolPageLayout(
             }
           </div>
         </header>
+      }
+      footer={
+        (footerIndicator || (toolConfig?.libs && toolConfig.libs.length > 0))
+        && (
+          <div
+            className="px-6 sm:px-8 py-4 sm:py-6 flex items-center justify-between text-[9px] font-black text-muted-foreground/60 uppercase tracking-widest border-t border-island-border/50 bg-island-bg/5"
+          >
+            <div className="flex items-center gap-4 min-w-0 flex-1 overflow-hidden">
+              {footerIndicator}
+            </div>
 
-        {/* Workspace Island */}
-        <div
-          className={cn(
-            'flex-1 min-h-0 shrink-0 glass-island rounded-3xl sm:rounded-[2.5rem] overflow-hidden flex flex-col border border-island-border relative shadow-2xl bg-island-bg/20',
-          )}
-        >
-          <div className={cn('flex-1 min-h-0 flex flex-col', workspaceClassName)}>
-            {children}
-          </div>
-
-          {/* Footer Indicator */}
-          {
-            (footerIndicator || (toolConfig?.libs && toolConfig.libs.length > 0))
-            && (
-              <div
-                className="px-6 sm:px-8 py-4 sm:py-6 flex items-center justify-between text-[9px] font-black text-muted-foreground/60 uppercase tracking-widest border-t border-island-border/50 bg-island-bg/5"
-              >
-                <div className="flex items-center gap-4 min-w-0 flex-1 overflow-hidden">
-                  {footerIndicator}
-                </div>
-
-                <div className="flex items-center gap-3 ml-4 shrink-0">
-                  {
-                    isMobile
-                      ? (
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <button
-                              className="flex items-center gap-2 px-3 py-1.5 bg-island-bg/40 border border-island-border/50 rounded-xl hover:bg-island-bg/60 transition-colors cursor-pointer group">
-                              <ShieldCheck className="w-3.5 h-3.5 text-green-500/50" />
-                              {
-                                toolConfig?.libs && toolConfig.libs.length > 0
-                                && (
-                                  <span className="text-muted-foreground group-hover:text-blue-400 transition-colors">
-                                    {tCommon('libsCount', { count: toolConfig.libs.length })}
-                                  </span>
-                                )
-                              }
-                              <ChevronDown className="w-2.5 h-2.5 opacity-30" />
-                            </button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end" side="top" className="w-56 p-2 bg-island-bg/95 backdrop-blur-xl border-island-border shadow-2xl">
-                            <DropdownMenuLabel className="px-2 py-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
-                              {tCommon('securityPrivacy')}
-                            </DropdownMenuLabel>
-                            <div className="px-3 py-2.5 flex items-center gap-3 text-foreground/80 bg-island-bg/30 rounded-xl mb-2">
-                              <ShieldCheck className="w-4 h-4 text-green-500" />
-                              <span className="font-bold text-[10px] tracking-widest uppercase">{tCommon('clientSideOnly')}</span>
-                            </div>
-
-                            {
-                              toolConfig?.libs && toolConfig.libs.length > 0 && (
-                                <>
-                                  <DropdownMenuSeparator className="my-2" />
-                                  <DropdownMenuLabel className="px-2 py-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
-                                    {tCommon('poweredBy')}
-                                  </DropdownMenuLabel>
-                                  <div className="flex flex-col gap-1">
-                                    {
-                                      toolConfig.libs.map((lib: Library) => (
-                                        <DropdownMenuItem key={lib.name} className="p-0">
-                                          <a
-                                            href={lib.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="w-full px-3 py-2 text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-blue-400 hover:bg-island-bg/50 rounded-lg transition-all"
-                                          >
-                                            {lib.name}
-                                          </a>
-                                        </DropdownMenuItem>
-                                      ))
-                                    }
-                                  </div>
-                                </>
-                              )
-                            }
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      )
-                      : (
-                        <>
+            <div className="flex items-center gap-3 ml-4 shrink-0">
+              {
+                isMobile
+                  ? (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <button
+                          className="flex items-center gap-2 px-3 py-1.5 bg-island-bg/40 border border-island-border/50 rounded-xl hover:bg-island-bg/60 transition-colors cursor-pointer group">
+                          <ShieldCheck className="w-3.5 h-3.5 text-green-500/50" />
                           {
-                            toolConfig?.libs && toolConfig.libs.length > 0 && (
-                              <div className="flex items-center gap-2 mr-4">
-                                <span className="text-muted">{tCommon('poweredBy')}:</span>
-                                <div className="flex items-center gap-2">
-                                  {
-                                    toolConfig.libs.map((lib: Library, index: number) => (
-                                      <React.Fragment key={lib.name}>
-                                        <a
-                                          href={lib.url}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="text-muted-foreground hover:text-blue-400 transition-colors"
-                                        >
-                                          {lib.name}
-                                        </a>
-                                        {index < toolConfig.libs!.length - 1 && <span className="text-island-border">/</span>}
-                                      </React.Fragment>
-                                    ))
-                                  }
-                                </div>
-                              </div>
+                            toolConfig?.libs && toolConfig.libs.length > 0
+                            && (
+                              <span className="text-muted-foreground group-hover:text-blue-400 transition-colors">
+                                {tCommon('libsCount', { count: toolConfig.libs.length })}
+                              </span>
                             )
                           }
+                          <ChevronDown className="w-2.5 h-2.5 opacity-30" />
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" side="top" className="w-56 p-2 bg-island-bg/95 backdrop-blur-xl border-island-border shadow-2xl">
+                        <DropdownMenuLabel className="px-2 py-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
+                          {tCommon('securityPrivacy')}
+                        </DropdownMenuLabel>
+                        <div className="px-3 py-2.5 flex items-center gap-3 text-foreground/80 bg-island-bg/30 rounded-xl mb-2">
+                          <ShieldCheck className="w-4 h-4 text-green-500" />
+                          <span className="font-bold text-[10px] tracking-widest uppercase">{tCommon('clientSideOnly')}</span>
+                        </div>
 
-                          <div className="flex items-center gap-2 opacity-80">
-                            <ShieldCheck className="w-3.5 h-3.5 text-green-500/50" />
-                            {tCommon('clientSideOnly')}
+                        {
+                          toolConfig?.libs && toolConfig.libs.length > 0 && (
+                            <>
+                              <DropdownMenuSeparator className="my-2" />
+                              <DropdownMenuLabel className="px-2 py-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
+                                {tCommon('poweredBy')}
+                              </DropdownMenuLabel>
+                              <div className="flex flex-col gap-1">
+                                {
+                                  toolConfig.libs.map((lib: Library) => (
+                                    <DropdownMenuItem key={lib.name} className="p-0">
+                                      <a
+                                        href={lib.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-full px-3 py-2 text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-blue-400 hover:bg-island-bg/50 rounded-lg transition-all"
+                                      >
+                                        {lib.name}
+                                      </a>
+                                    </DropdownMenuItem>
+                                  ))
+                                }
+                              </div>
+                            </>
+                          )
+                        }
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )
+                  : (
+                    <>
+                      {
+                        toolConfig?.libs && toolConfig.libs.length > 0 && (
+                          <div className="flex items-center gap-2 mr-4">
+                            <span className="text-muted">{tCommon('poweredBy')}:</span>
+                            <div className="flex items-center gap-2">
+                              {
+                                toolConfig.libs.map((lib: Library, index: number) => (
+                                  <React.Fragment key={lib.name}>
+                                    <a
+                                      href={lib.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="text-muted-foreground hover:text-blue-400 transition-colors"
+                                    >
+                                      {lib.name}
+                                    </a>
+                                    {index < toolConfig.libs!.length - 1 && <span className="text-island-border">/</span>}
+                                  </React.Fragment>
+                                ))
+                              }
+                            </div>
                           </div>
-                        </>
-                      )
-                  }
-                </div>
-              </div>
-            )
-          }
-        </div>
-      </div>
+                        )
+                      }
 
-      {/* SEO Content Section */}
-      {
+                      <div className="flex items-center gap-2 opacity-80">
+                        <ShieldCheck className="w-3.5 h-3.5 text-green-500/50" />
+                        {tCommon('clientSideOnly')}
+                      </div>
+                    </>
+                  )
+              }
+            </div>
+          </div>
+        )
+      }
+      contentClassName={workspaceClassName}
+      afterIsland={
         toolConfig
         && (
           <section ref={aboutRef} className="px-6 py-12 sm:py-20 max-w-4xl mx-auto w-full space-y-12 shrink-0">
@@ -414,7 +390,7 @@ export default function ToolPageLayout(
               <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground/90">
                 {tCommon('aboutTitle', { title })}
               </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {toolConfig ? t(`${toolConfig.id}.description`) : ''} {tCommon('aboutDescription')}
               </p>
             </div>
@@ -444,7 +420,7 @@ export default function ToolPageLayout(
                 <h3 className="text-lg font-black tracking-widest uppercase text-zply-purple">
                   {tCommon('privacyFirst')}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {tCommon('privacyDescription', { title })}
                 </p>
               </div>
@@ -452,6 +428,13 @@ export default function ToolPageLayout(
           </section>
         )
       }
-    </motion.div>
+    >
+      <Script
+        id={`json-ld-${toolId}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
+      />
+      {children}
+    </PageLayout>
   );
 }
