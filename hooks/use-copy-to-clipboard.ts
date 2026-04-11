@@ -55,9 +55,16 @@ export function useCopyToClipboard(timeout: number = 2000): {
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(text)
         .then(() => setCopied(id))
-        .catch((): void => {
-          // Fallback if Clipboard API fails for some reason
-          fallbackCopy(text, () => setCopied(id));
+        .catch((err: Error): void => {
+          // Fallback if Clipboard API fails (e.g., NotAllowedError)
+          if (err.name === 'NotAllowedError') {
+            // Permission denied or missing user gesture - try fallback
+            fallbackCopy(text, () => setCopied(id));
+          } else {
+            // Log other unexpected clipboard errors
+            console.error('Clipboard API error:', err);
+            fallbackCopy(text, () => setCopied(id));
+          }
         });
     } else {
       fallbackCopy(text, () => setCopied(id));

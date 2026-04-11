@@ -1,0 +1,726 @@
+{
+  "Layout": {
+    "metadata": {
+      "title": "Zply - Boîte à outils de haute qualité pour développeurs",
+      "description": "Une boîte à outils rapide et axée sur la confidentialité pour les développeurs. Zéro backend, zéro cookie, zéro base de données.",
+      "keywords": "outils développeur, boîte à outils, formateur json, décodeur jwt, visualiseur sql, base64, respect de la vie privée"
+    }
+  },
+  "Index": {
+    "metadata": {
+      "title": "Zply - Boîte à outils de haute qualité pour développeurs",
+      "description": "Outils de développement ultra-rapides, privés et sécurisés. JSON, YAML, CSV, SQL, JWT, et plus."
+    },
+    "title": "Le couteau suisse pour <span>vos tâches quotidiennes</span>",
+    "description": "Conçu pour les professionnels soucieux de leur vie privée",
+    "features": {
+      "private": "100% Privé",
+      "privateDesc": "Zéro backend, zéro cookie, zéro tracker.",
+      "shareable": "Persistance URI",
+      "shareableDesc": "Partagez l'état de votre espace instantanément.",
+      "fast": "Ultra Rapide",
+      "fastDesc": "Outils locaux sans aucune latence"
+    },
+    "popularTools": "Outils Populaires",
+    "browseCategories": "Parcourir les catégories",
+    "toolsCount": "{count, plural, =1 {# Outil} other {# Outils}}",
+    "noResults": "Aucun résultat",
+    "tryOtherKeywords": "Essayez d'autres mots-clés",
+    "searchPlaceholder": "Rechercher des outils (ex: jwt, json, regex)...",
+    "searchPlaceholderMobile": "Rechercher des outils...",
+    "searchResults": "Résultats de recherche",
+    "dashboard": "Tableau de bord"
+  },
+  "PrivacyGate": {
+    "privacyGate": "Protection de la Vie Privée",
+    "title": "Requête Externe Requise",
+    "description": "Cet outil nécessite une requête externe vers un service tiers pour fournir les informations demandées. Aucune donnée personnelle n'est envoyée, seule une requête pour le service externe.",
+    "accept": "Je comprends, afficher les résultats",
+    "providerLink": "Ouvrir le site du fournisseur",
+    "loading": "Traitement..."
+  },
+  "Common": {
+    "language": "Langue",
+    "theme": "Thème",
+    "support": "Soutien",
+    "buyMeACoffee": "M'offrir un café",
+    "en": "Anglais",
+    "fr": "Français",
+    "light": "Clair",
+    "dark": "Sombre",
+    "homePage": "Accueil",
+    "home": "Accueil",
+    "privacyGuaranteed": "Confidentialité Garantie",
+    "openSource": "Open Source",
+    "toolbox": "Boîte à outils",
+    "toolActions": {
+      "addTimezone": "Ajouter un fuseau",
+      "beautify": "Embellir",
+      "minify": "Minifier",
+      "foldAll": "Tout replier",
+      "unfold": "Tout déplier",
+      "useCurrentTime": "Utiliser l'heure actuelle",
+      "title": "Actions"
+    },
+    "toolIndicators": {
+      "realTimeHashing": "Hachage en temps réel",
+      "msAutoDetected": "Millisecondes auto-détectées",
+      "liveNow": "Heure actuelle",
+      "liveRendering": "Rendu en direct",
+      "liveTransform": "Transformation en direct",
+      "imageDetected": "Image détectée",
+      "realTimeSync": "Synchronisation en temps réel",
+      "editingMode": "Mode édition de l'heure"
+    },
+    "charsCount": "{count, plural, =1 {# caractère} other {# caractères}}",
+    "tablesCount": "{count, plural, =1 {# table} other {# tables}}",
+    "relationsCount": "{count, plural, =1 {# relation} other {# relations}}",
+    "tzCount": "{count, plural, =1 {# fuseau} other {# fuseaux}}",
+    "toolModes": {
+      "editor": "Éditeur",
+      "split": "Fractionné",
+      "preview": "Aperçu",
+      "tree": "Arborescence",
+      "encode": "Encodage",
+      "decode": "Décodage",
+      "text": "Texte",
+      "file": "Fichier"
+    },
+    "interactiveEngine": "Moteur Interactif",
+    "share": "Partager",
+    "syncing": "Sync...",
+    "copied": "Copié !",
+    "aboutTool": "À propos de cet outil",
+    "pinToDashboard": "Épingler au tableau de bord",
+    "unpinFromDashboard": "Désépingler du tableau de bord",
+    "securityPrivacy": "Sécurité et Confidentialité",
+    "clientSideOnly": "Côté Client Uniquement",
+    "libsCount": "{count, plural, =1 {# Bibliothèque} other {# Bibliothèques}}",
+    "poweredBy": "Propulsé par",
+    "aboutTitle": "À propos de {title}",
+    "aboutDescription": "est un outil conçu pour fonctionner entièrement dans votre navigateur. Tous les traitements et transformations de données sont effectués localement, garantissant que vos informations sensibles ne quittent jamais votre appareil. Cette approche offre non seulement une confidentialité accrue, mais aussi des performances supérieures en éliminant les allers-retours avec le serveur.",
+    "keyFeatures": "Fonctionnalités Clés",
+    "howToUse": "Comment l'utiliser",
+    "step1": "Saisissez vos données dans l'éditeur ou la zone prévue à cet effet.",
+    "step2": "Ajustez les paramètres en fonction de vos besoins spécifiques.",
+    "step3": "Les résultats sont générés instantanément et prêts à être utilisés.",
+    "privacyFirst": "La confidentialité avant tout",
+    "privacyDescription": "Zply est conçu avec une approche axée sur la confidentialité. Vos données ne sont jamais envoyées à un serveur. Cet outil s'exécute entièrement dans votre navigateur, ce qui permet de manipuler des informations sensibles en toute sécurité.",
+    "openTool": "Ouvrir l'outil",
+    "comingSoon": "Bientôt",
+    "sidebar": {
+      "search": "Rechercher",
+      "searchShortcut": "⌘K",
+      "pinnedTools": "Outils épinglés",
+      "preferencesLinks": "Préférences & Liens",
+      "github": "GitHub",
+      "support": "Soutenir",
+      "menu": "Menu",
+      "openSearch": "Ouvrir le menu de recherche",
+      "toggleMobileMenu": "Basculer le menu mobile",
+      "closeMenu": "Fermer le menu",
+      "toggleTheme": "Changer le thème",
+      "themeToggle": "Passer au mode {mode}",
+      "commandMenu": {
+        "placeholder": "Rechercher des outils...",
+        "availableTools": "Outils disponibles",
+        "noResults": "Aucun outil trouvé pour \"{search}\"",
+        "navigate": "Naviguer",
+        "select": "Sélectionner",
+        "close": "Fermer"
+      }
+    },
+    "settings": {
+      "title": "Paramètres"
+    },
+    "moreOptions": "Plus d'options"
+  },
+  "PrivacyPolicy": {
+    "metadata": {
+      "title": "Confidentialité et Sécurité | Zply",
+      "description": "Zply est construit sur une philosophie axée sur la confidentialité. Nous n'utilisons pas de cookies et ne collectons aucune information personnellement identifiable (PII)."
+    },
+    "title": "Confidentialité & Sécurité",
+    "description": "Zply est construit sur une philosophie de protection de la vie privée. Nous n'utilisons pas de cookies et nous ne collectons aucune information personnellement identifiable (PII).",
+    "zeroBackend": "Zéro Backend",
+    "zeroBackendDesc": "Chaque outil s'exécute à 100% dans votre navigateur. Aucune donnée saisie n'est jamais envoyée à un serveur. Pour les outils nécessitant des données externes (comme la détection d'IP), nous demandons toujours votre accord avant toute requête externe.",
+    "zeroCookies": "Zéro Cookies",
+    "zeroCookiesDesc": "Nous n'utilisons pas de cookies ou d'identifiants persistants. Votre navigation reste privée et sans stockage.",
+    "uriPersistence": "Persistence URI",
+    "uriPersistenceDesc": "Partagez l'état de votre espace de travail instantanément. Nous utilisons la compression LZ-String pour stocker votre état actuel directement dans le window.location.hash.",
+    "secureHash": "Pourquoi le # est sécurisé",
+    "secureHashDesc": "Le texte après le symbole '#' (l'identifiant de fragment) dans une URL n'est jamais envoyé au serveur par le navigateur. Même si vous partagez un lien contenant vos données, seul votre navigateur (et la personne avec qui vous partagez le lien) peut le voir. Zply ne sait même pas ce qu'il y a dans votre hash.",
+    "telemetry": "Télémétrie respectueuse de la vie privée",
+    "telemetryDesc": "Pour surveiller la santé et les performances du site, nous utilisons Vercel Web Analytics. Cette intégration est strictement destinée à une télémétrie anonyme et ne suit pas les utilisateurs individuels.",
+    "noPii": "Pas de PII",
+    "noPiiDesc": "Votre adresse IP est hachée et jetée immédiatement ; nous ne voyons jamais qui vous êtes.",
+    "transparency": "Transparence totale",
+    "transparencyDesc": "Vous pouvez vérifier l'architecture respectueuse de la vie privée de Vercel dans leur documentation officielle.",
+    "fragmentIdentifier": "Sécurité de l'identifiant de fragment",
+    "exampleHash": "#donnees-compressees-ne-quittent-jamais-le-navigateur",
+    "externalPrivacyPolicy": "Politique de confidentialité"
+  },
+  "Categories": {
+    "All": "Tous",
+    "categoriesCount": "{count, plural, =1 {# Catégorie} other {# Catégories}}",
+    "Diagrams": "Diagrammes",
+    "DiagramsDesc": "Visualisez le code, les flux et la structure de la documentation",
+    "Data": "Données",
+    "DataDesc": "Formatez, validez et transformez des structures de données",
+    "Security": "Sécurité",
+    "SecurityDesc": "Sécurisez vos applications avec des outils cryptographiques robustes",
+    "Encoding": "Encodage",
+    "EncodingDesc": "Encodez et décodez des données dans différents formats",
+    "Time": "Temps",
+    "TimeDesc": "Convertissez, analysez et suivez les données temporelles",
+    "Network": "Réseau",
+    "NetworkDesc": "Analysez les configurations réseau et les protocoles web"
+  },
+  "Tools": {
+    "sql-database-visualizer": {
+      "title": "Visualiseur SQL & BD",
+      "description": "Visualiseur de base de données local. Générez des diagrammes ER interactifs à partir de SQL DDL ou Prisma en toute sécurité dans votre navigateur.",
+      "features": [
+        "Génération interactive de diagrammes ER",
+        "Support du SQL DDL et des schémas Prisma",
+        "Mise en page automatique (Dagre engine)",
+        "Navigation interactive (zoom, panoramique)",
+        "Export au format SVG ou image PNG",
+        "Traitement local garantissant la confidentialité",
+        "Pas de connexion base de données requise"
+      ]
+    },
+    "plantuml-editor": {
+      "title": "Éditeur PlantUML",
+      "description": "Concevez des diagrammes UML via du texte. Aperçu en temps réel et partage par URI.",
+      "features": [
+        "Rendu en temps réel & aperçu en direct",
+        "Conversion texte-vers-UML pour une conception rapide",
+        "Support des diagrammes de Séquence, Classe et État",
+        "Export en SVG, PNG ou ASCII de haute qualité",
+        "Partage d'état par URI sans backend",
+        "Traitement 100% local respectant la vie privée"
+      ],
+      "snippets": {
+        "title": "Extraits",
+        "label": "Modèles PlantUML",
+        "groups": {
+          "sequence": "Diagramme de séquence",
+          "class": "Diagramme de classe",
+          "useCase": "Diagramme de cas d'utilisation",
+          "state": "Diagramme d'état",
+          "er": "Relation d'entité",
+          "component": "Diagramme de composant"
+        },
+        "items": {
+          "basicRequestResponse": "Requête/Réponse de base",
+          "lifelinesActivation": "Avec lignes de vie & Activation",
+          "altOptLoop": "Blocs Alt/Opt/Loop",
+          "basicClassesComposition": "Classes de base & Composition",
+          "inheritanceInterfaces": "Héritage & Interfaces",
+          "associationsMultiplicity": "Associations & Multiplicité",
+          "actorsBasic": "Acteurs & Cas d'utilisation de base",
+          "includeExtend": "Include/Extend",
+          "simpleStates": "États simples",
+          "compositeChoice": "Composite & Choix",
+          "concurrentRegions": "Régions concurrentes",
+          "usersPosts": "Utilisateurs & Articles",
+          "crowsFoot": "Notation Patte de Corbeau",
+          "junctionAssociative": "Entité de jonction/associative",
+          "packagesNodes": "Paquets & Nœuds",
+          "providedRequired": "Interfaces fournies/requises",
+          "deployment": "Déploiement (Nœud + Artefact)"
+        },
+        "contents": {
+          "basicRequestResponse": {
+            "request": "Requête d'authentification",
+            "response": "Réponse d'authentification",
+            "anotherRequest": "Autre requête d'authentification",
+            "anotherResponse": "Autre réponse d'authentification"
+          },
+          "lifelinesActivation": {
+            "user": "Utilisateur",
+            "clickLogin": "Cliquer sur connexion",
+            "loggedIn": "Connecté"
+          },
+          "altOptLoop": {
+            "request": "Requête",
+            "success": "succès",
+            "error": "erreur",
+            "retry": "Réessayer",
+            "retryRequest": "Réessayer la requête",
+            "response": "Réponse",
+            "loopTimes": "3 fois"
+          },
+          "basicClassesComposition": {
+            "car": "Voiture",
+            "model": "modèle",
+            "year": "année",
+            "drive": "conduire",
+            "engine": "Moteur",
+            "horsepower": "puissance"
+          },
+          "inheritanceInterfaces": {
+            "repository": "Répertoire",
+            "save": "sauvegarder",
+            "findById": "trouverParId",
+            "baseEntity": "EntitéDeBase",
+            "id": "id",
+            "user": "Utilisateur",
+            "name": "nom",
+            "userRepository": "RépertoireUtilisateur"
+          },
+          "associationsMultiplicity": {
+            "order": "Commande",
+            "orderLine": "LigneDeCommande",
+            "product": "Produit"
+          },
+          "actorsBasic": {
+            "foodCritic": "Critique Gastronomique",
+            "restaurant": "Restaurant",
+            "eatFood": "Manger",
+            "payForFood": "Payer",
+            "drink": "Boire"
+          },
+          "includeExtend": {
+            "customer": "Client",
+            "admin": "Admin",
+            "placeOrder": "Passer commande",
+            "pay": "Payer",
+            "validateCart": "Valider le panier",
+            "refund": "Rembourser"
+          },
+          "simpleStates": {
+            "state1": "ceci est une chaîne",
+            "succeeded": "Réussi",
+            "aborted": "Abandonné"
+          },
+          "compositeChoice": {
+            "idle": "Inactif",
+            "processing": "Traitement",
+            "queueing": "En attente",
+            "running": "En cours",
+            "start": "démarrer",
+            "done": "terminé",
+            "submit": "soumettre",
+            "cancel": "annuler",
+            "invalid": "invalide",
+            "valid": "valide"
+          },
+          "concurrentRegions": {
+            "system": "Système",
+            "ui": "UI",
+            "hidden": "Masqué",
+            "visible": "Visible",
+            "show": "afficher",
+            "hide": "masquer",
+            "network": "Réseau",
+            "disconnected": "Déconnecté",
+            "connected": "Connecté",
+            "connect": "connecter",
+            "drop": "perte"
+          },
+          "usersPosts": {
+            "user": "Utilisateur",
+            "username": "nom_utilisateur",
+            "password": "mot_de_passe",
+            "post": "Article",
+            "content": "contenu"
+          },
+          "crowsFoot": {
+            "customer": "Client",
+            "name": "nom",
+            "order": "Commande",
+            "date": "date",
+            "places": "passe"
+          },
+          "junctionAssociative": {
+            "student": "Étudiant",
+            "name": "nom",
+            "course": "Cours",
+            "title": "titre",
+            "enrollment": "Inscription",
+            "grade": "note"
+          },
+          "packagesNodes": {
+            "someGroup": "Certain Groupe",
+            "otherGroups": "Autres Groupes",
+            "firstComponent": "Premier Composant",
+            "secondComponent": "Second Composant",
+            "anotherComponent": "Autre Composant"
+          },
+          "providedRequired": {
+            "webApp": "ApplicationWeb",
+            "api": "API",
+            "database": "BaseDeDonnées",
+            "auth": "Auth",
+            "logger": "Journaliseur",
+            "use": "utiliser"
+          },
+          "deployment": {
+            "server": "Serveur",
+            "db": "BD",
+            "postgres": "postgres"
+          }
+        }
+      }
+    },
+    "markdown-editor": {
+      "title": "Éditeur Markdown",
+      "description": "Éditeur Markdown ultra-rapide avec aperçu en temps réel, support GFM et export PDF instantané. 100% privé et sécurisé.",
+      "features": [
+        "Support du GitHub Flavored Markdown (GFM)",
+        "Aperçu en direct avec défilement synchronisé",
+        "Export Markdown vers PDF avec styles optimisés",
+        "Éditeur Monaco avec coloration syntaxique",
+        "Pliage du code basé sur les titres de sections",
+        "Compteur de caractères et mots en temps réel",
+        "Traitement 100% local pour une confidentialité maximale"
+      ],
+      "loadFile": "Charger un fichier",
+      "exportPdf": "Exporter en PDF",
+      "default": "# 🖋️ Éditeur Markdown\n\n## 🚀 Introduction\nÉditez ici pour voir le résultat à droite.\n\n## 🏗️ Architecture\nZply est basé sur Next.js.\n\n### 🎨 Design\nStyle épuré et moderne.\n\n## 🛠️ Utilisation\nUtilisez la barre d'outils pour formater votre texte."
+    },
+    "mermaid-maker": {
+      "title": "Créateur Mermaid.js",
+      "description": "Créez des diagrammes de flux et de séquence légers.",
+      "features": [
+        "Constructeur riche de diagrammes de flux et de séquence",
+        "Diagrammes de Gantt, graphes git et diagrammes de classes",
+        "Rendu en temps réel avec support du mode sombre",
+        "Export sous forme d'images SVG ou PNG",
+        "Syntaxe légère basée sur Markdown",
+        "Traitement côté client pour une confidentialité maximale"
+      ]
+    },
+    "svg-optimizer": {
+      "title": "Optimiseur SVG",
+      "description": "Visualisez et optimisez le code SVG via SVGO.",
+      "features": [
+        "Minification et nettoyage avancés de fichiers SVG",
+        "Suppression des métadonnées inutiles et des données masquées",
+        "Aperçu en temps réel des graphiques optimisés",
+        "Simplification des tracés et nettoyage des attributs",
+        "Optimisation 100% sécurisée et locale uniquement"
+      ]
+    },
+    "excalidraw-canvas": {
+      "title": "Canevas Excalidraw",
+      "description": "Croquis ultra-fluides et diagrammes à l'aspect \"dessiné à la main\".",
+      "features": [
+        "Canevas infini pour le brainstorming et les croquis",
+        "Esthétique visuelle authentique \"dessinée à la main\"",
+        "Export en SVG ou PNG haute résolution",
+        "Riche bibliothèque de formes et de composants",
+        "Architecture locale pour une confidentialité absolue"
+      ]
+    },
+    "data-transformer": {
+      "title": "Transformateur de Données",
+      "description": "Convertissez instantanément entre les formats JSON, YAML, CSV, XML et TypeScript.",
+      "features": [
+        "Conversion bidirectionnelle JSON vers YAML/CSV/XML",
+        "Génération d'interfaces TypeScript à partir de données d'exemple",
+        "Analyse et formatage intelligents du CSV",
+        "Transformation en temps réel et détection d'erreurs",
+        "Indentation et espacement personnalisables",
+        "Aucune donnée ne quitte votre navigateur local"
+      ]
+    },
+    "json-utils": {
+      "title": "Utilitaires JSON",
+      "description": "Visualisation, indentation, validation et minification instantanées de JSON.",
+      "features": [
+        "Formatage JSON rapide et indentation propre",
+        "Minification instantanée pour l'optimisation de la bande passante",
+        "Vue en arborescence interactive pour l'exploration de données profondes",
+        "Validation stricte du schéma JSON et mise en évidence des erreurs",
+        "Recherche JSON Path pour une extraction de données rapide",
+        "Traitement de données local garantissant la confidentialité"
+      ],
+      "invalidJson": "JSON Invalide",
+      "validJson": "JSON Valide",
+      "default": "{\n  \"id\": \"zply-01\",\n  \"name\": \"Formateur et Visualiseur JSON\",\n  \"features\": [\n    \"Formatage ultra-rapide\",\n    \"Minification\",\n    \"Validation stricte\",\n    \"Visualisation en arborescence\",\n    \"Persistance URL\"\n  ],\n  \"local_only\": true,\n  \"stats\": {\n    \"speed\": \"instantané\",\n    \"security\": \"côté client\"\n  }\n}"
+    },
+    "text-compare": {
+      "title": "Comparaison de Texte",
+      "description": "Comparez deux textes et trouvez les différences. Vue fractionnée ou unifiée.",
+      "features": [
+        "Vue diff avancée côte à côte (fractionnée)",
+        "Visualisation compacte des différences unifiées",
+        "Détection des changements au niveau des caractères",
+        "Comparaison en temps réel pour les documents volumineux",
+        "Éditeur haute performance basé sur Monaco",
+        "Traitement de texte local 100% privé"
+      ],
+      "default": {
+        "original": "// Texte original\nconst a = 1;\nconst b = 2;",
+        "modified": "// Texte modifié\nconst a = 1;\nconst b = 3;"
+      },
+      "unified": "Unifiée",
+      "split": "Fractionnée",
+      "original": "Original",
+      "modified": "Modifié",
+      "liveDiff": "Diff en Direct",
+      "sideBySide": "Comparaison côte à côte"
+    },
+    "regex-tester": {
+      "title": "Testeur Regex",
+      "description": "Testeur d'expressions régulières avec explications en temps réel.",
+      "features": [
+        "Correspondance et mise en évidence des regex en temps réel",
+        "Explications détaillées des groupes correspondants",
+        "Outils de capture de groupe et de remplacement",
+        "Support de plusieurs variantes de regex (JS, PCRE)",
+        "Aide-mémoire intégré pour une référence rapide",
+        "Confidentialité totale pour les motifs sensibles"
+      ]
+    },
+    "sql-formatter": {
+      "title": "Formateur SQL",
+      "description": "Embellissez et unifiez vos requêtes SQL complexes.",
+      "features": [
+        "Support des dialectes MySQL, PostgreSQL et SQLite",
+        "Règles d'indentation et de formatage personnalisables",
+        "Bascule de la casse des mots-clés SQL (MAJUSCULES/minuscules)",
+        "Coloration syntaxique et pliage de code",
+        "Formatage local rapide pour les requêtes volumineuses"
+      ]
+    },
+    "jwt-debugger": {
+      "title": "Débogueur JWT",
+      "description": "Décodage et encodage sécurisés et locaux de JSON Web Tokens (JWT).",
+      "features": [
+        "Décodage instantané de l'en-tête et de la charge utile JWT",
+        "Vérification de signature en temps réel avec clés locales",
+        "Éditeur de charge utile pour une régénération facile de jeton",
+        "Support de HS256, RS256 et autres algorithmes",
+        "Traitement 100% côté client pour la sécurité des jetons",
+        "Partage d'état par URI pour les flux de débogage"
+      ],
+      "hmacSecret": "Secret HMAC...",
+      "privateKey": "Clé privée (PEM ou JSON)..."
+    },
+    "hash-generator": {
+      "title": "Générateur de Hash",
+      "description": "Générez des empreintes SHA-256, SHA-512 et MD5 via l'API Web Crypto.",
+      "features": [
+        "Génération de empreintes SHA-256, SHA-512 et MD5",
+        "Génération sécurisée de HMAC avec clés personnalisées",
+        "Support du sel pour une sécurité accrue des hashs",
+        "Sortie en temps réel pendant la saisie ou le collage",
+        "Aucune transmission de données vers des serveurs distants"
+      ]
+    },
+    "secret-generator": {
+      "title": "Générateur de Mots de Passe & Secrets",
+      "description": "Générez des mots de passe sécurisés, des clés API et des jetons aléatoires avec évaluation de la force.",
+      "features": [
+        "Longueur et jeux de caractères de mots de passe personnalisables",
+        "Évaluation avancée de l'entropie et de la force",
+        "Génération sécurisée de clés API et de jetons aléatoires",
+        "Génération groupée pour plusieurs secrets",
+        "Génération locale uniquement via un RNG cryptographiquement sécurisé"
+      ]
+    },
+    "rsa-key-pair-generator": {
+      "title": "Générateur de Paire de Clés RSA",
+      "description": "Générez des paires de clés publiques/privées RSA.",
+      "features": [
+        "Génération de paires de clés publiques et privées RSA sécurisées",
+        "Support de tailles de clés personnalisées (jusqu'à 4096 bits)",
+        "Formats d'exportation PKCS#1 et PKCS#8",
+        "Exportation instantanée vers des structures PEM ou JSON",
+        "Génération locale sécurisée sans stockage côté serveur"
+      ]
+    },
+    "base64-encoder-decoder": {
+      "title": "Encodeur/Décodeur Base64",
+      "description": "Encodage et décodage Base64 instantanés pour du texte ou des fichiers.",
+      "features": [
+        "Encodage et décodage texte vers Base64 ultra-rapides",
+        "Support des variantes Base64 sécurisées pour les URLs",
+        "Conversion directe de fichiers en Data URIs Base64",
+        "Encodage conforme UTF-8 pour les caractères spéciaux",
+        "Traitement côté client pour la confidentialité des données"
+      ]
+    },
+    "url-encoder-decoder": {
+      "title": "Encodeur/Décodeur URL",
+      "description": "Gestion sécurisée des caractères spéciaux d'URI.",
+      "features": [
+        "Encodage et décodage par pourcentage pour les URIs",
+        "Analyse et formatage des paramètres de requête",
+        "Logique d'encodage conforme à la norme RFC 3986",
+        "Outils de prévention du double encodage",
+        "Transformation instantanée dans votre navigateur"
+      ]
+    },
+    "html-entities-converter": {
+      "title": "Entités HTML",
+      "description": "Échappez et déséchappez vos caractères HTML.",
+      "features": [
+        "Échappement des caractères spéciaux en entités HTML",
+        "Décodage des entités HTML nommées et numériques",
+        "Support des notations hexadécimales et décimales",
+        "Traitement local rapide pour l'analyse de sécurité web"
+      ]
+    },
+    "binary-converter": {
+      "title": "Convertisseur Binaire",
+      "description": "Convertissez du texte en binaire et vice versa.",
+      "features": [
+        "Conversion texte vers binaire (0101...) instantanée",
+        "Conversion de chaînes binaires en texte lisible",
+        "Support de plusieurs encodages (UTF-8, ASCII)",
+        "Transformation en temps réel pour l'analyse binaire",
+        "Traitement local garantissant la confidentialité"
+      ]
+    },
+    "color-converter": {
+      "title": "Convertisseur de Couleurs",
+      "description": "Conversion entre les formats HEX, RGB, HSL et CMYK.",
+      "features": [
+        "Conversion entre HEX, RGB, HSL et CMYK",
+        "Sélecteur de couleur visuel et outil d'aperçu",
+        "Vérificateur de rapport de contraste pour l'accessibilité",
+        "Exportation au format CSS et génération de palettes",
+        "Transformations d'espace colorimétrique locales rapides"
+      ]
+    },
+    "unicode-escape-sequences": {
+      "title": "Échappement Unicode",
+      "description": "Convertissez du texte en séquences d'échappement Unicode.",
+      "features": [
+        "Conversion de texte en séquences d'échappement \\uXXXX",
+        "Décodage des échappements Unicode en texte original",
+        "Support des séquences longues U+XXXXXXXX complètes",
+        "Gestion correcte des emojis et des caractères complexes",
+        "Transformation locale uniquement"
+      ]
+    },
+    "epoch-converter": {
+      "title": "Convertisseur Epoch",
+      "description": "Timestamps vers dates lisibles et gestion de l'UTC.",
+      "features": [
+        "Conversion de timestamps Unix en dates ISO-8601",
+        "Auto-détection des secondes vs millisecondes",
+        "Temps relatif lisible par l'homme (ex: \"il y a 2 minutes\")",
+        "Conversion de date et d'heure selon le fuseau horaire",
+        "Copie en un clic du timestamp Unix actuel",
+        "Traitement du temps local respectant la vie privée"
+      ],
+      "localTime": "Heure locale",
+      "utcTime": "Heure UTC",
+      "timestampLabel": "Unix Timestamp (Secondes ou Milliseconds)"
+    },
+    "timezone-converter": {
+      "title": "Convertisseur de Fuseau Horaire",
+      "description": "Comparez les heures entre différents fuseaux horaires.",
+      "features": [
+        "Horloge mondiale avec comparaison de plusieurs fuseaux horaires",
+        "Conversions tenant compte de l'heure d'été (DST)",
+        "Recherche rapide par ville ou région géographique",
+        "Curseur d'heure de référence pour une planification facile",
+        "Gestion sécurisée des fuseaux horaires en local uniquement"
+      ],
+      "addTimezone": "Ajouter un fuseau",
+      "searchPlaceholder": "Rechercher une ville ou une région...",
+      "noResults": "Aucun fuseau trouvé pour \"{search}\"",
+      "referenceTime": "Heure de référence",
+      "liveSyncActive": "Synchronisation en direct",
+      "liveMode": "Mode Direct",
+      "fixedTime": "Heure Fixe"
+    },
+    "cron-parser": {
+      "title": "Analyseur Cron",
+      "description": "Traduisez les expressions Cron en texte naturel.",
+      "features": [
+        "Traduction des expressions Cron en langage naturel",
+        "Calcul des prochaines dates et heures d'exécution",
+        "Support des formats Standard, Quartz et Jenkins",
+        "Validation en temps réel de la syntaxe Cron",
+        "Logique d'analyse privée locale uniquement"
+      ]
+    },
+    "time-tracker": {
+      "title": "Chronomètre & Minuteur",
+      "description": "Suivez le temps avec un chronomètre précis et des comptes à rebours personnalisables.",
+      "features": [
+        "Chronomètre de haute précision avec suivi des tours",
+        "Comptes à rebours personnalisables avec notifications",
+        "Interface visuelle moderne optimisée pour le mode sombre",
+        "Suivi du temps persistant après rechargement de page",
+        "Gestion du temps local 100% côté client"
+      ]
+    },
+    "my-ip-info": {
+      "title": "Infos mon IP",
+      "description": "Obtenez des informations détaillées sur votre adresse IP publique.",
+      "features": [
+        "Détection des adresses IPv4 et IPv6 publiques",
+        "Géolocalisation détaillée (ville, pays, région)",
+        "Informations sur le FAI et l'ASN (système autonome)",
+        "Analyse du User Agent et du système d'exploitation",
+        "Générateur de snippets terminal pour une recherche d'IP rapide",
+        "Détection d'IP respectueuse de la vie privée avec consentement de l'utilisateur"
+      ],
+      "manualDetection": "Détection manuelle",
+      "publicIpTerminal": "IP publique (Terminal)",
+      "localIpInternal": "IP locale (Interne)",
+      "platforms": {
+        "macosLinuxWindows": "macOS / Linux / Windows",
+        "powershell": "PowerShell",
+        "windowsCmd": "Windows (CMD)",
+        "macosLinux": "macOS / Linux"
+      },
+      "secureLookup": "Recherche sécurisée",
+      "clientSideDetection": "Détection côté client uniquement",
+      "deviceInfo": "Infos Appareil",
+      "operatingSystem": "Système d'exploitation",
+      "resolution": "Résolution",
+      "userAgent": "User Agent",
+      "localDetectionLogic": "La logique de détection s'exécute strictement dans votre navigateur.",
+      "geolocation": "Géolocalisation",
+      "location": "Localisation",
+      "country": "Pays",
+      "providerAsn": "Fournisseur / ASN",
+      "timezone": "Fuseau horaire",
+      "postalCode": "Code postal",
+      "coordinates": "Coordonnées",
+      "detectionFailed": "Échec de la détection",
+      "reloadPage": "Recharger la page",
+      "publicIpAddress": "Votre adresse IP publique",
+      "copyIp": "Copier l'IP",
+      "privacyGate": "Portail de Confidentialité",
+      "externalQueryRequired": "La détection d'IP nécessite une requête externe",
+      "privacyGateDescription": "Zply s'exécute entièrement dans votre navigateur. Pour récupérer votre adresse IP publique et votre géolocalisation, nous devons interroger un fournisseur externe (<span class=\"font-mono\">ipapi.co</span>).",
+      "detecting": "Détection en cours...",
+      "showMyIp": "Afficher mon IP",
+      "openProvider": "Ouvrir ipapi.co",
+      "detectingConnection": "Détection de votre connexion..."
+    },
+    "cidr-calculator": {
+      "title": "Calculateur CIDR",
+      "description": "Calculez les IPs, les plages et les masques de sous-réseau.",
+      "features": [
+        "Calcul des plages IP et des masques de sous-réseau",
+        "Détection de la première et de la dernière adresse IP utilisable",
+        "Calcul du nombre d'hôtes par sous-réseau",
+        "Conversion CIDR vers Netmask et masque générique",
+        "Calculs réseau locaux instantanés"
+      ]
+    },
+    "http-headers-analyzer": {
+      "title": "En-têtes HTTP",
+      "description": "Analysez les en-têtes de réponse HTTP.",
+      "features": [
+        "Analyse approfondie des en-têtes de réponse HTTP",
+        "Vérification des en-têtes de sécurité (CSP, HSTS, X-Frame)",
+        "Explications détaillées pour chaque type d'en-tête",
+        "Vue brute et analysée des charges utiles d'en-tête",
+        "Recommandations sur les meilleures pratiques de sécurité"
+      ]
+    }
+  }
+}

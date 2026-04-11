@@ -10,15 +10,26 @@ const eslintConfig = defineConfig([
       "no-nested-ternary": "error",
       "@typescript-eslint/no-inferrable-types": "off",
       "react-hooks/exhaustive-deps": "off",
-      "@typescript-eslint/explicit-function-return-type": "error",
       "@typescript-eslint/explicit-member-accessibility": "error",
-      "@typescript-eslint/typedef": [
-        "error",
-        {
-          "variableDeclaration": true,
-          "variableDeclarationIgnoreFunction": true
-        }
-      ]
+      "no-restricted-imports": ["error", {
+        "patterns": [
+          {
+            "group": ["@/components/command-menu/*"],
+            "message": "Please use the barrel file (index.ts) at the component folder root instead of importing the file directly."
+          },
+          {
+            "group": [
+              "@/components/ui/layout/*",
+              "!@/components/ui/layout/sidebar"
+            ],
+            "message": "Please use the barrel file at '@/components/ui/layout' instead of importing the file directly. For sidebar components, use '@/components/ui/layout/sidebar'."
+          },
+          {
+            "group": ["@/components/ui/layout/sidebar/*"],
+            "message": "Please use the barrel file at '@/components/ui/layout/sidebar' instead of importing the file directly."
+          }
+        ]
+      }]
     }
   },
   {

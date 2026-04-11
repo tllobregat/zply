@@ -6,11 +6,10 @@ export type CategoryColor = 'blue' | 'green' | 'red' | 'purple' | 'orange' | 'cy
 export type CategoryMeta = {
   icon: LucideIcon;
   color: CategoryColor;
-  desc: string;
 };
 
 export const CATEGORY_COLORS: Record<CategoryWithoutAll, CategoryColor> = {
-  [Category.VISUALISATION]: 'blue',
+  [Category.DIAGRAMS]: 'blue',
   [Category.DATA]: 'green',
   [Category.SECURITY]: 'red',
   [Category.ENCODING]: 'purple',
@@ -19,35 +18,29 @@ export const CATEGORY_COLORS: Record<CategoryWithoutAll, CategoryColor> = {
 };
 
 export const CATEGORY_META: Record<CategoryWithoutAll, CategoryMeta> = {
-  [Category.VISUALISATION]: {
+  [Category.DIAGRAMS]: {
     icon: Code2,
-    color: 'blue',
-    desc: 'Diagrams, UML, and Markdown'
+    color: 'blue'
   },
   [Category.DATA]: {
     icon: FileJson,
-    color: 'green',
-    desc: 'JSON formatting and data conversion'
+    color: 'green'
   },
   [Category.SECURITY]: {
     icon: Lock,
     color: 'red',
-    desc: 'Hashing, JWT decoding, and crypto',
   },
   [Category.ENCODING]: {
     icon: Binary,
-    color: 'purple',
-    desc: 'Base64, URL, and data encoding'
+    color: 'purple'
   },
   [Category.TIME]: {
     icon: Clock,
-    color: 'orange',
-    desc: 'Epoch timestamps and time tools'
+    color: 'orange'
   },
   [Category.NETWORK]: {
     icon: Globe,
-    color: 'cyan',
-    desc: 'Regex testing and network utilities'
+    color: 'cyan'
   },
 };
 

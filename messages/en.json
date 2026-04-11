@@ -1,0 +1,726 @@
+{
+  "Layout": {
+    "metadata": {
+      "title": "Zply - High Quality Developer Toolbox",
+      "description": "A fast, privacy-focused toolbox for developers. Zero backend, zero cookies, zero database.",
+      "keywords": "developer tools, toolbox, json formatter, jwt decoder, sql visualizer, base64, privacy-focused"
+    }
+  },
+  "Index": {
+    "metadata": {
+      "title": "Zply - High Quality Developer Toolbox",
+      "description": "Ultra-fast, private, and secure developer tools. JSON, YAML, CSV, SQL, JWT, and more."
+    },
+    "title": "The Swiss Army Knife for <span>Your Daily Tasks</span>",
+    "description": "Designed for privacy-conscious professionals",
+    "features": {
+      "private": "100% Private",
+      "privateDesc": "Zero backend, zero cookies, zero trackers.",
+      "shareable": "URI Persistence",
+      "shareableDesc": "Share your workspace state instantly.",
+      "fast": "Ultra Fast",
+      "fastDesc": "Zero latency locally-driven tools"
+    },
+    "popularTools": "Popular Tools",
+    "browseCategories": "Browse Categories",
+    "toolsCount": "{count, plural, =1 {# Tool} other {# Tools}}",
+    "noResults": "No results",
+    "tryOtherKeywords": "Try other keywords",
+    "searchPlaceholder": "Search tools (e.g. jwt, json, regex)...",
+    "searchPlaceholderMobile": "Search tools...",
+    "searchResults": "Search Results",
+    "dashboard": "Dashboard"
+  },
+  "PrivacyGate": {
+    "privacyGate": "Privacy Gate",
+    "title": "External Request Required",
+    "description": "This tool requires an external request to a third-party service to provide the requested information. No data from your side is sent, only a query for the external service.",
+    "accept": "I understand, show results",
+    "providerLink": "Open provider website",
+    "loading": "Processing..."
+  },
+  "Common": {
+    "language": "Language",
+    "theme": "Theme",
+    "support": "Support",
+    "buyMeACoffee": "Buy me a coffee",
+    "en": "English",
+    "fr": "French",
+    "light": "Light",
+    "dark": "Dark",
+    "homePage": "Home Page",
+    "home": "Home",
+    "privacyGuaranteed": "Privacy Guaranteed",
+    "openSource": "Open Source",
+    "toolbox": "Toolbox",
+    "toolActions": {
+      "addTimezone": "Add Timezone",
+      "beautify": "Beautify",
+      "foldAll": "Fold All",
+      "minify": "Minify",
+      "unfold": "Unfold",
+      "useCurrentTime": "Use Current Time",
+      "title": "Actions"
+    },
+    "toolIndicators": {
+      "realTimeHashing": "Real-time Hashing",
+      "msAutoDetected": "Milliseconds auto-detected",
+      "liveNow": "Live Now",
+      "liveRendering": "Live Rendering",
+      "liveTransform": "Live Transform",
+      "imageDetected": "Image Detected",
+      "realTimeSync": "Real-time sync active",
+      "editingMode": "Time editing mode"
+    },
+    "charsCount": "{count, plural, =1 {# character} other {# characters}}",
+    "tablesCount": "{count, plural, =1 {# table} other {# tables}}",
+    "relationsCount": "{count, plural, =1 {# relation} other {# relations}}",
+    "tzCount": "{count, plural, =1 {# timezone} other {# timezones}}",
+    "toolModes": {
+      "editor": "Editor",
+      "split": "Split",
+      "preview": "Preview",
+      "tree": "Tree",
+      "encode": "Encoding",
+      "decode": "Decoding",
+      "text": "Text",
+      "file": "File"
+    },
+    "interactiveEngine": "Interactive Engine",
+    "share": "Share",
+    "syncing": "Syncing...",
+    "copied": "Copied!",
+    "aboutTool": "About this tool",
+    "pinToDashboard": "Pin to Dashboard",
+    "unpinFromDashboard": "Unpin from Dashboard",
+    "securityPrivacy": "Security & Privacy",
+    "clientSideOnly": "Client-Side Only",
+    "libsCount": "{count, plural, =1 {# Library} other {# Libraries}}",
+    "poweredBy": "Powered by",
+    "aboutTitle": "About {title}",
+    "aboutDescription": "is a tool designed to work completely within your browser. All data processing and transformations are performed locally, ensuring that your sensitive information never leaves your device. This approach provides not only enhanced privacy but also superior performance by eliminating server round-trips.",
+    "keyFeatures": "Key Features",
+    "howToUse": "How to use",
+    "step1": "Enter your input data into the editor or designated area.",
+    "step2": "Adjust any settings or parameters to match your specific needs.",
+    "step3": "The results will be generated instantly and ready for use.",
+    "privacyFirst": "Privacy First",
+    "privacyDescription": "Zply is built with a privacy-first mindset. Your data is never sent to a server for processing. This tool runs entirely in your local browser environment, making it safe for handling sensitive information without risk of leakage.",
+    "openTool": "Open Tool",
+    "comingSoon": "Soon",
+    "sidebar": {
+      "search": "Search",
+      "searchShortcut": "⌘K",
+      "pinnedTools": "Pinned Tools",
+      "preferencesLinks": "Preferences & Links",
+      "github": "GitHub",
+      "support": "Support",
+      "menu": "Menu",
+      "openSearch": "Open search menu",
+      "toggleMobileMenu": "Toggle mobile menu",
+      "closeMenu": "Close menu",
+      "toggleTheme": "Toggle theme",
+      "themeToggle": "Switch to {mode} Mode",
+      "commandMenu": {
+        "placeholder": "Search tools...",
+        "availableTools": "Available tools",
+        "noResults": "No tools found for \"{search}\"",
+        "navigate": "Navigate",
+        "select": "Select",
+        "close": "Close"
+      }
+    },
+    "settings": {
+      "title": "Settings"
+    },
+    "moreOptions": "More options"
+  },
+  "PrivacyPolicy": {
+    "metadata": {
+      "title": "Privacy & Security | Zply",
+      "description": "Zply is built on a Privacy-First philosophy. We do not use cookies, and we do not collect any Personally Identifiable Information (PII)."
+    },
+    "title": "Privacy & Security",
+    "description": "Zply is built on a Privacy-First philosophy. We do not use cookies, and we do not collect any Personally Identifiable Information (PII).",
+    "zeroBackend": "Zero Backend",
+    "zeroBackendDesc": "Every tool runs 100% in your browser. No user-input data is ever sent to a server. For tools requiring external data (like IP detection), we always ask for your consent before any external request.",
+    "zeroCookies": "Zero Cookies",
+    "zeroCookiesDesc": "We do not use cookies or persistent identifiers. Your browsing remains private and storage-free.",
+    "uriPersistence": "URI Persistence",
+    "uriPersistenceDesc": "Share your workspace state instantly. We use LZ-String compression to store your current state directly in the window.location.hash.",
+    "secureHash": "Why the # is Secure",
+    "secureHashDesc": "The text after the '#' symbol (the fragment identifier) in a URL is never sent to the server by the browser. Even if you share a link containing your data, only your browser (and whoever you share the link with) can see it. Zply never even knows what's in your hash.",
+    "telemetry": "Privacy-First Telemetry",
+    "telemetryDesc": "To monitor site health and performance, we use Vercel Web Analytics. This integration is strictly for anonymous telemetry and does not track individual users.",
+    "noPii": "No PII",
+    "noPiiDesc": "Your IP address is hashed and discarded immediately; we never see who you are.",
+    "transparency": "Full Transparency",
+    "transparencyDesc": "You can verify Vercel's privacy-first architecture in their official documentation.",
+    "fragmentIdentifier": "Fragment Identifier Security",
+    "exampleHash": "#compressed-data-never-leaves-browser",
+    "externalPrivacyPolicy": "Privacy Policy"
+  },
+  "Categories": {
+    "All": "All",
+    "categoriesCount": "{count, plural, =1 {# Category} other {# Categories}}",
+    "Diagrams": "Diagrams",
+    "DiagramsDesc": "Visualize code, flows, and documentation structure",
+    "Data": "Data",
+    "DataDesc": "Format, validate, and transform data structures",
+    "Security": "Security",
+    "SecurityDesc": "Secure your applications with robust cryptographic tools",
+    "Encoding": "Encoding",
+    "EncodingDesc": "Encode and decode data across various formats",
+    "Time": "Time",
+    "TimeDesc": "Convert, parse, and track time-related data",
+    "Network": "Network",
+    "NetworkDesc": "Analyze network configurations and web protocols"
+  },
+  "Tools": {
+    "sql-database-visualizer": {
+      "title": "SQL & DB Visualizer",
+      "description": "Powerful local SQL and database visualizer. Generate interactive ER diagrams from SQL DDL or Prisma schemas securely in your browser.",
+      "features": [
+        "Interactive ER diagram generation",
+        "Support for SQL DDL and Prisma schemas",
+        "Smart auto-layout with Dagre-based engine",
+        "Fully interactive zoom, pan, and dragging",
+        "Export diagrams as SVG or PNG images",
+        "Local-only processing for data privacy",
+        "No database connection required (static analysis)"
+      ]
+    },
+    "plantuml-editor": {
+      "title": "PlantUML Editor",
+      "description": "Design UML diagrams via text. Real-time preview and sharing by URI.",
+      "features": [
+        "Real-time rendering & Live-preview",
+        "Text-to-UML conversion for quick design",
+        "Support for Sequence, Class, and State diagrams",
+        "Export as high-quality SVG, PNG, or ASCII",
+        "URI-based state sharing without backend",
+        "100% Privacy-first client-side processing"
+      ],
+      "snippets": {
+        "title": "Snippets",
+        "label": "PlantUML Templates",
+        "groups": {
+          "sequence": "Sequence Diagram",
+          "class": "Class Diagram",
+          "useCase": "Use Case Diagram",
+          "state": "State Diagram",
+          "er": "Entity Relationship",
+          "component": "Component Diagram"
+        },
+        "items": {
+          "basicRequestResponse": "Basic Request/Response",
+          "lifelinesActivation": "With Lifelines & Activation",
+          "altOptLoop": "Alt/Opt/Loop Blocks",
+          "basicClassesComposition": "Basic Classes & Composition",
+          "inheritanceInterfaces": "Inheritance & Interfaces",
+          "associationsMultiplicity": "Associations & Multiplicity",
+          "actorsBasic": "Actors & Basic Use Cases",
+          "includeExtend": "Include/Extend",
+          "simpleStates": "Simple States",
+          "compositeChoice": "Composite & Choice",
+          "concurrentRegions": "Concurrent Regions",
+          "usersPosts": "Users & Posts",
+          "crowsFoot": "Crow’s Foot Notation",
+          "junctionAssociative": "Junction/Associative Entity",
+          "packagesNodes": "Packages & Nodes",
+          "providedRequired": "Provided/Required Interfaces",
+          "deployment": "Deployment (Node + Artifact)"
+        },
+        "contents": {
+          "basicRequestResponse": {
+            "request": "Authentication Request",
+            "response": "Authentication Response",
+            "anotherRequest": "Another authentication Request",
+            "anotherResponse": "Another authentication Response"
+          },
+          "lifelinesActivation": {
+            "user": "User",
+            "clickLogin": "Click login",
+            "loggedIn": "Logged in"
+          },
+          "altOptLoop": {
+            "request": "Request",
+            "success": "success",
+            "error": "error",
+            "retry": "Retry",
+            "retryRequest": "Retry request",
+            "response": "Response",
+            "loopTimes": "3 times"
+          },
+          "basicClassesComposition": {
+            "car": "Car",
+            "model": "model",
+            "year": "year",
+            "drive": "drive",
+            "engine": "Engine",
+            "horsepower": "horsepower"
+          },
+          "inheritanceInterfaces": {
+            "repository": "Repository",
+            "save": "save",
+            "findById": "findById",
+            "baseEntity": "BaseEntity",
+            "id": "id",
+            "user": "User",
+            "name": "name",
+            "userRepository": "UserRepository"
+          },
+          "associationsMultiplicity": {
+            "order": "Order",
+            "orderLine": "OrderLine",
+            "product": "Product"
+          },
+          "actorsBasic": {
+            "foodCritic": "Food Critic",
+            "restaurant": "Restaurant",
+            "eatFood": "Eat Food",
+            "payForFood": "Pay for Food",
+            "drink": "Drink"
+          },
+          "includeExtend": {
+            "customer": "Customer",
+            "admin": "Admin",
+            "placeOrder": "Place Order",
+            "pay": "Pay",
+            "validateCart": "Validate Cart",
+            "refund": "Refund"
+          },
+          "simpleStates": {
+            "state1": "this is a string",
+            "succeeded": "Succeeded",
+            "aborted": "Aborted"
+          },
+          "compositeChoice": {
+            "idle": "Idle",
+            "processing": "Processing",
+            "queueing": "Queueing",
+            "running": "Running",
+            "start": "start",
+            "done": "done",
+            "submit": "submit",
+            "cancel": "cancel",
+            "invalid": "invalid",
+            "valid": "valid"
+          },
+          "concurrentRegions": {
+            "system": "System",
+            "ui": "UI",
+            "hidden": "Hidden",
+            "visible": "Visible",
+            "show": "show",
+            "hide": "hide",
+            "network": "Network",
+            "disconnected": "Disconnected",
+            "connected": "Connected",
+            "connect": "connect",
+            "drop": "drop"
+          },
+          "usersPosts": {
+            "user": "User",
+            "username": "username",
+            "password": "password",
+            "post": "Post",
+            "content": "content"
+          },
+          "crowsFoot": {
+            "customer": "Customer",
+            "name": "name",
+            "order": "Order",
+            "date": "date",
+            "places": "places"
+          },
+          "junctionAssociative": {
+            "student": "Student",
+            "name": "name",
+            "course": "Course",
+            "title": "title",
+            "enrollment": "Enrollment",
+            "grade": "grade"
+          },
+          "packagesNodes": {
+            "someGroup": "Some Group",
+            "otherGroups": "Other Groups",
+            "firstComponent": "First Component",
+            "secondComponent": "Second Component",
+            "anotherComponent": "Another Component"
+          },
+          "providedRequired": {
+            "webApp": "WebApp",
+            "api": "API",
+            "database": "Database",
+            "auth": "Auth",
+            "logger": "Logger",
+            "use": "use"
+          },
+          "deployment": {
+            "server": "Server",
+            "db": "DB",
+            "postgres": "postgres"
+          }
+        }
+      }
+    },
+    "markdown-editor": {
+      "title": "Markdown Editor",
+      "description": "Powerful local Markdown editor with live preview, GitHub Flavored Markdown (GFM) support, and instant PDF export. 100% private and secure.",
+      "features": [
+        "GitHub Flavored Markdown (GFM) support",
+        "Live split-screen preview with synchronized scrolling",
+        "Instant Markdown to PDF export with optimized styles",
+        "Monaco-powered editor with syntax highlighting",
+        "Header-based folding for better document navigation",
+        "Real-time character and word count tracking",
+        "100% Client-side processing for maximum privacy"
+      ],
+      "loadFile": "Load File",
+      "exportPdf": "Export to PDF",
+      "default": "# 🖋️ Markdown Editor\n\n## 🚀 Introduction\nEdit here to see the result on the right.\n\n## 🏗️ Architecture\nZply is built with Next.js.\n\n### 🎨 Design\nClean and modern styling.\n\n## 🛠️ Usage\nUse the toolbar to format your text."
+    },
+    "mermaid-maker": {
+      "title": "Mermaid.js Maker",
+      "description": "Create lightweight flowcharts and sequence diagrams.",
+      "features": [
+        "Rich flowchart and sequence diagram builder",
+        "Gantt charts, git graphs, and class diagrams",
+        "Real-time rendering with dark mode support",
+        "Export as SVG or PNG images",
+        "Lightweight Markdown-based syntax",
+        "Client-side processing for maximum privacy"
+      ]
+    },
+    "svg-optimizer": {
+      "title": "SVG Optimizer",
+      "description": "Visualize and optimize SVG code via SVGO.",
+      "features": [
+        "Advanced SVG minification and cleaning",
+        "Remove unnecessary metadata and hidden data",
+        "Real-time preview of optimized graphics",
+        "Path simplification and attribute cleanup",
+        "100% secure local-only optimization"
+      ]
+    },
+    "excalidraw-canvas": {
+      "title": "Excalidraw Canvas",
+      "description": "Ultra-smooth sketching and \"hand-drawn\" diagrams.",
+      "features": [
+        "Infinite canvas for brainstorming and sketching",
+        "Authentic \"hand-drawn\" visual aesthetic",
+        "Export as high-resolution SVG or PNG",
+        "Rich library of shapes and components",
+        "Local-first architecture for absolute privacy"
+      ]
+    },
+    "data-transformer": {
+      "title": "Data Transformer",
+      "description": "Convert between JSON, YAML, CSV, XML, and TypeScript formats instantly.",
+      "features": [
+        "Bidirectional JSON to YAML/CSV/XML conversion",
+        "TypeScript interface generation from sample data",
+        "Smart CSV parsing and formatting",
+        "Real-time transformation and error detection",
+        "Customizable indentation and spacing",
+        "No data leaves your local browser"
+      ]
+    },
+    "json-utils": {
+      "title": "JSON Utils",
+      "description": "Instant JSON visualization, indentation, validation, and minification.",
+      "features": [
+        "Fast JSON formatting and pretty printing",
+        "Instant minification for bandwidth optimization",
+        "Interactive tree view for deep data exploration",
+        "Strict JSON schema validation and error highlighting",
+        "JSON Path search for quick data extraction",
+        "Privacy-guaranteed local data processing"
+      ],
+      "invalidJson": "Invalid JSON",
+      "validJson": "Valid JSON",
+      "default": "{\n  \"id\": \"zply-01\",\n  \"name\": \"JSON Formatter & Viewer\",\n  \"features\": [\n    \"Ultra-fast formatting\",\n    \"Minification\",\n    \"Strict validation\",\n    \"Tree Visualization\",\n    \"URL Persistence\"\n  ],\n  \"local_only\": true,\n  \"stats\": {\n    \"speed\": \"instant\",\n    \"security\": \"client-side\"\n  }\n}"
+    },
+    "text-compare": {
+      "title": "Text Compare",
+      "description": "Compare two texts and find differences. Split or Unified view.",
+      "features": [
+        "Advanced side-by-side (split) diff view",
+        "Compact unified difference visualization",
+        "Character-level change detection",
+        "Real-time comparison for large documents",
+        "Monaco-powered high-performance editor",
+        "100% Private local text processing"
+      ],
+      "default": {
+        "original": "// Original text\nconst a = 1;\nconst b = 2;",
+        "modified": "// Modified text\nconst a = 1;\nconst b = 3;"
+      },
+      "unified": "Unified",
+      "split": "Split",
+      "original": "Original",
+      "modified": "Modified",
+      "liveDiff": "Live Diff",
+      "sideBySide": "Side-by-side comparison"
+    },
+    "regex-tester": {
+      "title": "Regex Tester",
+      "description": "Regular expression tester with real-time explanations.",
+      "features": [
+        "Real-time regex matching and highlighting",
+        "Detailed explanations of matched groups",
+        "Group capturing and replacement tools",
+        "Multiple regex flavor support (JS, PCRE)",
+        "Integrated cheat sheet for quick reference",
+        "Zero-backend privacy for sensitive patterns"
+      ]
+    },
+    "sql-formatter": {
+      "title": "SQL Formatter",
+      "description": "Beautify and unify your complex SQL queries.",
+      "features": [
+        "Support for MySQL, PostgreSQL, and SQLite dialects",
+        "Customizable indentation and formatting rules",
+        "SQL keyword casing (UPPERCASE/lowercase) toggle",
+        "Syntax highlighting and code folding",
+        "Fast local formatting for large queries"
+      ]
+    },
+    "jwt-debugger": {
+      "title": "JWT Debugger",
+      "description": "Secure and local decoding and encoding of JSON Web Tokens (JWT).",
+      "features": [
+        "Instant decoding of JWT Header and Payload",
+        "Real-time Signature verification with local keys",
+        "Payload editor for easy token re-generation",
+        "Support for HS256, RS256, and other algorithms",
+        "100% Client-side processing for token security",
+        "URI state sharing for debugging workflows"
+      ],
+      "hmacSecret": "HMAC Secret...",
+      "privateKey": "Private Key (PEM or JSON)..."
+    },
+    "hash-generator": {
+      "title": "Hash Generator",
+      "description": "Generate SHA-256, SHA-512, and MD5 hashes via Web Crypto API.",
+      "features": [
+        "SHA-256, SHA-512, and MD5 hash generation",
+        "Secure HMAC generation with custom keys",
+        "Salt support for enhanced hash security",
+        "Real-time output as you type or paste",
+        "No data transmission to remote servers"
+      ]
+    },
+    "secret-generator": {
+      "title": "Password & Secret Generator",
+      "description": "Generate secure passwords, API keys, and random tokens with strength evaluation.",
+      "features": [
+        "Customizable password length and character sets",
+        "Advanced entropy and strength evaluation",
+        "Secure API key and random token generation",
+        "Bulk generation for multiple secrets",
+        "Local-only generation using cryptographically secure RNG"
+      ]
+    },
+    "rsa-key-pair-generator": {
+      "title": "RSA Key Pair Gen",
+      "description": "Generate RSA public/private key pairs.",
+      "features": [
+        "Generate secure RSA public and private key pairs",
+        "Custom key size support (up to 4096-bit)",
+        "PKCS#1 and PKCS#8 export formats",
+        "Instant export to PEM or JSON structures",
+        "Secure local generation without server-side storage"
+      ]
+    },
+    "base64-encoder-decoder": {
+      "title": "Base64 Encoder/Decoder",
+      "description": "Instant Base64 encoding and decoding for text or files.",
+      "features": [
+        "Ultra-fast text to Base64 encoding and decoding",
+        "Support for URL-safe Base64 variants",
+        "Convert files to Base64 Data URIs directly",
+        "UTF-8 compliant encoding for special characters",
+        "Client-side processing for data privacy"
+      ]
+    },
+    "url-encoder-decoder": {
+      "title": "URL Encoder/Decoder",
+      "description": "Secure management of URI special characters.",
+      "features": [
+        "Percent-encoding and decoding for URIs",
+        "Query parameter parsing and formatting",
+        "RFC 3986 compliant encoding logic",
+        "Double-encoding prevention tools",
+        "Instant transformation in your browser"
+      ]
+    },
+    "html-entities-converter": {
+      "title": "HTML Entities",
+      "description": "Escape and unescape your HTML characters.",
+      "features": [
+        "Encode special characters into HTML entities",
+        "Decode named and numeric HTML entities",
+        "Support for Hex and Decimal notations",
+        "Fast local processing for web security analysis"
+      ]
+    },
+    "binary-converter": {
+      "title": "Binary Converter",
+      "description": "Convert text to binary and vice versa.",
+      "features": [
+        "Instant text to Binary (0101...) conversion",
+        "Convert binary strings back to readable text",
+        "Multiple encoding support (UTF-8, ASCII)",
+        "Real-time transformation for binary analysis",
+        "Privacy-guaranteed local processing"
+      ]
+    },
+    "color-converter": {
+      "title": "Color Converter",
+      "description": "Conversion between HEX, RGB, HSL, and CMYK formats.",
+      "features": [
+        "Convert between HEX, RGB, HSL, and CMYK",
+        "Visual color picker and preview tool",
+        "Contrast ratio checker for accessibility",
+        "CSS-ready format export and palette generation",
+        "Fast local color space transformations"
+      ]
+    },
+    "unicode-escape-sequences": {
+      "title": "Unicode Escape",
+      "description": "Convert text to Unicode escape sequences.",
+      "features": [
+        "Convert text to \\uXXXX escape sequences",
+        "Decode Unicode escapes back to original text",
+        "Support for full U+XXXXXXXX long sequences",
+        "Handle emojis and complex characters correctly",
+        "Local-only transformation"
+      ]
+    },
+    "epoch-converter": {
+      "title": "Epoch Converter",
+      "description": "Timestamps to readable dates and UTC management.",
+      "features": [
+        "Convert Unix timestamps to ISO-8601 dates",
+        "Auto-detection of Seconds vs Milliseconds",
+        "Human-readable relative time (e.g. '2 minutes ago')",
+        "Timezone-aware date and time conversion",
+        "One-click copy of current Unix timestamp",
+        "Privacy-first local time processing"
+      ],
+      "localTime": "Local Time",
+      "utcTime": "UTC Time",
+      "timestampLabel": "Unix Timestamp (Seconds or Milliseconds)"
+    },
+    "timezone-converter": {
+      "title": "Timezone Converter",
+      "description": "Compare times between different time zones.",
+      "features": [
+        "World clock with multi-timezone comparison",
+        "Daylight Saving Time (DST) aware conversions",
+        "Fast search by city or geographical region",
+        "Reference time slider for easy planning",
+        "Secure local-only timezone management"
+      ],
+      "addTimezone": "Add Timezone",
+      "searchPlaceholder": "Search city or region...",
+      "noResults": "No timezones found matching \"{search}\"",
+      "referenceTime": "Reference Time",
+      "liveSyncActive": "Live Sync Active",
+      "liveMode": "Live Mode",
+      "fixedTime": "Fixed Time"
+    },
+    "cron-parser": {
+      "title": "Cron Parser",
+      "description": "Translate Cron expressions into natural text.",
+      "features": [
+        "Translate Cron expressions into natural language",
+        "Calculate next execution dates and times",
+        "Support for Standard, Quartz, and Jenkins formats",
+        "Real-time validation of Cron syntax",
+        "Private local-only parsing logic"
+      ]
+    },
+    "time-tracker": {
+      "title": "Stopwatch & Timer",
+      "description": "Track time with a precise stopwatch, lap management, and customizable countdowns.",
+      "features": [
+        "High-precision stopwatch with lap tracking",
+        "Customizable countdown timers with notifications",
+        "Modern dark-mode optimized visual interface",
+        "Persistent time tracking across page reloads",
+        "100% Client-side local time management"
+      ]
+    },
+    "my-ip-info": {
+      "title": "My IP Info",
+      "description": "Get detailed information about your public IP address.",
+      "features": [
+        "Public IPv4 and IPv6 address detection",
+        "Detailed geolocation (City, Country, Region)",
+        "ISP and ASN (Autonomous System) information",
+        "User Agent and Operating System analysis",
+        "Terminal snippet generator for quick IP lookup",
+        "Privacy-conscious IP detection with user consent"
+      ],
+      "manualDetection": "Manual Detection",
+      "publicIpTerminal": "Public IP (Terminal)",
+      "localIpInternal": "Local IP (Internal)",
+      "platforms": {
+        "macosLinuxWindows": "macOS / Linux / Windows",
+        "powershell": "PowerShell",
+        "windowsCmd": "Windows (CMD)",
+        "macosLinux": "macOS / Linux"
+      },
+      "secureLookup": "Secure Lookup",
+      "clientSideDetection": "Client-side only detection",
+      "deviceInfo": "Device Info",
+      "operatingSystem": "Operating System",
+      "resolution": "Resolution",
+      "userAgent": "User Agent",
+      "localDetectionLogic": "Detection logic runs strictly in your browser.",
+      "geolocation": "Geolocation",
+      "location": "Location",
+      "country": "Country",
+      "providerAsn": "Provider / ASN",
+      "timezone": "Timezone",
+      "postalCode": "Postal Code",
+      "coordinates": "Coordinates",
+      "detectionFailed": "Detection Failed",
+      "reloadPage": "Reload Page",
+      "publicIpAddress": "Your Public IP Address",
+      "copyIp": "Copy IP",
+      "privacyGate": "Privacy Gate",
+      "externalQueryRequired": "IP Detection requires external query",
+      "privacyGateDescription": "Zply runs entirely in your browser. To retrieve your public IP address and geolocation, we need to query an external provider (<span class=\"font-mono\">ipapi.co</span>).",
+      "detecting": "Detecting...",
+      "showMyIp": "Show my IP",
+      "openProvider": "Open ipapi.co",
+      "detectingConnection": "Detecting your connection..."
+    },
+    "cidr-calculator": {
+      "title": "CIDR Calculator",
+      "description": "Calculate IPs, ranges, and subnet masks.",
+      "features": [
+        "Calculate IP ranges and subnet masks",
+        "First and last usable IP address detection",
+        "Number of hosts per subnet calculation",
+        "CIDR to Netmask and Wildcard mask conversion",
+        "Instant local network calculations"
+      ]
+    },
+    "http-headers-analyzer": {
+      "title": "HTTP Headers",
+      "description": "Analyze HTTP response headers.",
+      "features": [
+        "Deep analysis of HTTP response headers",
+        "Security headers check (CSP, HSTS, X-Frame)",
+        "Detailed explanations for each header type",
+        "Raw and parsed view of header payloads",
+        "Security best-practices recommendations"
+      ]
+    }
+  }
+}

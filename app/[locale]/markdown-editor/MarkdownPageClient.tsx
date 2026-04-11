@@ -1,0 +1,178 @@
+'use client';
+
+import { EditorPreviewWorkspace } from '@/components/ui/layout';
+import { ToolPageLayout }from '@/components/ui/layout';
+import { Separator } from '@/components/ui/separator';
+import { ViewModeToggle } from '@/components/ui/layout';
+import { Category, ToolId } from '@/lib/config/tools';
+import { useTranslations } from 'next-intl';
+import { cn } from '@/lib/utils';
+import * as LucideIcons from 'lucide-react';
+import type * as monaco from 'monaco-editor';
+import { ReactNode, RefObject, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { useTheme } from 'next-themes';
+import { useMarkdownState } from './use-markdown-state';
+import { useMarkdownTransformation } from './use-markdown-transformation';
+import { useMarkdownActions } from './use-markdown-actions';
+import { MarkdownToolbar } from './MarkdownToolbar';
+
+const { FileText, Zap } = LucideIcons;
+
+export default function MarkdownPageClient(): ReactNode {
+  const { resolvedTheme } = useTheme();
+  const { content, setContent, viewMode, setViewMode } = useMarkdownState();
+  const { html } = useMarkdownTransformation(content);
+  const editorRef: RefObject<monaco.editor.IStandaloneCodeEditor | null> = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
+  const previewRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(null);
+
+  const { handleToolbarAction, handleFoldAll, handleUnfoldAll } = useMarkdownActions(editorRef);
+  const handleExportPdf = (): void => {
+    window.print();
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+        handleExportPdf();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const t = useTranslations('Tools');
+  const tCategories = useTranslations('Categories');
+  const tCommon = useTranslations('Common');
+  return (
+    <>
+      <ToolPageLayout
+        toolId={ToolId.MARKDOWN}
+        title={t(`${ToolId.MARKDOWN}.title`)}
+        icon={<FileText className="w-5 h-5" />}
+        breadcrumbItems={[
+          { label: tCategories(Category.DIAGRAMS), href: `/?category=${Category.DIAGRAMS}` },
+          { label: t(`${ToolId.MARKDOWN}.title`) }
+        ]}
+        headerActions={
+          <div className="flex items-center gap-2">
+            <MarkdownToolbar
+              onAction={handleToolbarAction}
+              onFoldAll={handleFoldAll}
+              onUnfoldAll={handleUnfoldAll}
+              onLoadFile={setContent}
+              loadFileLabel={t(`${ToolId.MARKDOWN}.loadFile`)}
+              onExportPdf={handleExportPdf}
+              exportPdfLabel={t(`${ToolId.MARKDOWN}.exportPdf`)}
+            />
+            <Separator className="h-4 hidden lg:block" />
+            <ViewModeToggle viewMode={viewMode} setViewMode={setViewMode} />
+          </div>
+        }
+        footerIndicator={
+          <>
+            <span className="flex items-center gap-1.5"><Zap
+              className="w-3 h-3 text-yellow-500/50" /> {tCommon('toolIndicators.liveRendering')}</span>
+            <Separator />
+            <span>{tCommon('charsCount', { count: content.length })}</span>
+          </>
+        }
+        workspaceClassName="flex-1 min-h-0 flex-row overflow-hidden"
+      >
+        <EditorPreviewWorkspace
+          value={content}
+          onChange={setContent}
+          language="markdown"
+          viewMode={viewMode}
+          editorProps={{
+            onMount: (editor: monaco.editor.IStandaloneCodeEditor, monacoInstance: typeof monaco) => {
+              editorRef.current = editor;
+
+              // Add command for PDF export (Ctrl+P / Cmd+P)
+              editor.addCommand(monacoInstance.KeyMod.CtrlCmd | monacoInstance.KeyCode.KeyP, () => {
+                handleExportPdf();
+              });
+
+              // Register a custom folding provider for Markdown headers
+              // as Monaco doesn't provide one for '#' headers by default
+              monacoInstance.languages.registerFoldingRangeProvider('markdown', {
+                provideFoldingRanges: (model: monaco.editor.ITextModel) => {
+                  const lines: string[] = model.getLinesContent();
+                  const ranges: monaco.languages.FoldingRange[] = [];
+                  const stack: { level: number; start: number }[] = [];
+
+                  for (let i: number = 0; i < lines.length; i++) {
+                    const line: string = lines[i];
+                    const match: RegExpMatchArray | null = line.match(/^(#{1,6})\s/);
+
+                    if (match) {
+                      const level: number = match[1].length;
+                      const lineNumber: number = i + 1;
+
+                      while (stack.length > 0 && stack[stack.length - 1].level >= level) {
+                        const last: { level: number, start: number } = stack.pop()!;
+                        if (lineNumber - 1 > last.start) {
+                          ranges.push({
+                            start: last.start,
+                            end: lineNumber - 1,
+                            kind: monacoInstance.languages.FoldingRangeKind.Region
+                          });
+                        }
+                      }
+                      stack.push({ level, start: lineNumber });
+                    }
+                  }
+
+                  while (stack.length > 0) {
+                    const last: { level: number; start: number } = stack.pop()!;
+                    if (lines.length > last.start) {
+                      ranges.push({
+                        start: last.start,
+                        end: lines.length,
+                        kind: monacoInstance.languages.FoldingRangeKind.Region
+                      });
+                    }
+                  }
+
+                  return ranges;
+                }
+              });
+            },
+            options: {
+              showFoldingControls: 'always',
+              lineNumbers: 'on',
+              foldingHighlight: true,
+              lineDecorationsWidth: 16,
+            }
+          }}
+          previewClassName={`${resolvedTheme === 'dark' ? 'bg-[#050a1a]' : 'bg-slate-50'}`}
+          preview={
+            <div ref={previewRef} className="h-full p-12 md:p-16 overflow-y-auto custom-scrollbar markdown-preview-area">
+              <article
+                className={cn(
+                  'prose max-w-none prose-headings:font-black prose-p:leading-relaxed',
+                  resolvedTheme === 'dark' && 'prose-invert'
+                )}
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+            </div>
+          }
+        />
+      </ToolPageLayout>
+      {
+        typeof document !== 'undefined'
+        && createPortal(
+          <div id="markdown-print-area" className="hidden print:block">
+            <article
+              className="prose max-w-none prose-headings:font-black prose-p:leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+          </div>,
+          document.body
+        )
+      }
+    </>
+  );
+}

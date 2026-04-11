@@ -43,3 +43,6 @@ next-env.d.ts
 # intel IJ
 .idea
 zply.iml
+
+# junie
+.junie/memory
