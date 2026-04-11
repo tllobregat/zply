@@ -23,7 +23,7 @@ export function PageLayoutIsland({
       islandClassName
     )}>
       <div className={cn(
-        "flex-1 min-h-0 flex flex-col rounded-[inherit]",
+        "flex-1 min-h-0 min-w-0 flex flex-col rounded-[inherit]",
         scrollInIsland && "overflow-y-auto custom-scrollbar",
         contentClassName
       )}>

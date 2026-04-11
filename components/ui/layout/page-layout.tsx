@@ -33,7 +33,7 @@ export const PageLayout = React.forwardRef<HTMLDivElement, PageLayoutProps>(({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       className={cn(
-        "flex-1 flex flex-col min-h-0",
+        "flex-1 flex flex-col min-h-0 min-w-0",
         scrollInIsland ? "overflow-hidden" : "overflow-y-auto custom-scrollbar",
         className
       )}
@@ -42,7 +42,7 @@ export const PageLayout = React.forwardRef<HTMLDivElement, PageLayoutProps>(({
         id={id}
         ref={ref}
         className={cn(
-          "flex flex-col px-2 sm:pl-0 sm:pr-3",
+          "flex flex-col min-w-0 px-2 sm:pl-0 sm:pr-3",
           scrollInIsland ? "flex-1 min-h-0" : "h-full shrink-0"
         )}
       >

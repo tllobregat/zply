@@ -19,7 +19,7 @@ interface BreadcrumbProps {
 export function Breadcrumb({ items }: BreadcrumbProps): React.ReactNode {
   const t = useTranslations('Common');
   return (
-    <nav className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">
+    <nav className="flex flex-wrap items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">
       <Link href="/" className="hover:text-blue-400 transition-colors flex items-center gap-1">
         <Home className="w-3 h-3" /> {t('home')}
       </Link>
