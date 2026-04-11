@@ -4,7 +4,7 @@ import { Key, Unlock, Shield, Settings2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import React, { ReactNode } from 'react';
-import { ViewModeToggle } from '@/components/ui/view-mode-toggle';
+import { ViewModeToggle } from '@/components/ui/layout';
 import { ViewMode } from '@/hooks/use-view-mode';
 import { CategoryTheme } from '@/lib/config/categories';
 import { useTranslations } from 'next-intl';

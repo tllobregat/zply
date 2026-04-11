@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { ViewModeToggle } from '@/components/ui/view-mode-toggle';
+import { ViewModeToggle } from '@/components/ui/layout';
 import { cn } from '@/lib/utils';
 import { RefreshCw } from 'lucide-react';
 import React, { ReactNode } from 'react';

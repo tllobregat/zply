@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { ViewModeToggle } from '@/components/ui/view-mode-toggle';
+import { ViewModeToggle } from '@/components/ui/layout';
 import { ViewMode } from '@/hooks/use-view-mode';
 import { CategoryTheme } from '@/lib/config/categories';
 import { cn } from '@/lib/utils';

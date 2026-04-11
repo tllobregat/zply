@@ -5,10 +5,9 @@ import { IpInfoError } from '@/app/[locale]/my-ip-info/IpInfoError';
 import { IpInfoGeolocation } from '@/app/[locale]/my-ip-info/IpInfoGeolocation';
 import { IpInfoHero } from '@/app/[locale]/my-ip-info/IpInfoHero';
 import { IpInfoManualGuide } from '@/app/[locale]/my-ip-info/IpInfoManualGuide';
-import { IpInfoPermissionGate } from '@/app/[locale]/my-ip-info/IpInfoPermissionGate';
 import { useIpInfoDevice } from '@/app/[locale]/my-ip-info/use-ip-info-device';
 import { useIpInfoFetch } from '@/app/[locale]/my-ip-info/use-ip-info-fetch';
-import ToolPageLayout from '@/components/tool-page-layout';
+import { ToolPageLayout, PermissionGate } from '@/components/ui/layout';
 import { Separator } from '@/components/ui/separator';
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 import { CATEGORY_COLORS, CategoryTheme, getCategoryClasses } from '@/lib/config/categories';
@@ -70,10 +69,16 @@ export default function MyIpInfoClient(): ReactNode {
                   </div>
                 )
                 : (
-                  <IpInfoPermissionGate
+                  <PermissionGate
                     onAccept={triggerFetch}
                     loading={loading}
                     theme={theme}
+                    title={t(`${ToolId.MY_IP}.externalQueryRequired`)}
+                    description={t.raw(`${ToolId.MY_IP}.privacyGateDescription`)}
+                    buttonLabel={t(`${ToolId.MY_IP}.showMyIp`)}
+                    loadingLabel={t(`${ToolId.MY_IP}.detecting`)}
+                    gateLabel={t(`${ToolId.MY_IP}.privacyGate`)}
+                    providerUrl="https://ipapi.co/"
                   />
                 )
             }

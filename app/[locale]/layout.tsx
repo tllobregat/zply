@@ -1,7 +1,7 @@
 import { CommandMenu } from '@/components/command-menu';
 import { DevTool } from '@/components/dev-tool';
 import { Providers } from '@/components/providers';
-import { Sidebar } from '@/components/sidebar';
+import { Sidebar } from '@/components/ui/layout/sidebar';
 import type { Metadata } from 'next';
 import { NextFontWithVariable } from 'next/dist/compiled/@next/font';
 import { Geist, Geist_Mono } from 'next/font/google';
@@ -99,7 +99,7 @@ export default async function RootLayout({
               <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-zply-purple/10 rounded-full blur-[140px]" />
             </div>
 
-            <div className="flex flex-col-reverse sm:flex-row w-full h-full py-2 sm:py-3 gap-8 sm:gap-6">
+            <div className="flex flex-col-reverse sm:flex-row w-full h-full py-2 sm:py-3 gap-2 sm:gap-6">
               {/* Navigation (Sidebar on desktop, Bottom bar on mobile) */}
               <Sidebar />
 

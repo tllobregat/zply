@@ -1,5 +1,5 @@
 'use client';
-import ToolPageLayout from '@/components/tool-page-layout';
+import { ToolPageLayout }from '@/components/ui/layout';
 import { Separator } from '@/components/ui/separator';
 import { CATEGORY_COLORS, CategoryTheme, getCategoryClasses } from '@/lib/config/categories';
 import { Category, ToolId } from '@/lib/config/tools';

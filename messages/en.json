@@ -20,8 +20,19 @@
     "searchResults": "Search Results",
     "dashboard": "Dashboard"
   },
+  "PrivacyGate": {
+    "privacyGate": "Privacy Gate",
+    "title": "External Request Required",
+    "description": "This tool requires an external request to a third-party service to provide the requested information. No data from your side is sent, only a query for the external service.",
+    "accept": "I understand, show results",
+    "providerLink": "Open provider website",
+    "loading": "Processing..."
+  },
   "Common": {
     "language": "Language",
+    "theme": "Theme",
+    "support": "Support",
+    "buyMeACoffee": "Buy me a coffee",
     "en": "English",
     "fr": "French",
     "light": "Light",

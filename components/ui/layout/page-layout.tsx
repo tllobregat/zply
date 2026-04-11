@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { PageLayoutIsland } from './page-layout-island';
 
 interface PageLayoutProps {
   header: React.ReactNode;
@@ -47,20 +48,14 @@ export const PageLayout = React.forwardRef<HTMLDivElement, PageLayoutProps>(({
       >
         {header}
 
-        <div className={cn(
-          "flex-1 min-h-0 flex flex-col glass-island rounded-2xl sm:rounded-3xl overflow-hidden border border-island-border relative shadow-2xl bg-island-bg/20",
-          !scrollInIsland && "shrink-0",
-          islandClassName
-        )}>
-          <div className={cn(
-            "flex-1 min-h-0 flex flex-col rounded-[inherit]",
-            scrollInIsland && "overflow-y-auto custom-scrollbar",
-            contentClassName
-          )}>
-            {children}
-          </div>
-          {footer}
-        </div>
+        <PageLayoutIsland
+          islandClassName={islandClassName}
+          contentClassName={contentClassName}
+          scrollInIsland={scrollInIsland}
+          footer={footer}
+        >
+          {children}
+        </PageLayoutIsland>
       </div>
       {afterIsland}
     </motion.div>

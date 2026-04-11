@@ -1,4 +1,4 @@
-import ToolPageLayout from '@/components/tool-page-layout';
+import { ToolPageLayout }from '@/components/ui/layout';
 import { Category, ToolId } from '@/lib/config/tools';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';

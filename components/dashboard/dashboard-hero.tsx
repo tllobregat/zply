@@ -32,9 +32,9 @@ export function DashboardHero(): React.ReactNode {
         transition={{ duration: 0.5, delay: 0.1 }}
         className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto"
       >
-        <div className="flex items-center gap-4 px-4 py-2">
-          <div className="w-10 h-10 rounded-full bg-green-500/5 flex items-center justify-center text-green-500/60 shrink-0">
-            <Shield className="w-5 h-5" />
+        <div className="flex items-center gap-4 px-4 py-2 group transition-all">
+          <div className="w-10 h-10 rounded-full bg-green-500/5 flex items-center justify-center text-green-500/60 shrink-0 transition-all group-hover:bg-green-500/10 group-hover:text-green-500 shadow-[inset_0_0_0_1px_rgba(34,197,94,0.05)] group-hover:shadow-[inset_0_0_0_1px_rgba(34,197,94,0.1)]">
+            <Shield className="w-5 h-5 transition-transform group-hover:scale-110" />
           </div>
           <div className="min-w-0">
             <h3 className="text-sm font-black uppercase text-foreground mb-0.5">{t('features.private')}</h3>
@@ -42,9 +42,9 @@ export function DashboardHero(): React.ReactNode {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 px-4 py-2">
-          <div className="w-10 h-10 rounded-full bg-orange-500/5 flex items-center justify-center text-orange-500/60 shrink-0">
-            <Link className="w-5 h-5" />
+        <div className="flex items-center gap-4 px-4 py-2 group transition-all">
+          <div className="w-10 h-10 rounded-full bg-orange-500/5 flex items-center justify-center text-orange-500/60 shrink-0 transition-all group-hover:bg-orange-500/10 group-hover:text-orange-500 shadow-[inset_0_0_0_1px_rgba(249,115,22,0.05)] group-hover:shadow-[inset_0_0_0_1px_rgba(249,115,22,0.1)]">
+            <Link className="w-5 h-5 transition-transform group-hover:scale-110" />
           </div>
           <div className="min-w-0">
             <h3 className="text-sm font-black uppercase text-foreground mb-0.5">{t('features.shareable')}</h3>
@@ -52,9 +52,9 @@ export function DashboardHero(): React.ReactNode {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 px-4 py-2">
-          <div className="w-10 h-10 rounded-full bg-blue-500/5 flex items-center justify-center text-blue-500/60 shrink-0">
-            <Zap className="w-5 h-5" />
+        <div className="flex items-center gap-4 px-4 py-2 group transition-all">
+          <div className="w-10 h-10 rounded-full bg-blue-500/5 flex items-center justify-center text-blue-500/60 shrink-0 transition-all group-hover:bg-blue-500/10 group-hover:text-blue-500 shadow-[inset_0_0_0_1px_rgba(59,130,246,0.05)] group-hover:shadow-[inset_0_0_0_1px_rgba(59,130,246,0.1)]">
+            <Zap className="w-5 h-5 transition-transform group-hover:scale-110" />
           </div>
           <div className="min-w-0">
             <h3 className="text-sm font-black uppercase text-foreground mb-0.5">{t('features.fast')}</h3>

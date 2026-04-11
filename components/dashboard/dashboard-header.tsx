@@ -1,8 +1,8 @@
 'use client';
 
-import { Breadcrumb, BreadcrumbItem } from '@/components/ui/breadcrumb';
-import { CATEGORY_META, CategoryMeta, getCategoryClasses, getCategoryColorClass } from '@/lib/config/categories';
-import { CATEGORIES, Category } from '@/lib/config/tools';
+import { Breadcrumb, BreadcrumbItem } from '@/components/ui/layout';
+import { CATEGORY_META, CategoryMeta, getCategoryClasses } from '@/lib/config/categories';
+import { Category } from '@/lib/config/tools';
 import { cn } from '@/lib/utils';
 import { LayoutGrid, LucideIcon, Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';

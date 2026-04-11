@@ -1,8 +1,8 @@
 'use client';
 
 import { DashboardFooter } from '@/components/dashboard/dashboard-footer';
-import { PageLayout } from '@/components/page-layout';
-import { Breadcrumb } from '@/components/ui/breadcrumb';
+import { PageLayout } from '@/components/ui/layout';
+import { Breadcrumb } from '@/components/ui/layout';
 import { ShieldCheck, Lock, Cookie, Database, Activity, ExternalLink } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React from 'react';

@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { ViewModeToggle } from '@/components/ui/view-mode-toggle';
+import { ViewModeToggle } from '@/components/ui/layout';
 import { cn } from '@/lib/utils';
 import { Code, Download, Image as ImageIcon } from 'lucide-react';
 import Script from 'next/script';

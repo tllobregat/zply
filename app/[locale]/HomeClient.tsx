@@ -6,62 +6,22 @@ import { DashboardHeader } from '@/components/dashboard/dashboard-header';
 import { DashboardHero } from '@/components/dashboard/dashboard-hero';
 import { QuickActions } from '@/components/dashboard/quick-actions';
 import { ToolGrid } from '@/components/dashboard/tool-grid';
-import { PageLayout } from '@/components/page-layout';
+import { PageLayout } from '@/components/ui/layout';
+import { useCategory, UseCategory } from '@/hooks/use-category';
 import { usePinnedTools, UsePinnedTools } from '@/hooks/use-pinned-tools';
 import { Category, ToolConfig, TOOLS } from '@/lib/config/tools';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState, useCallback } from 'react';
 
 export default function HomeClient(): React.ReactNode {
-  const searchParams: URLSearchParams = useSearchParams();
-  const router: AppRouterInstance = useRouter();
   const tTools = useTranslations('Tools');
 
   const [search, setSearch] = useState<string>('');
+  const onReset = useCallback(() => setSearch(''), []);
+  const { activeCategory, setActiveCategory }: UseCategory = useCategory(onReset);
   const { pinnedIds, togglePin }: UsePinnedTools = usePinnedTools();
   const toolsRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
-
-  // Derive activeCategory from URL
-  const activeCategory: Category = useMemo(() => {
-    const categoryFromUrl: string | null = searchParams.get('category');
-    if (categoryFromUrl && Object.values(Category).includes(categoryFromUrl as Category)) {
-      return categoryFromUrl as Category;
-    }
-    return Category.ALL;
-  }, [searchParams]);
-
-  // Update activeCategory via URL
-  const setActiveCategory = (newCategory: Category, useReplace: boolean = false): void => {
-    const params: URLSearchParams = new URLSearchParams(searchParams.toString());
-    if (newCategory === Category.ALL) {
-      params.delete('category');
-    } else {
-      params.set('category', newCategory);
-    }
-
-    const queryString: string = params.toString();
-    const targetUrl: string = queryString ? `/?${queryString}` : '/';
-
-    if (useReplace) {
-      router.replace(targetUrl, { scroll: false });
-    } else {
-      router.push(targetUrl, { scroll: false });
-    }
-  };
-
-  // Handle reset-dashboard event
-  useEffect(() => {
-    const handleReset = (): void => {
-      setActiveCategory(Category.ALL, true);
-      setSearch('');
-    };
-
-    window.addEventListener('reset-dashboard', handleReset);
-    return (): void => window.removeEventListener('reset-dashboard', handleReset);
-  }, [searchParams, router]); // include dependencies for setActiveCategory closure logic
 
   const handleTogglePin = (id: string, e: React.MouseEvent): void => {
     e.preventDefault();

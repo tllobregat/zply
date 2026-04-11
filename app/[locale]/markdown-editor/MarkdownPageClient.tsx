@@ -1,9 +1,9 @@
 'use client';
 
-import { EditorPreviewWorkspace } from '@/components/editor-preview-workspace';
-import ToolPageLayout from '@/components/tool-page-layout';
+import { EditorPreviewWorkspace } from '@/components/ui/layout';
+import { ToolPageLayout }from '@/components/ui/layout';
 import { Separator } from '@/components/ui/separator';
-import { ViewModeToggle } from '@/components/ui/view-mode-toggle';
+import { ViewModeToggle } from '@/components/ui/layout';
 import { Category, ToolId } from '@/lib/config/tools';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';

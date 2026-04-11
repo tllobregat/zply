@@ -6,7 +6,7 @@ import { EpochTimestampInput } from '@/app/[locale]/epoch-converter/EpochTimesta
 import { useEpochNow } from '@/app/[locale]/epoch-converter/use-epoch-now';
 import { useEpochState } from '@/app/[locale]/epoch-converter/use-epoch-state';
 import { useEpochTransformation } from '@/app/[locale]/epoch-converter/use-epoch-transformation';
-import ToolPageLayout from '@/components/tool-page-layout';
+import { ToolPageLayout }from '@/components/ui/layout';
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 import { CATEGORY_COLORS, CategoryTheme, getCategoryClasses } from '@/lib/config/categories';
 import { Category, ToolId } from '@/lib/config/tools';

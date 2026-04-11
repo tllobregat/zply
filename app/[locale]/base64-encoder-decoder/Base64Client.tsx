@@ -8,17 +8,16 @@ import { Base64Toolbar } from '@/app/[locale]/base64-encoder-decoder/Base64Toolb
 import { useBase64File } from '@/app/[locale]/base64-encoder-decoder/use-base64-file';
 import { useBase64State } from '@/app/[locale]/base64-encoder-decoder/use-base64-state';
 import { useBase64Transformation } from '@/app/[locale]/base64-encoder-decoder/use-base64-transformation';
-import { EditorPreviewWorkspace } from '@/components/editor-preview-workspace';
-import ToolPageLayout from '@/components/tool-page-layout';
+import { EditorPreviewWorkspace, ToolPageLayout } from '@/components/ui/layout';
 import { Separator } from '@/components/ui/separator';
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 import { useViewMode, ViewMode } from '@/hooks/use-view-mode';
 import { CATEGORY_COLORS, CategoryTheme, getCategoryClasses } from '@/lib/config/categories';
 import { Category, ToolId } from '@/lib/config/tools';
-import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import { AnimatePresence } from 'framer-motion';
 import { Binary, Zap } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React, { ReactNode } from 'react';
 
 const MAX_DISPLAY_LENGTH: number = 50000; // 50KB limit for live display
@@ -85,7 +84,7 @@ export default function Base64Client(): ReactNode {
         language={state.mode === 'decode' ? 'plaintext' : 'markdown'}
         viewMode={viewMode}
         customEditor={
-          state.inputType === 'file' 
+          state.inputType === 'file'
             ? (
               <div className="h-full flex flex-col justify-center">
                 <Base64FileUpload

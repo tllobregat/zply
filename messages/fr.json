@@ -20,8 +20,19 @@
     "searchResults": "Résultats de recherche",
     "dashboard": "Tableau de bord"
   },
+  "PrivacyGate": {
+    "privacyGate": "Protection de la Vie Privée",
+    "title": "Requête Externe Requise",
+    "description": "Cet outil nécessite une requête externe vers un service tiers pour fournir les informations demandées. Aucune donnée personnelle n'est envoyée, seule une requête pour le service externe.",
+    "accept": "Je comprends, afficher les résultats",
+    "providerLink": "Ouvrir le site du fournisseur",
+    "loading": "Traitement..."
+  },
   "Common": {
     "language": "Langue",
+    "theme": "Thème",
+    "support": "Soutien",
+    "buyMeACoffee": "M'offrir un café",
     "en": "Anglais",
     "fr": "Français",
     "light": "Clair",
