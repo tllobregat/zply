@@ -12,9 +12,6 @@ interface DashboardHeaderProps {
   activeCategory: Category;
   search: string;
   setSearch: (search: string) => void;
-  setActiveCategory: (category: Category, useReplace?: boolean) => void;
-  isBrowsingCategories: boolean;
-  filteredToolsCount: number;
 }
 
 export function DashboardHeader(
@@ -22,9 +19,6 @@ export function DashboardHeader(
     activeCategory,
     search,
     setSearch,
-    setActiveCategory,
-    isBrowsingCategories,
-    filteredToolsCount,
   }: DashboardHeaderProps,
 ): React.ReactNode {
   const tCommon = useTranslations('Common');

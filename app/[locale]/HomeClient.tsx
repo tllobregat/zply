@@ -51,9 +51,6 @@ export default function HomeClient(): React.ReactNode {
           activeCategory={activeCategory}
           search={search}
           setSearch={setSearch}
-          setActiveCategory={setActiveCategory}
-          isBrowsingCategories={isBrowsingCategories}
-          filteredToolsCount={filteredTools.length}
         />
       }
       footer={<DashboardFooter />}
