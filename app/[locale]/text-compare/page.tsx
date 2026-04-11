@@ -1,23 +1,31 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import TextCompareClient from './TextCompareClient';
+import { getTranslations } from 'next-intl/server';
+import { ToolId } from '@/lib/config/tools';
 
-export const metadata: Metadata = {
-  title: 'Text Compare | Zply',
-  description: 'Compare two texts and find differences. Split or Unified view.',
-  openGraph: {
-    title: 'Text Compare | Zply',
-    description: 'Compare two texts and find differences. Split or Unified view.',
-    url: 'https://zply.dev/text-compare',
-  },
-  twitter: {
-    title: 'Text Compare | Zply',
-    description: 'Compare two texts and find differences. Split or Unified view.',
-  },
-  alternates: {
-    canonical: 'https://zply.dev/text-compare',
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Tools' });
+  const toolId: ToolId = ToolId.TEXT_COMPARE;
+
+  return {
+    title: `${t(`${toolId}.title`)} | Zply`,
+    description: t(`${toolId}.description`),
+    openGraph: {
+      title: `${t(`${toolId}.title`)} | Zply`,
+      description: t(`${toolId}.description`),
+      url: `https://zply.dev/text-compare`,
+    },
+    twitter: {
+      title: `${t(`${toolId}.title`)} | Zply`,
+      description: t(`${toolId}.description`),
+    },
+    alternates: {
+      canonical: `https://zply.dev/text-compare`,
+    },
+  };
+}
 
 export default function TextComparePage(): ReactNode {
   return <TextCompareClient />;

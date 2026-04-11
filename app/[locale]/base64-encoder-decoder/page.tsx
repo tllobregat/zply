@@ -1,23 +1,31 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import Base64Client from './Base64Client';
+import { getTranslations } from 'next-intl/server';
+import { ToolId } from '@/lib/config/tools';
 
-export const metadata: Metadata = {
-  title: 'Base64 Encoder/Decoder | Zply',
-  description: 'Instant Base64 encoding and decoding for text or files.',
-  openGraph: {
-    title: 'Base64 Encoder/Decoder | Zply',
-    description: 'Instant Base64 encoding and decoding for text or files.',
-    url: 'https://zply.dev/base64-encoder-decoder',
-  },
-  twitter: {
-    title: 'Base64 Encoder/Decoder | Zply',
-    description: 'Instant Base64 encoding and decoding for text or files.',
-  },
-  alternates: {
-    canonical: 'https://zply.dev/base64-encoder-decoder',
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Tools' });
+  const toolId: ToolId = ToolId.BASE64;
+
+  return {
+    title: `${t(`${toolId}.title`)} | Zply`,
+    description: t(`${toolId}.description`),
+    openGraph: {
+      title: `${t(`${toolId}.title`)} | Zply`,
+      description: t(`${toolId}.description`),
+      url: `https://zply.dev/base64-encoder-decoder`,
+    },
+    twitter: {
+      title: `${t(`${toolId}.title`)} | Zply`,
+      description: t(`${toolId}.description`),
+    },
+    alternates: {
+      canonical: `https://zply.dev/base64-encoder-decoder`,
+    },
+  };
+}
 
 export default function Base64ToolPage(): ReactNode {
   return <Base64Client />;

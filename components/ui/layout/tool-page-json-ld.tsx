@@ -11,6 +11,7 @@ interface ToolPageJsonLdProps {
 
 export function ToolPageJsonLd({ toolId, title, toolConfig }: ToolPageJsonLdProps) {
   const t = useTranslations('Tools');
+  const features = toolConfig ? t.raw(`${toolConfig.id}.features`) as string[] | undefined : undefined;
 
   const jsonLd = JSON.stringify({
     '@context': 'https://schema.org',
@@ -20,6 +21,7 @@ export function ToolPageJsonLd({ toolId, title, toolConfig }: ToolPageJsonLdProp
     'applicationCategory': 'DeveloperTool',
     'operatingSystem': 'Any',
     'url': `https://zply.dev${toolConfig?.href}`,
+    'featureList': Array.isArray(features) ? features.join(', ') : undefined,
     'offers': {
       '@type': 'Offer',
       'price': '0',

@@ -1,23 +1,29 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { PrivacyPageClient } from './PrivacyPageClient';
+import { getTranslations } from 'next-intl/server';
 
-export const metadata: Metadata = {
-  title: 'Privacy & Security | Zply',
-  description: 'Learn how Zply ensures your data privacy with 100% client-side processing and zero-cookie policy.',
-  openGraph: {
-    title: 'Privacy & Security | Zply',
-    description: 'Learn how Zply ensures your data privacy with 100% client-side processing and zero-cookie policy.',
-    url: 'https://zply.dev/privacy',
-  },
-  twitter: {
-    title: 'Privacy & Security | Zply',
-    description: 'Learn how Zply ensures your data privacy with 100% client-side processing and zero-cookie policy.',
-  },
-  alternates: {
-    canonical: 'https://zply.dev/privacy',
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'PrivacyPolicy' });
+
+  return {
+    title: t('metadata.title'),
+    description: t('metadata.description'),
+    openGraph: {
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+      url: 'https://zply.dev/privacy',
+    },
+    twitter: {
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+    },
+    alternates: {
+      canonical: 'https://zply.dev/privacy',
+    },
+  };
+}
 
 export default function PrivacyPage(): ReactNode {
   return <PrivacyPageClient />;

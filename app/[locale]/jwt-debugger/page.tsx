@@ -1,23 +1,31 @@
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import JwtDebuggerClient from './JwtDebuggerClient';
+import { getTranslations } from 'next-intl/server';
+import { ToolId } from '@/lib/config/tools';
 
-export const metadata: Metadata = {
-  title: 'JWT Debugger | Zply',
-  description: 'Secure and local decoding and encoding of JSON Web Tokens (JWT).',
-  openGraph: {
-    title: 'JWT Debugger | Zply',
-    description: 'Secure and local decoding and encoding of JSON Web Tokens (JWT).',
-    url: 'https://zply.dev/jwt-debugger',
-  },
-  twitter: {
-    title: 'JWT Debugger | Zply',
-    description: 'Secure and local decoding and encoding of JSON Web Tokens (JWT).',
-  },
-  alternates: {
-    canonical: 'https://zply.dev/jwt-debugger',
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Tools' });
+  const toolId: ToolId = ToolId.JWT_DEC;
+
+  return {
+    title: `${t(`${toolId}.title`)} | Zply`,
+    description: t(`${toolId}.description`),
+    openGraph: {
+      title: `${t(`${toolId}.title`)} | Zply`,
+      description: t(`${toolId}.description`),
+      url: `https://zply.dev/jwt-debugger`,
+    },
+    twitter: {
+      title: `${t(`${toolId}.title`)} | Zply`,
+      description: t(`${toolId}.description`),
+    },
+    alternates: {
+      canonical: `https://zply.dev/jwt-debugger`,
+    },
+  };
+}
 
 export default function JwtPage(): ReactNode {
   return <JwtDebuggerClient />;

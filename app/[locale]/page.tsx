@@ -2,18 +2,38 @@ import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import HomeClient from './HomeClient';
 import Script from 'next/script';
+import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 
-export const metadata: Metadata = {
-  title: 'Zply - High Quality Developer Toolbox',
-  description: 'Ultra-fast, private, and secure developer tools. JSON, YAML, CSV, SQL, JWT, and more.',
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Index' });
+
+  return {
+    title: t('metadata.title'),
+    description: t('metadata.description'),
+    openGraph: {
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+      url: 'https://zply.dev',
+    },
+    twitter: {
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+    },
+    alternates: {
+      canonical: 'https://zply.dev',
+    },
+  };
+}
 
 export default function Home(): ReactNode {
+  const t = useTranslations('Index');
   const jsonLd: Record<string, string | object> = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    'name': 'Zply - High Quality Developer Toolbox',
-    'description': 'Ultra-fast, private, and secure developer tools. JSON, YAML, CSV, SQL, JWT, and more.',
+    'name': t('metadata.title'),
+    'description': t('metadata.description'),
     'applicationCategory': 'DeveloperTool',
     'operatingSystem': 'Any',
     'url': 'https://zply.dev',

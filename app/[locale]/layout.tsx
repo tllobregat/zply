@@ -9,7 +9,7 @@ import '../globals.css';
 import React from 'react';
 import { Analytics } from "@vercel/analytics/next"
 import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
+import {getMessages, getTranslations} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import { ClientThemeProvider } from '@/components/client-theme-provider';
@@ -24,39 +24,44 @@ const geistMono: NextFontWithVariable = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'Zply - High Quality Developer Toolbox',
-  description: 'A fast, privacy-focused toolbox for developers. Zero backend, zero cookies, zero database.',
-  keywords: ['developer tools', 'toolbox', 'json formatter', 'jwt decoder', 'sql visualizer', 'base64', 'privacy-focused'],
-  authors: [{ name: 'tllobregat' }],
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://zply.dev',
-    siteName: 'Zply',
-    title: 'Zply - High Quality Developer Toolbox',
-    description: 'Ultra-fast, private, and secure developer tools. JSON, YAML, CSV, SQL, JWT, and more.',
-    images: [
-      {
-        url: 'https://zply.dev/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Zply Developer Toolbox',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Zply - High Quality Developer Toolbox',
-    description: 'Ultra-fast, private, and secure developer tools. JSON, YAML, CSV, SQL, JWT, and more.',
-    images: ['https://zply.dev/og-image.png'],
-    creator: '@tllobregat',
-  },
-  alternates: {
-    canonical: 'https://zply.dev',
-  },
-  metadataBase: new URL('https://zply.dev'),
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Layout' });
+
+  return {
+    title: t('metadata.title'),
+    description: t('metadata.description'),
+    keywords: t('metadata.keywords').split(',').map(k => k.trim()),
+    authors: [{ name: 'tllobregat' }],
+    openGraph: {
+      type: 'website',
+      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+      url: 'https://zply.dev',
+      siteName: 'Zply',
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+      images: [
+        {
+          url: 'https://zply.dev/og-image.png',
+          width: 1200,
+          height: 630,
+          alt: 'Zply Developer Toolbox',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+      images: ['https://zply.dev/og-image.png'],
+      creator: '@tllobregat',
+    },
+    alternates: {
+      canonical: 'https://zply.dev',
+    },
+    metadataBase: new URL('https://zply.dev'),
+  };
+}
 
 export default async function RootLayout({
   children,
