@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/tllobregat/zply/compare/v1.1.0...v1.2.0) (2026-04-11)
+
+
+### Features
+
+* **i18n:** add internationalization support for en & fr ([2aeabd1](https://github.com/tllobregat/zply/commit/2aeabd19b43e544bb1aae21e43d9c57033eb9b4f))
+* **markdown-editor:** add file upload support to MarkdownToolbar ([b5f06aa](https://github.com/tllobregat/zply/commit/b5f06aa3341c2fad796bdb69c51f8f44e5db150e))
+* **markdown-editor:** add PDF export functionality with print styles and toolbar integration ([e8dcb69](https://github.com/tllobregat/zply/commit/e8dcb6952f9caea42549d2399d1c5c3c311e3965))
+* **privacy:** add dedicated privacy policy page with multilingual support and enhanced content ([b2f703a](https://github.com/tllobregat/zply/commit/b2f703a3d769ba07001d8733ce9b81fe712f7783))
+* **tool-pages:** enhance metadata generation and add feature lists to tool pages ([2995a99](https://github.com/tllobregat/zply/commit/2995a99c0e54d55b14e5898ba14bb40849b5580a))
+* **ui:** add reset-dashboard event and refine sidebar navigation ([7d29077](https://github.com/tllobregat/zply/commit/7d2907796201f1427c615c51b9f4906e475e0291))
+* **ui:** implement animated full-page mobile menu with portal and dev-tool hide feature ([5d5c399](https://github.com/tllobregat/zply/commit/5d5c3999f2e3d1094fa63218bbfe539258df7734))
+* **ui:** review dashboard ui ([92947cd](https://github.com/tllobregat/zply/commit/92947cd886750c61500dc0d31eee778ae5167e4f))
+
+
+### Bug Fixes
+
+* **clipboard:** improve clipboard fallback handling and error logging ([23d2853](https://github.com/tllobregat/zply/commit/23d2853619ac0bebf006f30de840e6aea30f3bef))
+* **dashboard:** enhance tagline ([f2c593a](https://github.com/tllobregat/zply/commit/f2c593a8a697c4c6c6185c0aa366f9a2117d09e9))
+* **dashboard:** review route navigation methods ([9728ea6](https://github.com/tllobregat/zply/commit/9728ea69d2ae0fbfe1d7f3073809dee306d9bdbd))
+* **text-compare:** add unified/split diff mode and standardize labels ([d267937](https://github.com/tllobregat/zply/commit/d267937bdc1f098b70bb87b000e2cab311ce414a))
+* **ui:** add `cursor-pointer` to interactive elements for better UX ([2b3b9b4](https://github.com/tllobregat/zply/commit/2b3b9b44c0caf29c15f1830227763da2a8e64f6a))
+* **ui:** fix CopyButton style for IpInfoManualGuide sections ([8316885](https://github.com/tllobregat/zply/commit/83168855fec105b38a9bd16d0e6b63407f79d815))
+* **ui:** resolve mobile bottom bar overlap and standardize icon sizes ([70db95a](https://github.com/tllobregat/zply/commit/70db95a3ae397f22c6017bdc686632bd62ad6da9))
+* **ui:** standardize `workspaceClassName` styles across tools for responsive layout handling ([cf9fa69](https://github.com/tllobregat/zply/commit/cf9fa69d16cd4e154ff211c96192f5e52a4f3e32))
+* **ui:** standardize border-radius and shadow styles across components ([2e7d5c5](https://github.com/tllobregat/zply/commit/2e7d5c5dba35c889a0f28b8e564ab51a323d1fc0))
+
 ## 1.1.0 (2026-04-06)
 
 
