@@ -31,6 +31,13 @@
     "searchResults": "Résultats de recherche",
     "dashboard": "Tableau de bord"
   },
+  "NotFound": {
+    "title": "Perdu dans l'URI ?",
+    "description": "L'outil que vous recherchez a soit déménagé dans une autre dimension, soit n'a jamais existé dans celle-ci.",
+    "backHome": "Retour à l'accueil",
+    "searchTools": "Rechercher des outils",
+    "funFact": "Le saviez-vous ? Zply est 100% local-first. Même cette erreur est générée dans votre navigateur, sans aucun appel serveur."
+  },
   "PrivacyGate": {
     "privacyGate": "Protection de la Vie Privée",
     "title": "Requête Externe Requise",

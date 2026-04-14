@@ -31,6 +31,13 @@
     "searchResults": "Search Results",
     "dashboard": "Dashboard"
   },
+  "NotFound": {
+    "title": "Lost in the URI?",
+    "description": "The tool you are looking for has either moved to another dimension or never existed in this one.",
+    "backHome": "Back to Home",
+    "searchTools": "Search Tools",
+    "funFact": "Did you know? Zply is 100% local-first. Even this error is generated in your browser, without any server calls."
+  },
   "PrivacyGate": {
     "privacyGate": "Privacy Gate",
     "title": "External Request Required",
