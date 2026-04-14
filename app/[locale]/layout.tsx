@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { CommandMenu } from '@/components/command-menu';
 import { DevTool } from '@/components/dev-tool';
 import { Providers } from '@/components/providers';

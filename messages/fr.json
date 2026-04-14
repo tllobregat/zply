@@ -512,6 +512,37 @@
         "Aucune transmission de données vers des serveurs distants"
       ]
     },
+    "certificate-decoder": {
+      "title": "Décodeur de Certificat",
+      "description": "Décodez les certificats X.509 pour afficher leurs détails, notamment le sujet, l'émetteur, la validité et les extensions.",
+      "features": [
+        "Décodage instantané des certificats PEM et DER",
+        "Vue détaillée des noms distinctifs (DN) du sujet et de l'émetteur",
+        "Suivi de la période de validité avec statut d'expiration",
+        "Génération d'empreintes numériques (SHA-1, SHA-256)",
+        "Analyse de l'utilisation des clés et de l'utilisation étendue",
+        "Analyse de certificat 100% sécurisée et locale uniquement"
+      ],
+      "invalidCert": "Certificat Invalide",
+      "validCert": "Certificat Valide",
+      "expired": "Expiré",
+      "expiresIn": "Expire dans {days} jours",
+      "expiredAgo": "Expiré il y a {days} jours",
+      "subject": "Sujet",
+      "issuer": "Émetteur",
+      "validity": "Validité",
+      "publicKey": "Clé Publique",
+      "extensions": "Extensions",
+      "fingerprints": "Empreintes",
+      "notBefore": "Pas avant",
+      "notAfter": "Pas après",
+      "serialNumber": "Numéro de série",
+      "signatureAlgorithm": "Algorithme de signature",
+      "version": "Version",
+      "resetToDefault": "Réinitialiser par défaut",
+      "placeholder": "Collez un certificat X.509 pour voir ses détails.",
+      "critical": "Critique"
+    },
     "secret-generator": {
       "title": "Générateur de Mots de Passe & Secrets",
       "description": "Générez des mots de passe sécurisés, des clés API et des jetons aléatoires avec évaluation de la force.",

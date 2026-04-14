@@ -512,6 +512,37 @@
         "No data transmission to remote servers"
       ]
     },
+    "certificate-decoder": {
+      "title": "Certificate Decoder",
+      "description": "Decode X.509 certificates to view their details, including subject, issuer, validity, and extensions.",
+      "features": [
+        "Instant decoding of PEM and DER certificates",
+        "Detailed view of Subject and Issuer Distinguished Names",
+        "Validity period tracking with expiration status",
+        "Fingerprint generation (SHA-1, SHA-256)",
+        "Key usage and extended key usage analysis",
+        "100% Secure local-only certificate analysis"
+      ],
+      "invalidCert": "Invalid Certificate",
+      "validCert": "Valid Certificate",
+      "expired": "Expired",
+      "expiresIn": "Expires in {days} days",
+      "expiredAgo": "Expired {days} days ago",
+      "subject": "Subject",
+      "issuer": "Issuer",
+      "validity": "Validity",
+      "publicKey": "Public Key",
+      "extensions": "Extensions",
+      "fingerprints": "Fingerprints",
+      "notBefore": "Not Before",
+      "notAfter": "Not After",
+      "serialNumber": "Serial Number",
+      "signatureAlgorithm": "Signature Algorithm",
+      "version": "Version",
+      "resetToDefault": "Reset to Default",
+      "placeholder": "Paste a X.509 certificate to view their details.",
+      "critical": "Critical"
+    },
     "secret-generator": {
       "title": "Password & Secret Generator",
       "description": "Generate secure passwords, API keys, and random tokens with strength evaluation.",

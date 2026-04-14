@@ -60,9 +60,10 @@ export enum ToolId {
   // SECURITY
   JWT_DEC = 'jwt-debugger',
   HASH_GEN = 'hash-generator',
+  CERT_DEC = 'certificate-decoder',
   RSA_GEN = 'rsa-key-pair-generator',
   SECRET_GEN = 'secret-generator',
-  
+
   // ENCODING
   URL_IO = 'url-encoder-decoder',
   BASE64 = 'base64-encoder-decoder',
@@ -261,6 +262,18 @@ export const TOOLS: ToolConfig[] = [
     icon: ShieldEllipsis,
     status: 'coming-soon',
     category: Category.SECURITY
+  },
+  {
+    id: ToolId.CERT_DEC,
+    href: '/certificate-decoder',
+    icon: ShieldCheck,
+    status: 'active',
+    category: Category.SECURITY,
+    showInSidebar: true,
+    libs: [
+      { name: '@peculiar/x509', url: 'https://github.com/PeculiarVentures/x509' },
+      { name: 'Monaco Editor', url: 'https://github.com/microsoft/monaco-editor' }
+    ]
   },
 
   // ENCODING
