@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import MonacoEditor, { OnMount, EditorProps } from '@/components/monaco-editor';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
-import React, { ReactNode, RefObject, useCallback } from 'react';
+import React, { ReactNode, RefObject, useCallback, useMemo } from 'react';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import type * as monaco from 'monaco-editor';
 
@@ -103,6 +103,14 @@ export function EditorPreviewWorkspace(
     }
   }, [editorProps, markers]);
 
+  const stableEditorProps = useMemo(() => {
+    if (!editorProps) return {};
+    // Extract everything except onMount to avoid passing the mount handler twice
+    const { onMount, ...rest } = editorProps;
+    void onMount;
+    return rest;
+  }, [editorProps]);
+
   const editorElement: ReactNode = (
     <div className={cn('h-full w-full bg-island-bg/20 overflow-hidden', editorClassName)}>
       {
@@ -118,8 +126,7 @@ export function EditorPreviewWorkspace(
               theme={resolvedTheme === 'dark' ? 'vs-dark' : 'light'}
               onChange={(val: string | undefined): void => onChange(val || '')}
               onMount={handleEditorMount}
-              options={editorProps?.options}
-              {...editorProps}
+              {...stableEditorProps}
             />
           )
       }
@@ -140,7 +147,7 @@ export function EditorPreviewWorkspace(
           showEditor
           && (
             <motion.div
-              key="editor-full"
+              key="editor-main"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
@@ -154,7 +161,7 @@ export function EditorPreviewWorkspace(
           showPreview
           && (
             <motion.div
-              key="preview-full"
+              key="preview-main"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
@@ -173,7 +180,7 @@ export function EditorPreviewWorkspace(
     <PanelGroup direction={isMobile ? 'vertical' : 'horizontal'} className="h-full w-full">
       <Panel defaultSize={isMobile ? 40 : 50} minSize={20}>
         <motion.div
-          key="editor-split"
+          key="editor-main"
           initial={{ opacity: 0, x: isMobile ? 0 : -20, y: isMobile ? -20 : 0 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           className={cn(
@@ -197,7 +204,7 @@ export function EditorPreviewWorkspace(
 
       <Panel defaultSize={isMobile ? 60 : 50} minSize={20}>
         <motion.div
-          key="preview-split"
+          key="preview-main"
           initial={{ opacity: 0, x: isMobile ? 0 : 20, y: isMobile ? 20 : 0 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           className="h-full"

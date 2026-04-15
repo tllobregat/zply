@@ -30,7 +30,7 @@ export function useShareableState<T>(
   const { registerUpdate, getLatestValue } = useShareableStateSync();
 
   // Try to load from hash immediately during initialization
-  const getInitialValue = (): T => {
+  const getInitialValue = useCallback((): T => {
     if (typeof window === 'undefined') return initialValue;
     
     // Check if the value is already in the global registry (synced by another component)
@@ -57,7 +57,7 @@ export function useShareableState<T>(
     } catch {
       return initialValue;
     }
-  };
+  }, [key, initialValue, getLatestValue]);
 
   const [state, setStateInternal] = useState<T>(getInitialValue);
 
@@ -65,12 +65,18 @@ export function useShareableState<T>(
   useEffect(() => {
     const handleHashChange = (): void => {
       const newValue: T = getInitialValue();
-      setStateInternal(newValue);
+      setStateInternal((prev: T): T => {
+        // Use a stable comparison to avoid jumps
+        if (JSON.stringify(prev) === JSON.stringify(newValue)) {
+          return prev;
+        }
+        return newValue;
+      });
     };
 
     window.addEventListener('hashchange', handleHashChange);
     return (): void => window.removeEventListener('hashchange', handleHashChange);
-  }, [key, initialValue]);
+  }, [getInitialValue]);
 
   // Update hash via the global manager when state changes
   useEffect(() => {

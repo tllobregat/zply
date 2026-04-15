@@ -1,6 +1,7 @@
 import MonacoEditor, { MonacoDiffEditor } from '@/components/monaco-editor';
 import { useTheme } from 'next-themes';
 import React, { ReactNode } from 'react';
+import type * as monaco from 'monaco-editor';
 import { DiffMode, ViewMode } from './text-compare.types';
 
 interface TextCompareEditorProps {
@@ -58,7 +59,7 @@ export function TextCompareEditor(
               modified={modified}
               language="plaintext"
               theme={resolvedTheme === 'dark' ? 'vs-dark' : 'light'}
-              onMount={(editor) => {
+              onMount={(editor: monaco.editor.IDiffEditor) => {
                 editor.getOriginalEditor().onDidChangeModelContent(() => {
                   onOriginalChange(editor.getOriginalEditor().getValue());
                 });
