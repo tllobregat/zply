@@ -20,6 +20,7 @@ interface ToolPageLayoutProps {
   footerIndicator?: React.ReactNode;
   children: React.ReactNode;
   workspaceClassName?: string;
+  mobileBreakpoint?: number;
 }
 
 export function ToolPageLayout(
@@ -32,17 +33,18 @@ export function ToolPageLayout(
     footerIndicator,
     children,
     workspaceClassName,
+    mobileBreakpoint = 1024,
   }: ToolPageLayoutProps,
 ): React.ReactNode {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const aboutRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const checkMobile = (): void => setIsMobile(window.innerWidth < 1024);
+    const checkMobile = (): void => setIsMobile(window.innerWidth < mobileBreakpoint);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return (): void => window.removeEventListener('resize', checkMobile);
-  }, []);
+  }, [mobileBreakpoint]);
 
   const toolConfig: ToolConfig | undefined = TOOLS.find((t: ToolConfig) => t.id === toolId);
   const theme = toolConfig ? getCategoryClasses(CATEGORY_COLORS[toolConfig.category]) : undefined;

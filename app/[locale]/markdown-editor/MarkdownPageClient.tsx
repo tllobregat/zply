@@ -536,8 +536,9 @@ export default function MarkdownPageClient(): ReactNode {
           { label: tCategories(Category.DIAGRAMS), href: `/?category=${Category.DIAGRAMS}` },
           { label: t(`${ToolId.MARKDOWN}.title`) }
         ]}
+        mobileBreakpoint={1400}
         headerActions={
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap justify-end">
             <MarkdownToolbar
               onAction={handleToolbarAction}
               onFoldAll={handleFoldAll}
@@ -549,7 +550,7 @@ export default function MarkdownPageClient(): ReactNode {
               exportPdfLabel={tMarkdown('exportPdf')}
               mathLabel={tMarkdown('math')}
             />
-            <Separator className="h-4 hidden lg:block" />
+            <Separator className="h-4 hidden xl:block" />
             <ViewModeToggle viewMode={viewMode} setViewMode={setViewMode} />
           </div>
         }

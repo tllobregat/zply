@@ -66,7 +66,7 @@ export function MarkdownToolbar(
   };
 
   return (
-    <div className="hidden lg:flex items-center gap-0.5 bg-island-bg/40 border border-island-border p-1 rounded-xl">
+    <div className="hidden lg:flex flex-wrap items-center gap-0.5 bg-island-bg/40 border border-island-border p-1 rounded-xl">
       <Button
         variant="ghost"
         size="icon"
@@ -92,7 +92,7 @@ export function MarkdownToolbar(
       >
         <Printer className="w-4 h-4" />
       </Button>
-      <Separator className="h-4 mx-1" />
+      <Separator className="h-4 mx-1 hidden xl:block" />
       <Button
         variant="ghost"
         size="icon"
@@ -120,7 +120,7 @@ export function MarkdownToolbar(
       >
         <Heading3 className="w-4 h-4" />
       </Button>
-      <Separator className="h-4 mx-1" />
+      <Separator className="h-4 mx-1 hidden 2xl:block" />
       <Button
         variant="ghost"
         size="icon"
@@ -139,7 +139,7 @@ export function MarkdownToolbar(
       >
         <ChevronDown className="w-4 h-4" />
       </Button>
-      <Separator className="h-4 mx-1" />
+      <Separator className="h-4 mx-1 hidden xl:block" />
       <Button
         variant="ghost"
         size="icon"
@@ -167,7 +167,7 @@ export function MarkdownToolbar(
       >
         <Strikethrough className="w-4 h-4" />
       </Button>
-      <Separator className="h-4 mx-1" />
+      <Separator className="h-4 mx-1 hidden 2xl:block" />
       <Button
         variant="ghost"
         size="icon"
@@ -222,7 +222,7 @@ export function MarkdownToolbar(
       >
         <Sigma className="w-4 h-4" />
       </Button>
-      <Separator className="h-4 mx-1" />
+      <Separator className="h-4 mx-1 hidden xl:block" />
       <Button
         variant="ghost"
         size="icon"
