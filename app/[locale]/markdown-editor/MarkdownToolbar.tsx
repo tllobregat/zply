@@ -7,6 +7,8 @@ import {
   Heading1,
   Heading2,
   Heading3,
+  ChevronUp,
+  ChevronDown,
   Italic,
   Link,
   List,
@@ -23,6 +25,7 @@ interface MarkdownToolbarProps {
   onAction: (prefix: string, suffix: string, placeholder: string, isBlock: boolean) => void;
   onFoldAll: () => void;
   onUnfoldAll: () => void;
+  onShiftHeaders: (direction: 'up' | 'down') => void;
   onLoadFile: (content: string) => void;
   onExportPdf: () => void;
   loadFileLabel?: string;
@@ -34,6 +37,7 @@ export function MarkdownToolbar(
     onAction,
     onFoldAll,
     onUnfoldAll,
+    onShiftHeaders,
     onLoadFile,
     onExportPdf,
     loadFileLabel = 'Load File',
@@ -112,6 +116,25 @@ export function MarkdownToolbar(
         onClick={() => onAction('### ', '', 'Titre 3', true)}
       >
         <Heading3 className="w-4 h-4" />
+      </Button>
+      <Separator className="h-4 mx-1" />
+      <Button
+        variant="ghost"
+        size="icon"
+        className="w-8 h-8 rounded-lg"
+        title="Shift Headers (Hn -> Hn-1)"
+        onClick={() => onShiftHeaders('up')}
+      >
+        <ChevronUp className="w-4 h-4" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="w-8 h-8 rounded-lg"
+        title="Shift Headers (Hn -> Hn+1)"
+        onClick={() => onShiftHeaders('down')}
+      >
+        <ChevronDown className="w-4 h-4" />
       </Button>
       <Separator className="h-4 mx-1" />
       <Button

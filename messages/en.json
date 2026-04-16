@@ -386,6 +386,7 @@
       ],
       "loadFile": "Load File",
       "exportPdf": "Export to PDF",
+      "headerLevelJump": "Header level jump detected: from H{prev} to H{curr}",
       "default": "# 🖋️ Markdown Editor\n\n## 🚀 Introduction\nEdit here to see the result on the right.\n\n## 🏗️ Architecture\nZply is built with Next.js.\n\n### 🎨 Design\nClean and modern styling.\n\n## 🛠️ Usage\nUse the toolbar to format your text."
     },
     "mermaid-maker": {

@@ -386,6 +386,7 @@
       ],
       "loadFile": "Charger un fichier",
       "exportPdf": "Exporter en PDF",
+      "headerLevelJump": "Saut de niveau de titre détecté : passage de H{prev} à H{curr}",
       "default": "# 🖋️ Éditeur Markdown\n\n## 🚀 Introduction\nÉditez ici pour voir le résultat à droite.\n\n## 🏗️ Architecture\nZply est basé sur Next.js.\n\n### 🎨 Design\nStyle épuré et moderne.\n\n## 🛠️ Utilisation\nUtilisez la barre d'outils pour formater votre texte."
     },
     "mermaid-maker": {

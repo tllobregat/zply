@@ -26,8 +26,44 @@ export default function MarkdownPageClient(): ReactNode {
   const editorRef: RefObject<monaco.editor.IStandaloneCodeEditor | null> = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const previewRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(null);
 
-  const { handleToolbarAction, handleFoldAll, handleUnfoldAll } = useMarkdownActions(editorRef);
+  const { handleToolbarAction, handleFoldAll, handleUnfoldAll, handleShiftHeaders } = useMarkdownActions(editorRef);
   
+  const t = useTranslations('Tools');
+  const tCategories = useTranslations('Categories');
+  const tCommon = useTranslations('Common');
+
+  // Validate markdown for header level jumps
+  const validateMarkdown = useCallback((model: monaco.editor.ITextModel, monacoInstance: typeof monaco) => {
+    const lines: string[] = model.getLinesContent();
+    const markers: monaco.editor.IMarkerData[] = [];
+    let lastLevel: number = 0;
+
+    for (let i: number = 0; i < lines.length; i++) {
+      const line: string = lines[i];
+      const match: RegExpMatchArray | null = line.match(/^(#{1,6})\s/);
+
+      if (match) {
+        const currentLevel: number = match[1].length;
+        
+        // If jumping more than one level (e.g., H1 to H3)
+        if (currentLevel > lastLevel + 1 && lastLevel !== 0) {
+          markers.push({
+            severity: monacoInstance.MarkerSeverity.Warning,
+            message: t(`${ToolId.MARKDOWN}.headerLevelJump`, { prev: lastLevel, curr: currentLevel }),
+            startLineNumber: i + 1,
+            startColumn: 1,
+            endLineNumber: i + 1,
+            endColumn: match[0].length + 1,
+          });
+        }
+        
+        lastLevel = currentLevel;
+      }
+    }
+
+    monacoInstance.editor.setModelMarkers(model, 'markdown-linter', markers);
+  }, [t]);
+
   const handleExportPdf = useCallback((): void => {
     window.print();
   }, []);
@@ -44,14 +80,24 @@ export default function MarkdownPageClient(): ReactNode {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleExportPdf]);
 
-  const t = useTranslations('Tools');
-  const tCategories = useTranslations('Categories');
-  const tCommon = useTranslations('Common');
-
   // Memoize editor props to keep EditorPreviewWorkspace stable
   const editorProps = useMemo(() => ({
     onMount: (editor: monaco.editor.IStandaloneCodeEditor, monacoInstance: typeof monaco) => {
       editorRef.current = editor;
+
+      // Initial validation
+      const model = editor.getModel();
+      if (model) {
+        validateMarkdown(model, monacoInstance);
+      }
+
+      // Validate on content change
+      editor.onDidChangeModelContent(() => {
+        const model = editor.getModel();
+        if (model) {
+          validateMarkdown(model, monacoInstance);
+        }
+      });
 
       // Add command for PDF export (Ctrl+P / Cmd+P)
       editor.addCommand(monacoInstance.KeyMod.CtrlCmd | monacoInstance.KeyCode.KeyP, () => {
@@ -109,7 +155,7 @@ export default function MarkdownPageClient(): ReactNode {
       foldingHighlight: true,
       lineDecorationsWidth: 16,
     } as const
-  }), [handleExportPdf]);
+  }), [handleExportPdf, validateMarkdown]);
 
   // Memoize preview content
   const previewElement = useMemo(() => (
@@ -140,6 +186,7 @@ export default function MarkdownPageClient(): ReactNode {
               onAction={handleToolbarAction}
               onFoldAll={handleFoldAll}
               onUnfoldAll={handleUnfoldAll}
+              onShiftHeaders={handleShiftHeaders}
               onLoadFile={setContent}
               loadFileLabel={t(`${ToolId.MARKDOWN}.loadFile`)}
               onExportPdf={handleExportPdf}
