@@ -387,6 +387,25 @@
       "loadFile": "Load File",
       "exportPdf": "Export to PDF",
       "headerLevelJump": "Header level jump detected: from H{prev} to H{curr}",
+      "multipleH1": "Multiple H1 headers detected. A document should ideally have only one level 1 header.",
+      "trailingSpaces": "Trailing spaces detected.",
+      "consecutiveEmptyLines": "More than two consecutive empty lines detected.",
+      "inconsistentListMarkers": "Inconsistent list markers: mixing '*', '-', or '+'.",
+      "missingLineAroundHeader": "Missing empty line before or after a header.",
+      "missingAltText": "Link or image missing alternative text.",
+      "orphanLinkReference": "Orphan link reference: '[{ref}]' is not defined.",
+      "unclosedCodeBlock": "Unclosed code block.",
+      "malformedHeader": "Malformed header: missing space after '#' symbols.",
+      "duplicateHeaderId": "Multiple headers have the same content: '{text}'.",
+      "quickFix": {
+        "removeTrailingSpaces": "Remove trailing spaces",
+        "fixConsecutiveEmptyLines": "Reduce to single empty line",
+        "fixMalformedHeader": "Add space after '#'",
+        "fixInconsistentListMarker": "Use previous line marker",
+        "fixMissingAltText": "Add alternative text",
+        "fixMissingLineAroundHeader": "Add missing empty lines",
+        "fixUnclosedCodeBlock": "Close code block"
+      },
       "default": "# 🖋️ Markdown Editor\n\n## 🚀 Introduction\nEdit here to see the result on the right.\n\n## 🏗️ Architecture\nZply is built with Next.js.\n\n### 🎨 Design\nClean and modern styling.\n\n## 🛠️ Usage\nUse the toolbar to format your text."
     },
     "mermaid-maker": {
