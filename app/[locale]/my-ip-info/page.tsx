@@ -15,14 +15,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: `${t(`${toolId}.title`)} | Zply`,
       description: t(`${toolId}.description`),
-      url: `https://zply.dev/my-ip-info`,
+      url: `https://zply.dev/${locale === 'en' ? '' : locale + '/'}my-ip-info`,
     },
     twitter: {
       title: `${t(`${toolId}.title`)} | Zply`,
       description: t(`${toolId}.description`),
     },
     alternates: {
-      canonical: `https://zply.dev/my-ip-info`,
+      canonical: `https://zply.dev/${locale === 'en' ? '' : locale + '/'}my-ip-info`,
     },
   };
 }

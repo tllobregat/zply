@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       creator: '@tllobregat',
     },
     alternates: {
-      canonical: 'https://zply.dev',
+      canonical: locale === 'en' ? 'https://zply.dev' : `https://zply.dev/${locale}`,
     },
     icons: {
       icon: [
