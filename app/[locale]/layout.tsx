@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import { NextFontWithVariable } from 'next/dist/compiled/@next/font';
 import { Geist, Geist_Mono } from 'next/font/google';
 import '../globals.css';
+import 'katex/dist/katex.min.css';
 import React from 'react';
 import { Analytics } from "@vercel/analytics/next"
 import {NextIntlClientProvider} from 'next-intl';

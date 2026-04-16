@@ -1,5 +1,12 @@
 import { marked } from 'marked';
 import { useEffect, useState, useTransition } from 'react';
+import markedKatex from 'marked-katex-extension';
+
+// Initialize marked with katex extension
+marked.use(markedKatex({
+  throwOnError: false,
+  displayMode: false, // Default for inline, block is handled by double $$
+}));
 
 export type UseMarkdownTransformation = {
   html: string;

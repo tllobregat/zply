@@ -386,6 +386,7 @@
       ],
       "loadFile": "Charger un fichier",
       "exportPdf": "Exporter en PDF",
+      "math": "Formule Mathématique",
       "headerLevelJump": "Saut de niveau de titre détecté : passage de H{prev} à H{curr}",
       "multipleH1": "Plusieurs titres H1 détectés. Un document ne devrait idéalement avoir qu'un seul titre de niveau 1.",
       "trailingSpaces": "Espaces en fin de ligne détectés.",
@@ -406,7 +407,7 @@
         "fixMissingLineAroundHeader": "Ajouter les lignes vides manquantes",
         "fixUnclosedCodeBlock": "Fermer le bloc de code"
       },
-      "default": "# 🖋️ Éditeur Markdown\n\n## 🚀 Introduction\nÉditez ici pour voir le résultat à droite.\n\n## 🏗️ Architecture\nZply est basé sur Next.js.\n\n### 🎨 Design\nStyle épuré et moderne.\n\n## 🛠️ Utilisation\nUtilisez la barre d'outils pour formater votre texte."
+      "default": "# 🖋️ Éditeur Markdown\n\n## 🚀 Introduction\n\nÉditez ici pour voir le résultat à droite.\n\n## 🏗️ Architecture\n\nZply est basé sur Next.js.\n\n### 🎨 Design\n\nStyle épuré et moderne.\n\n## 🛠️ Utilisation\n\nUtilisez la barre d'outils pour formater votre texte.\n\n## 📐 Formules Mathématiques\n\nVous pouvez utiliser des formules inline comme $E = mc^2$ ou des blocs :\n\n$$\\int_{a}^{b} x^2 dx = \\left[\\frac{x^3}{3}\\right]_{a}^{b}$$"
     },
     "mermaid-maker": {
       "title": "Créateur Mermaid.js",

@@ -29,6 +29,7 @@ export default function MarkdownPageClient(): ReactNode {
   const { handleToolbarAction, handleFoldAll, handleUnfoldAll, handleShiftHeaders } = useMarkdownActions(editorRef);
   
   const t = useTranslations('Tools');
+  const tMarkdown = useTranslations(`Tools.${ToolId.MARKDOWN}`);
   const tCategories = useTranslations('Categories');
   const tCommon = useTranslations('Common');
 
@@ -543,9 +544,10 @@ export default function MarkdownPageClient(): ReactNode {
               onUnfoldAll={handleUnfoldAll}
               onShiftHeaders={handleShiftHeaders}
               onLoadFile={setContent}
-              loadFileLabel={t(`${ToolId.MARKDOWN}.loadFile`)}
               onExportPdf={handleExportPdf}
-              exportPdfLabel={t(`${ToolId.MARKDOWN}.exportPdf`)}
+              loadFileLabel={tMarkdown('loadFile')}
+              exportPdfLabel={tMarkdown('exportPdf')}
+              mathLabel={tMarkdown('math')}
             />
             <Separator className="h-4 hidden lg:block" />
             <ViewModeToggle viewMode={viewMode} setViewMode={setViewMode} />

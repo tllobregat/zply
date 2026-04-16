@@ -15,6 +15,7 @@ import {
   FolderOpen,
   Printer,
   Quote,
+  Sigma,
   Strikethrough,
   Terminal,
   UnfoldVertical
@@ -30,6 +31,7 @@ interface MarkdownToolbarProps {
   onExportPdf: () => void;
   loadFileLabel?: string;
   exportPdfLabel?: string;
+  mathLabel?: string;
 }
 
 export function MarkdownToolbar(
@@ -41,7 +43,8 @@ export function MarkdownToolbar(
     onLoadFile,
     onExportPdf,
     loadFileLabel = 'Load File',
-    exportPdfLabel = 'Export to PDF'
+    exportPdfLabel = 'Export to PDF',
+    mathLabel = 'Mathematical Formula'
   }: MarkdownToolbarProps,
 ): ReactNode {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -209,6 +212,15 @@ export function MarkdownToolbar(
         onClick={() => onAction('```\n', '\n```', 'code', true)}
       >
         <Terminal className="w-4 h-4" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="w-8 h-8 rounded-lg"
+        title={mathLabel}
+        onClick={() => onAction('$$\n', '\n$$', 'e = mc^2', true)}
+      >
+        <Sigma className="w-4 h-4" />
       </Button>
       <Separator className="h-4 mx-1" />
       <Button
