@@ -60,6 +60,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     alternates: {
       canonical: 'https://zply.dev',
     },
+    icons: {
+      icon: [
+        { url: '/icon.svg', type: 'image/svg+xml' },
+      ],
+      shortcut: '/icon.svg',
+      apple: '/icon.svg',
+    },
     metadataBase: new URL('https://zply.dev'),
   };
 }
