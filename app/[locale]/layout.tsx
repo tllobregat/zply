@@ -42,20 +42,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Zply',
       title: t('metadata.title'),
       description: t('metadata.description'),
-      images: [
-        {
-          url: 'https://zply.dev/og-image.png',
-          width: 1200,
-          height: 630,
-          alt: 'Zply Developer Toolbox',
-        },
-      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: t('metadata.title'),
       description: t('metadata.description'),
-      images: ['https://zply.dev/og-image.png'],
       creator: '@tllobregat',
     },
     alternates: {
