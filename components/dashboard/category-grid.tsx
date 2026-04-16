@@ -20,7 +20,7 @@ export function CategoryGrid({ setActiveCategory }: CategoryGridProps): React.Re
         <h3 className="text-base sm:text-sm font-black uppercase tracking-[0.2em] sm:tracking-[0.25em]">{tIndex('browseCategories')}</h3>
         <div className="h-px bg-island-border/60 flex-1 ml-4 sm:ml-6" />
       </div>
-      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6">
         {
           CATEGORIES
             .filter((c: Category): c is CategoryWithoutAll => c !== Category.ALL)

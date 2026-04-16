@@ -21,7 +21,13 @@ export default function HomeClient(): React.ReactNode {
   const onReset = useCallback(() => setSearch(''), []);
   const { activeCategory, setActiveCategory }: UseCategory = useCategory(onReset);
   const { pinnedIds, togglePin }: UsePinnedTools = usePinnedTools();
+  
   const toolsRef: React.RefObject<HTMLDivElement | null> = useRef<HTMLDivElement>(null);
+  const categoriesRef = useRef<HTMLDivElement>(null);
+
+  const handleScrollToCategories = () => {
+    categoriesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   const handleTogglePin = (id: string, e: React.MouseEvent): void => {
     e.preventDefault();
@@ -56,7 +62,7 @@ export default function HomeClient(): React.ReactNode {
       footer={<DashboardFooter />}
       contentClassName="p-4 sm:p-8"
     >
-      {isBrowsingCategories && <DashboardHero />}
+      {isBrowsingCategories && <DashboardHero onExplore={handleScrollToCategories} />}
 
       <AnimatePresence mode="wait">
         {
@@ -73,7 +79,9 @@ export default function HomeClient(): React.ReactNode {
                   pinnedIds={pinnedIds}
                   handleTogglePin={handleTogglePin}
                 />
-                <CategoryGrid setActiveCategory={setActiveCategory} />
+                <div ref={categoriesRef}>
+                  <CategoryGrid setActiveCategory={setActiveCategory} />
+                </div>
               </motion.div>
             )
             : (
