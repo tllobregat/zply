@@ -16,7 +16,7 @@ import { useCertificateDecoderState } from './use-certificate-decoder-state';
 import { useCertificateDecoderTransformation } from './use-certificate-decoder-transformation';
 
 export default function CertificateDecoderClient() {
-  const t = useTranslations('Tools.certificate-decoder');
+  const t = useTranslations(`Tools.${ToolId.CERT_DEC}`);
   const tCategories = useTranslations('Categories');
 
   const { content, setContent, viewMode, setViewMode } = useCertificateDecoderState();
@@ -45,7 +45,7 @@ export default function CertificateDecoderClient() {
       icon={<ShieldCheck className="w-6 h-6" />}
       breadcrumbItems={[
         { label: tCategories(Category.SECURITY), href: `/?category=${Category.SECURITY}` },
-        { label: t(`${ToolId.CERT_DEC}.title`) },
+        { label: t('title') },
       ]}
       headerActions={
         <CertificateDecoderToolbar
