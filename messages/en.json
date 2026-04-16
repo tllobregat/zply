@@ -374,15 +374,15 @@
     },
     "markdown-editor": {
       "title": "Markdown Editor",
-      "description": "Powerful local Markdown editor with live preview, GitHub Flavored Markdown (GFM) support, and instant PDF export. 100% private and secure.",
+      "description": "Powerful Markdown editor with live preview, GFM support, KaTeX formulas, and structural analysis. 100% private and secure.",
       "features": [
         "GitHub Flavored Markdown (GFM) support",
-        "Live split-screen preview with synchronized scrolling",
-        "Instant Markdown to PDF export with optimized styles",
+        "Live preview with smart synchronization",
+        "KaTeX mathematical formula support",
+        "Structural analysis with error and warning detection",
+        "One-click Quick Fixes for style and syntax",
         "Monaco-powered editor with syntax highlighting",
-        "Header-based folding for better document navigation",
-        "Real-time character and word count tracking",
-        "100% Client-side processing for maximum privacy"
+        "Instant Markdown to PDF export with optimized styles"
       ],
       "loadFile": "Load File",
       "exportPdf": "Export to PDF",

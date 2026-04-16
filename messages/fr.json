@@ -374,15 +374,15 @@
     },
     "markdown-editor": {
       "title": "Éditeur Markdown",
-      "description": "Éditeur Markdown ultra-rapide avec aperçu en temps réel, support GFM et export PDF instantané. 100% privé et sécurisé.",
+      "description": "Éditeur Markdown puissant avec aperçu en temps réel, support GFM, formules mathématiques (KaTeX) et analyse de structure. 100% privé.",
       "features": [
         "Support du GitHub Flavored Markdown (GFM)",
-        "Aperçu en direct avec défilement synchronisé",
-        "Export Markdown vers PDF avec styles optimisés",
+        "Aperçu en direct avec synchronisation intelligente",
+        "Support des formules mathématiques KaTeX",
+        "Analyse structurelle avec détection d'erreurs et warnings",
+        "Corrections rapides (Quick Fixes) en un clic",
         "Éditeur Monaco avec coloration syntaxique",
-        "Pliage du code basé sur les titres de sections",
-        "Compteur de caractères et mots en temps réel",
-        "Traitement 100% local pour une confidentialité maximale"
+        "Export Markdown vers PDF avec styles optimisés"
       ],
       "loadFile": "Charger un fichier",
       "exportPdf": "Exporter en PDF",
