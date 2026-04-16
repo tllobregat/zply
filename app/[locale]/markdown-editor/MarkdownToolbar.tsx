@@ -7,12 +7,15 @@ import {
   Heading1,
   Heading2,
   Heading3,
+  ChevronUp,
+  ChevronDown,
   Italic,
   Link,
   List,
   FolderOpen,
   Printer,
   Quote,
+  Sigma,
   Strikethrough,
   Terminal,
   UnfoldVertical
@@ -23,10 +26,12 @@ interface MarkdownToolbarProps {
   onAction: (prefix: string, suffix: string, placeholder: string, isBlock: boolean) => void;
   onFoldAll: () => void;
   onUnfoldAll: () => void;
+  onShiftHeaders: (direction: 'up' | 'down') => void;
   onLoadFile: (content: string) => void;
   onExportPdf: () => void;
   loadFileLabel?: string;
   exportPdfLabel?: string;
+  mathLabel?: string;
 }
 
 export function MarkdownToolbar(
@@ -34,10 +39,12 @@ export function MarkdownToolbar(
     onAction,
     onFoldAll,
     onUnfoldAll,
+    onShiftHeaders,
     onLoadFile,
     onExportPdf,
     loadFileLabel = 'Load File',
-    exportPdfLabel = 'Export to PDF'
+    exportPdfLabel = 'Export to PDF',
+    mathLabel = 'Mathematical Formula'
   }: MarkdownToolbarProps,
 ): ReactNode {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -59,7 +66,7 @@ export function MarkdownToolbar(
   };
 
   return (
-    <div className="hidden lg:flex items-center gap-0.5 bg-island-bg/40 border border-island-border p-1 rounded-xl">
+    <div className="hidden lg:flex flex-wrap items-center gap-0.5 bg-island-bg/40 border border-island-border p-1 rounded-xl">
       <Button
         variant="ghost"
         size="icon"
@@ -85,7 +92,7 @@ export function MarkdownToolbar(
       >
         <Printer className="w-4 h-4" />
       </Button>
-      <Separator className="h-4 mx-1" />
+      <Separator className="h-4 mx-1 hidden xl:block" />
       <Button
         variant="ghost"
         size="icon"
@@ -113,7 +120,26 @@ export function MarkdownToolbar(
       >
         <Heading3 className="w-4 h-4" />
       </Button>
-      <Separator className="h-4 mx-1" />
+      <Separator className="h-4 mx-1 hidden 2xl:block" />
+      <Button
+        variant="ghost"
+        size="icon"
+        className="w-8 h-8 rounded-lg"
+        title="Shift Headers (Hn -> Hn-1)"
+        onClick={() => onShiftHeaders('up')}
+      >
+        <ChevronUp className="w-4 h-4" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="w-8 h-8 rounded-lg"
+        title="Shift Headers (Hn -> Hn+1)"
+        onClick={() => onShiftHeaders('down')}
+      >
+        <ChevronDown className="w-4 h-4" />
+      </Button>
+      <Separator className="h-4 mx-1 hidden xl:block" />
       <Button
         variant="ghost"
         size="icon"
@@ -141,7 +167,7 @@ export function MarkdownToolbar(
       >
         <Strikethrough className="w-4 h-4" />
       </Button>
-      <Separator className="h-4 mx-1" />
+      <Separator className="h-4 mx-1 hidden 2xl:block" />
       <Button
         variant="ghost"
         size="icon"
@@ -187,7 +213,16 @@ export function MarkdownToolbar(
       >
         <Terminal className="w-4 h-4" />
       </Button>
-      <Separator className="h-4 mx-1" />
+      <Button
+        variant="ghost"
+        size="icon"
+        className="w-8 h-8 rounded-lg"
+        title={mathLabel}
+        onClick={() => onAction('$$\n', '\n$$', 'e = mc^2', true)}
+      >
+        <Sigma className="w-4 h-4" />
+      </Button>
+      <Separator className="h-4 mx-1 hidden xl:block" />
       <Button
         variant="ghost"
         size="icon"

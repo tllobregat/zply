@@ -31,6 +31,13 @@
     "searchResults": "Résultats de recherche",
     "dashboard": "Tableau de bord"
   },
+  "NotFound": {
+    "title": "Perdu dans l'URI ?",
+    "description": "L'outil que vous recherchez a soit déménagé dans une autre dimension, soit n'a jamais existé dans celle-ci.",
+    "backHome": "Retour à l'accueil",
+    "searchTools": "Rechercher des outils",
+    "funFact": "Le saviez-vous ? Zply est 100% local-first. Même cette erreur est générée dans votre navigateur, sans aucun appel serveur."
+  },
   "PrivacyGate": {
     "privacyGate": "Protection de la Vie Privée",
     "title": "Requête Externe Requise",
@@ -367,19 +374,40 @@
     },
     "markdown-editor": {
       "title": "Éditeur Markdown",
-      "description": "Éditeur Markdown ultra-rapide avec aperçu en temps réel, support GFM et export PDF instantané. 100% privé et sécurisé.",
+      "description": "Éditeur Markdown puissant avec aperçu en temps réel, support GFM, formules mathématiques (KaTeX) et analyse de structure. 100% privé.",
       "features": [
         "Support du GitHub Flavored Markdown (GFM)",
-        "Aperçu en direct avec défilement synchronisé",
-        "Export Markdown vers PDF avec styles optimisés",
+        "Aperçu en direct avec synchronisation intelligente",
+        "Support des formules mathématiques KaTeX",
+        "Analyse structurelle avec détection d'erreurs et warnings",
+        "Corrections rapides (Quick Fixes) en un clic",
         "Éditeur Monaco avec coloration syntaxique",
-        "Pliage du code basé sur les titres de sections",
-        "Compteur de caractères et mots en temps réel",
-        "Traitement 100% local pour une confidentialité maximale"
+        "Export Markdown vers PDF avec styles optimisés"
       ],
       "loadFile": "Charger un fichier",
       "exportPdf": "Exporter en PDF",
-      "default": "# 🖋️ Éditeur Markdown\n\n## 🚀 Introduction\nÉditez ici pour voir le résultat à droite.\n\n## 🏗️ Architecture\nZply est basé sur Next.js.\n\n### 🎨 Design\nStyle épuré et moderne.\n\n## 🛠️ Utilisation\nUtilisez la barre d'outils pour formater votre texte."
+      "math": "Formule Mathématique",
+      "headerLevelJump": "Saut de niveau de titre détecté : passage de H{prev} à H{curr}",
+      "multipleH1": "Plusieurs titres H1 détectés. Un document ne devrait idéalement avoir qu'un seul titre de niveau 1.",
+      "trailingSpaces": "Espaces en fin de ligne détectés.",
+      "consecutiveEmptyLines": "Plus de deux lignes vides consécutives détectées.",
+      "inconsistentListMarkers": "Incohérence des marqueurs de liste : mélange de '*', '-' ou '+'.",
+      "missingLineAroundHeader": "Absence de ligne vide avant ou après un titre.",
+      "missingAltText": "Lien ou image sans texte alternatif.",
+      "orphanLinkReference": "Référence de lien orpheline : '[{ref}]' n'est pas défini.",
+      "unclosedCodeBlock": "Bloc de code non fermé.",
+      "malformedHeader": "Titre mal formé : il manque un espace après les symboles '#'.",
+      "duplicateHeaderId": "Plusieurs titres ont le même contenu : '{text}'.",
+      "quickFix": {
+        "removeTrailingSpaces": "Supprimer les espaces de fin",
+        "fixConsecutiveEmptyLines": "Réduire à une seule ligne vide",
+        "fixMalformedHeader": "Ajouter l'espace après les '#'",
+        "fixInconsistentListMarker": "Utiliser le marqueur de la ligne précédente",
+        "fixMissingAltText": "Ajouter un texte alternatif",
+        "fixMissingLineAroundHeader": "Ajouter les lignes vides manquantes",
+        "fixUnclosedCodeBlock": "Fermer le bloc de code"
+      },
+      "default": "# 🖋️ Éditeur Markdown\n\n## 🚀 Introduction\n\nÉditez ici pour voir le résultat à droite.\n\n## 🏗️ Architecture\n\nZply est basé sur Next.js.\n\n### 🎨 Design\n\nStyle épuré et moderne.\n\n## 🛠️ Utilisation\n\nUtilisez la barre d'outils pour formater votre texte.\n\n## 📐 Formules Mathématiques\n\nVous pouvez utiliser des formules inline comme $E = mc^2$ ou des blocs :\n\n$$\\int_{a}^{b} x^2 dx = \\left[\\frac{x^3}{3}\\right]_{a}^{b}$$"
     },
     "mermaid-maker": {
       "title": "Créateur Mermaid.js",
@@ -511,6 +539,37 @@
         "Sortie en temps réel pendant la saisie ou le collage",
         "Aucune transmission de données vers des serveurs distants"
       ]
+    },
+    "certificate-decoder": {
+      "title": "Décodeur de Certificat",
+      "description": "Décodez les certificats X.509 pour afficher leurs détails, notamment le sujet, l'émetteur, la validité et les extensions.",
+      "features": [
+        "Décodage instantané des certificats PEM et DER",
+        "Vue détaillée des noms distinctifs (DN) du sujet et de l'émetteur",
+        "Suivi de la période de validité avec statut d'expiration",
+        "Génération d'empreintes numériques (SHA-1, SHA-256)",
+        "Analyse de l'utilisation des clés et de l'utilisation étendue",
+        "Analyse de certificat 100% sécurisée et locale uniquement"
+      ],
+      "invalidCert": "Certificat Invalide",
+      "validCert": "Certificat Valide",
+      "expired": "Expiré",
+      "expiresIn": "Expire dans {days} jours",
+      "expiredAgo": "Expiré il y a {days} jours",
+      "subject": "Sujet",
+      "issuer": "Émetteur",
+      "validity": "Validité",
+      "publicKey": "Clé Publique",
+      "extensions": "Extensions",
+      "fingerprints": "Empreintes",
+      "notBefore": "Pas avant",
+      "notAfter": "Pas après",
+      "serialNumber": "Numéro de série",
+      "signatureAlgorithm": "Algorithme de signature",
+      "version": "Version",
+      "resetToDefault": "Réinitialiser par défaut",
+      "placeholder": "Collez un certificat X.509 pour voir ses détails.",
+      "critical": "Critique"
     },
     "secret-generator": {
       "title": "Générateur de Mots de Passe & Secrets",

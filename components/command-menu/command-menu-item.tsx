@@ -44,7 +44,7 @@ export function CommandMenuItem({
     >
       <div className="flex items-center gap-3">
         <div className={cn(
-          'w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center border transition-colors',
+          'w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center border transition-colors shrink-0',
           isActive ? cn(theme.bg, theme.border, 'text-white') : cn('bg-island-bg border-island-border text-muted-foreground', theme.hoverText)
         )}>
           <Icon className="w-4 h-4 sm:w-5 sm:h-5" />

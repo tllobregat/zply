@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/tllobregat/zply/compare/v1.2.0...v1.3.0) (2026-04-16)
+
+
+### Features
+
+* **app-manifest:** add web app manifest and update icons for improved PWA support ([df81e8b](https://github.com/tllobregat/zply/commit/df81e8b3ebec550bd340f574ddf4fb5c74b4761f))
+* **certificate-decoder:** add new tool for decoding X.509 certificates with detailed views ([e6ecec5](https://github.com/tllobregat/zply/commit/e6ecec574db1de8feac23a9943736addaed37f85))
+* **dashboard:** enhance navigation and layout for category exploration ([7bb7c5a](https://github.com/tllobregat/zply/commit/7bb7c5a087972adf51825bbe56515d63509c9e8a))
+* **markdown-editor:** add header shifting functionality to toolbar and editor actions ([be24a32](https://github.com/tllobregat/zply/commit/be24a32de2ad2363acdff168cdcfa55444d3ec79))
+* **markdown-editor:** add KaTeX support for mathematical formulas in markdown ([5b1ce60](https://github.com/tllobregat/zply/commit/5b1ce60aae958a40a7d4e75968171e8e042f2648))
+* **markdown-editor:** enhance markdown validation with comprehensive linting and add quick fixes ([458c373](https://github.com/tllobregat/zply/commit/458c37349779635f49c713a4da205549c628b657))
+* **markdown-editor:** improve layout responsiveness and add customizable mobile breakpoint ([c0f0b62](https://github.com/tllobregat/zply/commit/c0f0b62b7d7772f583d4074bd0db66c50083ec10))
+* **markdown-editor:** update feature set with KaTeX, structural analysis, and smart preview ([ce59de3](https://github.com/tllobregat/zply/commit/ce59de3c68896263600fa1c1dde7f60d3d4942d6))
+* **not-found:** add localized 404 page with interactive navigation options ([5d8efe1](https://github.com/tllobregat/zply/commit/5d8efe12369cf6cf47805a12dd1f3d50e082b75d))
+
+
+### Bug Fixes
+
+* **markdown-editor:** fix cursor jumping while writing bug ([ba1330d](https://github.com/tllobregat/zply/commit/ba1330db52451e041bfcd86cf9e6d10aad7c7fc4))
+* **metadata:** ensure localized URLs are set correctly for all pages ([c0686aa](https://github.com/tllobregat/zply/commit/c0686aa7522ed8ed260abf7086dab44acc2714dd))
+* **metadata:** fix opengraph-image 404 and metadata routing ([63b9a2b](https://github.com/tllobregat/zply/commit/63b9a2bf7d4a724a57945701195d967b3d49ffbc))
+* **ui:** diverse small ui improvements ([b883f6b](https://github.com/tllobregat/zply/commit/b883f6b20459384e5330fe5d4aeb4910fdf5b348))
+
 ## [1.2.0](https://github.com/tllobregat/zply/compare/v1.1.0...v1.2.0) (2026-04-11)
 
 

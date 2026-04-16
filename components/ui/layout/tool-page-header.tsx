@@ -42,24 +42,25 @@ export function ToolPageHeader({
   });
 
   return (
-    <header className="px-4 sm:px-8 py-4 flex items-center justify-between shrink-0">
-      <div className="flex flex-col min-w-0">
-        <Breadcrumb items={enhancedBreadcrumbItems} />
-        <div className="flex items-center gap-3">
+    <header className="px-4 sm:px-8 py-4 flex flex-col gap-2 shrink-0">
+      <Breadcrumb items={enhancedBreadcrumbItems} />
+      
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3 min-w-0">
           <div className={cn('p-1.5 sm:p-2 rounded-xl border shrink-0', iconColorClassName)}>
             {icon}
           </div>
           <h1 className="text-xl sm:text-2xl font-black tracking-tight truncate">{title}</h1>
         </div>
-      </div>
 
-      <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-        <ToolPageActions
-          toolId={toolId}
-          isMobile={isMobile}
-          headerActions={headerActions}
-          scrollToAbout={scrollToAbout}
-        />
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <ToolPageActions
+            toolId={toolId}
+            isMobile={isMobile}
+            headerActions={headerActions}
+            scrollToAbout={scrollToAbout}
+          />
+        </div>
       </div>
     </header>
   );

@@ -15,14 +15,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: `${t(`${toolId}.title`)} | Zply`,
       description: t(`${toolId}.description`),
-      url: `https://zply.dev/timezone-converter`,
+      url: `https://zply.dev/${locale === 'en' ? '' : locale + '/'}timezone-converter`,
     },
     twitter: {
       title: `${t(`${toolId}.title`)} | Zply`,
       description: t(`${toolId}.description`),
     },
     alternates: {
-      canonical: `https://zply.dev/timezone-converter`,
+      canonical: `https://zply.dev/${locale === 'en' ? '' : locale + '/'}timezone-converter`,
     },
   };
 }

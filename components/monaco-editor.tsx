@@ -1,13 +1,13 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { EditorProps } from '@monaco-editor/react';
-import React from 'react';
+import { EditorProps, OnMount, DiffEditorProps } from '@monaco-editor/react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
+import type * as monaco from 'monaco-editor';
 
 /**
  * Loading component for Monaco Editor.
- * Matches the background and overall style of the application.
  */
 const MonacoLoader = (): React.ReactNode => (
   <div className="w-full h-full flex flex-col items-center justify-center bg-black/5 animate-in fade-in duration-500">
@@ -18,10 +18,6 @@ const MonacoLoader = (): React.ReactNode => (
   </div>
 );
 
-/**
- * Dynamically imported Monaco Editor to prevent heavy bundle on initial load.
- * SSR is disabled as Monaco depends on browser-only globals.
- */
 const DynamicEditor: React.ComponentType<EditorProps> = dynamic(
   () => import('@monaco-editor/react').then((mod) => mod.default),
   {
@@ -30,10 +26,7 @@ const DynamicEditor: React.ComponentType<EditorProps> = dynamic(
   }
 );
 
-/**
- * Dynamically imported Monaco Diff Editor.
- */
-const DynamicDiffEditor: React.ComponentType<import('@monaco-editor/react').DiffEditorProps> = dynamic(
+const DynamicDiffEditor: React.ComponentType<DiffEditorProps> = dynamic(
   () => import('@monaco-editor/react').then((mod) => mod.DiffEditor),
   {
     ssr: false,
@@ -42,12 +35,40 @@ const DynamicDiffEditor: React.ComponentType<import('@monaco-editor/react').Diff
 );
 
 /**
- * Reusable Monaco Editor component with project defaults.
+ * Reusable Monaco Editor component.
+ * Optimized to prevent cursor jumps by using a hybrid controlled/uncontrolled approach.
  */
 const MonacoEditor = (props: EditorProps): React.ReactNode => {
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
+  const { value, onMount, ...restProps } = props;
+
+  // Sync value from outside (e.g. file load, URL sync)
+  useEffect(() => {
+    if (editorRef.current && value !== undefined) {
+      const currentValue = editorRef.current.getValue();
+      if (value !== currentValue) {
+        const selection = editorRef.current.getSelection();
+        editorRef.current.setValue(value);
+        if (selection) {
+          editorRef.current.setSelection(selection);
+        }
+      }
+    }
+  }, [value]);
+
+  const handleEditorMount: OnMount = useCallback((editor, monacoInstance) => {
+    editorRef.current = editor;
+    if (onMount) {
+      onMount(editor, monacoInstance);
+    }
+  }, [onMount]);
+
   return (
     <DynamicEditor
-      {...props}
+      {...restProps}
+      value={undefined}
+      defaultValue={value}
+      onMount={handleEditorMount}
       options={{
         minimap: { enabled: false },
         fontSize: 14,
@@ -66,9 +87,9 @@ const MonacoEditor = (props: EditorProps): React.ReactNode => {
 };
 
 /**
- * Reusable Monaco Diff Editor component with project defaults.
+ * Reusable Monaco Diff Editor component.
  */
-const MonacoDiffEditor = (props: import('@monaco-editor/react').DiffEditorProps): React.ReactNode => {
+const MonacoDiffEditor = (props: DiffEditorProps): React.ReactNode => {
   return (
     <DynamicDiffEditor
       {...props}
@@ -90,4 +111,4 @@ const MonacoDiffEditor = (props: import('@monaco-editor/react').DiffEditorProps)
 
 export default MonacoEditor;
 export { MonacoDiffEditor };
-export type { OnMount, EditorProps, DiffEditorProps } from '@monaco-editor/react';
+export type { OnMount, EditorProps, DiffEditorProps };

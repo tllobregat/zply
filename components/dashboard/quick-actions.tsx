@@ -34,7 +34,7 @@ export function QuickActions({ pinnedIds, handleTogglePin }: QuickActionsProps):
         <div className="h-px bg-island-border/60 flex-1 ml-4 sm:ml-6" />
       </div>
 
-      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
         {popularTools.map((tool: ToolConfig, index: number) => (
           <ToolCard
             key={tool.id}

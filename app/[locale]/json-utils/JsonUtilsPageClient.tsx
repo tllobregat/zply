@@ -86,7 +86,7 @@ export default function JsonUtilsPageClient(): ReactNode {
               />
             )
             : (
-              <div className="flex-1 overflow-auto p-8 custom-scrollbar bg-black/20">
+              <div className="flex-1 overflow-auto p-8 custom-scrollbar bg-island-bg">
                 <JsonTreeView
                   parsedContent={parsedContent}
                   error={error}

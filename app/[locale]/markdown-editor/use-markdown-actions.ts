@@ -10,6 +10,7 @@ export type UseMarkdownActions = {
   ) => void;
   handleFoldAll: () => void;
   handleUnfoldAll: () => void;
+  handleShiftHeaders: (direction: 'up' | 'down') => void;
 }
 
 export function useMarkdownActions(editorRef: RefObject<monaco.editor.IStandaloneCodeEditor | null>): UseMarkdownActions {
@@ -60,9 +61,64 @@ export function useMarkdownActions(editorRef: RefObject<monaco.editor.IStandalon
     editorRef.current.trigger('toolbar', 'editor.unfoldAll', null);
   };
 
+  const handleShiftHeaders = (direction: 'up' | 'down'): void => {
+    if (!editorRef.current) return;
+
+    const editor = editorRef.current;
+    const model = editor.getModel();
+    const selection = editor.getSelection();
+    if (!model || !selection) return;
+
+    const isSelectionEmpty = selection.isEmpty();
+    const startLine = isSelectionEmpty ? 1 : selection.startLineNumber;
+    const endLine = isSelectionEmpty ? model.getLineCount() : selection.endLineNumber;
+
+    const edits: monaco.editor.IIdentifiedSingleEditOperation[] = [];
+
+    for (let lineNumber = startLine; lineNumber <= endLine; lineNumber++) {
+      const line = model.getLineContent(lineNumber);
+      const match = line.match(/^(#{1,6})(\s+.*)/);
+      if (match) {
+        const hashes = match[1];
+        const level = hashes.length;
+
+        if (direction === 'down') {
+          if (level < 6) {
+            edits.push({
+              range: {
+                startLineNumber: lineNumber,
+                startColumn: 1,
+                endLineNumber: lineNumber,
+                endColumn: level + 1,
+              },
+              text: '#'.repeat(level + 1),
+            });
+          }
+        } else {
+          if (level > 1) {
+            edits.push({
+              range: {
+                startLineNumber: lineNumber,
+                startColumn: 1,
+                endLineNumber: lineNumber,
+                endColumn: level + 1,
+              },
+              text: '#'.repeat(level - 1),
+            });
+          }
+        }
+      }
+    }
+
+    if (edits.length > 0) {
+      editor.executeEdits('shift-headers', edits);
+    }
+  };
+
   return {
     handleToolbarAction,
     handleFoldAll,
     handleUnfoldAll,
+    handleShiftHeaders,
   };
 }

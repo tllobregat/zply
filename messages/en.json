@@ -31,6 +31,13 @@
     "searchResults": "Search Results",
     "dashboard": "Dashboard"
   },
+  "NotFound": {
+    "title": "Lost in the URI?",
+    "description": "The tool you are looking for has either moved to another dimension or never existed in this one.",
+    "backHome": "Back to Home",
+    "searchTools": "Search Tools",
+    "funFact": "Did you know? Zply is 100% local-first. Even this error is generated in your browser, without any server calls."
+  },
   "PrivacyGate": {
     "privacyGate": "Privacy Gate",
     "title": "External Request Required",
@@ -367,19 +374,40 @@
     },
     "markdown-editor": {
       "title": "Markdown Editor",
-      "description": "Powerful local Markdown editor with live preview, GitHub Flavored Markdown (GFM) support, and instant PDF export. 100% private and secure.",
+      "description": "Powerful Markdown editor with live preview, GFM support, KaTeX formulas, and structural analysis. 100% private and secure.",
       "features": [
         "GitHub Flavored Markdown (GFM) support",
-        "Live split-screen preview with synchronized scrolling",
-        "Instant Markdown to PDF export with optimized styles",
+        "Live preview with smart synchronization",
+        "KaTeX mathematical formula support",
+        "Structural analysis with error and warning detection",
+        "One-click Quick Fixes for style and syntax",
         "Monaco-powered editor with syntax highlighting",
-        "Header-based folding for better document navigation",
-        "Real-time character and word count tracking",
-        "100% Client-side processing for maximum privacy"
+        "Instant Markdown to PDF export with optimized styles"
       ],
       "loadFile": "Load File",
       "exportPdf": "Export to PDF",
-      "default": "# 🖋️ Markdown Editor\n\n## 🚀 Introduction\nEdit here to see the result on the right.\n\n## 🏗️ Architecture\nZply is built with Next.js.\n\n### 🎨 Design\nClean and modern styling.\n\n## 🛠️ Usage\nUse the toolbar to format your text."
+      "math": "Mathematical Formula",
+      "headerLevelJump": "Header level jump detected: from H{prev} to H{curr}",
+      "multipleH1": "Multiple H1 headers detected. A document should ideally have only one level 1 header.",
+      "trailingSpaces": "Trailing spaces detected.",
+      "consecutiveEmptyLines": "More than two consecutive empty lines detected.",
+      "inconsistentListMarkers": "Inconsistent list markers: mixing '*', '-', or '+'.",
+      "missingLineAroundHeader": "Missing empty line before or after a header.",
+      "missingAltText": "Link or image missing alternative text.",
+      "orphanLinkReference": "Orphan link reference: '[{ref}]' is not defined.",
+      "unclosedCodeBlock": "Unclosed code block.",
+      "malformedHeader": "Malformed header: missing space after '#' symbols.",
+      "duplicateHeaderId": "Multiple headers have the same content: '{text}'.",
+      "quickFix": {
+        "removeTrailingSpaces": "Remove trailing spaces",
+        "fixConsecutiveEmptyLines": "Reduce to single empty line",
+        "fixMalformedHeader": "Add space after '#'",
+        "fixInconsistentListMarker": "Use previous line marker",
+        "fixMissingAltText": "Add alternative text",
+        "fixMissingLineAroundHeader": "Add missing empty lines",
+        "fixUnclosedCodeBlock": "Close code block"
+      },
+      "default": "# \uD83D\uDD8B\uFE0F Éditeur Markdown\n\n## \uD83D\uDE80 Introduction\n\nÉditez ici pour voir le résultat à droite.\n\n## \uD83C\uDFD7\uFE0F Architecture\n\nZply est basé sur Next.js.\n\n### \uD83C\uDFA8 Design\n\nStyle épuré et moderne.\n\n## \uD83D\uDEE0\uFE0F Utilisation\n\nUtilisez la barre d'outils pour formater votre texte.\n\n## \uD83D\uDCD0 Formules Mathématiques\n\nVous pouvez utiliser des formules inline comme $E = mc^2$ ou des blocs :\n\n$$\\int_{a}^{b} x^2 dx = \\left[\\frac{x^3}{3}\\right]_{a}^{b}$$"
     },
     "mermaid-maker": {
       "title": "Mermaid.js Maker",
@@ -511,6 +539,37 @@
         "Real-time output as you type or paste",
         "No data transmission to remote servers"
       ]
+    },
+    "certificate-decoder": {
+      "title": "Certificate Decoder",
+      "description": "Decode X.509 certificates to view their details, including subject, issuer, validity, and extensions.",
+      "features": [
+        "Instant decoding of PEM and DER certificates",
+        "Detailed view of Subject and Issuer Distinguished Names",
+        "Validity period tracking with expiration status",
+        "Fingerprint generation (SHA-1, SHA-256)",
+        "Key usage and extended key usage analysis",
+        "100% Secure local-only certificate analysis"
+      ],
+      "invalidCert": "Invalid Certificate",
+      "validCert": "Valid Certificate",
+      "expired": "Expired",
+      "expiresIn": "Expires in {days} days",
+      "expiredAgo": "Expired {days} days ago",
+      "subject": "Subject",
+      "issuer": "Issuer",
+      "validity": "Validity",
+      "publicKey": "Public Key",
+      "extensions": "Extensions",
+      "fingerprints": "Fingerprints",
+      "notBefore": "Not Before",
+      "notAfter": "Not After",
+      "serialNumber": "Serial Number",
+      "signatureAlgorithm": "Signature Algorithm",
+      "version": "Version",
+      "resetToDefault": "Reset to Default",
+      "placeholder": "Paste a X.509 certificate to view their details.",
+      "critical": "Critical"
     },
     "secret-generator": {
       "title": "Password & Secret Generator",
