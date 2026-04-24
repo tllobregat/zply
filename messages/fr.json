@@ -387,6 +387,7 @@
       ],
       "loadFile": "Charger un fichier",
       "exportPdf": "Exporter en PDF",
+      "dropFileToImport": "Déposer le fichier pour importer",
       "math": "Formule Mathématique",
       "headerLevelJump": "Saut de niveau de titre détecté : passage de H{prev} à H{curr}",
       "multipleH1": "Plusieurs titres H1 détectés. Un document ne devrait idéalement avoir qu'un seul titre de niveau 1.",

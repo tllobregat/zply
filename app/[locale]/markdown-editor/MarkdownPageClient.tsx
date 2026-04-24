@@ -9,7 +9,8 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import * as LucideIcons from 'lucide-react';
 import type * as monaco from 'monaco-editor';
-import { ReactNode, RefObject, useRef, useEffect, useCallback, useMemo } from 'react';
+import { processFile } from './markdown.utils';
+import React, { ReactNode, RefObject, useRef, useEffect, useCallback, useMemo, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { useMarkdownState } from './use-markdown-state';
 import { useMarkdownTransformation } from './use-markdown-transformation';
@@ -40,6 +41,8 @@ export default function MarkdownPageClient(): ReactNode {
 
   const { handleToolbarAction, handleFoldAll, handleUnfoldAll, handleShiftHeaders } = useMarkdownActions(editorRef);
 
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+
   const t = useTranslations('Tools');
   const tMarkdown = useTranslations(`Tools.${ToolId.MARKDOWN}`);
   const tCategories = useTranslations('Categories');
@@ -60,6 +63,36 @@ export default function MarkdownPageClient(): ReactNode {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleExportPdf]);
+
+  const handleDragOver = useCallback((e: React.DragEvent): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  }, []);
+
+  const handleDrop = useCallback(async (e: React.DragEvent): Promise<void> => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+
+    const file: File | undefined = e.dataTransfer.files?.[0];
+    if (!file) return;
+
+    try {
+      const content: string = await processFile(file);
+      if (content) {
+        setContent(content);
+      }
+    } catch (error: unknown) {
+      console.error('Failed to process dropped file:', error);
+    }
+  }, [setContent]);
 
   // Memoize editor props to keep EditorPreviewWorkspace stable
   const editorProps = useMemo(() => ({
@@ -364,15 +397,34 @@ export default function MarkdownPageClient(): ReactNode {
         }
         workspaceClassName="flex-1 min-h-0 flex-row overflow-hidden"
       >
-        <EditorPreviewWorkspace
-          value={content}
-          onChange={setContent}
-          language="markdown"
-          viewMode={viewMode}
-          editorProps={editorProps}
-          previewClassName={`${resolvedTheme === 'dark' ? 'bg-[#050a1a]' : 'bg-slate-50'}`}
-          preview={previewElement}
-        />
+        <div
+          className="flex-1 flex flex-row min-h-0 min-w-0 relative"
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+        >
+          <EditorPreviewWorkspace
+            value={content}
+            onChange={setContent}
+            language="markdown"
+            viewMode={viewMode}
+            editorProps={editorProps}
+            previewClassName={`${resolvedTheme === 'dark' ? 'bg-[#050a1a]' : 'bg-slate-50'}`}
+            preview={previewElement}
+          />
+
+          {
+            isDragging
+            && (
+              <div className="absolute inset-0 z-50 flex items-center justify-center bg-island-bg/60 backdrop-blur-sm border-2 border-dashed border-primary m-4 rounded-3xl pointer-events-none">
+                <div className="flex flex-col items-center gap-4 text-primary">
+                  <LucideIcons.Upload className="w-12 h-12 animate-bounce" />
+                  <p className="text-xl font-bold">{tMarkdown('dropFileToImport')}</p>
+                </div>
+              </div>
+            )
+          }
+        </div>
       </ToolPageLayout>
 
       <MarkdownPasteModal

@@ -1,4 +1,4 @@
-import { csvToMarkdown, excelToMarkdown, htmlToMarkdown } from './markdown.utils';
+import { processFile } from './markdown.utils';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import {
@@ -50,43 +50,19 @@ export function MarkdownToolbar(
 ): ReactNode {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const fileName = file.name.toLowerCase();
-    const isCsv = fileName.endsWith('.csv');
-    const isHtml = fileName.endsWith('.html') || fileName.endsWith('.htm');
-    const isExcel = fileName.endsWith('.xlsx') || fileName.endsWith('.xlsb') || fileName.endsWith('.xls') || fileName.endsWith('.xlsm');
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const result = event.target?.result;
-      if (!result) return;
-
-      if (isExcel) {
-        if (result instanceof ArrayBuffer) {
-          onLoadFile(excelToMarkdown(result, file.name));
-        }
-        return;
+    try {
+      const content = await processFile(file);
+      if (content) {
+        onLoadFile(content);
       }
-
-      if (typeof result === 'string') {
-        if (isCsv) {
-          onLoadFile(csvToMarkdown(result));
-        } else if (isHtml) {
-          onLoadFile(htmlToMarkdown(result));
-        } else {
-          onLoadFile(result);
-        }
-      }
-    };
-
-    if (isExcel) {
-      reader.readAsArrayBuffer(file);
-    } else {
-      reader.readAsText(file);
+    } catch (error) {
+      console.error('Failed to load file:', error);
     }
+
     // Reset input value to allow selecting the same file again
     e.target.value = '';
   };

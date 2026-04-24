@@ -386,6 +386,7 @@
       ],
       "loadFile": "Load File",
       "exportPdf": "Export to PDF",
+      "dropFileToImport": "Drop file to import",
       "math": "Mathematical Formula",
       "headerLevelJump": "Header level jump detected: from H{prev} to H{curr}",
       "multipleH1": "Multiple H1 headers detected. A document should ideally have only one level 1 header.",

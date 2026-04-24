@@ -123,6 +123,53 @@ export function excelToMarkdown(buffer: ArrayBuffer, fileName: string): string {
   return markdown.trim();
 }
 
+export function processFile(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const fileName = file.name.toLowerCase();
+    const isCsv = fileName.endsWith('.csv');
+    const isHtml = fileName.endsWith('.html') || fileName.endsWith('.htm');
+    const isExcel = fileName.endsWith('.xlsx') || fileName.endsWith('.xlsb') || fileName.endsWith('.xls') || fileName.endsWith('.xlsm');
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const result = event.target?.result;
+      if (!result) {
+        resolve('');
+        return;
+      }
+
+      if (isExcel) {
+        if (result instanceof ArrayBuffer) {
+          resolve(excelToMarkdown(result, file.name));
+        } else {
+          resolve('');
+        }
+        return;
+      }
+
+      if (typeof result === 'string') {
+        if (isCsv) {
+          resolve(csvToMarkdown(result));
+        } else if (isHtml) {
+          resolve(htmlToMarkdown(result));
+        } else {
+          resolve(result);
+        }
+      } else {
+        resolve('');
+      }
+    };
+
+    reader.onerror = () => reject(new Error('Failed to read file'));
+
+    if (isExcel) {
+      reader.readAsArrayBuffer(file);
+    } else {
+      reader.readAsText(file);
+    }
+  });
+}
+
 /**
  * Heuristic to detect if a string might be CSV data.
  * Checks for multiple lines and consistent column counts with delimiters.
