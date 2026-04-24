@@ -1,17 +1,21 @@
 'use client';
 
 import { EditorPreviewWorkspace } from '@/components/ui/layout';
-import { ToolPageLayout }from '@/components/ui/layout';
+import { ToolPageLayout } from '@/components/ui/layout';
 import { Separator } from '@/components/ui/separator';
 import { ViewModeToggle } from '@/components/ui/layout';
+import { Button } from '@/components/ui/button';
 import { Category, ToolId } from '@/lib/config/tools';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import * as LucideIcons from 'lucide-react';
 import type * as monaco from 'monaco-editor';
-import { ReactNode, RefObject, useRef, useEffect, useCallback, useMemo } from 'react';
+import { ReactNode, RefObject, useRef, useEffect, useCallback, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useTheme } from 'next-themes';
+import { AnimatePresence, motion } from 'framer-motion';
+import TurndownService from 'turndown';
+import { gfm } from 'turndown-plugin-gfm';
 import { useMarkdownState } from './use-markdown-state';
 import { useMarkdownTransformation } from './use-markdown-transformation';
 import { useMarkdownActions } from './use-markdown-actions';
@@ -26,8 +30,11 @@ export default function MarkdownPageClient(): ReactNode {
   const editorRef: RefObject<monaco.editor.IStandaloneCodeEditor | null> = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const previewRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(null);
 
+  const [isPasteModalOpen, setIsPasteModalOpen] = useState<boolean>(false);
+  const [pendingPaste, setPendingPaste] = useState<{ text: string; html?: string; selection: monaco.Selection } | null>(null);
+
   const { handleToolbarAction, handleFoldAll, handleUnfoldAll, handleShiftHeaders } = useMarkdownActions(editorRef);
-  
+
   const t = useTranslations('Tools');
   const tMarkdown = useTranslations(`Tools.${ToolId.MARKDOWN}`);
   const tCategories = useTranslations('Categories');
@@ -265,6 +272,76 @@ export default function MarkdownPageClient(): ReactNode {
     window.print();
   }, []);
 
+  const handleConfirmPaste = useCallback((useHtml: boolean = false): void => {
+    if (pendingPaste && editorRef.current) {
+      let textToInsert = pendingPaste.text;
+
+      if (useHtml && pendingPaste.html) {
+        try {
+          const turndownService = new TurndownService({
+            headingStyle: 'atx',
+            codeBlockStyle: 'fenced'
+          });
+          turndownService.use(gfm);
+
+          // Custom rule to handle tables that don't have <th> in the first row
+          // The default GFM plugin ignores tables without <th> and keeps them as HTML
+          turndownService.addRule('table-no-th', {
+            filter: (node) => {
+              const tableNode = node as HTMLTableElement;
+              return tableNode.nodeName === 'TABLE' &&
+                tableNode.rows &&
+                tableNode.rows.length > 0 &&
+                !Array.from(tableNode.rows[0].cells).every(cell => cell.nodeName === 'TH');
+            },
+            replacement: (content) => {
+              // Ensure we don't have double newlines
+              const cleanContent = content.replace(/\n\n+/g, '\n');
+
+              // We need to ensure there's a separator line after the first row
+              const rows = cleanContent.split('\n').filter(r => r.trim().startsWith('|'));
+              if (rows.length > 0) {
+                const firstRow = rows[0];
+                const columnCount = (firstRow.match(/\|/g) || []).length - 1;
+                if (columnCount > 0) {
+                  const separator = '|' + ' --- |'.repeat(columnCount);
+                  rows.splice(1, 0, separator);
+                }
+                return '\n\n' + rows.join('\n') + '\n\n';
+              }
+
+              return '\n\n' + cleanContent + '\n\n';
+            }
+          });
+
+          // Clean up the generated markdown to remove trailing spaces and excessive newlines
+          const convertedMarkdown = turndownService.turndown(pendingPaste.html);
+          textToInsert = convertedMarkdown
+            .split('\n')
+            .map(line => line.trimEnd()) // Remove trailing spaces
+            .join('\n')
+            .replace(/\n{3,}/g, '\n\n') // Max 2 consecutive newlines
+            .trim(); // Trim start and end of the whole text
+        } catch (err) {
+          console.error('Failed to convert HTML to Markdown:', err);
+          // Fallback to plain text if conversion fails
+          textToInsert = pendingPaste.text;
+        }
+      }
+
+      editorRef.current.executeEdits('paste-confirmation', [
+        {
+          range: pendingPaste.selection,
+          text: textToInsert,
+          forceMoveMarkers: true,
+        },
+      ]);
+      editorRef.current.focus();
+    }
+    setIsPasteModalOpen(false);
+    setPendingPaste(null);
+  }, [pendingPaste]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
@@ -281,6 +358,97 @@ export default function MarkdownPageClient(): ReactNode {
   const editorProps = useMemo(() => ({
     onMount: (editor: monaco.editor.IStandaloneCodeEditor, monacoInstance: typeof monaco) => {
       editorRef.current = editor;
+
+      // Use Monaco's own action system to override paste
+      editor.addAction({
+        id: 'zply-intercept-paste',
+        label: 'Paste',
+        keybindings: [monacoInstance.KeyMod.CtrlCmd | monacoInstance.KeyCode.KeyV],
+        run: async () => {
+          try {
+            const clipboardItems = await navigator.clipboard.read();
+            let text = '';
+            let htmlContent = '';
+            let hasHtml = false;
+
+            for (const item of clipboardItems) {
+              if (item.types.includes('text/html')) {
+                const blob = await item.getType('text/html');
+                htmlContent = await blob.text();
+                hasHtml = true;
+              }
+              if (item.types.includes('text/plain')) {
+                const blob = await item.getType('text/plain');
+                text = await blob.text();
+              }
+            }
+
+            if (!text && !htmlContent) return;
+
+            const selection = editor.getSelection();
+            if (!selection) return;
+
+            if (hasHtml) {
+              // Check if HTML is interesting enough to convert
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(htmlContent, 'text/html');
+              const interestingElements = ['table', 'a', 'strong', 'b', 'em', 'i', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'img', 'code', 'pre', 'blockquote', 'hr', 'del', 's', 'math'];
+              const isInteresting = interestingElements.some(tag => doc.querySelector(tag)) ||
+                doc.querySelector('[data-equation-content]') !== null ||
+                Array.from(doc.querySelectorAll('img')).some(img => {
+                  const alt = img.getAttribute('alt') || '';
+                  return alt.includes('\\') || alt.includes('$');
+                });
+
+              if (isInteresting) {
+                setPendingPaste({ text, html: htmlContent, selection });
+                setIsPasteModalOpen(true);
+              } else {
+                // Not interesting HTML, just paste as plain text
+                editor.executeEdits('zply-paste', [
+                  {
+                    range: selection,
+                    text: text,
+                    forceMoveMarkers: true,
+                  },
+                ]);
+                editor.focus();
+              }
+            } else {
+              // Standard text paste, no modal
+              editor.executeEdits('zply-paste', [
+                {
+                  range: selection,
+                  text: text,
+                  forceMoveMarkers: true,
+                },
+              ]);
+              editor.focus();
+            }
+          } catch (err) {
+            console.error('Failed to read clipboard:', err);
+            // Fallback for browsers that might not support navigator.clipboard.read()
+            try {
+              const text = await navigator.clipboard.readText();
+              if (text) {
+                const selection = editor.getSelection();
+                if (selection) {
+                  editor.executeEdits('zply-paste-fallback', [
+                    {
+                      range: selection,
+                      text: text,
+                      forceMoveMarkers: true,
+                    },
+                  ]);
+                  editor.focus();
+                }
+              }
+            } catch (fallbackErr) {
+              console.error('Fallback clipboard read failed:', fallbackErr);
+            }
+          }
+        }
+      });
 
       // Initial validation
       const model = editor.getModel();
@@ -420,7 +588,12 @@ export default function MarkdownPageClient(): ReactNode {
                         resource: model.uri,
                         versionId: model.getVersionId(),
                         textEdit: {
-                          range: { startLineNumber: marker.startLineNumber + 1, startColumn: 1, endLineNumber: marker.startLineNumber + 1, endColumn: 1 },
+                          range: {
+                            startLineNumber: marker.startLineNumber + 1,
+                            startColumn: 1,
+                            endLineNumber: marker.startLineNumber + 1,
+                            endColumn: 1
+                          },
                           text: '\n',
                         },
                       }] : []),
@@ -455,7 +628,8 @@ export default function MarkdownPageClient(): ReactNode {
 
           return {
             actions,
-            dispose: () => {},
+            dispose: () => {
+            },
           };
         },
       });
@@ -557,7 +731,7 @@ export default function MarkdownPageClient(): ReactNode {
         footerIndicator={
           <>
             <span className="flex items-center gap-1.5">
-              <Zap className={cn("w-3 h-3 text-yellow-500/50", isPending && "animate-pulse")} /> 
+              <Zap className={cn('w-3 h-3 text-yellow-500/50', isPending && 'animate-pulse')} />
               {tCommon('toolIndicators.liveRendering')}
             </span>
             <Separator />
@@ -576,6 +750,71 @@ export default function MarkdownPageClient(): ReactNode {
           preview={previewElement}
         />
       </ToolPageLayout>
+      <AnimatePresence>
+        {
+          isPasteModalOpen
+          && (
+            <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsPasteModalOpen(false)}
+                className="absolute inset-0 bg-background/40 backdrop-blur-sm"
+              />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                className={cn(
+                  'relative w-full max-w-lg overflow-hidden rounded-3xl border border-island-border shadow-2xl',
+                  resolvedTheme === 'dark' ? 'bg-[#0a0f1e]/90' : 'bg-white/90'
+                )}
+              >
+                <div className="p-8">
+                  <div className="mb-6 flex items-center gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-500">
+                      <LucideIcons.ClipboardPaste className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-black uppercase tracking-tight">
+                        {tMarkdown('pasteConfirmation.title')}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {tMarkdown('pasteConfirmation.description')}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-2 sm:flex-row sm:justify-end sm:gap-3">
+                    <Button
+                      variant="ghost"
+                      onClick={() => setIsPasteModalOpen(false)}
+                      className="w-full sm:w-auto sm:order-1"
+                    >
+                      {tMarkdown('pasteConfirmation.cancel')}
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      onClick={() => handleConfirmPaste(false)}
+                      className="w-full sm:w-auto sm:order-2"
+                    >
+                      {tMarkdown('pasteConfirmation.confirm')}
+                    </Button>
+                    <Button
+                      variant="primary"
+                      onClick={() => handleConfirmPaste(true)}
+                      className="w-full sm:w-auto px-6 sm:order-3"
+                    >
+                      {tMarkdown('pasteConfirmation.convert')}
+                    </Button>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )
+        }
+      </AnimatePresence>
       {
         typeof document !== 'undefined'
         && createPortal(

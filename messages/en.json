@@ -376,8 +376,8 @@
       "title": "Markdown Editor",
       "description": "Powerful Markdown editor with live preview, GFM support, KaTeX formulas, and structural analysis. 100% private and secure.",
       "features": [
-        "GitHub Flavored Markdown (GFM) support",
         "Live preview with smart synchronization",
+        "Smart Rich Text to Markdown conversion (Tables, Math, etc.)",
         "KaTeX mathematical formula support",
         "Structural analysis with error and warning detection",
         "One-click Quick Fixes for style and syntax",
@@ -407,7 +407,14 @@
         "fixMissingLineAroundHeader": "Add missing empty lines",
         "fixUnclosedCodeBlock": "Close code block"
       },
-      "default": "# \uD83D\uDD8B\uFE0F Éditeur Markdown\n\n## \uD83D\uDE80 Introduction\n\nÉditez ici pour voir le résultat à droite.\n\n## \uD83C\uDFD7\uFE0F Architecture\n\nZply est basé sur Next.js.\n\n### \uD83C\uDFA8 Design\n\nStyle épuré et moderne.\n\n## \uD83D\uDEE0\uFE0F Utilisation\n\nUtilisez la barre d'outils pour formater votre texte.\n\n## \uD83D\uDCD0 Formules Mathématiques\n\nVous pouvez utiliser des formules inline comme $E = mc^2$ ou des blocs :\n\n$$\\int_{a}^{b} x^2 dx = \\left[\\frac{x^3}{3}\\right]_{a}^{b}$$"
+      "pasteConfirmation": {
+        "title": "Confirm Paste",
+        "description": "Rich text detected in clipboard. How would you like to paste it?",
+        "confirm": "Keep as Text",
+        "convert": "Convert to Markdown",
+        "cancel": "Cancel"
+      },
+      "default": "# ✒️ Markdown Editor\n\n## 🚀 Introduction\n\nEdit here to see the result on the right.\n\n## 🏗️ Architecture\n\nZply is based on Next.js.\n\n### 🎨 Design\n\nClean and modern style.\n\n## 🛠️ Usage\n\nUse the toolbar to format your text.\n\n## 📐 Mathematical Formulas\n\nYou can use inline formulas like $E = mc^2$ or blocks:\n\n$$\\int_{a}^{b} x^2 dx = \\left[\\frac{x^3}{3}\\right]_{a}^{b}$"
     },
     "mermaid-maker": {
       "title": "Mermaid.js Maker",

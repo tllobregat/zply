@@ -135,7 +135,9 @@ export const TOOLS: ToolConfig[] = [
     showInSidebar: true,
     libs: [
       { name: 'marked', url: 'https://github.com/markedjs/marked' },
-      { name: 'Monaco Editor', url: 'https://github.com/microsoft/monaco-editor' }
+      { name: 'Monaco Editor', url: 'https://github.com/microsoft/monaco-editor' },
+      { name: 'turndown', url: 'https://github.com/mixmark-io/turndown' },
+      { name: 'turndown-plugin-gfm', url: 'https://github.com/domchristie/turndown-plugin-gfm' }
     ]
   },
   {
