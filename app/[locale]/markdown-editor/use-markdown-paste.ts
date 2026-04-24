@@ -2,10 +2,12 @@ import type * as monaco from 'monaco-editor';
 import { RefObject, useCallback, useState } from 'react';
 import TurndownService from 'turndown';
 import { gfm } from 'turndown-plugin-gfm';
+import { csvToMarkdown, isCSV } from './markdown.utils';
 
 export interface PendingPaste {
   text: string;
   html?: string;
+  isCsv?: boolean;
   selection: monaco.Selection;
 }
 
@@ -13,11 +15,13 @@ export function useMarkdownPaste(editorRef: RefObject<monaco.editor.IStandaloneC
   const [isPasteModalOpen, setIsPasteModalOpen] = useState<boolean>(false);
   const [pendingPaste, setPendingPaste] = useState<PendingPaste | null>(null);
 
-  const handleConfirmPaste = useCallback((useHtml: boolean = false): void => {
+  const handleConfirmPaste = useCallback((mode: 'raw' | 'html' | 'csv' = 'raw'): void => {
     if (pendingPaste && editorRef.current) {
       let textToInsert = pendingPaste.text;
 
-      if (useHtml && pendingPaste.html) {
+      if (mode === 'csv') {
+        textToInsert = csvToMarkdown(pendingPaste.text);
+      } else if (mode === 'html' && pendingPaste.html) {
         try {
           const turndownService = new TurndownService({
             headingStyle: 'atx',
@@ -114,6 +118,9 @@ export function useMarkdownPaste(editorRef: RefObject<monaco.editor.IStandaloneC
         if (isInteresting) {
           setPendingPaste({ text, html: htmlContent, selection });
           setIsPasteModalOpen(true);
+        } else if (isCSV(text)) {
+          setPendingPaste({ text, html: htmlContent, isCsv: true, selection });
+          setIsPasteModalOpen(true);
         } else {
           editor.executeEdits('zply-paste', [
             {
@@ -124,6 +131,9 @@ export function useMarkdownPaste(editorRef: RefObject<monaco.editor.IStandaloneC
           ]);
           editor.focus();
         }
+      } else if (isCSV(text)) {
+        setPendingPaste({ text, isCsv: true, selection });
+        setIsPasteModalOpen(true);
       } else {
         editor.executeEdits('zply-paste', [
           {

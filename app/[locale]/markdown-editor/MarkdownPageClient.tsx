@@ -33,6 +33,7 @@ export default function MarkdownPageClient(): ReactNode {
   const {
     isPasteModalOpen,
     setIsPasteModalOpen,
+    pendingPaste,
     handleConfirmPaste,
     interceptPaste
   } = useMarkdownPaste(editorRef);
@@ -378,6 +379,7 @@ export default function MarkdownPageClient(): ReactNode {
         isOpen={isPasteModalOpen}
         onClose={() => setIsPasteModalOpen(false)}
         onConfirm={handleConfirmPaste}
+        pendingPaste={pendingPaste}
         resolvedTheme={resolvedTheme}
       />
 

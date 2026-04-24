@@ -5,14 +5,17 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import * as LucideIcons from 'lucide-react';
 
+import { PendingPaste } from './use-markdown-paste';
+
 interface MarkdownPasteModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (useHtml: boolean) => void;
+  onConfirm: (mode: 'raw' | 'html' | 'csv') => void;
+  pendingPaste?: PendingPaste | null;
   resolvedTheme?: string;
 }
 
-export function MarkdownPasteModal({ isOpen, onClose, onConfirm, resolvedTheme }: MarkdownPasteModalProps) {
+export function MarkdownPasteModal({ isOpen, onClose, onConfirm, pendingPaste, resolvedTheme }: MarkdownPasteModalProps) {
   const tMarkdown = useTranslations(`Tools.${ToolId.MARKDOWN}`);
 
   return (
@@ -47,7 +50,15 @@ export function MarkdownPasteModal({ isOpen, onClose, onConfirm, resolvedTheme }
                       {tMarkdown('pasteConfirmation.title')}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {tMarkdown('pasteConfirmation.description')}
+                      {
+                        pendingPaste?.isCsv
+                          ? (
+                            tMarkdown('pasteConfirmation.descriptionCsv')
+                          )
+                          : (
+                            tMarkdown('pasteConfirmation.description')
+                          )
+                      }
                     </p>
                   </div>
                 </div>
@@ -62,18 +73,32 @@ export function MarkdownPasteModal({ isOpen, onClose, onConfirm, resolvedTheme }
                   </Button>
                   <Button
                     variant="secondary"
-                    onClick={() => onConfirm(false)}
+                    onClick={() => onConfirm('raw')}
                     className="w-full sm:w-auto sm:order-2"
                   >
                     {tMarkdown('pasteConfirmation.confirm')}
                   </Button>
-                  <Button
-                    variant="primary"
-                    onClick={() => onConfirm(true)}
-                    className="w-full sm:w-auto px-6 sm:order-3"
-                  >
-                    {tMarkdown('pasteConfirmation.convert')}
-                  </Button>
+                  {
+                    pendingPaste?.isCsv
+                      ? (
+                        <Button
+                          variant="primary"
+                          onClick={() => onConfirm('csv')}
+                          className="w-full sm:w-auto px-6 sm:order-3"
+                        >
+                          {tMarkdown('pasteConfirmation.convertCsv')}
+                        </Button>
+                      )
+                      : (
+                        <Button
+                          variant="primary"
+                          onClick={() => onConfirm('html')}
+                          className="w-full sm:w-auto px-6 sm:order-3"
+                        >
+                          {tMarkdown('pasteConfirmation.convert')}
+                        </Button>
+                      )
+                  }
                 </div>
               </div>
             </motion.div>

@@ -377,7 +377,7 @@
       "description": "Powerful Markdown editor with live preview, GFM support, KaTeX formulas, and structural analysis. 100% private and secure.",
       "features": [
         "Live preview with smart synchronization",
-        "Smart Rich Text to Markdown conversion (Tables, Math, etc.)",
+        "Smart Rich Text and CSV to Markdown conversion",
         "KaTeX mathematical formula support",
         "Structural analysis with error and warning detection",
         "One-click Quick Fixes for style and syntax",
@@ -410,8 +410,10 @@
       "pasteConfirmation": {
         "title": "Confirm Paste",
         "description": "Rich text detected in clipboard. How would you like to paste it?",
+        "descriptionCsv": "CSV data detected in clipboard. How would you like to paste it?",
         "confirm": "Keep as Text",
         "convert": "Convert to Markdown",
+        "convertCsv": "Convert CSV to Table",
         "cancel": "Cancel"
       },
       "default": "# ✒️ Markdown Editor\n\n## 🚀 Introduction\n\nEdit here to see the result on the right.\n\n## 🏗️ Architecture\n\nZply is based on Next.js.\n\n### 🎨 Design\n\nClean and modern style.\n\n## 🛠️ Usage\n\nUse the toolbar to format your text.\n\n## 📐 Mathematical Formulas\n\nYou can use inline formulas like $E = mc^2$ or blocks:\n\n$$\\int_{a}^{b} x^2 dx = \\left[\\frac{x^3}{3}\\right]_{a}^{b}$"
