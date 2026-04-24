@@ -90,9 +90,50 @@ const MonacoEditor = (props: EditorProps): React.ReactNode => {
  * Reusable Monaco Diff Editor component.
  */
 const MonacoDiffEditor = (props: DiffEditorProps): React.ReactNode => {
+  const diffEditorRef = useRef<monaco.editor.IDiffEditor | null>(null);
+  const { original, modified, onMount, ...restProps } = props;
+
+  // Sync original value
+  useEffect(() => {
+    if (diffEditorRef.current && original !== undefined) {
+      const originalEditor = diffEditorRef.current.getOriginalEditor();
+      if (original !== originalEditor.getValue()) {
+        const selection = originalEditor.getSelection();
+        originalEditor.setValue(original);
+        if (selection) {
+          originalEditor.setSelection(selection);
+        }
+      }
+    }
+  }, [original]);
+
+  // Sync modified value
+  useEffect(() => {
+    if (diffEditorRef.current && modified !== undefined) {
+      const modifiedEditor = diffEditorRef.current.getModifiedEditor();
+      if (modified !== modifiedEditor.getValue()) {
+        const selection = modifiedEditor.getSelection();
+        modifiedEditor.setValue(modified);
+        if (selection) {
+          modifiedEditor.setSelection(selection);
+        }
+      }
+    }
+  }, [modified]);
+
+  const handleEditorMount = useCallback((editor: monaco.editor.IStandaloneDiffEditor, monacoInstance: typeof monaco) => {
+    diffEditorRef.current = editor;
+    if (onMount) {
+      onMount(editor, monacoInstance);
+    }
+  }, [onMount]);
+
   return (
     <DynamicDiffEditor
-      {...props}
+      {...restProps}
+      original={original}
+      modified={modified}
+      onMount={handleEditorMount}
       options={{
         minimap: { enabled: false },
         fontSize: 14,
