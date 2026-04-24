@@ -1,6 +1,47 @@
 import TurndownService from 'turndown';
 import { gfm } from 'turndown-plugin-gfm';
 import Papa from 'papaparse';
+import * as XLSX from 'xlsx';
+
+/**
+ * Converts a 2D array of data into a valid GFM Markdown table.
+ * Ensures consistent column counts and escapes special characters.
+ */
+function arrayToMarkdownTable(data: unknown[][]): string {
+  if (data.length === 0) return '';
+
+  // 1. Find the maximum number of columns
+  const maxColumns = Math.max(...data.map(row => row.length));
+  if (maxColumns === 0) return '';
+
+  const formatCell = (cell: unknown): string => {
+    const str = String(cell ?? '').trim();
+    // Escape pipes and handle newlines
+    return str.replace(/\|/g, '\\|').replace(/\n/g, '<br>');
+  };
+
+  const rows: string[] = [];
+
+  // 2. Format Header
+  const header = data[0];
+  const paddedHeader = [...header];
+  while (paddedHeader.length < maxColumns) paddedHeader.push('');
+  rows.push(`| ${paddedHeader.map(formatCell).join(' | ')} |`);
+
+  // 3. Format Separator
+  const separator = Array(maxColumns).fill('---');
+  rows.push(`| ${separator.join(' | ')} |`);
+
+  // 4. Format Body
+  const body = data.slice(1);
+  body.forEach(row => {
+    const paddedRow = [...row];
+    while (paddedRow.length < maxColumns) paddedRow.push('');
+    rows.push(`| ${paddedRow.map(formatCell).join(' | ')} |`);
+  });
+
+  return rows.join('\n');
+}
 
 /**
  * Converts HTML string to Markdown.
@@ -24,14 +65,17 @@ export function htmlToMarkdown(html: string): string {
     replacement: (content) => {
       const cleanContent = content.replace(/\n\n+/g, '\n');
       const rows = cleanContent.split('\n').filter(r => r.trim().startsWith('|'));
+      
       if (rows.length > 0) {
-        const firstRow = rows[0];
-        const columnCount = (firstRow.match(/\|/g) || []).length - 1;
-        if (columnCount > 0) {
-          const separator = '|' + ' --- |'.repeat(columnCount);
-          rows.splice(1, 0, separator);
-        }
-        return '\n\n' + rows.join('\n') + '\n\n';
+        // Parse the rows back into an array to use our robust table generator
+        const data = rows.map(row => 
+          row.trim()
+             .replace(/^\|/, '')
+             .replace(/\|$/, '')
+             .split('|')
+             .map(cell => cell.trim())
+        );
+        return '\n\n' + arrayToMarkdownTable(data) + '\n\n';
       }
       return '\n\n' + cleanContent + '\n\n';
     }
@@ -53,25 +97,30 @@ export function csvToMarkdown(csv: string): string {
     skipEmptyLines: true,
   });
 
-  if (results.data.length === 0) {
-    return '';
-  }
+  return arrayToMarkdownTable(results.data);
+}
 
-  const rows = results.data;
-  const header = rows[0];
-  const body = rows.slice(1);
+/**
+ * Converts an Excel workbook (ArrayBuffer) into a GFM Markdown string.
+ */
+export function excelToMarkdown(buffer: ArrayBuffer, fileName: string): string {
+  const workbook: XLSX.WorkBook = XLSX.read(buffer, { type: 'array' });
+  const baseName: string = fileName.replace(/\.[^/.]+$/, "");
+  
+  let markdown: string = `# ${baseName}\n\n`;
 
-  if (header.length === 0) {
-    return '';
-  }
+  workbook.SheetNames.forEach((sheetName: string) => {
+    const sheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
+    const data: unknown[][] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-  const markdownTable = [
-    `| ${header.join(' | ')} |`,
-    `| ${header.map(() => '---').join(' | ')} |`,
-    ...body.map(row => `| ${row.join(' | ')} |`)
-  ].join('\n');
+    if (data.length > 0) {
+      markdown += `## ${sheetName}\n\n`;
+      markdown += arrayToMarkdownTable(data);
+      markdown += '\n\n';
+    }
+  });
 
-  return markdownTable;
+  return markdown.trim();
 }
 
 /**

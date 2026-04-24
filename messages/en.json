@@ -377,7 +377,7 @@
       "description": "Powerful Markdown editor with live preview, GFM support, KaTeX formulas, and structural analysis. 100% private and secure.",
       "features": [
         "Live preview with smart synchronization",
-        "Smart Rich Text, CSV and HTML to Markdown conversion",
+        "Smart Rich Text, CSV, HTML and Excel to Markdown conversion",
         "KaTeX mathematical formula support",
         "Structural analysis with error and warning detection",
         "One-click Quick Fixes for style and syntax",

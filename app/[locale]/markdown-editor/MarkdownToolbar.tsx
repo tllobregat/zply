@@ -1,4 +1,4 @@
-import { csvToMarkdown, htmlToMarkdown } from './markdown.utils';
+import { csvToMarkdown, excelToMarkdown, htmlToMarkdown } from './markdown.utils';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import {
@@ -57,21 +57,36 @@ export function MarkdownToolbar(
     const fileName = file.name.toLowerCase();
     const isCsv = fileName.endsWith('.csv');
     const isHtml = fileName.endsWith('.html') || fileName.endsWith('.htm');
+    const isExcel = fileName.endsWith('.xlsx') || fileName.endsWith('.xlsb') || fileName.endsWith('.xls') || fileName.endsWith('.xlsm');
 
     const reader = new FileReader();
     reader.onload = (event) => {
-      const content = event.target?.result;
-      if (typeof content === 'string') {
+      const result = event.target?.result;
+      if (!result) return;
+
+      if (isExcel) {
+        if (result instanceof ArrayBuffer) {
+          onLoadFile(excelToMarkdown(result, file.name));
+        }
+        return;
+      }
+
+      if (typeof result === 'string') {
         if (isCsv) {
-          onLoadFile(csvToMarkdown(content));
+          onLoadFile(csvToMarkdown(result));
         } else if (isHtml) {
-          onLoadFile(htmlToMarkdown(content));
+          onLoadFile(htmlToMarkdown(result));
         } else {
-          onLoadFile(content);
+          onLoadFile(result);
         }
       }
     };
-    reader.readAsText(file);
+
+    if (isExcel) {
+      reader.readAsArrayBuffer(file);
+    } else {
+      reader.readAsText(file);
+    }
     // Reset input value to allow selecting the same file again
     e.target.value = '';
   };
@@ -91,7 +106,7 @@ export function MarkdownToolbar(
         type="file"
         ref={fileInputRef}
         className="hidden"
-        accept=".md,.markdown,.txt,.csv,.html,.htm"
+        accept=".md,.markdown,.txt,.csv,.html,.htm,.xlsx,.xlsb,.xls,.xlsm"
         onChange={handleFileChange}
       />
       <Button

@@ -378,7 +378,7 @@
       "features": [
         "Support du GitHub Flavored Markdown (GFM)",
         "Aperçu en direct avec synchronisation intelligente",
-        "Conversion intelligente du Texte Enrichi, CSV et HTML vers Markdown",
+        "Conversion intelligente du Texte Enrichi, CSV, HTML et Excel vers Markdown",
         "Support des formules mathématiques KaTeX",
         "Analyse structurelle avec détection d'erreurs et warnings",
         "Corrections rapides (Quick Fixes) en un clic",
