@@ -1,13 +1,12 @@
 import type * as monaco from 'monaco-editor';
 import { RefObject, useCallback, useState } from 'react';
-import TurndownService from 'turndown';
-import { gfm } from 'turndown-plugin-gfm';
-import { csvToMarkdown, isCSV } from './markdown.utils';
+import { csvToMarkdown, isCSV, htmlToMarkdown, isHTML } from './markdown.utils';
 
 export interface PendingPaste {
   text: string;
   html?: string;
   isCsv?: boolean;
+  isHtml?: boolean;
   selection: monaco.Selection;
 }
 
@@ -21,46 +20,9 @@ export function useMarkdownPaste(editorRef: RefObject<monaco.editor.IStandaloneC
 
       if (mode === 'csv') {
         textToInsert = csvToMarkdown(pendingPaste.text);
-      } else if (mode === 'html' && pendingPaste.html) {
+      } else if (mode === 'html') {
         try {
-          const turndownService = new TurndownService({
-            headingStyle: 'atx',
-            codeBlockStyle: 'fenced'
-          });
-          turndownService.use(gfm);
-
-          // Custom rule to handle tables that don't have <th> in the first row
-          turndownService.addRule('table-no-th', {
-            filter: (node) => {
-              const tableNode = node as HTMLTableElement;
-              return tableNode.nodeName === 'TABLE' &&
-                tableNode.rows &&
-                tableNode.rows.length > 0 &&
-                !Array.from(tableNode.rows[0].cells).every(cell => cell.nodeName === 'TH');
-            },
-            replacement: (content) => {
-              const cleanContent = content.replace(/\n\n+/g, '\n');
-              const rows = cleanContent.split('\n').filter(r => r.trim().startsWith('|'));
-              if (rows.length > 0) {
-                const firstRow = rows[0];
-                const columnCount = (firstRow.match(/\|/g) || []).length - 1;
-                if (columnCount > 0) {
-                  const separator = '|' + ' --- |'.repeat(columnCount);
-                  rows.splice(1, 0, separator);
-                }
-                return '\n\n' + rows.join('\n') + '\n\n';
-              }
-              return '\n\n' + cleanContent + '\n\n';
-            }
-          });
-
-          const convertedMarkdown = turndownService.turndown(pendingPaste.html);
-          textToInsert = convertedMarkdown
-            .split('\n')
-            .map(line => line.trimEnd())
-            .join('\n')
-            .replace(/\n{3,}/g, '\n\n')
-            .trim();
+          textToInsert = htmlToMarkdown(pendingPaste.html || pendingPaste.text);
         } catch (err) {
           console.error('Failed to convert HTML to Markdown:', err);
           textToInsert = pendingPaste.text;
@@ -85,13 +47,13 @@ export function useMarkdownPaste(editorRef: RefObject<monaco.editor.IStandaloneC
       const clipboardItems = await navigator.clipboard.read();
       let text = '';
       let htmlContent = '';
-      let hasHtml = false;
+      let hasRichtext = false;
 
       for (const item of clipboardItems) {
         if (item.types.includes('text/html')) {
           const blob = await item.getType('text/html');
           htmlContent = await blob.text();
-          hasHtml = true;
+          hasRichtext = true;
         }
         if (item.types.includes('text/plain')) {
           const blob = await item.getType('text/plain');
@@ -104,7 +66,7 @@ export function useMarkdownPaste(editorRef: RefObject<monaco.editor.IStandaloneC
       const selection = editor.getSelection();
       if (!selection) return;
 
-      if (hasHtml) {
+      if (hasRichtext) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlContent, 'text/html');
         const interestingElements = ['table', 'a', 'strong', 'b', 'em', 'i', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'img', 'code', 'pre', 'blockquote', 'hr', 'del', 's', 'math'];
@@ -116,10 +78,13 @@ export function useMarkdownPaste(editorRef: RefObject<monaco.editor.IStandaloneC
           });
 
         if (isInteresting) {
-          setPendingPaste({ text, html: htmlContent, selection });
+          setPendingPaste({ text, html: htmlContent, isHtml: true, selection });
           setIsPasteModalOpen(true);
         } else if (isCSV(text)) {
           setPendingPaste({ text, html: htmlContent, isCsv: true, selection });
+          setIsPasteModalOpen(true);
+        } else if (isHTML(text)) {
+          setPendingPaste({ text, html: text, isHtml: true, selection });
           setIsPasteModalOpen(true);
         } else {
           editor.executeEdits('zply-paste', [
@@ -133,6 +98,9 @@ export function useMarkdownPaste(editorRef: RefObject<monaco.editor.IStandaloneC
         }
       } else if (isCSV(text)) {
         setPendingPaste({ text, isCsv: true, selection });
+        setIsPasteModalOpen(true);
+      } else if (isHTML(text)) {
+        setPendingPaste({ text, isHtml: true, selection });
         setIsPasteModalOpen(true);
       } else {
         editor.executeEdits('zply-paste', [

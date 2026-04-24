@@ -1,4 +1,4 @@
-import { csvToMarkdown } from './markdown.utils';
+import { csvToMarkdown, htmlToMarkdown } from './markdown.utils';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import {
@@ -56,6 +56,7 @@ export function MarkdownToolbar(
 
     const fileName = file.name.toLowerCase();
     const isCsv = fileName.endsWith('.csv');
+    const isHtml = fileName.endsWith('.html') || fileName.endsWith('.htm');
 
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -63,6 +64,8 @@ export function MarkdownToolbar(
       if (typeof content === 'string') {
         if (isCsv) {
           onLoadFile(csvToMarkdown(content));
+        } else if (isHtml) {
+          onLoadFile(htmlToMarkdown(content));
         } else {
           onLoadFile(content);
         }
@@ -88,7 +91,7 @@ export function MarkdownToolbar(
         type="file"
         ref={fileInputRef}
         className="hidden"
-        accept=".md,.markdown,.txt,.csv"
+        accept=".md,.markdown,.txt,.csv,.html,.htm"
         onChange={handleFileChange}
       />
       <Button

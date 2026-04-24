@@ -1,4 +1,49 @@
+import TurndownService from 'turndown';
+import { gfm } from 'turndown-plugin-gfm';
 import Papa from 'papaparse';
+
+/**
+ * Converts HTML string to Markdown.
+ */
+export function htmlToMarkdown(html: string): string {
+  const turndownService = new TurndownService({
+    headingStyle: 'atx',
+    codeBlockStyle: 'fenced'
+  });
+  turndownService.use(gfm);
+
+  // Custom rule to handle tables that don't have <th> in the first row
+  turndownService.addRule('table-no-th', {
+    filter: (node) => {
+      const tableNode = node as HTMLTableElement;
+      return tableNode.nodeName === 'TABLE' &&
+        tableNode.rows &&
+        tableNode.rows.length > 0 &&
+        !Array.from(tableNode.rows[0].cells).every(cell => cell.nodeName === 'TH');
+    },
+    replacement: (content) => {
+      const cleanContent = content.replace(/\n\n+/g, '\n');
+      const rows = cleanContent.split('\n').filter(r => r.trim().startsWith('|'));
+      if (rows.length > 0) {
+        const firstRow = rows[0];
+        const columnCount = (firstRow.match(/\|/g) || []).length - 1;
+        if (columnCount > 0) {
+          const separator = '|' + ' --- |'.repeat(columnCount);
+          rows.splice(1, 0, separator);
+        }
+        return '\n\n' + rows.join('\n') + '\n\n';
+      }
+      return '\n\n' + cleanContent + '\n\n';
+    }
+  });
+
+  return turndownService.turndown(html)
+    .split('\n')
+    .map(line => line.trimEnd())
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
 
 /**
  * Converts a CSV string into a GFM Markdown table.
@@ -79,4 +124,17 @@ export function isCSV(text: string): boolean {
   }
 
   return false;
+}
+
+/**
+ * Heuristic to detect if a string might be HTML.
+ */
+export function isHTML(text: string): boolean {
+  if (!text) return false;
+  const trimmed = text.trim();
+  // Basic check for HTML tags
+  return (
+    (trimmed.startsWith('<') && trimmed.endsWith('>')) ||
+    (/<[a-z][\s\S]*>/i.test(trimmed))
+  );
 }
