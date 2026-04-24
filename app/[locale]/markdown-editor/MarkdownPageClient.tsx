@@ -16,10 +16,13 @@ import { useMarkdownState } from './use-markdown-state';
 import { useMarkdownTransformation } from './use-markdown-transformation';
 import { useMarkdownActions } from './use-markdown-actions';
 import { MarkdownToolbar } from './MarkdownToolbar';
+import { MarkdownImportModal } from './MarkdownImportModal';
 import { useMarkdownLinter } from './use-markdown-linter';
 import { useMarkdownPaste } from './use-markdown-paste';
 import { MarkdownPasteModal } from './MarkdownPasteModal';
 import { MarkdownPrintArea } from './MarkdownPrintArea';
+import { getDefaultMarkdown } from './markdown.default';
+import LZString from 'lz-string';
 
 const { FileText, Zap } = LucideIcons;
 
@@ -42,11 +45,40 @@ export default function MarkdownPageClient(): ReactNode {
   const { handleToolbarAction, handleFoldAll, handleUnfoldAll, handleShiftHeaders } = useMarkdownActions(editorRef);
 
   const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [isImportModalOpen, setIsImportModalOpen] = useState<boolean>(false);
+  const [pendingImportContent, setPendingImportContent] = useState<string | null>(null);
 
   const t = useTranslations('Tools');
   const tMarkdown = useTranslations(`Tools.${ToolId.MARKDOWN}`);
   const tCategories = useTranslations('Categories');
   const tCommon = useTranslations('Common');
+
+  const defaultContent = useMemo(() => getDefaultMarkdown(t), [t]);
+
+  const handleImportFile = useCallback((newContent: string): void => {
+    if (content && content !== defaultContent && content !== newContent) {
+      setPendingImportContent(newContent);
+      setIsImportModalOpen(true);
+    } else {
+      setContent(newContent);
+    }
+  }, [content, defaultContent, setContent]);
+
+  const handleConfirmImport = useCallback((mode: 'overwrite' | 'new-tab'): void => {
+    if (!pendingImportContent) return;
+
+    if (mode === 'overwrite') {
+      setContent(pendingImportContent);
+    } else {
+      const state = { md: pendingImportContent };
+      const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(state));
+      const url = `${window.location.pathname}#${compressed}`;
+      window.open(url, '_blank');
+    }
+
+    setIsImportModalOpen(false);
+    setPendingImportContent(null);
+  }, [pendingImportContent, setContent]);
 
   const handleExportPdf = useCallback((): void => {
     window.print();
@@ -85,14 +117,14 @@ export default function MarkdownPageClient(): ReactNode {
     if (!file) return;
 
     try {
-      const content: string = await processFile(file);
-      if (content) {
-        setContent(content);
+      const fileContent: string = await processFile(file);
+      if (fileContent) {
+        handleImportFile(fileContent);
       }
     } catch (error: unknown) {
       console.error('Failed to process dropped file:', error);
     }
-  }, [setContent]);
+  }, [handleImportFile]);
 
   // Memoize editor props to keep EditorPreviewWorkspace stable
   const editorProps = useMemo(() => ({
@@ -375,7 +407,7 @@ export default function MarkdownPageClient(): ReactNode {
               onFoldAll={handleFoldAll}
               onUnfoldAll={handleUnfoldAll}
               onShiftHeaders={handleShiftHeaders}
-              onLoadFile={setContent}
+              onLoadFile={handleImportFile}
               onExportPdf={handleExportPdf}
               loadFileLabel={tMarkdown('loadFile')}
               exportPdfLabel={tMarkdown('exportPdf')}
@@ -432,6 +464,13 @@ export default function MarkdownPageClient(): ReactNode {
         onClose={() => setIsPasteModalOpen(false)}
         onConfirm={handleConfirmPaste}
         pendingPaste={pendingPaste}
+        resolvedTheme={resolvedTheme}
+      />
+
+      <MarkdownImportModal
+        isOpen={isImportModalOpen}
+        onClose={() => setIsImportModalOpen(false)}
+        onConfirm={handleConfirmImport}
         resolvedTheme={resolvedTheme}
       />
 

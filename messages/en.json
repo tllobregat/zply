@@ -417,6 +417,13 @@
         "convertCsv": "Convert CSV to Table",
         "cancel": "Cancel"
       },
+      "importConfirmation": {
+        "title": "Confirm Import",
+        "description": "Importing a new file will overwrite your current content. Do you want to continue?",
+        "overwrite": "Overwrite Content",
+        "openNewTab": "Open in New Tab",
+        "cancel": "Cancel"
+      },
       "default": "# ✒️ Markdown Editor\n\n## 🚀 Introduction\n\nEdit here to see the result on the right.\n\n## 🏗️ Architecture\n\nZply is based on Next.js.\n\n### 🎨 Design\n\nClean and modern style.\n\n## 🛠️ Usage\n\nUse the toolbar to format your text.\n\n## 📐 Mathematical Formulas\n\nYou can use inline formulas like $E = mc^2$ or blocks:\n\n$$\\int_{a}^{b} x^2 dx = \\left[\\frac{x^3}{3}\\right]_{a}^{b}$"
     },
     "mermaid-maker": {
