@@ -1,7 +1,7 @@
 'use client';
 
 import { EditorPreviewWorkspace } from '@/components/ui/layout';
-import { ToolPageLayout }from '@/components/ui/layout';
+import { ToolPageLayout } from '@/components/ui/layout';
 import { Separator } from '@/components/ui/separator';
 import { ViewModeToggle } from '@/components/ui/layout';
 import { Category, ToolId } from '@/lib/config/tools';
@@ -9,13 +9,20 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 import * as LucideIcons from 'lucide-react';
 import type * as monaco from 'monaco-editor';
-import { ReactNode, RefObject, useRef, useEffect, useCallback, useMemo } from 'react';
-import { createPortal } from 'react-dom';
+import { processFile } from './markdown.utils';
+import React, { ReactNode, RefObject, useRef, useEffect, useCallback, useMemo, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { useMarkdownState } from './use-markdown-state';
 import { useMarkdownTransformation } from './use-markdown-transformation';
 import { useMarkdownActions } from './use-markdown-actions';
 import { MarkdownToolbar } from './MarkdownToolbar';
+import { MarkdownImportModal } from './MarkdownImportModal';
+import { useMarkdownLinter } from './use-markdown-linter';
+import { useMarkdownPaste } from './use-markdown-paste';
+import { MarkdownPasteModal } from './MarkdownPasteModal';
+import { MarkdownPrintArea } from './MarkdownPrintArea';
+import { getDefaultMarkdown } from './markdown.default';
+import LZString from 'lz-string';
 
 const { FileText, Zap } = LucideIcons;
 
@@ -26,240 +33,52 @@ export default function MarkdownPageClient(): ReactNode {
   const editorRef: RefObject<monaco.editor.IStandaloneCodeEditor | null> = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const previewRef: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(null);
 
+  const { validateMarkdown } = useMarkdownLinter();
+  const {
+    isPasteModalOpen,
+    setIsPasteModalOpen,
+    pendingPaste,
+    handleConfirmPaste,
+    interceptPaste
+  } = useMarkdownPaste(editorRef);
+
   const { handleToolbarAction, handleFoldAll, handleUnfoldAll, handleShiftHeaders } = useMarkdownActions(editorRef);
-  
+
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [isImportModalOpen, setIsImportModalOpen] = useState<boolean>(false);
+  const [pendingImportContent, setPendingImportContent] = useState<string | null>(null);
+
   const t = useTranslations('Tools');
   const tMarkdown = useTranslations(`Tools.${ToolId.MARKDOWN}`);
   const tCategories = useTranslations('Categories');
   const tCommon = useTranslations('Common');
 
-  // Validate markdown for quality and syntax
-  const validateMarkdown = useCallback((model: monaco.editor.ITextModel, monacoInstance: typeof monaco) => {
-    const lines: string[] = model.getLinesContent();
-    const markers: monaco.editor.IMarkerData[] = [];
-    let lastLevel: number = 0;
-    let h1Count: number = 0;
-    let consecutiveEmptyLines: number = 0;
-    const headerTexts: Set<string> = new Set<string>();
-    const linkReferences: Set<string> = new Set<string>();
-    const usedReferences: { ref: string; line: number; col: number; len: number }[] = [];
-    let insideCodeBlock: boolean = false;
-    let codeBlockStartLine: number = -1;
+  const defaultContent = useMemo(() => getDefaultMarkdown(t), [t]);
 
-    for (let i: number = 0; i < lines.length; i++) {
-      const line: string = lines[i];
-      const lineNum: number = i + 1;
+  const handleImportFile = useCallback((newContent: string): void => {
+    if (content && content !== defaultContent && content !== newContent) {
+      setPendingImportContent(newContent);
+      setIsImportModalOpen(true);
+    } else {
+      setContent(newContent);
+    }
+  }, [content, defaultContent, setContent]);
 
-      // 1. Code blocks tracking
-      if (line.trim().startsWith('```')) {
-        insideCodeBlock = !insideCodeBlock;
-        codeBlockStartLine = insideCodeBlock ? lineNum : -1;
-      }
+  const handleConfirmImport = useCallback((mode: 'overwrite' | 'new-tab'): void => {
+    if (!pendingImportContent) return;
 
-      if (insideCodeBlock && lineNum !== codeBlockStartLine) continue;
-
-      // 2. Trailing spaces
-      if (line.length > 0 && /\s$/.test(line)) {
-        markers.push({
-          severity: monacoInstance.MarkerSeverity.Warning,
-          message: t(`${ToolId.MARKDOWN}.trailingSpaces`),
-          startLineNumber: lineNum,
-          startColumn: line.length,
-          endLineNumber: lineNum,
-          endColumn: line.length + 1,
-          code: 'trailing-spaces',
-        });
-      }
-
-      // 3. Consecutive empty lines
-      if (line.trim() === '') {
-        consecutiveEmptyLines++;
-        if (consecutiveEmptyLines > 2) {
-          markers.push({
-            severity: monacoInstance.MarkerSeverity.Warning,
-            message: t(`${ToolId.MARKDOWN}.consecutiveEmptyLines`),
-            startLineNumber: lineNum,
-            startColumn: 1,
-            endLineNumber: lineNum,
-            endColumn: 1,
-            code: 'consecutive-empty-lines',
-          });
-        }
-      } else {
-        consecutiveEmptyLines = 0;
-      }
-
-      // 4. Headers validation
-      const headerMatch: RegExpMatchArray | null = line.match(/^(#{1,6})(\s+)(.*)/);
-      const malformedHeaderMatch: RegExpMatchArray | null = line.match(/^(#{1,6})[^#\s]/);
-
-      if (malformedHeaderMatch) {
-        markers.push({
-          severity: monacoInstance.MarkerSeverity.Error,
-          message: t(`${ToolId.MARKDOWN}.malformedHeader`),
-          startLineNumber: lineNum,
-          startColumn: 1,
-          endLineNumber: lineNum,
-          endColumn: malformedHeaderMatch[1].length + 1,
-          code: 'malformed-header',
-        });
-      }
-
-      if (headerMatch) {
-        const level: number = headerMatch[1].length;
-        const text: string = headerMatch[3].trim();
-
-        // Multiple H1
-        if (level === 1) {
-          h1Count++;
-          if (h1Count > 1) {
-            markers.push({
-              severity: monacoInstance.MarkerSeverity.Warning,
-              message: t(`${ToolId.MARKDOWN}.multipleH1`),
-              startLineNumber: lineNum,
-              startColumn: 1,
-              endLineNumber: lineNum,
-              endColumn: headerMatch[0].length + 1,
-            });
-          }
-        }
-
-        // Header level jump
-        if (level > lastLevel + 1 && lastLevel !== 0) {
-          markers.push({
-            severity: monacoInstance.MarkerSeverity.Warning,
-            message: t(`${ToolId.MARKDOWN}.headerLevelJump`, { prev: lastLevel, curr: level }),
-            startLineNumber: lineNum,
-            startColumn: 1,
-            endLineNumber: lineNum,
-            endColumn: headerMatch[1].length + 1,
-          });
-        }
-        lastLevel = level;
-
-        // Duplicate header ID
-        if (headerTexts.has(text)) {
-          markers.push({
-            severity: monacoInstance.MarkerSeverity.Warning,
-            message: t(`${ToolId.MARKDOWN}.duplicateHeaderId`, { text }),
-            startLineNumber: lineNum,
-            startColumn: headerMatch[1].length + headerMatch[2].length + 1,
-            endLineNumber: lineNum,
-            endColumn: headerMatch[0].length + 1,
-          });
-        }
-        headerTexts.add(text);
-
-        // Missing empty line before header
-        if (i > 0 && lines[i - 1].trim() !== '') {
-          markers.push({
-            severity: monacoInstance.MarkerSeverity.Warning,
-            message: t(`${ToolId.MARKDOWN}.missingLineAroundHeader`),
-            startLineNumber: lineNum,
-            startColumn: 1,
-            endLineNumber: lineNum,
-            endColumn: headerMatch[1].length + 1,
-            code: 'missing-line-around-header',
-          });
-        }
-        // Missing empty line after header
-        if (i < lines.length - 1 && lines[i + 1].trim() !== '' && !lines[i + 1].startsWith('#')) {
-          markers.push({
-            severity: monacoInstance.MarkerSeverity.Warning,
-            message: t(`${ToolId.MARKDOWN}.missingLineAroundHeader`),
-            startLineNumber: lineNum,
-            startColumn: 1,
-            endLineNumber: lineNum,
-            endColumn: headerMatch[1].length + 1,
-            code: 'missing-line-around-header',
-          });
-        }
-      }
-
-      // 5. Lists inconsistency
-      const listMatch: RegExpMatchArray | null = line.match(/^\s*([*\-+])\s/);
-      if (listMatch) {
-        const marker: string = listMatch[1];
-        // Check surrounding list items if they use the same marker
-        // Simplified: check if previous line was a list with different marker at same indentation
-        if (i > 0) {
-          const prevListMatch: RegExpMatchArray | null = lines[i - 1].match(/^(\s*)([*\-+])\s/);
-          const currentIndent: string = line.match(/^\s*/)?.[0] || '';
-          if (prevListMatch && prevListMatch[1] === currentIndent && prevListMatch[2] !== marker) {
-            markers.push({
-              severity: monacoInstance.MarkerSeverity.Warning,
-              message: t(`${ToolId.MARKDOWN}.inconsistentListMarkers`),
-              startLineNumber: lineNum,
-              startColumn: line.indexOf(marker) + 1,
-              endLineNumber: lineNum,
-              endColumn: line.indexOf(marker) + 2,
-              code: 'inconsistent-list-marker',
-            });
-          }
-        }
-      }
-
-      // 6. Missing alt text
-      const altTextMatches = line.matchAll(/(!?\[]\(.*?\))/g);
-      for (const match of altTextMatches) {
-        markers.push({
-          severity: monacoInstance.MarkerSeverity.Warning,
-          message: t(`${ToolId.MARKDOWN}.missingAltText`),
-          startLineNumber: lineNum,
-          startColumn: match.index + 1,
-          endLineNumber: lineNum,
-          endColumn: match.index + match[0].length + 1,
-          code: 'missing-alt-text',
-        });
-      }
-
-      // 7. Link references
-      const refDefMatch: RegExpMatchArray | null = line.match(/^\s*\[(.*?)]:\s+/);
-      if (refDefMatch) {
-        linkReferences.add(refDefMatch[1]);
-      }
-
-      const refUsageMatches = line.matchAll(/\[(.*?)]\[(.*?)]/g);
-      for (const match of refUsageMatches) {
-        const ref: string = match[2] || match[1];
-        usedReferences.push({
-          ref,
-          line: lineNum,
-          col: match.index + (match[2] ? match[1].length + 3 : 1),
-          len: ref.length
-        });
-      }
+    if (mode === 'overwrite') {
+      setContent(pendingImportContent);
+    } else {
+      const state = { md: pendingImportContent };
+      const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(state));
+      const url = `${window.location.pathname}#${compressed}`;
+      window.open(url, '_blank');
     }
 
-    // 8. Orphan link references
-    for (const usage of usedReferences) {
-      if (!linkReferences.has(usage.ref)) {
-        markers.push({
-          severity: monacoInstance.MarkerSeverity.Error,
-          message: t(`${ToolId.MARKDOWN}.orphanLinkReference`, { ref: usage.ref }),
-          startLineNumber: usage.line,
-          startColumn: usage.col,
-          endLineNumber: usage.line,
-          endColumn: usage.col + usage.len,
-        });
-      }
-    }
-
-    // 9. Unclosed code block
-    if (insideCodeBlock) {
-      markers.push({
-        severity: monacoInstance.MarkerSeverity.Error,
-        message: t(`${ToolId.MARKDOWN}.unclosedCodeBlock`),
-        startLineNumber: codeBlockStartLine,
-        startColumn: 1,
-        endLineNumber: codeBlockStartLine,
-        endColumn: 4,
-        code: 'unclosed-code-block',
-      });
-    }
-
-    monacoInstance.editor.setModelMarkers(model, 'markdown-linter', markers);
-  }, [t]);
+    setIsImportModalOpen(false);
+    setPendingImportContent(null);
+  }, [pendingImportContent, setContent]);
 
   const handleExportPdf = useCallback((): void => {
     window.print();
@@ -277,10 +96,48 @@ export default function MarkdownPageClient(): ReactNode {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleExportPdf]);
 
+  const handleDragOver = useCallback((e: React.DragEvent): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  }, []);
+
+  const handleDrop = useCallback(async (e: React.DragEvent): Promise<void> => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+
+    const file: File | undefined = e.dataTransfer.files?.[0];
+    if (!file) return;
+
+    try {
+      const fileContent: string = await processFile(file);
+      if (fileContent) {
+        handleImportFile(fileContent);
+      }
+    } catch (error: unknown) {
+      console.error('Failed to process dropped file:', error);
+    }
+  }, [handleImportFile]);
+
   // Memoize editor props to keep EditorPreviewWorkspace stable
   const editorProps = useMemo(() => ({
     onMount: (editor: monaco.editor.IStandaloneCodeEditor, monacoInstance: typeof monaco) => {
       editorRef.current = editor;
+
+      // Use Monaco's own action system to override paste
+      editor.addAction({
+        id: 'zply-intercept-paste',
+        label: 'Paste',
+        keybindings: [monacoInstance.KeyMod.CtrlCmd | monacoInstance.KeyCode.KeyV],
+        run: () => interceptPaste(editor),
+      });
 
       // Initial validation
       const model = editor.getModel();
@@ -420,7 +277,12 @@ export default function MarkdownPageClient(): ReactNode {
                         resource: model.uri,
                         versionId: model.getVersionId(),
                         textEdit: {
-                          range: { startLineNumber: marker.startLineNumber + 1, startColumn: 1, endLineNumber: marker.startLineNumber + 1, endColumn: 1 },
+                          range: {
+                            startLineNumber: marker.startLineNumber + 1,
+                            startColumn: 1,
+                            endLineNumber: marker.startLineNumber + 1,
+                            endColumn: 1
+                          },
                           text: '\n',
                         },
                       }] : []),
@@ -455,7 +317,8 @@ export default function MarkdownPageClient(): ReactNode {
 
           return {
             actions,
-            dispose: () => {},
+            dispose: () => {
+            },
           };
         },
       });
@@ -511,7 +374,7 @@ export default function MarkdownPageClient(): ReactNode {
       foldingHighlight: true,
       lineDecorationsWidth: 16,
     } as const
-  }), [handleExportPdf, validateMarkdown, t]);
+  }), [handleExportPdf, validateMarkdown, t, interceptPaste]);
 
   // Memoize preview content
   const previewElement = useMemo(() => (
@@ -544,7 +407,7 @@ export default function MarkdownPageClient(): ReactNode {
               onFoldAll={handleFoldAll}
               onUnfoldAll={handleUnfoldAll}
               onShiftHeaders={handleShiftHeaders}
-              onLoadFile={setContent}
+              onLoadFile={handleImportFile}
               onExportPdf={handleExportPdf}
               loadFileLabel={tMarkdown('loadFile')}
               exportPdfLabel={tMarkdown('exportPdf')}
@@ -557,7 +420,7 @@ export default function MarkdownPageClient(): ReactNode {
         footerIndicator={
           <>
             <span className="flex items-center gap-1.5">
-              <Zap className={cn("w-3 h-3 text-yellow-500/50", isPending && "animate-pulse")} /> 
+              <Zap className={cn('w-3 h-3 text-yellow-500/50', isPending && 'animate-pulse')} />
               {tCommon('toolIndicators.liveRendering')}
             </span>
             <Separator />
@@ -566,28 +429,52 @@ export default function MarkdownPageClient(): ReactNode {
         }
         workspaceClassName="flex-1 min-h-0 flex-row overflow-hidden"
       >
-        <EditorPreviewWorkspace
-          value={content}
-          onChange={setContent}
-          language="markdown"
-          viewMode={viewMode}
-          editorProps={editorProps}
-          previewClassName={`${resolvedTheme === 'dark' ? 'bg-[#050a1a]' : 'bg-slate-50'}`}
-          preview={previewElement}
-        />
+        <div
+          className="flex-1 flex flex-row min-h-0 min-w-0 relative"
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+        >
+          <EditorPreviewWorkspace
+            value={content}
+            onChange={setContent}
+            language="markdown"
+            viewMode={viewMode}
+            editorProps={editorProps}
+            previewClassName={`${resolvedTheme === 'dark' ? 'bg-[#050a1a]' : 'bg-slate-50'}`}
+            preview={previewElement}
+          />
+
+          {
+            isDragging
+            && (
+              <div className="absolute inset-0 z-50 flex items-center justify-center bg-island-bg/60 backdrop-blur-sm border-2 border-dashed border-primary m-4 rounded-3xl pointer-events-none">
+                <div className="flex flex-col items-center gap-4 text-primary">
+                  <LucideIcons.Upload className="w-12 h-12 animate-bounce" />
+                  <p className="text-xl font-bold">{tMarkdown('dropFileToImport')}</p>
+                </div>
+              </div>
+            )
+          }
+        </div>
       </ToolPageLayout>
-      {
-        typeof document !== 'undefined'
-        && createPortal(
-          <div id="markdown-print-area" className="hidden print:block">
-            <article
-              className="prose max-w-none prose-headings:font-black prose-p:leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
-          </div>,
-          document.body
-        )
-      }
+
+      <MarkdownPasteModal
+        isOpen={isPasteModalOpen}
+        onClose={() => setIsPasteModalOpen(false)}
+        onConfirm={handleConfirmPaste}
+        pendingPaste={pendingPaste}
+        resolvedTheme={resolvedTheme}
+      />
+
+      <MarkdownImportModal
+        isOpen={isImportModalOpen}
+        onClose={() => setIsImportModalOpen(false)}
+        onConfirm={handleConfirmImport}
+        resolvedTheme={resolvedTheme}
+      />
+
+      <MarkdownPrintArea html={html} />
     </>
   );
 }

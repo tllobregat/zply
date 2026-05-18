@@ -112,7 +112,7 @@ export function EditorPreviewWorkspace(
   }, [editorProps]);
 
   const editorElement: ReactNode = (
-    <div className={cn('h-full w-full bg-island-bg/20 overflow-hidden', editorClassName)}>
+    <div className={cn('h-full w-full bg-island-bg/20 overflow-hidden min-w-0', editorClassName)}>
       {
         customEditor
           ? (
@@ -134,7 +134,7 @@ export function EditorPreviewWorkspace(
   );
 
   const previewElement: ReactNode = (
-    <div className={cn('h-full w-full bg-island-bg/50', previewClassName)}>
+    <div className={cn('h-full w-full bg-island-bg/50 min-w-0', previewClassName)}>
       {preview}
     </div>
   );
@@ -177,14 +177,14 @@ export function EditorPreviewWorkspace(
 
   // Split Mode with Resizable Panels
   return (
-    <PanelGroup direction={isMobile ? 'vertical' : 'horizontal'} className="h-full w-full">
-      <Panel defaultSize={isMobile ? 40 : 50} minSize={20}>
+    <PanelGroup direction={isMobile ? 'vertical' : 'horizontal'} className="h-full w-full min-w-0">
+      <Panel defaultSize={isMobile ? 40 : 50} minSize={20} className="min-w-0">
         <motion.div
           key="editor-main"
           initial={{ opacity: 0, x: isMobile ? 0 : -20, y: isMobile ? -20 : 0 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           className={cn(
-            "h-full",
+            "h-full min-w-0",
             isMobile ? "border-b border-island-border" : "border-r border-island-border"
           )}
         >
@@ -193,7 +193,7 @@ export function EditorPreviewWorkspace(
       </Panel>
       
       <PanelResizeHandle className={cn(
-        "hover:bg-blue-500/30 transition-colors relative z-50 flex items-center justify-center group",
+        "hover:bg-blue-500/30 transition-colors relative z-50 flex items-center justify-center group shrink-0",
         isMobile ? "h-1.5 w-full" : "w-1.5 h-full"
       )}>
         <div className={cn(
@@ -202,12 +202,12 @@ export function EditorPreviewWorkspace(
         )} />
       </PanelResizeHandle>
 
-      <Panel defaultSize={isMobile ? 60 : 50} minSize={20}>
+      <Panel defaultSize={isMobile ? 60 : 50} minSize={20} className="min-w-0">
         <motion.div
           key="preview-main"
           initial={{ opacity: 0, x: isMobile ? 0 : 20, y: isMobile ? 20 : 0 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
-          className="h-full"
+          className="h-full min-w-0"
         >
           {previewElement}
         </motion.div>

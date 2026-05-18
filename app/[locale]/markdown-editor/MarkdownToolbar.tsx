@@ -1,3 +1,4 @@
+import { processFile } from './markdown.utils';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import {
@@ -49,18 +50,19 @@ export function MarkdownToolbar(
 ): ReactNode {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const content = event.target?.result;
-      if (typeof content === 'string') {
+    try {
+      const content = await processFile(file);
+      if (content) {
         onLoadFile(content);
       }
-    };
-    reader.readAsText(file);
+    } catch (error) {
+      console.error('Failed to load file:', error);
+    }
+
     // Reset input value to allow selecting the same file again
     e.target.value = '';
   };
@@ -80,7 +82,7 @@ export function MarkdownToolbar(
         type="file"
         ref={fileInputRef}
         className="hidden"
-        accept=".md,.markdown,text/markdown,text/plain"
+        accept=".md,.markdown,.txt,.csv,.html,.htm,.xlsx,.xlsb,.xls,.xlsm"
         onChange={handleFileChange}
       />
       <Button

@@ -1,6 +1,6 @@
 import MonacoEditor, { MonacoDiffEditor } from '@/components/monaco-editor';
 import { useTheme } from 'next-themes';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useCallback, useMemo } from 'react';
 import type * as monaco from 'monaco-editor';
 import { DiffMode, ViewMode } from './text-compare.types';
 
@@ -27,6 +27,35 @@ export function TextCompareEditor(
 
   const isSplit: boolean = diffMode === 'split';
   const showDiff: boolean = viewMode === 'split' || !isSplit;
+
+  const handleDiffEditorMount = useCallback((editor: monaco.editor.IStandaloneDiffEditor): void => {
+    editor.getOriginalEditor().onDidChangeModelContent((): void => {
+      onOriginalChange(editor.getOriginalEditor().getValue());
+    });
+    editor.getModifiedEditor().onDidChangeModelContent((): void => {
+      onModifiedChange(editor.getModifiedEditor().getValue());
+    });
+  }, [onOriginalChange, onModifiedChange]);
+
+  const diffOptions = useMemo(() => ({
+    padding: { top: 40 },
+    originalEditable: true,
+    renderSideBySide: isSplit,
+    readOnly: false,
+  }), [isSplit]);
+
+  const editorOptions = useMemo(() => ({
+    padding: { top: 40 },
+    readOnly: false,
+  }), []);
+
+  const handleEditorChange = useCallback((val: string | undefined): void => {
+    if (viewMode === 'original') {
+      onOriginalChange(val || '');
+    } else {
+      onModifiedChange(val || '');
+    }
+  }, [viewMode, onOriginalChange, onModifiedChange]);
 
   return (
     <div className="flex-1 min-h-0 bg-island-bg/20 relative">
@@ -59,20 +88,8 @@ export function TextCompareEditor(
               modified={modified}
               language="plaintext"
               theme={resolvedTheme === 'dark' ? 'vs-dark' : 'light'}
-              onMount={(editor: monaco.editor.IDiffEditor) => {
-                editor.getOriginalEditor().onDidChangeModelContent(() => {
-                  onOriginalChange(editor.getOriginalEditor().getValue());
-                });
-                editor.getModifiedEditor().onDidChangeModelContent(() => {
-                  onModifiedChange(editor.getModifiedEditor().getValue());
-                });
-              }}
-              options={{
-                padding: { top: 40 },
-                originalEditable: true,
-                renderSideBySide: isSplit,
-                readOnly: false,
-              }}
+              onMount={handleDiffEditorMount}
+              options={diffOptions}
             />
           )
           : (
@@ -81,17 +98,8 @@ export function TextCompareEditor(
               value={viewMode === 'original' ? original : modified}
               language="plaintext"
               theme={resolvedTheme === 'dark' ? 'vs-dark' : 'light'}
-              onChange={(val) => {
-                if (viewMode === 'original') {
-                  onOriginalChange(val || '');
-                } else {
-                  onModifiedChange(val || '');
-                }
-              }}
-              options={{
-                padding: { top: 40 },
-                readOnly: false,
-              }}
+              onChange={handleEditorChange}
+              options={editorOptions}
             />
           )
       }
