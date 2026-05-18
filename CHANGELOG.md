@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/tllobregat/zply/compare/v1.3.0...v1.4.0) (2026-05-18)
+
+
+### Features
+
+* **markdown-editor:** add CSV to Markdown table conversion ([9759f24](https://github.com/tllobregat/zply/commit/9759f247a6a4da089ecd3d3db2c5e8e66a234594))
+* **markdown-editor:** add drag-and-drop file import with processing feedback ([0c840a2](https://github.com/tllobregat/zply/commit/0c840a2251703b64d890222a4583631fc1d32e15))
+* **markdown-editor:** add Excel to Markdown table conversion ([654d7b0](https://github.com/tllobregat/zply/commit/654d7b004a3f915ae804c16584a147f7a75c6cf4))
+* **markdown-editor:** add HTML to Markdown table conversion ([6f3d163](https://github.com/tllobregat/zply/commit/6f3d1634449df606fd8551637c583e77fadfbca4))
+* **markdown-editor:** add import modal with overwrite and open in new tab options ([5e9dc65](https://github.com/tllobregat/zply/commit/5e9dc65395c6732d775d17989b6f6c69913c6f3e))
+* **markdown-editor:** add rich text to markdown conversion with turndown support for GFM features ([091379d](https://github.com/tllobregat/zply/commit/091379d3c627ebdeb5cc39dcd8a10315cb11cf17))
+
+
+### Bug Fixes
+
+* **text-compare:** fix cursor jump while writing ([ebdb4a0](https://github.com/tllobregat/zply/commit/ebdb4a0e724413dae0e261cef3f6c798d4cd728a))
+
 ## [1.3.0](https://github.com/tllobregat/zply/compare/v1.2.0...v1.3.0) (2026-04-16)
 
 
