@@ -186,6 +186,7 @@
   "Tools": {
     "sql-database-visualizer": {
       "title": "SQL & DB Visualizer",
+      "autoOrganize": "Auto-Organize Schema",
       "description": "Powerful local SQL and database visualizer. Generate interactive ER diagrams from SQL DDL or Prisma schemas securely in your browser.",
       "features": [
         "Interactive ER diagram generation",

@@ -186,6 +186,7 @@
   "Tools": {
     "sql-database-visualizer": {
       "title": "Visualiseur SQL & BD",
+      "autoOrganize": "Organiser le schéma",
       "description": "Visualiseur de base de données local. Générez des diagrammes ER interactifs à partir de SQL DDL ou Prisma en toute sécurité dans votre navigateur.",
       "features": [
         "Génération interactive de diagrammes ER",

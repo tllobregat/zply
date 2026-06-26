@@ -5,14 +5,20 @@ import { useTheme } from 'next-themes';
 import { ReactNode } from 'react';
 import { TableColumn, TableData } from './db-schema.types';
 
-export function TableNode({ data }: { data: TableData }): ReactNode {
+export function TableNode({ data }: { data: TableData & { isHighlighted?: boolean; isDimmed?: boolean } }): ReactNode {
   const { resolvedTheme } = useTheme();
   const isDark: boolean = resolvedTheme === 'dark';
 
   const pkColor: string = isDark ? 'text-yellow-200/90' : 'text-amber-900';
 
   return (
-    <div className="min-w-64 glass-island bg-island-card/90 border border-island-border rounded-xl shadow-2xl overflow-hidden font-mono text-xs">
+    <div className={cn(
+      "min-w-64 glass-island bg-island-card/90 border rounded-xl shadow-2xl overflow-hidden font-mono text-xs transition-all duration-300",
+      data.isHighlighted 
+        ? "border-blue-500 ring-2 ring-blue-500/50 scale-105 z-50 shadow-blue-500/20" 
+        : "border-island-border",
+      data.isDimmed && "opacity-40 grayscale-[0.5] scale-95"
+    )}>
       <div className="bg-blue-500/10 border-b border-island-border p-3 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <Database className="w-4 h-4 text-blue-400" />

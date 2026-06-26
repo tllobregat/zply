@@ -22,9 +22,9 @@ const nodeTypes: { table: typeof TableNode } = {
 };
 
 export function DbSchemaVisualizer(): ReactNode {
-  const t = useTranslations('Tools');
-  const tCategories = useTranslations('Categories');
-  const tCommon = useTranslations('Common');
+  const t: ReturnType<typeof useTranslations> = useTranslations('Tools');
+  const tCategories: ReturnType<typeof useTranslations> = useTranslations('Categories');
+  const tCommon: ReturnType<typeof useTranslations> = useTranslations('Common');
   const { resolvedTheme } = useTheme();
   const { content, setContent, viewMode, setViewMode, isMounted } = useDbSchemaState();
   const {
@@ -32,6 +32,8 @@ export function DbSchemaVisualizer(): ReactNode {
     edges,
     onNodesChange,
     onEdgesChange,
+    onEdgeClick,
+    onPaneClick,
     error,
     updateSchema
   } = useDbSchemaTransformation(content, isMounted);
@@ -49,11 +51,13 @@ export function DbSchemaVisualizer(): ReactNode {
         { label: t(`${ToolId.DB_SCHEMA}.title`) }
       ]}
       headerActions={
-        <DbSchemaToolbar
-          viewMode={viewMode}
-          setViewMode={setViewMode}
-          onUpdateSchema={() => updateSchema(content)}
-        />
+        <div className="flex-1 flex justify-end min-w-0">
+          <DbSchemaToolbar
+            viewMode={viewMode}
+            setViewMode={setViewMode}
+            onUpdateSchema={() => updateSchema(content)}
+          />
+        </div>
       }
       footerIndicator={
         <div className="flex items-center gap-3 sm:gap-6">
@@ -83,6 +87,8 @@ export function DbSchemaVisualizer(): ReactNode {
               edges={edges}
               onNodesChange={onNodesChange}
               onEdgesChange={onEdgesChange}
+              onEdgeClick={onEdgeClick}
+              onPaneClick={onPaneClick}
               nodeTypes={nodeTypes}
               colorMode={resolvedTheme === 'dark' ? 'dark' : 'light'}
               fitView

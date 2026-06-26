@@ -155,12 +155,12 @@ function processCreateTable(ast: Create, tables: Record<string, TableData>, rela
           const ref: { table: Array<{ table: string }>; definition: Array<{ column: string }> } = 
             constDef.reference_definition as unknown as { table: Array<{ table: string }>; definition: Array<{ column: string }> };
           const toTable: string = extractName(ref.table[0]);
-          const toCols: unknown[] = ref.definition as unknown[];
+          const toCols: Array<{ column: string }> = ref.definition as Array<{ column: string }>;
 
           fromCols.forEach((colRef: ColumnRef, idx: number) => {
             const fromColName: string = getColName(colRef);
-            const targetCol: unknown = toCols[idx] || toCols[0];
-            const toColName: string = extractName(targetCol);
+            const targetCol: { column: string } = toCols[idx] || toCols[0];
+            const toColName: string = targetCol.column;
 
             relationships.push({
               fromTable: tableName,
@@ -200,12 +200,12 @@ function processAlterTable(ast: Alter, relationships: Relationship[]): void {
           const ref: { table: Array<{ table: string }>; definition: Array<{ column: string }> } = 
             def.reference_definition as unknown as { table: Array<{ table: string }>; definition: Array<{ column: string }> };
           const toTable: string = extractName(ref.table[0]);
-          const toCols: unknown[] = ref.definition as unknown[];
+          const toCols: Array<{ column: string }> = ref.definition as Array<{ column: string }>;
 
           fromCols.forEach((colRef: ColumnRef, idx: number) => {
             const fromColName: string = getColName(colRef);
-            const targetCol: unknown = toCols[idx] || toCols[0];
-            const toColName: string = extractName(targetCol);
+            const targetCol: { column: string } = toCols[idx] || toCols[0];
+            const toColName: string = targetCol.column;
             
             relationships.push({
               fromTable: tableName,
@@ -223,11 +223,19 @@ function processAlterTable(ast: Alter, relationships: Relationship[]): void {
 export const getLayoutedElements = (nodes: Node[], edges: Edge[]): { nodes: Node[]; edges: Edge[] } => {
   const dagreGraph: dagre.graphlib.Graph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel((): object => ({}));
-  dagreGraph.setGraph({ rankdir: 'LR', nodesep: 100, ranksep: 200 });
+  dagreGraph.setGraph({ 
+    rankdir: 'LR', 
+    nodesep: 40, 
+    ranksep: 240,
+    marginx: 50,
+    marginy: 50,
+  });
 
   nodes.forEach((node: Node): void => {
     const data: TableData = node.data as TableData;
-    dagreGraph.setNode(node.id, { width: 250, height: 100 + data.columns.length * 30 });
+    // Estimate height based on columns + header
+    const height: number = 60 + (data.columns.length * 40);
+    dagreGraph.setNode(node.id, { width: 280, height });
   });
 
   edges.forEach((edge: Edge): void => {
@@ -239,8 +247,8 @@ export const getLayoutedElements = (nodes: Node[], edges: Edge[]): { nodes: Node
   nodes.forEach((node: Node): void => {
     const nodeWithPosition: dagre.Node = dagreGraph.node(node.id);
     node.position = {
-      x: nodeWithPosition.x - 125,
-      y: nodeWithPosition.y - 50,
+      x: nodeWithPosition.x - 140,
+      y: nodeWithPosition.y - (dagreGraph.node(node.id).height / 2),
     };
   });
 
