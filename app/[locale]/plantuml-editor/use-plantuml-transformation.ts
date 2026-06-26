@@ -2,10 +2,9 @@ import { PlantUmlError } from '@/app/[locale]/plantuml-editor/plantuml.types';
 import { Logger } from '@/lib/logger';
 import { RefObject, useEffect, useRef, useState } from 'react';
 
-const DEBOUNCE_MS: number = 3000;
+const DEBOUNCE_MS: number = 1000;
 
 type Timeout = ReturnType<typeof setTimeout>;
-type Interval = ReturnType<typeof setInterval>;
 
 declare global {
   interface Window {
@@ -20,8 +19,8 @@ export type UsePlantUmlTransformation = {
   isEngineReady: boolean;
   svgContent: string | null;
   isRendering: boolean;
+  isDebouncing: boolean;
   error: PlantUmlError | null;
-  progress: number;
   initEngine: () => void;
   forceRender: () => void,
 }
@@ -30,12 +29,11 @@ export function usePlantUmlTransformation(content: string, isMounted: boolean): 
   const [isEngineReady, setIsEngineReady] = useState<boolean>(false);
   const [svgContent, setSvgContent] = useState<string | null>(null);
   const [isRendering, setIsRendering] = useState<boolean>(false);
+  const [isDebouncing, setIsDebouncing] = useState<boolean>(false);
   const [error, setError] = useState<PlantUmlError | null>(null);
-  const [progress, setProgress] = useState<number>(0);
   const [forceTrigger, setForceTrigger] = useState<number>(0);
 
   const timerRef: RefObject<Timeout | null> = useRef<Timeout | null>(null);
-  const progressIntervalRef: RefObject<Interval | null> = useRef<Interval | null>(null);
   const lastRenderedContentRef: RefObject<string | null> = useRef<string | null>(null);
   const isForcedRef: RefObject<boolean> = useRef<boolean>(false);
 
@@ -86,7 +84,6 @@ export function usePlantUmlTransformation(content: string, isMounted: boolean): 
                 line: jsonError.line
               });
               setIsRendering(false);
-              setProgress(0);
               return;
             }
           } catch (e) {
@@ -114,7 +111,6 @@ export function usePlantUmlTransformation(content: string, isMounted: boolean): 
       setError({ message: 'Erreur de compilation' });
     } finally {
       setIsRendering(false);
-      setProgress(0);
       isForcedRef.current = false;
     }
   };
@@ -129,41 +125,27 @@ export function usePlantUmlTransformation(content: string, isMounted: boolean): 
 
     if (!svgContent || isForcedRef.current) {
       if (timerRef.current) clearTimeout(timerRef.current);
-      if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
+      setIsDebouncing(false);
       renderDiagram(content);
       return;
     }
 
     if (content === lastRenderedContentRef.current) {
       if (timerRef.current) clearTimeout(timerRef.current);
-      if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
-      setProgress(0);
+      setIsDebouncing(false);
       return;
     }
 
     if (timerRef.current) clearTimeout(timerRef.current);
-    if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
-    setProgress(0);
 
-    const startTime: number = Date.now();
-
-    progressIntervalRef.current = setInterval(() => {
-      const elapsed: number = Date.now() - startTime;
-      const newProgress: number = Math.min((elapsed / DEBOUNCE_MS) * 100, 100);
-      setProgress(newProgress);
-
-      if (newProgress >= 100) {
-        if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
-      }
-    }, 50);
-
+    setIsDebouncing(true);
     timerRef.current = setTimeout(() => {
+      setIsDebouncing(false);
       renderDiagram(content);
     }, DEBOUNCE_MS);
 
     return (): void => {
       if (timerRef.current) clearTimeout(timerRef.current);
-      if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
     };
   }, [content, isEngineReady, isMounted, forceTrigger]);
 
@@ -171,8 +153,8 @@ export function usePlantUmlTransformation(content: string, isMounted: boolean): 
     isEngineReady,
     svgContent,
     isRendering,
+    isDebouncing,
     error,
-    progress,
     initEngine,
     forceRender,
   };

@@ -10,11 +10,11 @@ interface PreviewContentProps {
   isEngineReady: boolean;
   svgContent: string | null;
   isRendering: boolean;
-  progress: number;
+  isDebouncing: boolean;
   theme: ReturnType<typeof getCategoryClasses>;
 }
 
-export default function PreviewContent({ isEngineReady, svgContent, isRendering, progress, theme }: PreviewContentProps): React.ReactNode {
+export default function PreviewContent({ isEngineReady, svgContent, isRendering, isDebouncing, theme }: PreviewContentProps): React.ReactNode {
   if (!isEngineReady) {
     return (
       <motion.div
@@ -100,7 +100,7 @@ export default function PreviewContent({ isEngineReady, svgContent, isRendering,
                 <div
                   className={cn(
                     'transition-all duration-700 p-8 rounded-xl bg-slate-50 shadow-2xl border border-white/10 mx-auto',
-                    (isRendering || (progress > 0 && progress < 100)) && 'opacity-40 scale-[0.98] blur-[1px]'
+                    (isRendering || isDebouncing) && 'opacity-40 scale-[0.98] blur-[1px]'
                   )}
                   dangerouslySetInnerHTML={{ __html: svgContent }}
                 />

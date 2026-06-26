@@ -14,7 +14,6 @@ import { useTheme } from 'next-themes';
 import React, { ReactNode, useMemo } from 'react';
 import { PlantUmlToolbar } from './PlantUmlToolbar';
 import { PlantUmlErrorOverlay } from './PlantUmlErrorOverlay';
-import { PlantUmlProgressBar } from './PlantUmlProgressBar';
 import { usePlantUmlState } from './use-plantuml-state';
 import { usePlantUmlTransformation } from './use-plantuml-transformation';
 import { usePlantUmlActions } from './use-plantuml-actions';
@@ -29,8 +28,8 @@ export default function PlantUmlPageClient(): ReactNode {
     isEngineReady, 
     svgContent, 
     isRendering, 
+    isDebouncing,
     error, 
-    progress, 
     initEngine,
     forceRender
   } = usePlantUmlTransformation(content, isMounted);
@@ -123,14 +122,12 @@ export default function PlantUmlPageClient(): ReactNode {
         }}
         preview={
           <div className={`h-full w-full flex items-center justify-center ${resolvedTheme === 'dark' ? 'bg-[#050a1a]' : 'bg-slate-50'} relative overflow-hidden custom-scrollbar`}>
-            <PlantUmlProgressBar progress={progress} theme={theme} />
-
             <AnimatePresence mode="wait">
               <PreviewContent
                 isEngineReady={isEngineReady}
                 svgContent={svgContent}
                 isRendering={isRendering}
-                progress={progress}
+                isDebouncing={isDebouncing}
                 theme={theme}
               />
             </AnimatePresence>
