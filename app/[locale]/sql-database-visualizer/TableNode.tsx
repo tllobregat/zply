@@ -16,7 +16,12 @@ export function TableNode({ data }: { data: TableData }): ReactNode {
       <div className="bg-blue-500/10 border-b border-island-border p-3 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <Database className="w-4 h-4 text-blue-400" />
-          <span className="font-black uppercase tracking-wider text-blue-400">{data.name}</span>
+          <div className="flex flex-col min-w-0">
+            {data.name.includes('.') && <span className="text-[8px] opacity-50 truncate leading-none mb-0.5">{data.name.split('.')[0]}</span>}
+            <span className="font-black uppercase tracking-wider text-blue-400 truncate leading-none" title={data.name}>
+              {data.name.includes('.') ? data.name.split('.').pop() : data.name}
+            </span>
+          </div>
         </div>
         {
           data.primaryKeys.length > 1

@@ -140,14 +140,17 @@ function processCreateTable(ast: Create, tables: Record<string, TableData>, rela
       else if (def.resource === 'constraint') {
         const constDef: CreateConstraintDefinition = def;
         
-        if (constDef.constraint_type === 'primary key' && constDef.definition) {
+        const constType: string | undefined = constDef.constraint_type;
+        const normalizedType: string = constType?.toLowerCase() ?? '';
+
+        if (normalizedType === 'primary key' && constDef.definition) {
           constDef.definition.forEach((colRef: ColumnRef) => {
             const pkName: string = getColName(colRef);
             primaryKeys.push(pkName);
             const existingCol: TableColumn | undefined = columns.find((c: TableColumn) => c.name === pkName);
             if (existingCol) existingCol.isPK = true;
           });
-        } else if (constDef.constraint_type === 'FOREIGN KEY' && constDef.definition && constDef.reference_definition) {
+        } else if (normalizedType === 'foreign key' && constDef.definition && 'reference_definition' in constDef) {
           const fromCols: ColumnRef[] = constDef.definition;
           const ref: { table: Array<{ table: string }>; definition: Array<{ column: string }> } = 
             constDef.reference_definition as unknown as { table: Array<{ table: string }>; definition: Array<{ column: string }> };
@@ -189,7 +192,10 @@ function processAlterTable(ast: Alter, relationships: Relationship[]): void {
   expressions.forEach((expr: ReturnType<typeof ast.expr>) => {
     if (expr.action === 'add' && expr.create_definitions) {
       expr.create_definitions.forEach((def: CreateDefinition) => {
-        if (def.resource === 'constraint' && def.constraint_type === 'FOREIGN KEY' && def.reference_definition) {
+        const constType: string | undefined = 'constraint_type' in def ? def.constraint_type : undefined;
+        const normalizedType: string = constType?.toLowerCase() ?? '';
+
+        if (def.resource === 'constraint' && normalizedType === 'foreign key' && 'reference_definition' in def) {
           const fromCols: ColumnRef[] = def.definition;
           const ref: { table: Array<{ table: string }>; definition: Array<{ column: string }> } = 
             def.reference_definition as unknown as { table: Array<{ table: string }>; definition: Array<{ column: string }> };
