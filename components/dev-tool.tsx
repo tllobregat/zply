@@ -1,6 +1,7 @@
 'use client';
 
 import { Logger } from '@/lib/logger';
+import { decompressState } from '@/lib/url-state';
 import { cn } from '@/lib/utils';
 import { Check, ChevronDown, ChevronUp, Copy, EyeOff, Terminal, X } from 'lucide-react';
 import LZString from 'lz-string';
@@ -21,6 +22,13 @@ function DevToolButton(): React.ReactNode {
           setHashContent(null);
           return;
         }
+        const decodedState: unknown | null = decompressState(hash);
+        if (decodedState) {
+          setHashContent(decodedState);
+          return;
+        }
+
+        // Fallback to legacy LZ-String
         const decoded: string = LZString.decompressFromEncodedURIComponent(hash);
         if (decoded) {
           setHashContent(JSON.parse(decoded));

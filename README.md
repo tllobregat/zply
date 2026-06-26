@@ -33,7 +33,7 @@ Built for professionals who value privacy and speed.
 - **🔒 Zero Backend:** Every tool runs 100% in your browser. No user-input data is ever sent to a server.
 - **🍪 Zero Cookies:** We do not use cookies or persistent identifiers. Your browsing remains private and storage-free.
 - **🛡️ Privacy-First Telemetry:** We use anonymous, cookieless telemetry to monitor site health. (See [Analytics & Privacy](#-analytics--privacy) for details).
-- **💾 URI Persistence:** Share your workspace state instantly. We use **LZ-String** compression to store your current state directly in the `window.location.hash`, ensuring your data stays in the browser and never touches the network.
+- **💾 URI Persistence:** Share your workspace state instantly. We use **MessagePack + Zlib** compression to store your current state directly in the `window.location.hash`, ensuring your data stays in the browser and never touches the network.
 - **⚡ High Performance:** Built with Next.js (SSG) for sub-second load times and a fluid, "Island-based" UI architecture.
 
 ---
@@ -89,7 +89,7 @@ Built for professionals who value privacy and speed.
 - **Primitives:** [Radix UI](https://www.radix-ui.com/)
 - **Icons:** [Lucide React](https://lucide.dev/)
 - **Editor:** [Monaco Editor](https://microsoft.github.io/monaco-editor/)
-- **State Compression:** [LZ-String](https://pieroxy.net/lua/lz-string/)
+- **State Compression:** [MessagePack](https://msgpack.org/) + [Zlib](https://en.wikipedia.org/wiki/Zlib) (via `fflate`)
 - **Animations:** [Framer Motion](https://www.framer.com/motion/)
 - **Graphs:** [React Flow](https://reactflow.dev/) & [Dagre](https://github.com/dagrejs/dagre)
 - **Time:** [Day.js](https://day.js.org/)
@@ -183,7 +183,7 @@ To monitor site health and performance, we use **Vercel Web Analytics**. This in
 
 ### 🔒 Zero Backend Data
 Even with telemetry enabled, your **data remains yours**.
-The contents of your editors (JSON, SQL, JWTs, etc.) are processed 100% locally in your browser. Because Zply uses **URI Persistence** (LZ-String compression in the `window.location.hash`), your sensitive inputs never touch a server—not even Vercel's.
+The contents of your editors (JSON, SQL, JWTs, etc.) are processed 100% locally in your browser. Because Zply uses **URI Persistence** (MessagePack + Zlib compression in the `window.location.hash`), your sensitive inputs never touch a server—not even Vercel's.
 
 ---
 

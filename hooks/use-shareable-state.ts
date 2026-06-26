@@ -1,5 +1,6 @@
 'use client';
 
+import { decompressState } from '@/lib/url-state';
 import LZString from 'lz-string';
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { useShareableStateSync } from './use-shareable-state-context';
@@ -41,6 +42,16 @@ export function useShareableState<T>(
       const hash: string = window.location.hash.substring(1);
       if (!hash) return initialValue;
 
+      // Try new format first
+      const newFormatData: Record<string, unknown> | null = decompressState<Record<string, unknown>>(hash);
+      if (newFormatData) {
+        if (key in newFormatData) {
+          return newFormatData[key] as T;
+        }
+        return initialValue;
+      }
+
+      // Fallback to legacy LZ-String
       const decoded: string | null = LZString.decompressFromEncodedURIComponent(hash);
       if (!decoded) return initialValue;
 

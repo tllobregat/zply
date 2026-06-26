@@ -154,7 +154,7 @@
     "zeroCookies": "Zero Cookies",
     "zeroCookiesDesc": "We do not use cookies or persistent identifiers. Your browsing remains private and storage-free.",
     "uriPersistence": "URI Persistence",
-    "uriPersistenceDesc": "Share your workspace state instantly. We use LZ-String compression to store your current state directly in the window.location.hash.",
+    "uriPersistenceDesc": "Share your workspace state instantly. We use MessagePack + Zlib compression to store your current state directly in the window.location.hash.",
     "secureHash": "Why the # is Secure",
     "secureHashDesc": "The text after the '#' symbol (the fragment identifier) in a URL is never sent to the server by the browser. Even if you share a link containing your data, only your browser (and whoever you share the link with) can see it. Zply never even knows what's in your hash.",
     "telemetry": "Privacy-First Telemetry",

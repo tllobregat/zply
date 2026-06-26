@@ -1,28 +1,26 @@
 'use client';
 
-import { EditorPreviewWorkspace } from '@/components/ui/layout';
-import { ToolPageLayout } from '@/components/ui/layout';
+import { EditorPreviewWorkspace, ToolPageLayout, ViewModeToggle } from '@/components/ui/layout';
 import { Separator } from '@/components/ui/separator';
-import { ViewModeToggle } from '@/components/ui/layout';
 import { Category, ToolId } from '@/lib/config/tools';
-import { useTranslations } from 'next-intl';
+import { compressState } from '@/lib/url-state';
 import { cn } from '@/lib/utils';
 import * as LucideIcons from 'lucide-react';
 import type * as monaco from 'monaco-editor';
-import { processFile } from './markdown.utils';
-import React, { ReactNode, RefObject, useRef, useEffect, useCallback, useMemo, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import { useMarkdownState } from './use-markdown-state';
-import { useMarkdownTransformation } from './use-markdown-transformation';
-import { useMarkdownActions } from './use-markdown-actions';
-import { MarkdownToolbar } from './MarkdownToolbar';
+import React, { ReactNode, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { getDefaultMarkdown } from './markdown.default';
+import { processFile } from './markdown.utils';
 import { MarkdownImportModal } from './MarkdownImportModal';
-import { useMarkdownLinter } from './use-markdown-linter';
-import { useMarkdownPaste } from './use-markdown-paste';
 import { MarkdownPasteModal } from './MarkdownPasteModal';
 import { MarkdownPrintArea } from './MarkdownPrintArea';
-import { getDefaultMarkdown } from './markdown.default';
-import LZString from 'lz-string';
+import { MarkdownToolbar } from './MarkdownToolbar';
+import { useMarkdownActions } from './use-markdown-actions';
+import { useMarkdownLinter } from './use-markdown-linter';
+import { useMarkdownPaste } from './use-markdown-paste';
+import { useMarkdownState } from './use-markdown-state';
+import { useMarkdownTransformation } from './use-markdown-transformation';
 
 const { FileText, Zap } = LucideIcons;
 
@@ -71,7 +69,7 @@ export default function MarkdownPageClient(): ReactNode {
       setContent(pendingImportContent);
     } else {
       const state = { md: pendingImportContent };
-      const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(state));
+      const compressed = compressState(state);
       const url = `${window.location.pathname}#${compressed}`;
       window.open(url, '_blank');
     }
