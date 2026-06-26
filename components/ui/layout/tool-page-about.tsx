@@ -56,15 +56,33 @@ export const ToolPageAbout = React.forwardRef<HTMLElement, ToolPageAboutProps>((
           <ul className="space-y-3 text-muted-foreground">
             <li className="flex gap-3">
               <span className="font-black text-foreground/40">01.</span>
-              <span>{tCommon('step1')}</span>
+              <span>
+                {
+                  t.has(`${toolConfig.id}.about.howToUse.step1`)
+                    ? t(`${toolConfig.id}.about.howToUse.step1`)
+                    : tCommon('step1')
+                }
+              </span>
             </li>
             <li className="flex gap-3">
               <span className="font-black text-foreground/40">02.</span>
-              <span>{tCommon('step2')}</span>
+              <span>
+                {
+                  t.has(`${toolConfig.id}.about.howToUse.step2`)
+                    ? t(`${toolConfig.id}.about.howToUse.step2`)
+                    : tCommon('step2')
+                }
+              </span>
             </li>
             <li className="flex gap-3">
               <span className="font-black text-foreground/40">03.</span>
-              <span>{tCommon('step3')}</span>
+              <span>
+                {
+                  t.has(`${toolConfig.id}.about.howToUse.step3`)
+                    ? t(`${toolConfig.id}.about.howToUse.step3`)
+                    : tCommon('step3')
+                }
+              </span>
             </li>
           </ul>
         </div>
