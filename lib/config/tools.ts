@@ -144,8 +144,9 @@ export const TOOLS: ToolConfig[] = [
     id: ToolId.MERMAID,
     href: '/mermaid-maker',
     icon: Share2,
-    status: 'coming-soon',
+    status: 'active',
     category: Category.DIAGRAMS,
+    showInSidebar: true,
     libs: [
       { name: 'mermaid', url: 'https://github.com/mermaid-js/mermaid' }
     ]

@@ -438,7 +438,23 @@
         "Export sous forme d'images SVG ou PNG",
         "Syntaxe légère basée sur Markdown",
         "Traitement côté client pour une confidentialité maximale"
-      ]
+      ],
+      "snippets": {
+        "title": "Exemples",
+        "label": "Modèles Mermaid",
+        "groups": {
+          "flowchart": "Diagramme de Flux",
+          "sequence": "Diagramme de Séquence",
+          "class": "Diagramme de Classes",
+          "gantt": "Diagramme de Gantt"
+        },
+        "items": {
+          "basicFlow": "Flux de Base",
+          "basicSequence": "Séquence de Base",
+          "basicClass": "Classes de Base",
+          "basicGantt": "Gantt de Base"
+        }
+      }
     },
     "svg-optimizer": {
       "title": "Optimiseur SVG",

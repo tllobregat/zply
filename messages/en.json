@@ -437,7 +437,23 @@
         "Export as SVG or PNG images",
         "Lightweight Markdown-based syntax",
         "Client-side processing for maximum privacy"
-      ]
+      ],
+      "snippets": {
+        "title": "Snippets",
+        "label": "Mermaid Examples",
+        "groups": {
+          "flowchart": "Flowchart",
+          "sequence": "Sequence Diagram",
+          "class": "Class Diagram",
+          "gantt": "Gantt Chart"
+        },
+        "items": {
+          "basicFlow": "Basic Flowchart",
+          "basicSequence": "Basic Sequence",
+          "basicClass": "Basic Class Diagram",
+          "basicGantt": "Basic Gantt Chart"
+        }
+      }
     },
     "svg-optimizer": {
       "title": "SVG Optimizer",
