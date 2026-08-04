@@ -43,7 +43,7 @@ Built for professionals who value privacy and speed.
 ### 🎨 Visualisation
 - **[PlantUML Editor](https://zply.dev/plantuml-editor)**: Create UML diagrams via text with real-time preview.
 - **[Markdown Editor](https://zply.dev/markdown-editor)**: Ultra-fast GFM (GitHub Flavored) editor with split-screen preview.
-- **Mermaid.js Maker** (`Coming Soon`): Lightweight flowcharts and sequence diagrams.
+- **[Mermaid.js Maker](https://zply.dev/mermaid-maker)**: Create lightweight flowcharts and sequence diagrams.
 - **SVG Optimizer** (`Coming Soon`): Visualize and clean up SVG code using SVGO.
 - **[SQL & DB Visualizer](https://zply.dev/sql-database-visualizer)**: Generate ER diagrams from SQL (PostgreSQL, MariaDB) or Prisma.
 - **Excalidraw Canvas** (`Coming Soon`): Smooth hand-drawn sketching and diagrams.
@@ -58,7 +58,8 @@ Built for professionals who value privacy and speed.
 ### 🔐 Security
 - **[JWT Debugger](https://zply.dev/jwt-debugger)**: Secure, local decoding of JWT claims and payloads.
 - **[Hash Generator](https://zply.dev/hash-generator)**: Generate SHA-256, SHA-512, and MD5 hashes (Web Crypto API).
-- **Password & Secret Generator** (`Coming Soon`): Generate secure passwords, API keys, and tokens with local strength evaluation.
+- **[Password Generator](https://zply.dev/password-generator)**: Generate secure passwords with customizable character sets and strength evaluation.
+- **[Certificate Decoder](https://zply.dev/certificate-decoder)**: Decode X.509 certificates to view their details, including subject, issuer, validity, and extensions.
 - **RSA Key Pair Gen** (`Coming Soon`): Generate public/private RSA key pairs.
 
 ### 🔤 Encoding & Conversion
@@ -84,14 +85,14 @@ Built for professionals who value privacy and speed.
 
 ## 🚀 Tech Stack
 
-- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+- **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **Primitives:** [Radix UI](https://www.radix-ui.com/)
 - **Icons:** [Lucide React](https://lucide.dev/)
 - **Editor:** [Monaco Editor](https://microsoft.github.io/monaco-editor/)
 - **State Compression:** [MessagePack](https://msgpack.org/) + [Zlib](https://en.wikipedia.org/wiki/Zlib) (via `fflate`)
 - **Animations:** [Framer Motion](https://www.framer.com/motion/)
-- **Graphs:** [React Flow](https://reactflow.dev/) & [Dagre](https://github.com/dagrejs/dagre)
+- **Graphs & Diagrams:** [React Flow](https://reactflow.dev/), [Dagre](https://github.com/dagrejs/dagre) & [Mermaid](https://mermaid.js.org/)
 - **Time:** [Day.js](https://day.js.org/)
 
 ---
