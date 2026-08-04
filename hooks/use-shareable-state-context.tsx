@@ -1,6 +1,7 @@
 'use client';
 
 import { Logger } from '@/lib/logger';
+import { compressState, decompressState } from '@/lib/url-state';
 import LZString from 'lz-string';
 import { usePathname } from 'next/navigation';
 import React, { createContext, PropsWithChildren, ReactNode, RefObject, useCallback, useContext, useEffect, useRef, useState } from 'react';
@@ -45,6 +46,11 @@ export function ShareableStateProvider({ children }: PropsWithChildren): ReactNo
       const hash: string = window.location.hash.substring(1);
       if (!hash) return {};
 
+      // Try new format first
+      const newFormatData: Record<string, unknown> | null = decompressState<Record<string, unknown>>(hash);
+      if (newFormatData) return newFormatData;
+
+      // Fallback to legacy LZ-String
       const decoded: string | null = LZString.decompressFromEncodedURIComponent(hash);
       if (!decoded) return {};
 
@@ -81,7 +87,7 @@ export function ShareableStateProvider({ children }: PropsWithChildren): ReactNo
 
     try {
       const dataToSave: Record<string, unknown> = registryRef.current;
-      const compressed: string = LZString.compressToEncodedURIComponent(JSON.stringify(dataToSave));
+      const compressed: string = compressState(dataToSave);
       const newHash: string = `#${compressed}`;
 
       if (typeof window !== 'undefined' && window.location.hash !== newHash) {

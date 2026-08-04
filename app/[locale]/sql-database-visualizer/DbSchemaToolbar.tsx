@@ -1,7 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { ViewModeToggle } from '@/components/ui/layout';
+import { ToolId } from '@/lib/config/tools';
 import { cn } from '@/lib/utils';
-import { RefreshCw } from 'lucide-react';
+import { Layout } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React, { ReactNode } from 'react';
 
 interface DbSchemaToolbarProps {
@@ -19,21 +21,23 @@ export function DbSchemaToolbar(
     isDropdown = false,
   }: DbSchemaToolbarProps,
 ): ReactNode {
+  const t: ReturnType<typeof useTranslations> = useTranslations('Tools');
+
   return (
-    <div className={cn("flex items-center gap-3", isDropdown && "flex-col items-stretch")}>
+    <div className={cn("flex items-center gap-3 w-full sm:w-auto", isDropdown && "flex-col items-stretch")}>
       <ViewModeToggle 
         viewMode={viewMode} 
         setViewMode={setViewMode} 
-        className={cn(isDropdown && "w-full")}
+        className={cn("shrink-0", isDropdown && "w-full")}
       />
       <Button
         onClick={onUpdateSchema}
         variant="tab"
         size="sm"
-        className={cn("gap-2", isDropdown && "w-full justify-start py-3")}
+        className={cn("flex-1 sm:flex-initial gap-2 text-primary whitespace-nowrap", isDropdown && "w-full justify-start py-3")}
       >
-        <RefreshCw className="w-3.5 h-3.5" /> 
-        <span>Force Layout</span>
+        <Layout className="w-3.5 h-3.5" /> 
+        <span>{t(`${ToolId.DB_SCHEMA}.autoOrganize`)}</span>
       </Button>
     </div>
   );

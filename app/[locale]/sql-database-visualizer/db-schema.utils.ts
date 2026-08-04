@@ -140,24 +140,27 @@ function processCreateTable(ast: Create, tables: Record<string, TableData>, rela
       else if (def.resource === 'constraint') {
         const constDef: CreateConstraintDefinition = def;
         
-        if (constDef.constraint_type === 'primary key' && constDef.definition) {
+        const constType: string | undefined = constDef.constraint_type;
+        const normalizedType: string = constType?.toLowerCase() ?? '';
+
+        if (normalizedType === 'primary key' && constDef.definition) {
           constDef.definition.forEach((colRef: ColumnRef) => {
             const pkName: string = getColName(colRef);
             primaryKeys.push(pkName);
             const existingCol: TableColumn | undefined = columns.find((c: TableColumn) => c.name === pkName);
             if (existingCol) existingCol.isPK = true;
           });
-        } else if (constDef.constraint_type === 'FOREIGN KEY' && constDef.definition && constDef.reference_definition) {
+        } else if (normalizedType === 'foreign key' && constDef.definition && 'reference_definition' in constDef) {
           const fromCols: ColumnRef[] = constDef.definition;
           const ref: { table: Array<{ table: string }>; definition: Array<{ column: string }> } = 
             constDef.reference_definition as unknown as { table: Array<{ table: string }>; definition: Array<{ column: string }> };
           const toTable: string = extractName(ref.table[0]);
-          const toCols: unknown[] = ref.definition as unknown[];
+          const toCols: Array<{ column: string }> = ref.definition as Array<{ column: string }>;
 
           fromCols.forEach((colRef: ColumnRef, idx: number) => {
             const fromColName: string = getColName(colRef);
-            const targetCol: unknown = toCols[idx] || toCols[0];
-            const toColName: string = extractName(targetCol);
+            const targetCol: { column: string } = toCols[idx] || toCols[0];
+            const toColName: string = targetCol.column;
 
             relationships.push({
               fromTable: tableName,
@@ -189,17 +192,20 @@ function processAlterTable(ast: Alter, relationships: Relationship[]): void {
   expressions.forEach((expr: ReturnType<typeof ast.expr>) => {
     if (expr.action === 'add' && expr.create_definitions) {
       expr.create_definitions.forEach((def: CreateDefinition) => {
-        if (def.resource === 'constraint' && def.constraint_type === 'FOREIGN KEY' && def.reference_definition) {
+        const constType: string | undefined = 'constraint_type' in def ? def.constraint_type : undefined;
+        const normalizedType: string = constType?.toLowerCase() ?? '';
+
+        if (def.resource === 'constraint' && normalizedType === 'foreign key' && 'reference_definition' in def) {
           const fromCols: ColumnRef[] = def.definition;
           const ref: { table: Array<{ table: string }>; definition: Array<{ column: string }> } = 
             def.reference_definition as unknown as { table: Array<{ table: string }>; definition: Array<{ column: string }> };
           const toTable: string = extractName(ref.table[0]);
-          const toCols: unknown[] = ref.definition as unknown[];
+          const toCols: Array<{ column: string }> = ref.definition as Array<{ column: string }>;
 
           fromCols.forEach((colRef: ColumnRef, idx: number) => {
             const fromColName: string = getColName(colRef);
-            const targetCol: unknown = toCols[idx] || toCols[0];
-            const toColName: string = extractName(targetCol);
+            const targetCol: { column: string } = toCols[idx] || toCols[0];
+            const toColName: string = targetCol.column;
             
             relationships.push({
               fromTable: tableName,
@@ -217,11 +223,19 @@ function processAlterTable(ast: Alter, relationships: Relationship[]): void {
 export const getLayoutedElements = (nodes: Node[], edges: Edge[]): { nodes: Node[]; edges: Edge[] } => {
   const dagreGraph: dagre.graphlib.Graph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel((): object => ({}));
-  dagreGraph.setGraph({ rankdir: 'LR', nodesep: 100, ranksep: 200 });
+  dagreGraph.setGraph({ 
+    rankdir: 'LR', 
+    nodesep: 40, 
+    ranksep: 240,
+    marginx: 50,
+    marginy: 50,
+  });
 
   nodes.forEach((node: Node): void => {
     const data: TableData = node.data as TableData;
-    dagreGraph.setNode(node.id, { width: 250, height: 100 + data.columns.length * 30 });
+    // Estimate height based on columns + header
+    const height: number = 60 + (data.columns.length * 40);
+    dagreGraph.setNode(node.id, { width: 280, height });
   });
 
   edges.forEach((edge: Edge): void => {
@@ -233,8 +247,8 @@ export const getLayoutedElements = (nodes: Node[], edges: Edge[]): { nodes: Node
   nodes.forEach((node: Node): void => {
     const nodeWithPosition: dagre.Node = dagreGraph.node(node.id);
     node.position = {
-      x: nodeWithPosition.x - 125,
-      y: nodeWithPosition.y - 50,
+      x: nodeWithPosition.x - 140,
+      y: nodeWithPosition.y - (dagreGraph.node(node.id).height / 2),
     };
   });
 

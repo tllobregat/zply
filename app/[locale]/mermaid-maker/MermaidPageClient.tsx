@@ -1,29 +1,28 @@
 'use client';
 
-import PreviewContent from '@/app/[locale]/plantuml-editor/PreviewContent';
-import StatusDisplay from '@/app/[locale]/plantuml-editor/StatusDisplay';
+import PreviewContent from '@/app/[locale]/mermaid-maker/PreviewContent';
+import StatusDisplay from '@/app/[locale]/mermaid-maker/StatusDisplay';
 import { EditorPreviewWorkspace } from '@/components/ui/layout';
-import { ToolPageLayout }from '@/components/ui/layout';
+import { ToolPageLayout } from '@/components/ui/layout';
 import { Separator } from '@/components/ui/separator';
 import { CATEGORY_COLORS, CategoryTheme, getCategoryClasses } from '@/lib/config/categories';
 import { Category, ToolId } from '@/lib/config/tools';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence } from 'framer-motion';
-import { Code } from 'lucide-react';
+import { Share2 } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import React, { ReactNode, useMemo } from 'react';
-import { PlantUmlToolbar } from './PlantUmlToolbar';
-import { PlantUmlErrorOverlay } from './PlantUmlErrorOverlay';
-import { usePlantUmlState } from './use-plantuml-state';
-import { usePlantUmlTransformation } from './use-plantuml-transformation';
-import { usePlantUmlActions } from './use-plantuml-actions';
-import type * as monaco from 'monaco-editor';
+import React, { ReactNode } from 'react';
+import { MermaidToolbar } from './MermaidToolbar';
+import { MermaidErrorOverlay } from './MermaidErrorOverlay';
+import { useMermaidState } from './use-mermaid-state';
+import { useMermaidTransformation } from './use-mermaid-transformation';
+import { useMermaidActions } from './use-mermaid-actions';
 
-export default function PlantUmlPageClient(): ReactNode {
+export default function MermaidPageClient(): ReactNode {
   const t = useTranslations('Tools');
   const tCategories = useTranslations('Categories');
   const { resolvedTheme } = useTheme();
-  const { content, setContent, viewMode, setViewMode, isMounted } = usePlantUmlState();
+  const { content, setContent, viewMode, setViewMode, isMounted } = useMermaidState();
   const { 
     isEngineReady, 
     svgContent, 
@@ -32,58 +31,30 @@ export default function PlantUmlPageClient(): ReactNode {
     error, 
     initEngine,
     forceRender
-  } = usePlantUmlTransformation(content, isMounted);
-  const { handleDownload, handleCopy, handleCopyAsImage, isCopied } = usePlantUmlActions();
+  } = useMermaidTransformation(content, isMounted);
+  const { handleDownload, handleCopy, handleCopyAsImage, isCopied } = useMermaidActions();
 
   const theme: CategoryTheme = getCategoryClasses(CATEGORY_COLORS[Category.DIAGRAMS]);
 
   const handleSelectSnippet = (snippet: string): void => {
     setContent(snippet);
-    // Use setTimeout to ensure content state is updated before forcing render
-    // or we can rely on the fact that forceRender will trigger the effect which uses the current 'content'
     forceRender();
   };
-
-  const markers: monaco.editor.IMarkerData[] = useMemo(() => {
-    if (!error) return [];
-    
-    let lineNumber: number = error.line || 1;
-    let message: string = error.message;
-
-    // If no explicit line number, attempt to extract it from the message (fallback for legacy/plain errors)
-    if (!error.line) {
-      const lineMatch: RegExpMatchArray | null = message.match(/(?:line\s+|ligne\s+)(\d+)/i);
-      if (lineMatch) {
-        lineNumber = parseInt(lineMatch[1], 10);
-        // Clean the message if it contains "line X"
-        message = message.replace(/^.*(?:line|ligne)\s+\d+[:\s]*/i, '').trim() || message;
-      }
-    }
-
-    return [{
-      severity: 8, // MarkerSeverity.Error
-      message: message,
-      startLineNumber: lineNumber,
-      startColumn: 1,
-      endLineNumber: lineNumber,
-      endColumn: 1000,
-    }];
-  }, [error]);
 
   if (!isMounted) return null;
 
   return (
     <ToolPageLayout
-      toolId={ToolId.PLANTUML}
-      title={t(`${ToolId.PLANTUML}.title`)}
-      icon={<Code className="w-5 h-5" />}
+      toolId={ToolId.MERMAID}
+      title={t(`${ToolId.MERMAID}.title`)}
+      icon={<Share2 className="w-5 h-5" />}
       workspaceClassName="flex-1 min-h-0 md:flex-row"
       breadcrumbItems={[
         { label: tCategories(Category.DIAGRAMS), href: `/?category=${Category.DIAGRAMS}` },
-        { label: t(`${ToolId.PLANTUML}.title`) }
+        { label: t(`${ToolId.MERMAID}.title`) }
       ]}
       headerActions={
-        <PlantUmlToolbar 
+        <MermaidToolbar 
           viewMode={viewMode}
           setViewMode={setViewMode}
           onCopy={() => handleCopy(svgContent)}
@@ -91,7 +62,6 @@ export default function PlantUmlPageClient(): ReactNode {
           onDownload={() => handleDownload(svgContent)}
           onSelectSnippet={handleSelectSnippet}
           isCopied={isCopied}
-          isEngineReady={isEngineReady}
           isRendering={isRendering}
           hasSvg={!!svgContent}
           onInitEngine={initEngine}
@@ -110,9 +80,8 @@ export default function PlantUmlPageClient(): ReactNode {
       <EditorPreviewWorkspace
         value={content}
         onChange={setContent}
-        language="plantuml"
+        language="mermaid"
         viewMode={viewMode}
-        markers={markers}
         editorProps={{
           options: {
             fontFamily: 'var(--font-geist-mono)',
@@ -132,7 +101,7 @@ export default function PlantUmlPageClient(): ReactNode {
               />
             </AnimatePresence>
 
-            <PlantUmlErrorOverlay error={error} />
+            <MermaidErrorOverlay error={error} />
           </div>
         }
       />

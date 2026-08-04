@@ -154,7 +154,7 @@
     "zeroCookies": "Zéro Cookies",
     "zeroCookiesDesc": "Nous n'utilisons pas de cookies ou d'identifiants persistants. Votre navigation reste privée et sans stockage.",
     "uriPersistence": "Persistence URI",
-    "uriPersistenceDesc": "Partagez l'état de votre espace de travail instantanément. Nous utilisons la compression LZ-String pour stocker votre état actuel directement dans le window.location.hash.",
+    "uriPersistenceDesc": "Partagez l'état de votre espace de travail instantanément. Nous utilisons la compression MessagePack + Zlib pour stocker votre état actuel directement dans le window.location.hash.",
     "secureHash": "Pourquoi le # est sécurisé",
     "secureHashDesc": "Le texte après le symbole '#' (l'identifiant de fragment) dans une URL n'est jamais envoyé au serveur par le navigateur. Même si vous partagez un lien contenant vos données, seul votre navigateur (et la personne avec qui vous partagez le lien) peut le voir. Zply ne sait même pas ce qu'il y a dans votre hash.",
     "telemetry": "Télémétrie respectueuse de la vie privée",
@@ -186,6 +186,7 @@
   "Tools": {
     "sql-database-visualizer": {
       "title": "Visualiseur SQL & BD",
+      "autoOrganize": "Organiser le schéma",
       "description": "Visualiseur de base de données local. Générez des diagrammes ER interactifs à partir de SQL DDL ou Prisma en toute sécurité dans votre navigateur.",
       "features": [
         "Génération interactive de diagrammes ER",
@@ -437,7 +438,23 @@
         "Export sous forme d'images SVG ou PNG",
         "Syntaxe légère basée sur Markdown",
         "Traitement côté client pour une confidentialité maximale"
-      ]
+      ],
+      "snippets": {
+        "title": "Exemples",
+        "label": "Modèles Mermaid",
+        "groups": {
+          "flowchart": "Diagramme de Flux",
+          "sequence": "Diagramme de Séquence",
+          "class": "Diagramme de Classes",
+          "gantt": "Diagramme de Gantt"
+        },
+        "items": {
+          "basicFlow": "Flux de Base",
+          "basicSequence": "Séquence de Base",
+          "basicClass": "Classes de Base",
+          "basicGantt": "Gantt de Base"
+        }
+      }
     },
     "svg-optimizer": {
       "title": "Optimiseur SVG",
@@ -558,6 +575,48 @@
         "Aucune transmission de données vers des serveurs distants"
       ]
     },
+    "password-generator": {
+      "title": "Générateur de Mots de Passe",
+      "description": "Générez des mots de passe sécurisés avec des jeux de caractères personnalisables et une évaluation de la force. 100% privé et local.",
+      "features": [
+        "Longueur personnalisable (jusqu'à 128 caractères)",
+        "Options pour majuscules, minuscules, chiffres et symboles",
+        "Option pour exclure les caractères similaires (ex: i, l, 1, L)",
+        "Évaluation de la force et de l'entropie en temps réel",
+        "Génération sécurisée via l'API Crypto du navigateur",
+        "Copie instantanée dans le presse-papier en un clic"
+      ],
+      "regenerate": "Régénérer",
+      "copy": "Copier",
+      "copied": "Copié !",
+      "entropy": "{value} bits d'entropie",
+      "entropy_info": "L'entropie mesure le caractère aléatoire et la complexité d'un mot de passe. Plus la valeur est élevée, plus il est difficile à deviner par force brute. Chaque bit supplémentaire double la difficulté.",
+      "strength": {
+        "weak": "Faible",
+        "fair": "Moyen",
+        "good": "Bon",
+        "strong": "Fort",
+        "very-strong": "Très Fort"
+      },
+      "options": {
+        "title": "Jeux de caractères",
+        "length": "Longueur du mot de passe",
+        "uppercase": "Majuscules (A-Z)",
+        "lowercase": "Minuscules (a-z)",
+        "numbers": "Chiffres (0-9)",
+        "symbols": "Symboles (!@#$%)",
+        "excludeSimilar": "Exclure les caractères similaires"
+      },
+      "about": {
+        "security_title": "Sécurité & Confidentialité",
+        "security_desc": "Les mots de passe sont générés à l'aide de l'API Crypto intégrée au navigateur (window.crypto.getRandomValues), garantissant un haut niveau d'aléatoire et de sécurité. Aucune donnée n'est envoyée à un serveur ; tout se passe localement sur votre appareil.",
+        "howToUse": {
+          "step1": "Configurez la longueur souhaitée et les jeux de caractères (majuscules, chiffres, etc.).",
+          "step2": "Le mot de passe est généré instantanément selon vos critères.",
+          "step3": "Copiez le mot de passe sécurisé et utilisez-le où vous en avez besoin."
+        }
+      }
+    },
     "certificate-decoder": {
       "title": "Décodeur de Certificat",
       "description": "Décodez les certificats X.509 pour afficher leurs détails, notamment le sujet, l'émetteur, la validité et les extensions.",
@@ -588,17 +647,6 @@
       "resetToDefault": "Réinitialiser par défaut",
       "placeholder": "Collez un certificat X.509 pour voir ses détails.",
       "critical": "Critique"
-    },
-    "secret-generator": {
-      "title": "Générateur de Mots de Passe & Secrets",
-      "description": "Générez des mots de passe sécurisés, des clés API et des jetons aléatoires avec évaluation de la force.",
-      "features": [
-        "Longueur et jeux de caractères de mots de passe personnalisables",
-        "Évaluation avancée de l'entropie et de la force",
-        "Génération sécurisée de clés API et de jetons aléatoires",
-        "Génération groupée pour plusieurs secrets",
-        "Génération locale uniquement via un RNG cryptographiquement sécurisé"
-      ]
     },
     "rsa-key-pair-generator": {
       "title": "Générateur de Paire de Clés RSA",

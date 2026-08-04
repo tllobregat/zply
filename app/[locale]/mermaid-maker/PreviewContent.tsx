@@ -25,7 +25,7 @@ export default function PreviewContent({ isEngineReady, svgContent, isRendering,
         className="flex flex-col items-center gap-4 text-slate-500"
       >
         <RefreshCw className={cn('w-8 h-8 animate-spin', theme.text)} />
-        <p className="text-[10px] font-black uppercase tracking-widest">Booting JVM...</p>
+        <p className="text-[10px] font-black uppercase tracking-widest">Initializing...</p>
       </motion.div>
     );
   }

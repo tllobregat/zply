@@ -154,7 +154,7 @@
     "zeroCookies": "Zero Cookies",
     "zeroCookiesDesc": "We do not use cookies or persistent identifiers. Your browsing remains private and storage-free.",
     "uriPersistence": "URI Persistence",
-    "uriPersistenceDesc": "Share your workspace state instantly. We use LZ-String compression to store your current state directly in the window.location.hash.",
+    "uriPersistenceDesc": "Share your workspace state instantly. We use MessagePack + Zlib compression to store your current state directly in the window.location.hash.",
     "secureHash": "Why the # is Secure",
     "secureHashDesc": "The text after the '#' symbol (the fragment identifier) in a URL is never sent to the server by the browser. Even if you share a link containing your data, only your browser (and whoever you share the link with) can see it. Zply never even knows what's in your hash.",
     "telemetry": "Privacy-First Telemetry",
@@ -186,6 +186,7 @@
   "Tools": {
     "sql-database-visualizer": {
       "title": "SQL & DB Visualizer",
+      "autoOrganize": "Auto-Organize Schema",
       "description": "Powerful local SQL and database visualizer. Generate interactive ER diagrams from SQL DDL or Prisma schemas securely in your browser.",
       "features": [
         "Interactive ER diagram generation",
@@ -436,7 +437,23 @@
         "Export as SVG or PNG images",
         "Lightweight Markdown-based syntax",
         "Client-side processing for maximum privacy"
-      ]
+      ],
+      "snippets": {
+        "title": "Snippets",
+        "label": "Mermaid Examples",
+        "groups": {
+          "flowchart": "Flowchart",
+          "sequence": "Sequence Diagram",
+          "class": "Class Diagram",
+          "gantt": "Gantt Chart"
+        },
+        "items": {
+          "basicFlow": "Basic Flowchart",
+          "basicSequence": "Basic Sequence",
+          "basicClass": "Basic Class Diagram",
+          "basicGantt": "Basic Gantt Chart"
+        }
+      }
     },
     "svg-optimizer": {
       "title": "SVG Optimizer",
@@ -557,6 +574,48 @@
         "No data transmission to remote servers"
       ]
     },
+    "password-generator": {
+      "title": "Password Generator",
+      "description": "Generate secure passwords with customizable character sets and strength evaluation. 100% private and local.",
+      "features": [
+        "Customizable password length (up to 128 characters)",
+        "Toggles for uppercase, lowercase, numbers, and symbols",
+        "Option to exclude similar characters (e.g., i, l, 1, L)",
+        "Real-time password strength and entropy evaluation",
+        "Secure generation using cryptographically strong RNG",
+        "Instant one-click copy to clipboard"
+      ],
+      "regenerate": "Regenerate",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "entropy": "{value} bits of entropy",
+      "entropy_info": "Entropy measures the randomness and complexity of a password. The higher the value, the harder it is to guess via brute force. Each additional bit doubles the difficulty.",
+      "strength": {
+        "weak": "Weak",
+        "fair": "Fair",
+        "good": "Good",
+        "strong": "Strong",
+        "very-strong": "Very Strong"
+      },
+      "options": {
+        "title": "Character Sets",
+        "length": "Password Length",
+        "uppercase": "Uppercase (A-Z)",
+        "lowercase": "Lowercase (a-z)",
+        "numbers": "Numbers (0-9)",
+        "symbols": "Symbols (!@#$%)",
+        "excludeSimilar": "Exclude Similar Characters"
+      },
+      "about": {
+        "security_title": "Security & Privacy",
+        "security_desc": "Passwords are generated using the browser's built-in Crypto API (window.crypto.getRandomValues), ensuring high randomness and security. No data is ever sent to a server; everything happens locally on your device.",
+        "howToUse": {
+          "step1": "Configure the desired length and character sets (uppercase, numbers, etc.).",
+          "step2": "The password is generated instantly according to your criteria.",
+          "step3": "Copy the secure password and use it wherever you need it."
+        }
+      }
+    },
     "certificate-decoder": {
       "title": "Certificate Decoder",
       "description": "Decode X.509 certificates to view their details, including subject, issuer, validity, and extensions.",
@@ -587,17 +646,6 @@
       "resetToDefault": "Reset to Default",
       "placeholder": "Paste a X.509 certificate to view their details.",
       "critical": "Critical"
-    },
-    "secret-generator": {
-      "title": "Password & Secret Generator",
-      "description": "Generate secure passwords, API keys, and random tokens with strength evaluation.",
-      "features": [
-        "Customizable password length and character sets",
-        "Advanced entropy and strength evaluation",
-        "Secure API key and random token generation",
-        "Bulk generation for multiple secrets",
-        "Local-only generation using cryptographically secure RNG"
-      ]
     },
     "rsa-key-pair-generator": {
       "title": "RSA Key Pair Gen",

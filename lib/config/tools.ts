@@ -14,6 +14,7 @@ import {
   Hash,
   Key,
   ListTree,
+  Lock,
   LucideIcon,
   MapPin,
   Network,
@@ -62,7 +63,7 @@ export enum ToolId {
   HASH_GEN = 'hash-generator',
   CERT_DEC = 'certificate-decoder',
   RSA_GEN = 'rsa-key-pair-generator',
-  SECRET_GEN = 'secret-generator',
+  PASSWORD_GEN = 'password-generator',
 
   // ENCODING
   URL_IO = 'url-encoder-decoder',
@@ -144,8 +145,9 @@ export const TOOLS: ToolConfig[] = [
     id: ToolId.MERMAID,
     href: '/mermaid-maker',
     icon: Share2,
-    status: 'coming-soon',
+    status: 'active',
     category: Category.DIAGRAMS,
+    showInSidebar: true,
     libs: [
       { name: 'mermaid', url: 'https://github.com/mermaid-js/mermaid' }
     ]
@@ -252,11 +254,15 @@ export const TOOLS: ToolConfig[] = [
     ]
   },
   {
-    id: ToolId.SECRET_GEN,
-    href: '/secret-generator',
-    icon: ShieldCheck,
-    status: 'coming-soon',
-    category: Category.SECURITY
+    id: ToolId.PASSWORD_GEN,
+    href: '/password-generator',
+    icon: Lock,
+    status: 'active',
+    category: Category.SECURITY,
+    showInSidebar: true,
+    libs: [
+      { name: 'Web Crypto API', url: 'https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API' }
+    ]
   },
   {
     id: ToolId.RSA_GEN,
